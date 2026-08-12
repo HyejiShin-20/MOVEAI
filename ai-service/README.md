@@ -3,7 +3,7 @@
 STT, 지식 추출, 임베딩 벡터 생성만 담당한다.
 DB 쓰기, 상태 판단, 순위 결정은 하지 않는다 (→ `backend`).
 
-계약 전문은 `docs/MOVE_AI_05_구현_상세명세.md §5`.
+계약 전문은 `docs/MOVE_AI_05B_API계약.md §5`.
 
 ## 엔드포인트
 
@@ -34,7 +34,7 @@ app/
 LLM 응답을 그대로 믿지 않는다. 서버에서 검증한다.
 
 ```
-[ ] enum이 허용목록 안 (05 §2-6)
+[ ] enum이 허용목록 안 (05A §2-6)
 [ ] source_excerpt 가 transcript의 부분 문자열   ← 가장 중요
 [ ] target_code 가 전달한 knownNodes/knownSegments 안에 존재
 [ ] conditions의 숫자가 transcript에 등장

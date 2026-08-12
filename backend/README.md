@@ -3,10 +3,10 @@
 DB 트랜잭션, 상태 전이, 조건 계산, **코사인 유사도 계산**, 응답 조립을 담당한다.
 LLM 호출과 음성 처리는 하지 않는다 (→ `ai-service`).
 
-전체 스키마·API 계약은 `docs/MOVE_AI_05_구현_상세명세.md`,
+스키마는 `docs/MOVE_AI_05A_DB스키마_임포트.md`, API 계약은 `docs/MOVE_AI_05B_API계약.md`,
 검색 내부 로직은 `docs/MOVE_AI_04_RETRIEVAL_GUIDANCE_구현명세.md`.
 
-## 패키지 (05 §6)
+## 패키지 (05C §6)
 
 ```
 com.moveai

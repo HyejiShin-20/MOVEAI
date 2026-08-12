@@ -31,7 +31,11 @@ scripts/     검증 스크립트
 cp .env.example .env          # 값 채우기
 docker compose up -d          # MariaDB 기동
 python scripts/validate_datasets.py   # 데이터셋 정합성 (기대: 이슈 0건)
+pip install -r ai-service/requirements.txt
 ```
+
+본선 전 준비는 [`docs/PREP_CHECKLIST.md`](docs/PREP_CHECKLIST.md),
+역할 분담은 [`docs/TEAM_ROLES.md`](docs/TEAM_ROLES.md).
 
 각 스택 실행 명령은 구현 후 이 절에 추가한다.
 

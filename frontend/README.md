@@ -1,6 +1,6 @@
 # frontend — React + TypeScript
 
-API 계약은 `docs/MOVE_AI_05_구현_상세명세.md §4`.
+API 계약은 `docs/MOVE_AI_05B_API계약.md §4`.
 화면 설계 지침은 `docs/MOVE_AI_기획디자인_이해자료.pdf` 3부.
 
 ## 화면

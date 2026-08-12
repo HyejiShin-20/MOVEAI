@@ -1,0 +1,29 @@
+# MOVE-AI AI Service
+# conda를 쓰더라도 패키지는 pip로 설치한다.
+# conda install 로 깔면 이 파일에 잡히지 않아 팀원과 환경이 갈린다.
+#
+#   pip install -r ai-service/requirements.txt
+
+# ── 웹 프레임워크 ────────────────────────────
+fastapi==0.115.6
+uvicorn[standard]==0.34.0
+python-multipart==0.0.20      # 오디오 파일 업로드(multipart)
+pydantic==2.10.4              # 지식 추출 스키마 강제
+pydantic-settings==2.7.0
+
+# ── 외부 호출 ────────────────────────────────
+httpx==0.28.1
+openai==1.59.6                # LLM · 임베딩 · STT(API 방식)
+python-dotenv==1.0.1
+tenacity==9.0.0               # 재시도 (추출 실패 시 1회 재요청)
+
+# ── 수치 ─────────────────────────────────────
+numpy==2.2.1                  # 임베딩 벡터 처리
+
+# ── 테스트 ───────────────────────────────────
+pytest==8.3.4
+pytest-asyncio==0.25.2
+
+# ── STT를 로컬로 돌릴 경우에만 주석 해제 ─────
+# 모델 가중치가 수 GB다. 반드시 본선 전에 받아둘 것.
+# faster-whisper==1.1.1

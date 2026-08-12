@@ -14,15 +14,18 @@
 | 상황 | 읽을 문서 |
 |---|---|
 | 항상 (세션 시작) | `docs/IMPLEMENTATION_STATUS.md` |
-| 제품이 뭔지 헷갈릴 때 | `docs/MOVE_AI_01_MVP_PRD.md` |
-| **DB / API / 임포트 / 구현 순서** | `docs/MOVE_AI_05_구현_상세명세.md` |
+| 제품이 뭔지 헷갈릴 때 | `docs/MOVE_AI_HACKATHON_READY_PACKAGE/MOVE_AI_01_MVP_PRD.md` |
+| **DB 스키마 · 임포트** | `docs/MOVE_AI_05A_DB스키마_임포트.md` |
+| **API 계약 (Spring · Python)** | `docs/MOVE_AI_05B_API계약.md` |
+| **구현 순서 · 모듈 · 테스트 · 운용** | `docs/MOVE_AI_05C_구현순서_운용.md` |
 | **검색·안내 내부 로직** | `docs/MOVE_AI_04_RETRIEVAL_GUIDANCE_구현명세.md` |
-| 작업 규칙·범위 판단 | `docs/MOVE_AI_02_HARNESS_ENGINEERING_PLAN.md` |
+| 작업 규칙·범위 판단 | `docs/MOVE_AI_HACKATHON_READY_PACKAGE/MOVE_AI_02_HARNESS_ENGINEERING_PLAN.md` |
 | 시연 시나리오 | `docs/DEMO_SCRIPT.md` |
+| 역할 분담 | `docs/TEAM_ROLES.md` |
 
 충돌 시 우선순위: **사용자 지시 → 01 → 05 → 04 → 02 → 기존 코드**
 
-`05`가 스키마와 API의 유일한 출처다. `API_CONTRACT.md`나 `DB_SCHEMA.md`를 따로 만들지 않는다.
+`05A`/`05B`가 스키마와 API의 유일한 출처다. `API_CONTRACT.md`나 `DB_SCHEMA.md`를 따로 만들지 않는다.
 
 ---
 
@@ -71,7 +74,7 @@
 
 **완료 조건 체크리스트는 `docs/IMPLEMENTATION_STATUS.md`에만 있다.**
 전부 통과하기 전에 다음 Phase로 넘어가지 않는다.
-Phase의 목적·시간 예산·축소 경로는 `05 §7`.
+Phase의 목적·시간 예산·축소 경로는 `05C §7`.
 
 ### 시간이 밀릴 때
 
@@ -82,7 +85,7 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 ```
 
 **Phase 4가 분기점이다.** 여기까지 되면 발표가 성립한다.
-완료 즉시 시연 1막을 녹화한다 — 뒤로 미루면 리허설 없이 마감에 몰린다.
+완료 즉시 **1막 시연을 직접 눌러보며 동작을 확인한다.** 영상 녹화는 개발 종료 후 사람이 한다.
 
 ---
 
@@ -130,6 +133,7 @@ scripts/     검증·실행 스크립트
 ```bash
 docker compose up -d                  # MariaDB
 python scripts/validate_datasets.py   # 데이터셋 정합성 (기대: 이슈 0건)
+pip install -r ai-service/requirements.txt
 ```
 
 빌드·테스트·실행 명령은 각 스택 구성 후 이 절에 추가한다.
@@ -150,4 +154,4 @@ ROUTE_B_01  후문→지하2층→12층   7단계   maxTon 1.0, maxH 2.3
 ROUTE_B_02  정문→지상로비→12층  3단계   minTon 1.0
 ```
 
-`min_tonnage`의 포함/배타가 데이터마다 다르다. 임포트 시 statement 문구로 파생 컬럼을 만든다 — **`05 §3-3`의 8건 표를 단위 테스트로 고정할 것.**
+`min_tonnage`의 포함/배타가 데이터마다 다르다. 임포트 시 statement 문구로 파생 컬럼을 만든다 — **`05A §3-3`의 8건 표를 단위 테스트로 고정할 것.**

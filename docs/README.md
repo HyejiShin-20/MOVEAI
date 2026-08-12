@@ -5,9 +5,17 @@
 **개발**
 ```
 1. MOVE_AI_01_MVP_PRD.md            무엇을 만드는가
-2. MOVE_AI_05_구현_상세명세.md        스키마 · API · 임포트 · 구현 순서   ★ 주력
-3. MOVE_AI_04_RETRIEVAL_GUIDANCE_구현명세.md   검색·안내 내부 로직
-4. MOVE_AI_02_HARNESS_ENGINEERING_PLAN.md      작업 규칙 · 범위 판단
+2. MOVE_AI_05C_구현순서_운용.md       구현 순서 · 시간 예산 · 모듈 · 테스트  ★ 항상
+3. MOVE_AI_05A_DB스키마_임포트.md     DB DDL · 임포트            (Phase 2)
+4. MOVE_AI_05B_API계약.md            Spring·Python 계약        (Phase 2b~7)
+5. MOVE_AI_04_RETRIEVAL_GUIDANCE_구현명세.md   검색·안내 내부 로직
+6. MOVE_AI_02_HARNESS_ENGINEERING_PLAN.md      작업 규칙 · 범위 판단
+```
+
+**본선 전 준비 (전원)**
+```
+PREP_CHECKLIST.md   환경·모델·키 준비. 미루면 당일 1~2시간 손해
+TEAM_ROLES.md       역할 분담. 하네스는 1명만 운용한다
 ```
 
 **기획 · 디자인 · 발표**
@@ -33,8 +41,12 @@ dataset/MOVE-AI_팀원용_가상데이터_제작_가이드.md     작성 가이�
 | `MOVE_AI_02_HARNESS_ENGINEERING_PLAN.md` | 작업 루프, Phase, 커밋 규칙, 컷라인 |
 | `MOVE_AI_03_HACKATHON_DAY_START_PROMPT.md` | 당일 하네스 첫 입력 |
 | `MOVE_AI_04_RETRIEVAL_GUIDANCE_구현명세.md` | 후보 수집 · 조건 평가 · 랭킹 · 경로 선택 |
-| `MOVE_AI_05_구현_상세명세.md` | DB DDL · API 계약 · AI 서비스 계약 · 임포트 · Phase |
-| `DEMO_SCRIPT.md` | 시연 녹화 컷 구성 (개발자용) |
+| `MOVE_AI_05A_DB스키마_임포트.md` | DB DDL · 데이터셋 임포트 |
+| `MOVE_AI_05B_API계약.md` | Spring API · Python AI 서비스 계약 |
+| `MOVE_AI_05C_구현순서_운용.md` | 시스템 구성 · 모듈 · 구현 순서 · 시간 예산 · 테스트 |
+| `DEMO_SCRIPT.md` | 시연 컷 구성 + **녹화 진행 가이드(§7)** |
+| `PREP_CHECKLIST.md` | **본선 전 준비** — 환경 · 모델 · 키 · 규정 |
+| `TEAM_ROLES.md` | 역할 분담과 하네스 운용 방식 |
 | `MOVE_AI_기획디자인_이해자료.pdf` | 비개발자용 이해 자료 (18쪽) |
 | `MOVE_AI_기획디자인_이해자료.html` | 위 PDF의 편집용 원본 |
 | `MOVE_AI_본선_PPT_준비_기능원리_안내.md` | 서비스 스토리 상세 |
@@ -47,14 +59,16 @@ dataset/MOVE-AI_팀원용_가상데이터_제작_가이드.md     작성 가이�
 
 ## 규칙
 
-**스키마와 API의 출처는 `05` 하나다.** `API_CONTRACT.md`나 `DB_SCHEMA.md`를 따로 만들지 않는다.
+**스키마와 API의 출처는 `05A`/`05B` 뿐이다.** `API_CONTRACT.md`나 `DB_SCHEMA.md`를 따로 만들지 않는다.
 두 곳에 적으면 반드시 어긋난다.
 
 **04와 05는 겹치지 않는다.** 검색 파이프라인 내부는 04, 그 로직이 들어갈 그릇은 05.
 
+**진행 상태는 `IMPLEMENTATION_STATUS.md` 한 곳에만 기록한다.** 05C는 목적·시간 예산만 정의한다.
+
 **충돌 시 우선순위**
 ```
-사용자의 당일 지시 → 01 → 05 → 04 → 02 → 기존 코드
+사용자의 당일 지시 → 01 → 05A/05B/05C → 04 → 02 → 기존 코드
 ```
 
 ## 임포트할 데이터는 어디에 있나

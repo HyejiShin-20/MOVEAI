@@ -8,14 +8,14 @@
 
 > ## ⚠ 이 문서는 초안이며 일부가 대체되었다
 >
-> 본선 전에 `04`(검색·안내 로직)와 `05`(DB·API·AI 계약)가 확정되면서 아래가 바뀌었다.
+> 본선 전에 `04`(검색·안내 로직)와 `05A/05B/05C`(DB·API·구현순서)가 확정되면서 아래가 바뀌었다.
 > 본문에 `[정정 · 본선 전 확정]` 표시가 붙은 곳은 **그 내용이 우선**이다.
 >
 > | 이 문서의 내용 | 확정된 것 |
 > |---|---|
-> | `API_CONTRACT.md` / `DB_SCHEMA.md` 생성 (§3, §5) | **만들지 않는다.** 계약은 `05`가 유일한 출처 |
+> | `API_CONTRACT.md` / `DB_SCHEMA.md` 생성 (§3, §5) | **만들지 않는다.** 계약은 `05A`/`05B`가 유일한 출처 |
 > | `POST /similarity-search` 선택 가능 (§7) | **만들지 않는다.** 코사인은 Spring에서 계산 |
-> | Phase 정의와 완료 조건 (§11) | `05 §7`(설명) + `IMPLEMENTATION_STATUS.md`(체크리스트) |
+> | Phase 정의와 완료 조건 (§11) | `05C §7`(설명) + `IMPLEMENTATION_STATUS.md`(체크리스트) |
 >
 > **이 문서에서 계속 유효한 것** — 작업 루프(§1), 우선순위(§2), 병렬 경계(§12),
 > 테스트 피라미드(§13), Gold 평가(§14), 오류 처리(§15), Git 규칙(§17),
@@ -82,7 +82,9 @@ move-ai/
 │  ├─ MOVE_AI_02_HARNESS_ENGINEERING_PLAN.md
 │  ├─ IMPLEMENTATION_STATUS.md
 │  ├─ MOVE_AI_04_RETRIEVAL_GUIDANCE_구현명세.md   ← 검색·안내 로직
-│  ├─ MOVE_AI_05_구현_상세명세.md                 ← DB·API·AI 계약 (아래 주석 참조)
+│  ├─ MOVE_AI_05A_DB스키마_임포트.md              ← DDL·임포트
+│  ├─ MOVE_AI_05B_API계약.md                     ← Spring·Python 계약
+│  ├─ MOVE_AI_05C_구현순서_운용.md               ← 구현 순서·시간 예산
 │  └─ DEMO_SCRIPT.md
 │
 ├─ datasets/
@@ -166,8 +168,7 @@ RouteSegment import + continuity test
 
 > **[정정 · 본선 전 확정]**
 > `API_CONTRACT.md`와 `DB_SCHEMA.md`를 **만들지 않는다.**
-> 계약은 이미 `docs/MOVE_AI_05_구현_상세명세.md`에 확정되어 있다
-> (§2 DB 스키마 · §4 Spring API · §5 Python AI 서비스).
+> 계약은 이미 확정되어 있다 — `05A`(DB 스키마) · `05B`(Spring API · Python AI 서비스).
 > 같은 내용을 두 파일에 두면 반드시 어긋난다. **05가 유일한 출처다.**
 
 ---
@@ -252,7 +253,7 @@ POST /embed
 > **[정정 · 본선 전 확정]**
 > `POST /similarity-search`는 **만들지 않는다.** 코사인 유사도는 Spring에서 계산한다.
 > 후보 벡터를 HTTP로 넘기면 안내 단계마다 수백 KB가 오가고, 내적/노름 계산은 Java 20줄이다.
-> Python은 위 3개 엔드포인트만 제공한다. → `05 §1`, `04 §7`
+> Python은 위 3개 엔드포인트만 제공한다. → `05C §1`, `04 §7`
 
 ---
 
@@ -377,7 +378,7 @@ Category는 기본적으로 hard filter로 사용하지 않는다.
 > **[정정 · 본선 전 확정]**
 > 아래 Phase 설명은 배경 이해용으로만 읽는다. **작업 기준은 아래 두 곳이다.**
 >
-> - `05 §7` — Phase별 목표 시간과 컷라인 발동 기준
+> - `05C §7` — Phase별 목표 시간과 컷라인 발동 기준
 > - `docs/IMPLEMENTATION_STATUS.md` — **완료 조건 체크리스트 (유일한 진행 상태 기록)**
 >
 > Phase 2는 2a(DDL·임포트)와 2b(조회 API)로 분리되었다.

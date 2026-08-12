@@ -23,7 +23,9 @@ docs/IMPLEMENTATION_STATUS.md  현재 진행 상황과 다음 할 일
 필요할 때만 아래를 연다. 전부 읽지 않는다.
 
 ```
-docs/MOVE_AI_05_구현_상세명세.md   DB DDL · API 계약 · AI 계약 · 임포트 · Phase별 완료 조건
+docs/MOVE_AI_05C_구현순서_운용.md   구현 순서 · 시간 예산 · 모듈 · 테스트 (항상)
+docs/MOVE_AI_05A_DB스키마_임포트.md  DB DDL · 임포트          (Phase 2)
+docs/MOVE_AI_05B_API계약.md         Spring·Python API 계약   (Phase 2b~7)
 docs/MOVE_AI_04_RETRIEVAL_GUIDANCE_구현명세.md   후보 수집 · 조건 평가 · 랭킹 · 경로 선택
 docs/MOVE_AI_01_MVP_PRD.md         제품 정의
 docs/DEMO_SCRIPT.md                시연 시나리오
@@ -64,7 +66,7 @@ docs/DEMO_SCRIPT.md                시연 시나리오
 8. build / test / 실제 API 호출로 검증한다.
 9. 검증 결과와 다음 작업을 `IMPLEMENTATION_STATUS.md`에 기록한다.
 
-`05 §7`의 Phase 완료 조건 체크박스를 **전부 통과하기 전에 다음 Phase로 넘어가지 않는다.**
+`IMPLEMENTATION_STATUS.md`의 Phase 완료 조건 체크박스를 **전부 통과하기 전에 다음 Phase로 넘어가지 않는다.**
 
 ### 작업 원칙
 
@@ -104,7 +106,7 @@ CLAUDE.md 와 docs/IMPLEMENTATION_STATUS.md 를 읽고,
 ## Phase 단위로 지시하는 게 좋다
 
 "백엔드 만들어줘"보다 **"Phase 2 해줘"**가 훨씬 잘 동작한다.
-`05 §7`이 그 단위로 쪼개져 있고 완료 조건이 붙어 있다.
+`05C §7`이 그 단위로 쪼개져 있고 완료 조건이 붙어 있다.
 
 Phase가 끝날 때마다 이렇게 요구한다.
 
