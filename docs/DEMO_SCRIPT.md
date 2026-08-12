@@ -34,12 +34,15 @@
 ### 필요한 API 호출
 
 ```
-POST /api/guidance  { deliveryJobId, vehicle:{ tonnage:1.0, heightM:2.1 } }
+POST /api/guidance  { deliveryJobId: JOB_B_01, vehicle:{ tonnage:1.0, heightM:2.1 } }
    → route = ROUTE_B_01, totalSteps 7
 
-POST /api/guidance  { deliveryJobId, vehicle:{ tonnage:2.5, heightM:2.7 } }
+POST /api/guidance  { deliveryJobId: JOB_B_01, vehicle:{ tonnage:2.5, heightM:2.7 } }
    → route = ROUTE_B_02, totalSteps 3
 ```
+
+**같은 배송 건(`JOB_B_01`)을 두 번 시작한다.** 두 번째 호출이 막히면 컷3을 찍을 수 없다.
+이전 세션은 `ABANDONED` 처리하고 새 세션을 만든다. → `05B §4-3`
 
 `ROUTE_B_01`은 `maxTonnage 1.0`, `ROUTE_B_02`는 `minTonnage 1.0`이다.
 경계 규칙(`maxTonnage`는 이하 허용, `minTonnage`는 초과만 허용)이 정확해야 1.0톤에서 두 경로가 동시에 살아남지 않는다. → `04 §11-3`
@@ -141,10 +144,10 @@ usage_scope   ACTION_GUIDANCE
 ### 1막이 성립하는가
 
 ```
-[ ] 1  배송 목록에 가온스퀘어 건이 보인다
+[ ] 1  배송 목록에 JOB_B_01(가온스퀘어 12층)이 보인다
 [ ] 2  차량 1톤 → 후문·지하 경로(7단계)가 나온다
 [ ] 3  1단계에 "2.3m 초과 진입 불가" 카드가 뜬다
-[ ] 4  같은 건에 차량 2.5톤 → 정문·로비 경로(3단계)로 바뀐다
+[ ] 4  같은 건을 2.5톤으로 다시 시작할 수 있고 정문·로비 경로(3단계)가 나온다
 [ ] 5  두 화면의 단계 수가 눈에 띄게 다르다 (7 vs 3)
 ```
 

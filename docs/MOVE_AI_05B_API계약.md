@@ -81,6 +81,34 @@ POST /api/guidance/{id}/complete 배송 완료 → { sessionId, status:"COMPLETE
 
 **세션 생성 시 확정한 `route_id`는 끝까지 바꾸지 않는다.** 중간에 바뀌면 `sequence_no`가 가리키는 대상이 흔들려 상태가 깨진다.
 
+### ★ 한 배송 건에 여러 세션을 허용한다
+
+시연 컷1과 컷3이 **같은 배송 건을 차량만 바꿔 두 번 시작**한다(1톤 → 2.5톤).
+따라서 이미 진행 중이거나 완료된 배송 건이라도 `POST /api/guidance`를 **막지 않는다.**
+
+```text
+POST /api/guidance  (같은 deliveryJobId 로 재호출)
+  → 해당 job 의 기존 ACTIVE 세션이 있으면 status = ABANDONED 로 바꾼다
+  → 새 세션을 ACTIVE 로 생성한다
+  → 201 반환
+```
+
+`409 CONFLICT`를 반환하거나 job 상태로 차단하면 **컷3을 찍을 때마다 DB를 손봐야 한다.**
+
+배송 건 상태는 다음과 같이 다룬다.
+
+```text
+세션 생성    delivery_jobs.status = IN_PROGRESS
+세션 완료    delivery_jobs.status = DONE
+재시작       DONE 이어도 다시 IN_PROGRESS 로 되돌린다
+```
+
+`GET /api/delivery-jobs?status=READY`가 목록 화면의 기본 조회다.
+시연 중 목록에서 건이 사라지면 곤란하므로, **필터 없이 호출하면 전체를 반환**하도록 둔다.
+
+> 실제 서비스라면 완료된 건의 재시작을 막아야 한다. MVP에서는 시연 가능성을 우선한다.
+> 이 결정은 의도된 것이며, 발표에서 "완료 처리는 기사 버튼이 유일한 트리거"라는 원칙과 충돌하지 않는다.
+
 ## 4-4. 단계 응답 형식
 
 ```json

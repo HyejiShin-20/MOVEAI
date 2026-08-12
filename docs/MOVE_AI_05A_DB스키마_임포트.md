@@ -230,7 +230,8 @@ CREATE TABLE knowledge_embeddings (
 ## 2-4. 배송과 안내
 
 ```sql
--- 신규. PRD §11에 없지만 "배송 건 선택 → 경로 결정" 흐름에 필수. 시드 4~6건이면 충분.
+-- 신규. PRD §11에 없지만 "배송 건 선택 → 경로 결정" 흐름에 필수.
+-- 데이터셋에 없으므로 임포트 마지막에 코드로 생성한다. 시드 5건은 §3-5.
 CREATE TABLE delivery_jobs (
   id                   BIGINT       AUTO_INCREMENT PRIMARY KEY,
   job_code             VARCHAR(32)  NOT NULL UNIQUE,   -- JOB_B_01
@@ -344,7 +345,8 @@ python scripts/validate_datasets.py    # 기대: 전체 이슈 0건
 ```text
 places → place_nodes (parent는 2-pass) → routes → route_segments
       → field_reports → knowledge_items → knowledge_conditions
-      → knowledge_targets → (embedding은 별도 단계 §7 Phase 3)
+      → knowledge_targets → delivery_jobs (§3-5, 코드로 생성)
+      → (embedding은 별도 단계, 05C §7 Phase 3)
 ```
 
 `place_nodes.parent_node_code`는 자기 참조라 **전체 삽입 후 2회차에 UPDATE**한다.
@@ -406,7 +408,35 @@ cond.setMinTonnageInclusive(inclusive);
 
 현재 4개 파일은 이 검증을 **전부 통과**한다. 통과하지 못하면 파일이 바뀐 것이니 임포트하지 말고 원인을 찾는다.
 
-## 3-5. 재실행 가능해야 한다
+## 3-5. ★ 시드 배송 건 (delivery_jobs)
+
+`delivery_jobs`는 데이터셋에 없다. **임포트 마지막 단계에서 아래 5건을 코드로 생성한다.**
+이게 없으면 배송 목록 화면이 비고, `POST /api/guidance`를 호출할 대상이 없어 Phase 4가 시작되지 않는다.
+
+**목적지는 Route가 실제로 향하는 노드여야 한다.** 그 외 노드를 넣으면 경로 후보가 0개가 되어
+`NO_ROUTE_AVAILABLE`이 난다. 전체 데이터에서 가능한 목적지는 7개뿐이고, 아래 5건은 그중에서 골랐다.
+
+| job_code | place | destination_node | recipient_label | item_summary | status |
+|---|---|---|---|---|---|
+| `JOB_B_01` | `PLACE_B` | `NODE_B_14` | 12층 입주사 안내데스크 | 일반 / 박스 3 | READY |
+| `JOB_B_02` | `PLACE_B` | `NODE_B_14` | 12층 회의실 | 일반 / 박스 1 | READY |
+| `JOB_C_01` | `PLACE_C` | `NODE_C_11` | 상온 배송 인계점 | 상온 / 박스 8 | READY |
+| `JOB_C_02` | `PLACE_C` | `NODE_C_12` | 냉장 배송 인계점 | 냉장 / 보냉박스 4 | READY |
+| `JOB_A_01` | `PLACE_A` | `NODE_A_10` | 101동 1203호 | 일반 / 박스 2 | READY |
+
+`address_text`는 외부 지도 앱으로 넘길 주소 문자열이며 장소명 수준으로 채우면 된다.
+
+### 왜 이 구성인가
+
+- **`JOB_B_01`이 시연 대상이다.** 목록 최상단에 오도록 정렬한다(`job_code` 오름차순이면 자연히 앞에 온다).
+- `JOB_B_02` — 같은 장소에 배송 건이 여러 개 있는 것이 자연스럽다. 목록이 비어 보이지 않게 한다.
+- `JOB_C_01` / `JOB_C_02` — **목적지로 경로가 갈리는** 사례다(상온/냉장). B는 차량으로 갈린다.
+  "다른 장소도 되나요?"라는 질문에 눌러서 보여줄 수 있다.
+- **D는 넣지 않는다.** `ROUTE_D_01`의 3단계에 붙는 지식이 0건이라, 시연 중 클릭하면 카드 없는 빈 화면이 나온다.
+
+시간이 부족하면 `JOB_B_01` · `JOB_C_01` · `JOB_A_01` 3건만 만들어도 시연은 성립한다.
+
+## 3-6. 재실행 가능해야 한다
 
 당일 여러 번 돌린다. `--truncate` 옵션으로 전체 삭제 후 재삽입하거나, `place_code` 기준 upsert로 만든다. **부분 실패 상태로 남지 않도록 장소 단위 트랜잭션**으로 감싼다.
 
