@@ -12,7 +12,10 @@
 
 당일에 이걸 받으면 늦는다. **미리 받아두면 캐시가 남는다.**
 
-## Docker
+## Docker  (백엔드 담당만)
+
+**R2·R3·R4는 건너뛴다.** 화면 담당은 DB를 직접 쓰지 않고 백엔드 API만 호출한다.
+Docker 대신 MariaDB를 직접 설치해도 된다 → `SETUP.md §1-B`
 
 ```bash
 docker pull mariadb:11.4
@@ -76,34 +79,26 @@ Spring Initializr에서 빈 프로젝트를 받아 한 번 빌드하면 배포�
 - [ ] JDK 17 이상 설치 확인 (`java -version`)
 - [ ] 빈 Spring Boot 프로젝트 빌드 1회 성공
 
-## Flutter — ★ 가장 오래 걸린다
+## Flutter — ★ 가장 오래 걸린다  (기사 앱 담당만)
 
-SDK만 1GB 이상이고 Android SDK·에뮬레이터 이미지까지 받으면 수 GB다.
-**당일에 받으면 오전이 통째로 날아간다.**
+설치 방법과 경로 선택은 `SETUP.md §4`. **웹 경로(A)로 시작하면 설치가 몇 배 빠르다.**
 
 ```bash
-flutter doctor
+flutter --version
 ```
 
-경고가 하나도 없어야 한다. Android 라이선스 동의가 빠지는 경우가 흔하다.
-
 ```bash
-flutter doctor --android-licenses
-```
-
-빈 프로젝트를 한 번 빌드하면 Gradle·pub 캐시가 채워진다.
-
-```bash
-flutter create _warmup && cd _warmup && flutter run
+flutter devices
 ```
 
 - [ ] Flutter 3.24+ 설치 (`flutter --version`)
-- [ ] `flutter doctor` 경고 0건
-- [ ] Android SDK + **에뮬레이터 이미지** 받음
-- [ ] 에뮬레이터에서 앱이 실제로 뜸
-- [ ] **에뮬레이터에서 마이크 녹음이 되는지 확인** ← 안 되면 S4 계획을 바꿔야 한다
-- [ ] `record` 등 녹음 패키지 `pub get` 1회 성공
-- [ ] 화면 녹화 방식 결정 (에뮬레이터 권장 → `mobile/README.md`)
+- [ ] **경로 결정** — A(웹, 권장) / B(Android 포함)
+- [ ] `flutter devices` 에 실행 대상이 보임 (A면 Chrome, B면 에뮬레이터)
+- [ ] `flutter create` + 실행 1회 성공 (pub·Gradle 캐시 채우기)
+- [ ] **마이크 녹음 확인** — A는 브라우저 권한, B는 에뮬레이터 마이크 설정
+- [ ] 화면 녹화 방식 결정 → `mobile/README.md`
+
+> B로 갈 경우 Android SDK·에뮬레이터 이미지가 수 GB다. **반드시 본선 전에 받는다.**
 
 ## Node (관리자 검수 화면)
 

@@ -41,13 +41,24 @@ $ 나 > 는 치지 않는다.  프롬프트 표시일 뿐이다.
 
 | 역할 | 필요한 것 |
 |---|---|
-| **전원** | Git · Docker |
-| 백엔드 (R1) | + Java · Python |
+| **전원** | Git |
+| 백엔드 (R1) | + Java · Python · **DB(Docker 또는 MariaDB)** |
 | 기사 앱 (R2) | + Flutter |
 | 관리자 화면 (R3) | + Node.js |
-| 발표·기획 (R4) | 전원 항목만. 나머지는 안 깔아도 된다 |
+| 발표·기획 (R4) | Git만. 나머지는 안 깔아도 된다 |
 
 역할은 `TEAM_ROLES.md`에 있다.
+
+> ### 데이터베이스는 백엔드 담당만 설치한다
+>
+> R2·R3는 **DB를 직접 쓰지 않는다.** 백엔드가 주는 API만 호출한다.
+> 개발 초반에는 Mock 데이터로 화면을 만들고, 연동 시점에 백엔드 담당의 주소로 붙는다.
+>
+> ```
+> R2·R3 화면  →  http://<백엔드 담당 IP>:8080/api/...
+> ```
+>
+> 같은 와이파이에 있으면 된다. **DB도 Docker도 설치할 필요가 없다.**
 
 ---
 
@@ -65,7 +76,24 @@ git --version
 `명령을 찾을 수 없습니다` 라고 나오면 [git-scm.com](https://git-scm.com/downloads)에서 받는다.
 설치 중 옵션은 **전부 기본값**으로 두면 된다.
 
-## 1-2. Docker Desktop
+---
+
+# 1-B. 데이터베이스  (백엔드 담당만)
+
+**두 가지 방법이 있다. 하나만 고르면 된다.**
+
+|  | 장점 | 단점 |
+|---|---|---|
+| **Docker** (권장) | 버전·한글설정이 자동으로 맞음. **초기화가 한 줄** | Windows는 WSL2 설정이 필요할 수 있음 |
+| **MariaDB 직접 설치** | 도커를 안 깔아도 됨 | 한글 설정을 직접 해야 함. 초기화가 번거로움 |
+
+Docker를 권하는 실질적 이유는 **시연 중 DB 초기화** 때문이다.
+녹화 전에 "임포트 직후 상태"로 되돌려야 하는데(`DEMO_SCRIPT §7-1`),
+도커면 `docker compose down -v` 한 줄이면 끝난다.
+
+이미 MariaDB나 MySQL이 깔려 있다면 굳이 도커를 새로 깔 필요는 없다.
+
+## 방법 1 — Docker Desktop
 
 데이터베이스(MariaDB)를 띄우는 데 쓴다. 직접 설치하지 않고 도커가 대신 띄워준다.
 
@@ -121,6 +149,38 @@ docker compose ps
 ```bash
 docker compose down
 ```
+
+데이터까지 완전히 지우고 처음 상태로 되돌리려면:
+
+```bash
+docker compose down -v
+```
+
+## 방법 2 — MariaDB 직접 설치
+
+[mariadb.org/download](https://mariadb.org/download/)에서 **11.4**를 받는다.
+설치 중 root 비밀번호를 정하고 기억해 둔다.
+
+설치 후 아래를 실행해 DB와 계정을 만든다. **한글이 깨지지 않으려면 charset 지정이 필수다.**
+
+```sql
+CREATE DATABASE moveai CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+CREATE USER 'moveai'@'localhost' IDENTIFIED BY 'moveai';
+GRANT ALL PRIVILEGES ON moveai.* TO 'moveai'@'localhost';
+FLUSH PRIVILEGES;
+```
+
+> **`utf8mb4`를 빠뜨리면 한글 데이터가 `???` 로 저장된다.**
+> 우리 데이터는 전부 한글이라 이걸 놓치면 임포트부터 깨진다.
+
+초기화가 필요할 때는 데이터베이스를 지우고 다시 만든다.
+
+```sql
+DROP DATABASE moveai;
+CREATE DATABASE moveai CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+```
+
+`.env`의 `DB_PORT`가 실제 포트(기본 3306)와 맞는지 확인한다.
 
 ---
 
@@ -275,13 +335,33 @@ gradlew.bat build
 
 # 4. Flutter  (기사 앱 담당) ★ 가장 오래 걸린다
 
-SDK만 1GB가 넘고, 안드로이드 관련까지 받으면 **수 GB**다.
-**반드시 미리 한다.** 당일에 하면 오전이 통째로 날아간다.
+**두 가지 경로가 있다. 먼저 경량 경로로 시작하는 것을 권한다.**
 
-## 4-1. 설치
+| | 받는 것 | 대략 | 시연 방식 |
+|---|---|---|---|
+| **A. 경량 — 웹만** (권장) | Flutter SDK | 1GB대 | 브라우저 창을 폰 비율로 |
+| B. 전체 — Android 포함 | + Android Studio · SDK · 에뮬레이터 | 수 GB | 에뮬레이터 |
+
+**Dart 코드는 두 경로가 동일하다.** A로 만들어 두고 나중에 B를 추가해도
+앱 코드를 다시 쓸 필요가 없다.
+
+## 왜 A를 권하는가
+
+- 제출물이 **녹화 영상**이라 실기기가 필수가 아니다
+- 브라우저 녹화가 에뮬레이터 녹화보다 쉽고 화질이 좋다
+- **마이크가 브라우저 API로 잡힌다** — 에뮬레이터 마이크 문제를 통째로 우회한다
+- 설치가 몇 배 빠르다. 해커톤 하루에서 이건 큰 차이다
+
+실기기처럼 보여야 한다는 요구가 있으면 B로 간다.
+
+---
+
+## 4-1. Flutter SDK 설치  (A·B 공통)
 
 [docs.flutter.dev/get-started](https://docs.flutter.dev/get-started/install)의 OS별 안내를 따른다.
-Android Studio도 함께 설치하는 것을 권한다 — 에뮬레이터와 안드로이드 SDK가 같이 깔린다.
+
+**경로 A로 갈 거면 Android Studio는 설치하지 않아도 된다.** 안내 중
+"Android setup" 부분을 건너뛰고 SDK 압축만 풀어 PATH에 추가하면 된다.
 
 ```bash
 flutter --version
@@ -289,27 +369,19 @@ flutter --version
 
 `3.24` 이상이면 된다.
 
-## 4-2. 진단 — 경고가 0건이어야 한다
+## 4-2. 경로 A — 웹으로 확인
+
+Chrome이 있으면 준비 끝이다.
 
 ```bash
-flutter doctor
+flutter config --enable-web
 ```
-
-항목마다 체크 표시가 나온다. **`[!]` 나 `[X]` 가 하나도 없어야 한다.**
-
-가장 흔한 문제는 안드로이드 라이선스 미동의다. 이 명령으로 해결된다.
 
 ```bash
-flutter doctor --android-licenses
+flutter devices
 ```
 
-`y` 를 여러 번 입력하면 된다.
-
-## 4-3. 에뮬레이터 준비
-
-Android Studio → `Device Manager` → 가상 기기 하나 생성 후 실행한다.
-
-## 4-4. 캐시 채우기 + 동작 확인
+목록에 `Chrome` 이 보이면 된다.
 
 ```bash
 flutter create _warmup
@@ -320,19 +392,51 @@ cd _warmup
 ```
 
 ```bash
+flutter run -d chrome
+```
+
+브라우저에 앱이 뜨면 성공이다. **`_warmup` 폴더는 지워도 된다.**
+
+> `flutter doctor` 에서 Android 관련 항목에 `[!]` 가 떠도 **웹만 쓸 거면 무시해도 된다.**
+> Chrome 항목만 체크돼 있으면 충분하다.
+
+### 마이크 확인
+
+브라우저에서 마이크 권한을 물으면 허용하고, 녹음이 되는지 본다.
+`localhost` 는 보안 예외라 HTTPS 없이도 마이크가 동작한다.
+
+## 4-3. 경로 B — Android까지  (실기기·에뮬레이터가 필요할 때만)
+
+Android Studio를 함께 설치한다. 에뮬레이터와 안드로이드 SDK가 같이 깔린다.
+
+```bash
+flutter doctor
+```
+
+`[!]` 나 `[X]` 가 없어야 한다. 가장 흔한 문제는 라이선스 미동의다.
+
+```bash
+flutter doctor --android-licenses
+```
+
+`y` 를 여러 번 입력하면 된다.
+
+Android Studio → `Device Manager` → 가상 기기 생성 후 실행.
+
+```bash
 flutter run
 ```
 
-에뮬레이터에 앱이 뜨면 성공이다. **`_warmup` 폴더는 지워도 된다.**
+에뮬레이터에 앱이 뜨면 성공이다.
 
-## 4-5. ★ 마이크 녹음 확인
+### ★ 에뮬레이터 마이크 확인
 
-**이걸 꼭 확인한다.** 기사 앱에서 음성 녹음을 해야 하는데,
-에뮬레이터에서 마이크가 안 잡히면 **시연 방식을 바꿔야 한다.**
+경로 B로 갈 때만 해당한다. **기사 앱에서 음성 녹음을 해야 하는데
+에뮬레이터에서 마이크가 안 잡히면 시연 방식을 바꿔야 한다.**
 당일에 알면 대응할 시간이 없다.
 
-에뮬레이터 설정에서 마이크가 호스트(노트북) 마이크로 연결되는지 본다.
-안 되면 팀에 알린다 — 실기기로 찍거나 텍스트 입력으로 대체하는 계획이 이미 있다.
+에뮬레이터 설정에서 마이크가 호스트(노트북) 마이크로 연결되는지 확인한다.
+안 되면 경로 A(웹)로 전환하는 것이 가장 빠른 해결책이다.
 
 ---
 
@@ -401,6 +505,8 @@ STT_MODEL=
 git --version
 ```
 
+DB 담당만:
+
 ```bash
 docker compose up -d
 ```
@@ -414,7 +520,7 @@ java -version
 ```
 
 ```bash
-flutter doctor
+flutter devices          # Chrome 이 보이면 웹 개발 준비 완료
 ```
 
 ```bash
@@ -441,7 +547,8 @@ python scripts/validate_datasets.py
 | `Cannot connect to the Docker daemon` | 위와 같다. Docker Desktop 실행 |
 | `이 시스템에서 스크립트를 실행할 수 없습니다` | PowerShell 정책. `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
 | `port is already allocated` | 3306 포트를 다른 DB가 쓰고 있다. 그걸 끄거나 `.env`에서 `DB_PORT` 변경 |
-| `flutter doctor`에 `[!]` | 대부분 안드로이드 라이선스. `flutter doctor --android-licenses` |
+| `flutter doctor`에 `[!]` | **웹만 쓸 거면 Android 항목은 무시해도 된다.** 라이선스 문제면 `flutter doctor --android-licenses` |
+| `flutter devices` 에 Chrome 이 없다 | `flutter config --enable-web` 실행 후 다시 확인 |
 | 가상환경을 켰는데 패키지가 없다 | 터미널을 새로 열면 꺼진다. `conda activate moveai` 를 다시 친다 |
 | `.env` 를 만들었는데 안 읽힌다 | 파일명이 `.env.txt` 로 저장된 경우가 많다. 확장자 표시를 켜서 확인 |
 
