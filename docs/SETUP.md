@@ -242,8 +242,41 @@ docker compose down -v
 
 ## 방법 2 — MariaDB 직접 설치
 
-[mariadb.org/download](https://mariadb.org/download/)에서 **11.4**를 받는다.
-설치 중 root 비밀번호를 정하고 기억해 둔다.
+[mariadb.org/download](https://mariadb.org/download/)에서 **11.4 이상**을 받는다.
+설치 중 root 비밀번호를 정하고 **반드시 기억해 둔다.** 나중에 DB를 만들 때 필요하다.
+
+### ★ 3306 포트가 이미 사용 중이라면
+
+설치 마법사에서 **"TCP port ... in use"** 경고가 나오는 경우가 흔하다.
+MySQL이나 다른 MariaDB가 이미 3306을 쓰고 있다는 뜻이다.
+
+무엇이 쓰고 있는지 확인한다. (PowerShell)
+
+```bash
+Get-NetTCPConnection -LocalPort 3306 -State Listen | ForEach-Object { Get-Process -Id $_.OwningProcess }
+```
+
+**기존 것을 끄지 말고 다른 포트를 쓴다.** 다른 프로젝트가 그걸 쓰고 있을 수 있다.
+
+빈 포트를 찾는다.
+
+```bash
+$used = (Get-NetTCPConnection -State Listen).LocalPort
+3307,3308,3309,3310 | ForEach-Object { "{0} {1}" -f $_, $(if ($used -contains $_) {"사용중"} else {"사용 가능"}) }
+```
+
+**`3307`을 권한다.** 두 번째 DB에 관례적으로 쓰는 번호다.
+
+설치 마법사의 TCP port 항목에 `3307`을 입력하고, **`.env`도 같이 바꾼다.**
+
+```
+DB_PORT=3307
+```
+
+> `.env`를 안 바꾸면 백엔드가 3306으로 접속을 시도해 연결에 실패한다.
+> Docker를 쓰는 경우에도 `.env`의 `DB_PORT`만 바꾸면 된다. `docker-compose.yml`이 그 값을 읽는다.
+
+
 
 설치 후 아래를 실행해 DB와 계정을 만든다. **한글이 깨지지 않으려면 charset 지정이 필수다.**
 
@@ -631,7 +664,8 @@ python scripts/validate_datasets.py
 | `docker: 명령을 찾을 수 없습니다` | Docker Desktop이 **실행 중이 아니다.** 프로그램을 켠다 |
 | `Cannot connect to the Docker daemon` | 위와 같다. Docker Desktop 실행 |
 | `이 시스템에서 스크립트를 실행할 수 없습니다` | PowerShell 정책. `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
-| `port is already allocated` | 3306 포트를 다른 DB가 쓰고 있다. 그걸 끄거나 `.env`에서 `DB_PORT` 변경 |
+| `port is already allocated` / `TCP port in use` | 다른 DB가 3306을 쓰고 있다. **끄지 말고** 3307로 설치하고 `.env`의 `DB_PORT` 변경 (§1-B) |
+| 백엔드가 DB에 연결 못 함 | `.env`의 `DB_PORT`가 실제 설치 포트와 다르다 |
 | `flutter doctor`에 `[!]` | **웹만 쓸 거면 Android 항목은 무시해도 된다.** 라이선스 문제면 `flutter doctor --android-licenses` |
 | `flutter devices` 에 Chrome 이 없다 | `flutter config --enable-web` 실행 후 다시 확인 |
 | 가상환경을 켰는데 패키지가 없다 | 터미널을 새로 열면 꺼진다. `conda activate moveai` 를 다시 친다 |

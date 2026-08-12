@@ -35,7 +35,7 @@ Java 17          Spring Boot 3.4.x   Gradle
 Python 3.12      FastAPI
 Flutter 3.24+    Dart 3.5+
 Node 20+         React 18 + TypeScript + Vite
-MariaDB 11.4
+MariaDB 11.4+
 ```
 
 **팀원마다 버전이 다르면 사전에 채워둔 빌드 캐시가 무용지물이 된다.**
