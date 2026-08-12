@@ -47,6 +47,8 @@ dataset/MOVE-AI_팀원용_가상데이터_제작_가이드.md     작성 가이�
 | `DEMO_SCRIPT.md` | 시연 컷 구성 + **녹화 진행 가이드(§7)** |
 | `PREP_CHECKLIST.md` | **본선 전 준비** — 환경 · 모델 · 키 · 규정 |
 | `TEAM_ROLES.md` | 역할 분담과 하네스 운용 방식 |
+
+화면 설계는 각 앱의 README에 있다 — `mobile/README.md`(Flutter 기사 앱), `admin-web/README.md`(관리자 검수).
 | `MOVE_AI_기획디자인_이해자료.pdf` | 비개발자용 이해 자료 (18쪽) |
 | `MOVE_AI_기획디자인_이해자료.html` | 위 PDF의 편집용 원본 |
 | `MOVE_AI_본선_PPT_준비_기능원리_안내.md` | 서비스 스토리 상세 |

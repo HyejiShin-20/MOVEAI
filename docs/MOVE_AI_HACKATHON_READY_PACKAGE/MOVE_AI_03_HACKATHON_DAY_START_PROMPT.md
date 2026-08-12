@@ -1,5 +1,11 @@
 # MOVE-AI 본선 당일 Harness 시작 프롬프트
 
+> ## ⚠ 이 파일은 초안이다. 당일에는 `docs/MOVE_AI_03_START_PROMPT.md`를 쓴다
+>
+> 04·05A·05B·05C 문서와 프로젝트 구조가 확정되면서 갱신본이 따로 있다.
+> 아래 내용에는 `frontend/` 등 **이미 바뀐 구조**가 남아 있다.
+> (현재 구조는 `backend/` · `ai-service/` · `mobile/`(Flutter) · `admin-web/`(React))
+
 아래 프롬프트를 본선 당일 Codex/ChatGPT Coding Harness의 첫 세션에 그대로 입력한다.
 
 ---

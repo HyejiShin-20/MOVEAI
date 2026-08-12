@@ -19,7 +19,8 @@
 ```
 backend/     Spring Boot   장소·경로·제보·검수·검색·안내 · MariaDB
 ai-service/  FastAPI       STT · 지식 추출 · 임베딩
-frontend/    React + TS    기사 화면 · 관리자 검수
+mobile/      Flutter       기사 앱 — 배송 목록 · Last 100m 안내 · 팁 등록
+admin-web/   React + Vite  관리자 검수 화면
 datasets/    합성 데이터 4종 (임포트 대상)
 docs/        기획·구현 문서
 scripts/     검증 스크립트
@@ -36,6 +37,10 @@ pip install -r ai-service/requirements.txt
 
 본선 전 준비는 [`docs/PREP_CHECKLIST.md`](docs/PREP_CHECKLIST.md),
 역할 분담은 [`docs/TEAM_ROLES.md`](docs/TEAM_ROLES.md).
+
+```bash
+flutter doctor          # 경고 0건이어야 한다
+```
 
 각 스택 실행 명령은 구현 후 이 절에 추가한다.
 

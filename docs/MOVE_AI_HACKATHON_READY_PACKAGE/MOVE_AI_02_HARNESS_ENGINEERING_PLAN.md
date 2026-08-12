@@ -102,7 +102,11 @@ move-ai/
 │  ├─ app/
 │  └─ tests/
 │
-├─ frontend/
+├─ mobile/          ← Flutter 기사 앱
+│  ├─ pubspec.yaml
+│  └─ lib/
+│
+├─ admin-web/       ← React 관리자 검수
 │  ├─ package.json
 │  └─ src/
 │

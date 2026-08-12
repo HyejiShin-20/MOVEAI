@@ -58,7 +58,7 @@ docs/DEMO_SCRIPT.md                시연 시나리오
 
 1. repository 전체 tree와 git status를 확인한다.
 2. 빌드·환경·docker 파일을 확인한다.
-3. `backend/`, `frontend/`, `ai-service/`의 현재 구현 상태를 확인한다.
+3. `backend/`, `ai-service/`, `mobile/`, `admin-web/`의 현재 구현 상태를 확인한다.
 4. `docs/IMPLEMENTATION_STATUS.md`의 Phase 표와 실제 상태를 대조한다.
 5. 차이가 있으면 그 파일을 사실에 맞게 갱신한다.
 6. 가장 앞선 미완료 Phase에서 **오늘 시연에 가장 빨리 연결되는 세로 슬라이스 하나**를 고른다.

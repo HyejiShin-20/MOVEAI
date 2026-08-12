@@ -74,7 +74,36 @@ Spring Initializr에서 빈 프로젝트를 받아 한 번 빌드하면 배포�
 - [ ] JDK 17 이상 설치 확인 (`java -version`)
 - [ ] 빈 Spring Boot 프로젝트 빌드 1회 성공
 
-## Node
+## Flutter — ★ 가장 오래 걸린다
+
+SDK만 1GB 이상이고 Android SDK·에뮬레이터 이미지까지 받으면 수 GB다.
+**당일에 받으면 오전이 통째로 날아간다.**
+
+```bash
+flutter doctor
+```
+
+경고가 하나도 없어야 한다. Android 라이선스 동의가 빠지는 경우가 흔하다.
+
+```bash
+flutter doctor --android-licenses
+```
+
+빈 프로젝트를 한 번 빌드하면 Gradle·pub 캐시가 채워진다.
+
+```bash
+flutter create _warmup && cd _warmup && flutter run
+```
+
+- [ ] Flutter 3.24+ 설치 (`flutter --version`)
+- [ ] `flutter doctor` 경고 0건
+- [ ] Android SDK + **에뮬레이터 이미지** 받음
+- [ ] 에뮬레이터에서 앱이 실제로 뜸
+- [ ] **에뮬레이터에서 마이크 녹음이 되는지 확인** ← 안 되면 S4 계획을 바꿔야 한다
+- [ ] `record` 등 녹음 패키지 `pub get` 1회 성공
+- [ ] 화면 녹화 방식 결정 (에뮬레이터 권장 → `mobile/README.md`)
+
+## Node (관리자 검수 화면)
 
 ```bash
 npm create vite@latest _warmup -- --template react-ts
@@ -147,6 +176,8 @@ cd _warmup && npm install
 - [ ] 팀 전원이 `MOVE_AI_기획디자인_이해자료.pdf` 읽음
 - [ ] 역할 분담 확정 (`TEAM_ROLES.md`)
 - [ ] 하네스 운용자 1명 지정
+- [ ] **Figma 시안 확정** — 화면 4개(기사) + 2개(관리자)
+      시안이 없으면 `mobile/README.md`·`admin-web/README.md`의 원칙대로 만든다
 - [ ] 하네스 시작 프롬프트 위치 확인 (`MOVE_AI_03_START_PROMPT.md`)
 - [ ] PPT 뼈대 12장 미리 만들어 둠 (내용은 당일 채움)
 

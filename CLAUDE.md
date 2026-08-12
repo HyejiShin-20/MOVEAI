@@ -122,11 +122,24 @@ REMAINING       blocker / 다음 정확한 작업 하나
 ```
 backend/     Spring Boot   장소·경로·제보·검수·검색·안내
 ai-service/  FastAPI       STT · 지식 추출 · 임베딩
-frontend/    React + TS    기사 화면 · 관리자 검수
+mobile/      Flutter       기사 앱 (배송목록·안내·팁등록)
+admin-web/   React + Vite  관리자 검수 화면
 datasets/    합성 데이터 4종 (임포트 대상, 검증 완료)
 docs/        기획·구현 문서
 scripts/     검증·실행 스크립트
 ```
+
+## 스택 버전 (임의로 바꾸지 말 것)
+
+```
+Java 17        Spring Boot 3.4.x   Gradle
+Python 3.11    FastAPI
+Flutter 3.24+  Dart 3.5+
+Node 20+       React 18 + TypeScript + Vite
+MariaDB 11.4
+```
+
+버전이 팀원마다 다르면 사전에 채운 빌드 캐시가 무용지물이 된다.
 
 ## 명령
 
