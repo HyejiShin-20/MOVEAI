@@ -9,6 +9,18 @@
 
 # 0. 시작하기 전에
 
+## 프로젝트 폴더부터 만든다
+
+아직 프로젝트가 없다면 먼저 받는다. **원하는 위치 아무 데나 두면 된다.**
+바탕화면, 문서 폴더, `D:\` 어디든 상관없다.
+
+```bash
+git clone <저장소 주소> MOVE-AI
+```
+
+저장소 주소는 팀에서 공유받는다.
+압축 파일로 받았다면 원하는 곳에 풀기만 하면 된다.
+
 ## 명령어는 어디에 치나
 
 **터미널**(명령 프롬프트)에 친다.
@@ -16,17 +28,34 @@
 - **Windows** — 시작 버튼 → `PowerShell` 검색 → 실행
 - **Mac** — `Command + Space` → `터미널` 검색 → 실행
 
-프로젝트 폴더로 먼저 이동한다. 폴더 경로는 각자 다르다.
+### ★ 프로젝트 폴더에서 터미널을 열어야 한다
+
+이 문서의 명령은 **전부 프로젝트 폴더 안에서** 실행한다.
+그렇지 않으면 `해당 경로를 찾을 수 없습니다` 같은 오류가 난다.
+
+**가장 쉬운 방법 (Windows)** — 탐색기로 프로젝트 폴더를 연 뒤,
+위쪽 **주소창을 클릭하고** `powershell` 을 입력하고 Enter.
+그 폴더 위치에서 터미널이 바로 열린다.
+
+**Mac** — 폴더에서 우클릭 → `서비스` → `폴더에서 새로운 터미널 열기`
+
+**직접 이동하려면** `cd` 뒤에 자기 폴더 경로를 쓴다. **경로는 사람마다 다르다.**
 
 ```bash
-cd E:\MOVE-AI
+cd C:\Users\내이름\Desktop\MOVE-AI
 ```
 
-Mac이면 이런 식이다.
+> 탐색기 주소창의 경로를 복사해 `cd ` 뒤에 붙여넣으면 편하다.
+> 경로에 띄어쓰기가 있으면 따옴표로 감싼다 — `cd "C:\My Projects\MOVE-AI"`
+
+### 지금 위치가 맞는지 확인
 
 ```bash
-cd ~/MOVE-AI
+ls
 ```
+
+`CLAUDE.md`, `docs`, `datasets` 같은 이름이 보이면 제 위치다.
+안 보이면 아직 프로젝트 폴더 밖이다.
 
 ## 문서에 나오는 표기
 
@@ -61,6 +90,61 @@ $ 나 > 는 치지 않는다.  프롬프트 표시일 뿐이다.
 > 같은 와이파이에 있으면 된다. **DB도 Docker도 설치할 필요가 없다.**
 
 ---
+
+# 0-B. Windows — 명령어로 한 번에 설치하기
+
+Windows 10/11에는 **winget**이라는 설치 도구가 기본으로 들어 있다.
+사이트를 하나씩 방문하지 않고 PowerShell에서 바로 설치할 수 있다.
+
+먼저 winget이 있는지 확인한다.
+
+```bash
+winget --version
+```
+
+버전이 나오면 아래를 쓸 수 있다. `명령을 찾을 수 없습니다` 라고 나오면
+Microsoft Store에서 **앱 설치 관리자**를 설치하거나, 각 항목의 사이트에서 직접 받는다.
+
+## PowerShell로 설치되는 것
+
+**자기 역할에 해당하는 것만** 실행한다.
+
+```bash
+winget install --id Git.Git -e
+```
+
+```bash
+winget install --id Python.Python.3.12 -e
+```
+
+```bash
+winget install --id EclipseAdoptium.Temurin.17.JDK -e
+```
+
+```bash
+winget install --id OpenJS.NodeJS.LTS -e
+```
+
+```bash
+winget install --id Docker.DockerDesktop -e
+```
+
+> 설치가 끝나면 **PowerShell을 닫고 새로 연다.** 그래야 새 명령이 인식된다.
+> 패키지 이름을 못 찾는다고 나오면 `winget search git` 처럼 검색해 정확한 ID를 확인한다.
+
+## 사이트에서 직접 받아야 하는 것
+
+winget으로 깔 수 있는 경우도 있지만, **설치 과정에서 선택할 것이 많아
+직접 받는 편이 확실하다.**
+
+| 항목 | 주소 | 누가 | 비고 |
+|---|---|---|---|
+| **Flutter SDK** | [docs.flutter.dev](https://docs.flutter.dev/get-started/install) | 기사 앱 담당 | 압축 풀고 PATH 추가. **웹만 쓸 거면 Android Studio 불필요** |
+| Android Studio | [developer.android.com](https://developer.android.com/studio) | 기사 앱 담당 중 **경로 B만** | 수 GB. 웹 경로면 건너뛴다 |
+| MariaDB | [mariadb.org/download](https://mariadb.org/download/) | 백엔드 담당 중 **Docker 안 쓸 때만** | 11.4 선택 |
+
+Flutter는 설치 후 PATH 등록이 필요해서 안내를 그대로 따라야 한다. → `§4`
+
 
 # 1. 전원 공통
 
@@ -541,6 +625,7 @@ python scripts/validate_datasets.py
 
 | 증상 | 원인과 해결 |
 |---|---|
+| `해당 경로를 찾을 수 없습니다` / 파일이 없다고 나옴 | 프로젝트 폴더 밖에서 실행했다. `ls` 로 위치 확인 (§0) |
 | `python: 명령을 찾을 수 없습니다` | 설치 시 `Add python.exe to PATH` 체크를 놓쳤다. 재설치하거나 PATH에 직접 추가 |
 | `pip: 명령을 찾을 수 없습니다` | `pip` 대신 `python -m pip` 로 친다 |
 | `docker: 명령을 찾을 수 없습니다` | Docker Desktop이 **실행 중이 아니다.** 프로그램을 켠다 |
