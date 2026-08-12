@@ -3,6 +3,8 @@
 > **코드는 미리 짜도 복붙할 수 없고 참고만 가능하다.**
 > 따라서 준비의 무게중심은 코드가 아니라 **환경·모델·키·데이터**다.
 > 당일 네트워크에서 내려받다가 1~2시간이 날아가는 것이 가장 큰 리스크다.
+>
+> **설치 방법 자체는 `SETUP.md`에 있다.** 이 문서는 설치 이후의 준비를 다룬다.
 
 ---
 
@@ -40,7 +42,7 @@ docker compose ps
 conda를 쓰든 venv를 쓰든 **패키지는 pip로 설치**한다. conda로 깔면 `requirements.txt`에 안 잡혀 팀원과 환경이 갈린다.
 
 ```bash
-conda create -n moveai python=3.11 -y
+conda create -n moveai python=3.12 -y
 ```
 
 ```bash

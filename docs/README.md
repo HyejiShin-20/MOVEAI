@@ -14,6 +14,7 @@
 
 **본선 전 준비 (전원)**
 ```
+SETUP.md            설치 가이드. 여기부터 시작한다
 PREP_CHECKLIST.md   환경·모델·키 준비. 미루면 당일 1~2시간 손해
 TEAM_ROLES.md       역할 분담. 하네스는 1명만 운용한다
 ```
@@ -47,8 +48,7 @@ dataset/MOVE-AI_팀원용_가상데이터_제작_가이드.md     작성 가이�
 | `DEMO_SCRIPT.md` | 시연 컷 구성 + **녹화 진행 가이드(§7)** |
 | `PREP_CHECKLIST.md` | **본선 전 준비** — 환경 · 모델 · 키 · 규정 |
 | `TEAM_ROLES.md` | 역할 분담과 하네스 운용 방식 |
-
-화면 설계는 각 앱의 README에 있다 — `mobile/README.md`(Flutter 기사 앱), `admin-web/README.md`(관리자 검수).
+| `SETUP.md` | **설치 가이드** — 비개발자도 따라할 수 있게 |
 | `MOVE_AI_기획디자인_이해자료.pdf` | 비개발자용 이해 자료 (18쪽) |
 | `MOVE_AI_기획디자인_이해자료.html` | 위 PDF의 편집용 원본 |
 | `MOVE_AI_본선_PPT_준비_기능원리_안내.md` | 서비스 스토리 상세 |
@@ -56,6 +56,8 @@ dataset/MOVE-AI_팀원용_가상데이터_제작_가이드.md     작성 가이�
 | `MOVE_AI_팀원용_기능흐름_AI원리_상세설명.md` | 전 팀원용 AI 원리 설명 |
 | `dataset/` | 데이터 작성 가이드 및 이력 |
 | `MOVE_AI_HACKATHON_READY_PACKAGE/` | 01~03 원본 패키지 |
+
+화면 설계는 각 앱의 README에 있다 — `mobile/README.md`(Flutter 기사 앱), `admin-web/README.md`(관리자 검수).
 
 ---
 

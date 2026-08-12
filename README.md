@@ -35,7 +35,8 @@ python scripts/validate_datasets.py   # 데이터셋 정합성 (기대: 이슈 0
 pip install -r ai-service/requirements.txt
 ```
 
-본선 전 준비는 [`docs/PREP_CHECKLIST.md`](docs/PREP_CHECKLIST.md),
+**처음이라면 [`docs/SETUP.md`](docs/SETUP.md) 부터 본다.** 설치를 순서대로 안내한다.
+이어서 [`docs/PREP_CHECKLIST.md`](docs/PREP_CHECKLIST.md)(모델·키 준비),
 역할 분담은 [`docs/TEAM_ROLES.md`](docs/TEAM_ROLES.md).
 
 ```bash

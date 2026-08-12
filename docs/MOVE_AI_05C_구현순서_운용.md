@@ -32,7 +32,7 @@
 
 ```
 Java 17          Spring Boot 3.4.x   Gradle
-Python 3.11      FastAPI
+Python 3.12      FastAPI
 Flutter 3.24+    Dart 3.5+
 Node 20+         React 18 + TypeScript + Vite
 MariaDB 11.4
