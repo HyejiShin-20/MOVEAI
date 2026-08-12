@@ -1,0 +1,42 @@
+# secrets
+.env
+*.pem
+*.key
+
+# data
+data/
+*.wav
+*.mp3
+*.m4a
+
+# java / gradle
+backend/build/
+backend/.gradle/
+backend/out/
+*.class
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+
+# node
+node_modules/
+frontend/dist/
+frontend/build/
+.vite/
+
+# ide
+.idea/
+.vscode/
+*.iml
+
+# os
+.DS_Store
+Thumbs.db
+desktop.ini

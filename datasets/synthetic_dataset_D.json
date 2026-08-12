@@ -1,0 +1,1220 @@
+{
+  "dataset_meta": {
+    "dataset_version": "synthetic_v4_normalized",
+    "author_prefix": "D",
+    "synthetic": true
+  },
+  "place": {
+    "place_code": "PLACE_D",
+    "name": "해피가든몰",
+    "place_type": "COMPLEX_FACILITY",
+    "custom_place_type": null,
+    "description": "1동(쇼핑몰), 2동(오피스), 3동(컨벤션)으로 이루어진 가상 대형 복합 단지",
+    "synthetic": true
+  },
+  "nodes": [
+    {
+      "node_code": "NODE_D_01",
+      "parent_node_code": null,
+      "node_type": "ENTRANCE",
+      "custom_node_type": null,
+      "name": "A 게이트 (일반 진입로)",
+      "floor_label": "1F",
+      "is_indoor": false,
+      "description": "승용차 전용 지하주차장 진입로"
+    },
+    {
+      "node_code": "NODE_D_02",
+      "parent_node_code": null,
+      "node_type": "ENTRANCE",
+      "custom_node_type": null,
+      "name": "B 게이트 (지하 화물/탑차 진입로)",
+      "floor_label": "1F",
+      "is_indoor": false,
+      "description": "화물차/탑차 전용 진입로 (지하 3층 직접 연결)"
+    },
+    {
+      "node_code": "NODE_D_03",
+      "parent_node_code": null,
+      "node_type": "ENTRANCE",
+      "custom_node_type": null,
+      "name": "C 게이트 (3동 컨벤션 진입로)",
+      "floor_label": "1F",
+      "is_indoor": false,
+      "description": "3동 컨벤션 전용 진입로"
+    },
+    {
+      "node_code": "NODE_D_04",
+      "parent_node_code": null,
+      "node_type": "ENTRANCE",
+      "custom_node_type": null,
+      "name": "D 게이트 (남측 하역장 진입로)",
+      "floor_label": "1F",
+      "is_indoor": false,
+      "description": "대형 화물차 전용 지상 진입로"
+    },
+    {
+      "node_code": "NODE_D_05",
+      "parent_node_code": null,
+      "node_type": "PARKING_POINT",
+      "custom_node_type": null,
+      "name": "지하 3층 제 1 하역장",
+      "floor_label": "B3F",
+      "is_indoor": true,
+      "description": "2동 오피스 및 3동 연결 화물차 정차 구역"
+    },
+    {
+      "node_code": "NODE_D_06",
+      "parent_node_code": null,
+      "node_type": "LOADING_POINT",
+      "custom_node_type": null,
+      "name": "지하 3층 제 2 하역장",
+      "floor_label": "B3F",
+      "is_indoor": true,
+      "description": "1동 쇼핑몰/식당가 전용 하역 구역"
+    },
+    {
+      "node_code": "NODE_D_07",
+      "parent_node_code": null,
+      "node_type": "ELEVATOR",
+      "custom_node_type": null,
+      "name": "2동 지하 3층 중앙 화물 엘리베이터",
+      "floor_label": "B3F",
+      "is_indoor": true,
+      "description": "2동 오피스 전 층 연결 화물용 승강기"
+    },
+    {
+      "node_code": "NODE_D_08",
+      "parent_node_code": null,
+      "node_type": "ELEVATOR",
+      "custom_node_type": null,
+      "name": "1동 지하 3층 안쪽 화물 엘리베이터",
+      "floor_label": "B3F",
+      "is_indoor": true,
+      "description": "1동 쇼핑몰 전용 화물 승강기"
+    },
+    {
+      "node_code": "NODE_D_09",
+      "parent_node_code": null,
+      "node_type": "SECURITY_GATE",
+      "custom_node_type": null,
+      "name": "2동 1층 로비 보안게이트",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "2동 오피스 출입 보안 스피드게이트"
+    },
+    {
+      "node_code": "NODE_D_10",
+      "parent_node_code": null,
+      "node_type": "CORRIDOR",
+      "custom_node_type": null,
+      "name": "2층 쇼핑몰-오피스동 연결통로",
+      "floor_label": "2F",
+      "is_indoor": true,
+      "description": "1동 쇼핑몰과 2동 오피스를 잇는 공중 구름다리"
+    },
+    {
+      "node_code": "NODE_D_11",
+      "parent_node_code": null,
+      "node_type": "ELEVATOR",
+      "custom_node_type": null,
+      "name": "2동 오피스 승객용 엘리베이터 승강장",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "2동 오피스 상층부 이동 승객용 엘리베이터 승강장"
+    },
+    {
+      "node_code": "NODE_D_12",
+      "parent_node_code": null,
+      "node_type": "DELIVERY_POINT",
+      "custom_node_type": null,
+      "name": "1동 쇼핑몰 3층 식당가 서비스 출입구",
+      "floor_label": "3F",
+      "is_indoor": true,
+      "description": "1동 쇼핑몰 배송 목적지"
+    },
+    {
+      "node_code": "NODE_D_13",
+      "parent_node_code": null,
+      "node_type": "BUILDING_ENTRANCE",
+      "custom_node_type": null,
+      "name": "3동 컨벤션 후면 출입구",
+      "floor_label": "1F",
+      "is_indoor": false,
+      "description": "3동 연회장 직통 서비스 출입구"
+    },
+    {
+      "node_code": "NODE_D_14",
+      "parent_node_code": null,
+      "node_type": "DELIVERY_POINT",
+      "custom_node_type": null,
+      "name": "2동 15층 오피스 배송 목적지",
+      "floor_label": "15F",
+      "is_indoor": true,
+      "description": "2동 오피스 최종 배송 목적지"
+    }
+  ],
+  "routes": [
+    {
+      "route_code": "ROUTE_D_01",
+      "name": "2동 15층 오피스 기본 배송 동선",
+      "start_node_code": "NODE_D_02",
+      "destination_node_code": "NODE_D_14",
+      "vehicle_class": "TRUCK",
+      "min_tonnage": null,
+      "max_tonnage": 4.9,
+      "max_vehicle_height_m": null,
+      "max_vehicle_width_m": null,
+      "is_default": true
+    },
+    {
+      "route_code": "ROUTE_D_02",
+      "name": "1동 식당가 배송 고정 경로",
+      "start_node_code": "NODE_D_02",
+      "destination_node_code": "NODE_D_12",
+      "vehicle_class": "TRUCK",
+      "min_tonnage": null,
+      "max_tonnage": null,
+      "max_vehicle_height_m": null,
+      "max_vehicle_width_m": null,
+      "is_default": true
+    }
+  ],
+  "route_segments": [
+    {
+      "segment_code": "SEG_D_01_01",
+      "route_code": "ROUTE_D_01",
+      "sequence_no": 1,
+      "from_node_code": "NODE_D_02",
+      "to_node_code": "NODE_D_05",
+      "movement_mode": "VEHICLE",
+      "traversal_method": "DRIVE",
+      "custom_traversal_method": null,
+      "instruction": "B 게이트에서 지하 3층 제 1 하역장으로 차량 이동",
+      "is_indoor": false
+    },
+    {
+      "segment_code": "SEG_D_01_02",
+      "route_code": "ROUTE_D_01",
+      "sequence_no": 2,
+      "from_node_code": "NODE_D_05",
+      "to_node_code": "NODE_D_07",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "WALK",
+      "custom_traversal_method": null,
+      "instruction": "하역장에서 중앙 화물 엘리베이터로 도보 이동",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_D_01_03",
+      "route_code": "ROUTE_D_01",
+      "sequence_no": 3,
+      "from_node_code": "NODE_D_07",
+      "to_node_code": "NODE_D_14",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "ELEVATOR",
+      "custom_traversal_method": null,
+      "instruction": "화물 엘리베이터를 이용하여 15층으로 이동",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_D_02_01",
+      "route_code": "ROUTE_D_02",
+      "sequence_no": 1,
+      "from_node_code": "NODE_D_02",
+      "to_node_code": "NODE_D_06",
+      "movement_mode": "VEHICLE",
+      "traversal_method": "DRIVE",
+      "custom_traversal_method": null,
+      "instruction": "B 게이트에서 지하 3층 제 2 하역장으로 차량 이동",
+      "is_indoor": false
+    },
+    {
+      "segment_code": "SEG_D_02_02",
+      "route_code": "ROUTE_D_02",
+      "sequence_no": 2,
+      "from_node_code": "NODE_D_06",
+      "to_node_code": "NODE_D_08",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "WALK",
+      "custom_traversal_method": null,
+      "instruction": "하역장에서 1동 안쪽 화물 엘리베이터로 도보 이동",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_D_02_03",
+      "route_code": "ROUTE_D_02",
+      "sequence_no": 3,
+      "from_node_code": "NODE_D_08",
+      "to_node_code": "NODE_D_12",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "ELEVATOR",
+      "custom_traversal_method": null,
+      "instruction": "화물 엘리베이터를 이용하여 3층 식당가로 이동",
+      "is_indoor": true
+    }
+  ],
+  "field_reports": [
+    {
+      "report_code": "REPORT_D_01",
+      "place_code": "PLACE_D",
+      "selected_scope_node_code": "NODE_D_02",
+      "source_type": "SYNTHETIC",
+      "transcript": "B 게이트 내려가는 램프가 두 번 꺾이는데, 처음 오면 지하 3층까지 계속 내려가는 줄 모르고 B1에서 세우는 분들이 많아요. 제 1 하역장은 기둥 사이가 좁아서 탑차는 후진으로 대야 편하고요. 중앙 화물 엘리베이터는 카드를 찍어야 눌러지니까 하역장 관리실에서 카드 먼저 받으세요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_D_001",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "진입 램프 층 혼동",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "B 게이트 진입 램프는 두 번 꺾이며 지하 3층까지 이어져 있어 초행 기사가 지하 1층에서 정차하는 경우가 많다.",
+          "action_text": null,
+          "source_excerpt": "처음 오면 지하 3층까지 계속 내려가는 줄 모르고 B1에서 세우는 분들이 많아요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_D_002",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_05",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "지하 3층 제 1 하역장은 기둥 사이가 좁아 탑차는 후진으로 주차하는 것이 편하다.",
+          "action_text": "후진으로 주차한다.",
+          "source_excerpt": "제 1 하역장은 기둥 사이가 좁아서 탑차는 후진으로 대야 편하고요.",
+          "conditions": {
+            "vehicle_class": "TRUCK",
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_D_003",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_07",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ELEVATOR_STAIRS",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "2동 지하 3층 중앙 화물 엘리베이터는 카드 인증을 해야 작동한다.",
+          "action_text": "하역장 관리실에서 카드를 먼저 받는다.",
+          "source_excerpt": "중앙 화물 엘리베이터는 카드를 찍어야 눌러지니까 하역장 관리실에서 카드 먼저 받으세요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_D_02",
+      "place_code": "PLACE_D",
+      "selected_scope_node_code": "NODE_D_06",
+      "source_type": "SYNTHETIC",
+      "transcript": "1동 쇼핑몰 3층 식당가로 갈 때는 오전 10시 전에 와서 지하 3층 제 2 하역장에 차 대야 편해요. 10시 넘어가면 마트 입고 차량이랑 섞여서 자리가 아예 없습니다. 그리고 1동 제일 안쪽에 위치한 엘리베이터 타고 올라갈 때 대형 카트는 회전각이 안 나와서 문에 잘 걸리니까 2호기 승강기 쓰셔야 돼요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_D_036",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_12",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "1동 식당가 배송은 오전 10시 이전에 방문하는 것이 좋다.",
+          "action_text": "오전 10시 전에 방문한다.",
+          "source_excerpt": "1동 쇼핑몰 3층 식당가로 갈 때는 오전 10시 전에 와서",
+          "conditions": {
+            "active_time_end": "10:00"
+          },
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_006",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_06",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "오전 10시 이전에 지하 3층 제 2 하역장에 주차한다.",
+          "action_text": "제 2 하역장에 주차한다.",
+          "source_excerpt": "지하 3층 제 2 하역장에 차 대야 편해요.",
+          "conditions": {
+            "active_time_end": "10:00"
+          },
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_007",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_06",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "오전 10시 이후에는 하역장 주차 자리가 없다.",
+          "action_text": null,
+          "source_excerpt": "10시 넘어가면 마트 입고 차량이랑 섞여서 자리가 아예 없습니다.",
+          "conditions": {
+            "active_time_start": "10:00"
+          },
+          "usage_scope": "WARNING_ONLY",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_009",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_08",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "대형 카트 회전각 제약",
+          "fact_type": "WARNING",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "statement": "대형 카트는 엘리베이터 문에 걸리기 쉽다.",
+          "action_text": null,
+          "source_excerpt": "대형 카트는 회전각이 안 나와서 문에 잘 걸리니까",
+          "conditions": {},
+          "usage_scope": "WARNING_ONLY",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_010",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_08",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ELEVATOR_STAIRS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "statement": "대형 카트 이용 시 엘리베이터 문에 걸리지 않도록 2호기 승강기를 사용해야 한다.",
+          "action_text": "2호기 승강기를 사용한다.",
+          "source_excerpt": "대형 카트는 회전각이 안 나와서 문에 잘 걸리니까 2호기 승강기 쓰셔야 돼요.",
+          "conditions": {},
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_D_03",
+      "place_code": "PLACE_D",
+      "selected_scope_node_code": "NODE_D_05",
+      "source_type": "SYNTHETIC",
+      "transcript": "2동 지하 3층 하역장이 꽉 찼으면 D 게이트로 들어가서 지상 남측 하역장에 잠시 세워도 돼요. 거기서 2층 쇼핑몰-오피스동 연결통로 구름다리로 1동 쇼핑몰까지 카트 끌고 건너갈 수 있거든요. 다만 연결통로 중간에 턱이 살짝 높아서 바퀴 작은 카트는 짐 쏟아질 수 있으니 조심하세요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_D_035",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_05",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "지하 3층 하역장이 만차일 수 있다.",
+          "action_text": null,
+          "source_excerpt": "2동 지하 3층 하역장이 꽉 찼으면",
+          "conditions": {},
+          "usage_scope": "WARNING_ONLY",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_011",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_04",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "만차 시 D 게이트로 우회하여 진입한다.",
+          "action_text": "D 게이트로 진입한다.",
+          "source_excerpt": "D 게이트로 들어가서",
+          "conditions": {},
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_012",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_04",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "지상 남측 하역장에 임시 정차가 가능하다.",
+          "action_text": "지상 남측 하역장에 정차한다.",
+          "source_excerpt": "지상 남측 하역장에 잠시 세워도 돼요.",
+          "conditions": {},
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_013",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_10",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "statement": "2층 연결통로를 통해 1동 쇼핑몰로 이동할 수 있다.",
+          "action_text": "2층 연결통로로 이동한다.",
+          "source_excerpt": "2층 쇼핑몰-오피스동 연결통로 구름다리로 1동 쇼핑몰까지 카트 끌고 건너갈 수 있거든요.",
+          "conditions": {},
+          "usage_scope": "ROUTE_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_014",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_10",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "연결통로 문턱 걸림",
+          "fact_type": "WARNING",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "statement": "연결통로 중간 턱으로 인해 짐이 쏟아질 위험이 있다.",
+          "action_text": null,
+          "source_excerpt": "연결통로 중간에 턱이 살짝 높아서 바퀴 작은 카트는 짐 쏟아질 수 있으니 조심하세요.",
+          "conditions": {},
+          "usage_scope": "WARNING_ONLY",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_D_04",
+      "place_code": "PLACE_D",
+      "selected_scope_node_code": "NODE_D_09",
+      "source_type": "SYNTHETIC",
+      "transcript": "2동 15층 오피스 갈 때 1층 로비 메인 보안게이트로는 카트 못 갖고 들어갑니다. 출입증 없으면 아예 안 열려요. 지하 3층 하역장에서 중앙 화물 엘리베이터 타고 1층 안내데스크 가서 임시 방문증 발급받은 다음 화물용으로 올라가셔야 합니다.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_D_015",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_09",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "statement": "1층 메인 보안게이트는 카트 진입이 불가하다.",
+          "action_text": null,
+          "source_excerpt": "1층 로비 메인 보안게이트로는 카트 못 갖고 들어갑니다.",
+          "conditions": {},
+          "usage_scope": "WARNING_ONLY",
+          "access_state": "PROHIBITED",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_016",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_09",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "statement": "출입증이 없으면 보안게이트가 열리지 않는다.",
+          "action_text": null,
+          "source_excerpt": "출입증 없으면 아예 안 열려요.",
+          "conditions": {},
+          "usage_scope": "WARNING_ONLY",
+          "access_state": "CONDITIONAL",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_017",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "1층 안내데스크"
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "statement": "1층 안내데스크에서 임시 방문증을 발급받아야 한다.",
+          "action_text": "임시 방문증을 발급받는다.",
+          "source_excerpt": "1층 안내데스크 가서 임시 방문증 발급받은 다음",
+          "conditions": {},
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_019",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "2동 1층 화물 엘리베이터 승강장"
+          },
+          "category": "ELEVATOR_STAIRS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "ELEVATOR",
+          "statement": "1층 안내데스크 방문 후 다시 화물용 엘리베이터를 이용해 상층부로 이동해야 한다.",
+          "action_text": "화물용으로 이동한다.",
+          "source_excerpt": "1층 안내데스크 가서 임시 방문증 발급받은 다음 화물용으로 올라가셔야 합니다.",
+          "conditions": {},
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_D_05",
+      "place_code": "PLACE_D",
+      "selected_scope_node_code": "NODE_D_13",
+      "source_type": "SYNTHETIC",
+      "transcript": "3동 후면 서비스 출입구 옆 바이크 정차장에 잠깐 댈 수 있어요. 거기 들어가다 보면 자동문 센서 작동 오류가 가끔 있어서 문이 늦게 열리니 조심하세요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_D_004",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "3동 후면 서비스 출입구 옆 바이크 정차장"
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "바이크 정차장에 임시 주차가 가능하다.",
+          "action_text": "바이크 정차장에 정차한다.",
+          "source_excerpt": "3동 후면 서비스 출입구 옆 바이크 정차장에 잠깐 댈 수 있어요.",
+          "conditions": {},
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_005",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_13",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "자동문 센서 오류",
+          "fact_type": "WARNING",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "statement": "자동문 센서 작동 오류로 문이 늦게 열릴 수 있다.",
+          "action_text": null,
+          "source_excerpt": "자동문 센서 작동 오류가 가끔 있어서 문이 늦게 열리니 조심하세요.",
+          "conditions": {},
+          "usage_scope": "WARNING_ONLY",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_D_06",
+      "place_code": "PLACE_D",
+      "selected_scope_node_code": "NODE_D_06",
+      "source_type": "SYNTHETIC",
+      "transcript": "1동 지하 1층 마트 뒤 비상용 셔터 통로가 하나 있는데요, 거기는 출근 시간인 오전 8시부터 9시 반 사이에는 쓰레기 수거함이 길을 막아서 카트 통행이 아예 불가능합니다. 그 시간대엔 조금 돌더라도 지하 3층 제 2 하역장 쪽으로 우회해서 이동하셔야 해요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_D_020",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "1동 지하 1층 마트 뒤 비상용 셔터 통로"
+          },
+          "category": "OTHER",
+          "custom_category_label": "비상용 셔터 통로 존재",
+          "fact_type": "LOCATION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "statement": "1동 지하 1층 마트 뒤에 비상용 셔터 통로가 있다.",
+          "action_text": null,
+          "source_excerpt": "1동 지하 1층 마트 뒤 비상용 셔터 통로가 하나 있는데요,",
+          "conditions": {},
+          "usage_scope": "REFERENCE_ONLY",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_021",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "1동 지하 1층 마트 뒤 비상용 셔터 통로"
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "statement": "08:00~09:30 사이에는 쓰레기 수거함으로 인해 통행이 불가하다.",
+          "action_text": null,
+          "source_excerpt": "오전 8시부터 9시 반 사이에는 쓰레기 수거함이 길을 막아서 카트 통행이 아예 불가능합니다.",
+          "conditions": {
+            "active_time_start": "08:00",
+            "active_time_end": "09:30"
+          },
+          "usage_scope": "WARNING_ONLY",
+          "access_state": "PROHIBITED",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_022",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_06",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "statement": "통행 제한 시간대에는 지하 3층 제 2 하역장으로 우회해야 한다.",
+          "action_text": "제 2 하역장으로 우회한다.",
+          "source_excerpt": "지하 3층 제 2 하역장 쪽으로 우회해서 이동하셔야 해요.",
+          "conditions": {
+            "active_time_start": "08:00",
+            "active_time_end": "09:30"
+          },
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_D_07",
+      "place_code": "PLACE_D",
+      "selected_scope_node_code": "NODE_D_02",
+      "source_type": "SYNTHETIC",
+      "transcript": "5톤 이상 대형 화물차는 B 게이트 지하 진입이 아예 안 됩니다. 천장 높이도 문제고 곡선 구간이 너무 좁아요. 5톤 넘는 차는 무조건 남측 D 게이트 지상 하역장으로 들어가야 합니다.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_D_023",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "5톤 이상 화물차는 B 게이트 진입이 금지된다.",
+          "action_text": null,
+          "source_excerpt": "5톤 이상 대형 화물차는 B 게이트 지하 진입이 아예 안 됩니다.",
+          "conditions": {
+            "min_tonnage": 5.0
+          },
+          "usage_scope": "WARNING_ONLY",
+          "access_state": "PROHIBITED",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_024",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "천장 높이 및 좁은 곡선 구간",
+          "fact_type": "WARNING",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "천장 높이 부족과 좁은 곡선 구간으로 인해 대형 차량의 진입이 불가능하다.",
+          "action_text": null,
+          "source_excerpt": "천장 높이도 문제고 곡선 구간이 너무 좁아요. 5톤 넘는 차는 무조건 남측 D 게이트 지상 하역장으로 들어가야 합니다.",
+          "conditions": {},
+          "usage_scope": "REFERENCE_ONLY",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_025",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_04",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "5톤 이상 차량은 D 게이트 지상 하역장을 이용해야 한다.",
+          "action_text": "D 게이트로 진입한다.",
+          "source_excerpt": "5톤 넘는 차는 무조건 남측 D 게이트 지상 하역장으로 들어가야 합니다.",
+          "conditions": {
+            "min_tonnage": 5.0
+          },
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_D_08",
+      "place_code": "PLACE_D",
+      "selected_scope_node_code": "NODE_D_03",
+      "source_type": "SYNTHETIC",
+      "transcript": "주말에 3동 컨벤션 갈 때는 C 게이트 근처 정차공간이 금방 찹니다. 그럴 땐 2동 지하 3층 제 1 하역장에 차 대고 중앙 화물 엘리베이터 타고 2층 쇼핑몰-오피스동 연결통로 지나서 3동으로 건너가는 게 빠릅니다.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_D_026",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_03",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "주말에는 C 게이트 정차공간이 매우 혼잡하다.",
+          "action_text": null,
+          "source_excerpt": "주말에 3동 컨벤션 갈 때는 C 게이트 근처 정차공간이 금방 찹니다.",
+          "conditions": {
+            "active_days": [
+              "SAT",
+              "SUN"
+            ]
+          },
+          "usage_scope": "WARNING_ONLY",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_027",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_05",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "statement": "혼잡 시 2동 지하 3층 제 1 하역장에 주차한다.",
+          "action_text": "제 1 하역장에 주차한다.",
+          "source_excerpt": "그럴 땐 2동 지하 3층 제 1 하역장에 차 대고",
+          "conditions": {},
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_029",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_10",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "statement": "2층 연결통로를 지나 3동으로 이동하는 경로를 활용한다.",
+          "action_text": "연결통로를 지나 3동으로 이동한다.",
+          "source_excerpt": "2층 쇼핑몰-오피스동 연결통로 지나서 3동으로 건너가는 게 빠릅니다.",
+          "conditions": {},
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_D_09",
+      "place_code": "PLACE_D",
+      "selected_scope_node_code": "NODE_D_05",
+      "source_type": "SYNTHETIC",
+      "transcript": "1동 3층 식당가로 직통하는 지하 3층 하역장 램프 경사로가 비나 눈 오는 날엔 엄청 미끄럽습니다. 카트 내리막길 이동할 때 수동 브레이크 잡고 가거나 2인 1조로 이동하셔야 사고 안 납니다.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_D_030",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "지하 3층 하역장 램프 경사로"
+          },
+          "category": "OTHER",
+          "custom_category_label": "경사로 노면 미끄러움",
+          "fact_type": "WARNING",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "statement": "비나 눈이 올 때 하역장 램프 경사로가 매우 미끄럽다.",
+          "action_text": null,
+          "source_excerpt": "비나 눈 오는 날엔 엄청 미끄럽습니다.",
+          "conditions": {},
+          "usage_scope": "WARNING_ONLY",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_031",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "지하 3층 하역장 램프 경사로"
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "statement": "카트 이동 시 수동 브레이크를 잡거나 2인 1조로 이동해야 한다.",
+          "action_text": "브레이크를 잡거나 2인 1조로 이동한다.",
+          "source_excerpt": "카트 내리막길 이동할 때 수동 브레이크 잡고 가거나 2인 1조로 이동하셔야 사고 안 납니다.",
+          "conditions": {},
+          "usage_scope": "ACTION_GUIDANCE",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_D_10",
+      "place_code": "PLACE_D",
+      "selected_scope_node_code": "NODE_D_11",
+      "source_type": "SYNTHETIC",
+      "transcript": "2동 오피스는 11시 30분부터 1시까지 점심시간이라 승객용 엘리베이터 승강장에 사람이 꽉 차요. 이때는 택배 카트 들고 승객용 엘리베이터 절대 못 탑니다. 지하 3층 중앙 화물 엘리베이터도 대기시간 15분 이상 걸리니까 점심시간 피해서 오시는 게 좋습니다.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_D_032",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_11",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "statement": "점심시간(11:30~13:00)에는 승객용 엘리베이터 승강장에 사람이 많아 혼잡하다.",
+          "action_text": null,
+          "source_excerpt": "2동 오피스는 11시 30분부터 1시까지 점심시간이라 승객용 엘리베이터 승강장에 사람이 꽉 차요.",
+          "conditions": {
+            "active_time_start": "11:30",
+            "active_time_end": "13:00"
+          },
+          "usage_scope": "WARNING_ONLY",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_033",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_11",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ELEVATOR_STAIRS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "statement": "사람이 꽉 차는 혼잡 시간대에는 카트를 동반하여 승객용 엘리베이터 탑승이 불가하다.",
+          "action_text": null,
+          "source_excerpt": "이때는 택배 카트 들고 승객용 엘리베이터 절대 못 탑니다.",
+          "conditions": {
+            "active_time_start": "11:30",
+            "active_time_end": "13:00"
+          },
+          "usage_scope": "WARNING_ONLY",
+          "access_state": "PROHIBITED",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        },
+        {
+          "knowledge_code": "K_D_034",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_D_07",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "ELEVATOR",
+          "statement": "점심시간 혼잡 시 화물 엘리베이터도 대기시간이 15분 이상 소요된다.",
+          "action_text": null,
+          "source_excerpt": "지하 3층 중앙 화물 엘리베이터도 대기시간 15분 이상 걸리니까 점심시간 피해서 오시는 게 좋습니다.",
+          "conditions": {
+            "active_time_start": "11:30",
+            "active_time_end": "13:00"
+          },
+          "usage_scope": "WARNING_ONLY",
+          "custom_fact_type_label": null,
+          "custom_traversal_method": null
+        }
+      ]
+    }
+  ],
+  "rag_test_queries": [
+    {
+      "query_code": "QUERY_D_01",
+      "place_code": "PLACE_D",
+      "question": "B 게이트로 들어왔는데 탑차 주차할 때 주의할 거 있나요?",
+      "context": {
+        "vehicle_class": "TRUCK",
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "VEHICLE"
+      },
+      "expected_knowledge_codes": [
+        "K_D_002",
+        "K_D_001"
+      ],
+      "must_not_return_codes": [
+        "K_D_012"
+      ],
+      "reason": "B 게이트 진입 후 제 1 하역장 주차 관련 지식이 나와야 하며, D 게이트 지상 하역장 정차 정보는 다른 진입로 정보이므로 핵심 답변으로 나오면 안 된다."
+    },
+    {
+      "query_code": "QUERY_D_02",
+      "place_code": "PLACE_D",
+      "question": "5톤 탑차 끌고 B 게이트로 들어가도 되나요?",
+      "context": {
+        "vehicle_class": "TRUCK",
+        "vehicle_tonnage": 5.0,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "VEHICLE"
+      },
+      "expected_knowledge_codes": [
+        "K_D_023",
+        "K_D_025"
+      ],
+      "must_not_return_codes": [
+        "K_D_026"
+      ],
+      "reason": "5톤 초과 차량의 B 게이트 진입 제한과 D 게이트 우회가 검색되어야 하며, 주말 C 게이트 혼잡 정보는 무관하므로 나오면 안 된다."
+    },
+    {
+      "query_code": "QUERY_D_03",
+      "place_code": "PLACE_D",
+      "question": "2층 쇼핑몰-오피스동 연결통로 구름다리로 카트 끌고 건너갈 때 주의할 점 있나요?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "PEDESTRIAN"
+      },
+      "expected_knowledge_codes": [
+        "K_D_014"
+      ],
+      "must_not_return_codes": [
+        "K_D_013"
+      ],
+      "reason": "단순 경로 안내가 아닌 '위험/주의사항'만을 잘 추출하는지 확인"
+    },
+    {
+      "query_code": "QUERY_D_04",
+      "place_code": "PLACE_D",
+      "question": "오전 9시에 마트 뒤 셔터 통로 지나서 1동 식당가 갈 수 있나요?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "PEDESTRIAN",
+        "current_time": "09:00"
+      },
+      "expected_knowledge_codes": [
+        "K_D_021",
+        "K_D_022"
+      ],
+      "must_not_return_codes": [],
+      "reason": "시간 조건(08:00~09:30)에 포함될 때의 제약 및 우회 지시 조회 확인"
+    },
+    {
+      "query_code": "QUERY_D_05",
+      "place_code": "PLACE_D",
+      "question": "낮 12시에 2동 오피스 상층부로 배송 갈 건데 승객용 엘리베이터 타도 되죠?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "PEDESTRIAN",
+        "current_time": "12:00"
+      },
+      "expected_knowledge_codes": [
+        "K_D_033"
+      ],
+      "must_not_return_codes": [
+        "K_D_034"
+      ],
+      "reason": "특정 시간대 승객용 엘리베이터 탑승 불가 팩트 체크 (대기시간 관련 항목 배제)"
+    }
+  ]
+}

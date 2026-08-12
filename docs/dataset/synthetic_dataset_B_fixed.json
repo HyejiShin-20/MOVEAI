@@ -1,0 +1,1717 @@
+{
+  "dataset_meta": {
+    "dataset_version": "synthetic_v2_normalized",
+    "author_prefix": "B",
+    "synthetic": true
+  },
+  "place": {
+    "place_code": "PLACE_B",
+    "name": "가온스퀘어 오피스타워",
+    "place_type": "OFFICE",
+    "custom_place_type": null,
+    "description": "지상 20층·지하 3층 규모의 단일 오피스타워. 저층부에 상업시설이 있고 상층부는 사무실 임차 구역이다. 배송차량은 원칙적으로 지하 2층 하역장을 이용하며, 지하 진입 램프에 높이 제한이 있어 큰 탑차는 지상 로비 앞에서 하차한다. 입주사 배송은 대부분 화물용 엘리베이터를 통해 이루어진다.",
+    "synthetic": true
+  },
+  "nodes": [
+    {
+      "node_code": "NODE_B_01",
+      "parent_node_code": null,
+      "node_type": "SITE",
+      "custom_node_type": null,
+      "name": "가온스퀘어 부지 전체",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "타워 건물과 지상 순환 차로, 지하주차장 출입 구역을 포함한 전체 부지"
+    },
+    {
+      "node_code": "NODE_B_02",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "ENTRANCE",
+      "custom_node_type": null,
+      "name": "정문 차량 출입구",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "대로변에 접한 정면 차량 출입구. 지상 순환 차로를 통해 로비 앞까지 접근할 수 있다."
+    },
+    {
+      "node_code": "NODE_B_03",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "ENTRANCE",
+      "custom_node_type": null,
+      "name": "후문 차량 출입구",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "건물 뒤편 이면도로에 접한 출입구. 지하주차장 진입 램프로 바로 연결된다."
+    },
+    {
+      "node_code": "NODE_B_04",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "OTHER",
+      "custom_node_type": "지하주차장 진입 경사로",
+      "name": "지하주차장 진입 램프",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "후문에서 지하 1층으로 내려가는 곡선 경사로. 입구 상단에 높이 제한 바가 설치되어 있다."
+    },
+    {
+      "node_code": "NODE_B_05",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "SECURITY_GATE",
+      "custom_node_type": null,
+      "name": "지하 1층 차량 차단기",
+      "floor_label": "B1",
+      "is_indoor": true,
+      "description": "램프를 내려오면 바로 나오는 차단기와 방재실 창구. 배송차량은 여기서 출입 확인을 받는다."
+    },
+    {
+      "node_code": "NODE_B_06",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "PARKING_POINT",
+      "custom_node_type": null,
+      "name": "지하 2층 배송차량 임시 주차 구역",
+      "floor_label": "B2",
+      "is_indoor": true,
+      "description": "하역장 옆에 별도로 표시된 배송차량용 임시 주차 칸"
+    },
+    {
+      "node_code": "NODE_B_07",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "LOADING_POINT",
+      "custom_node_type": null,
+      "name": "지하 2층 하역장",
+      "floor_label": "B2",
+      "is_indoor": true,
+      "description": "지하 2층 중앙의 하역 구역. 배송 물품을 내려 카트로 옮기는 지점이다."
+    },
+    {
+      "node_code": "NODE_B_08",
+      "parent_node_code": "NODE_B_07",
+      "node_type": "OTHER",
+      "custom_node_type": "방화문",
+      "name": "하역장 방화문",
+      "floor_label": "B2",
+      "is_indoor": true,
+      "description": "하역장과 실내 연결 통로 사이의 양방향 방화문"
+    },
+    {
+      "node_code": "NODE_B_09",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "CORRIDOR",
+      "custom_node_type": null,
+      "name": "지하 2층 하역장 연결 통로",
+      "floor_label": "B2",
+      "is_indoor": true,
+      "description": "방화문에서 화물용 엘리베이터 홀까지 이어지는 실내 통로"
+    },
+    {
+      "node_code": "NODE_B_10",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "ELEVATOR",
+      "custom_node_type": null,
+      "name": "화물용 엘리베이터",
+      "floor_label": "B2",
+      "is_indoor": true,
+      "description": "지하 2층부터 20층까지 운행하는 화물 전용 엘리베이터. 배송·이사 물량이 함께 사용한다."
+    },
+    {
+      "node_code": "NODE_B_11",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "BUILDING_ENTRANCE",
+      "custom_node_type": null,
+      "name": "1층 로비 회전문",
+      "floor_label": "1F",
+      "is_indoor": false,
+      "description": "지상 순환 차로에서 로비로 들어가는 정면 회전문. 옆에 여닫이 보조문이 있다."
+    },
+    {
+      "node_code": "NODE_B_12",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "ELEVATOR",
+      "custom_node_type": null,
+      "name": "로비 승객용 엘리베이터",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "1층 로비 중앙의 입주사 직원용 엘리베이터 뱅크"
+    },
+    {
+      "node_code": "NODE_B_13",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "OTHER",
+      "custom_node_type": "무인 택배 보관대",
+      "name": "1층 로비 무인 택배 보관대",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "로비 한쪽에 설치된 무인 택배함. 수령인이 부재일 때 사용하는 대체 인계 지점이다."
+    },
+    {
+      "node_code": "NODE_B_14",
+      "parent_node_code": "NODE_B_01",
+      "node_type": "DELIVERY_POINT",
+      "custom_node_type": null,
+      "name": "12층 입주사 안내데스크",
+      "floor_label": "12F",
+      "is_indoor": true,
+      "description": "12층 입주사의 물품 인계 지점. 엘리베이터에서 내려 정면에 있다."
+    }
+  ],
+  "routes": [
+    {
+      "route_code": "ROUTE_B_01",
+      "name": "후문-지하2층 하역장-12층 배송 경로",
+      "start_node_code": "NODE_B_03",
+      "destination_node_code": "NODE_B_14",
+      "vehicle_class": "TRUCK",
+      "min_tonnage": null,
+      "max_tonnage": 1.0,
+      "max_vehicle_height_m": 2.3,
+      "max_vehicle_width_m": null,
+      "is_default": true
+    },
+    {
+      "route_code": "ROUTE_B_02",
+      "name": "정문-지상 로비 하차 배송 경로",
+      "start_node_code": "NODE_B_02",
+      "destination_node_code": "NODE_B_14",
+      "vehicle_class": "TRUCK",
+      "min_tonnage": 1.0,
+      "max_tonnage": null,
+      "max_vehicle_height_m": null,
+      "max_vehicle_width_m": null,
+      "is_default": false
+    }
+  ],
+  "route_segments": [
+    {
+      "segment_code": "SEG_B_01",
+      "route_code": "ROUTE_B_01",
+      "sequence_no": 1,
+      "from_node_code": "NODE_B_03",
+      "to_node_code": "NODE_B_04",
+      "movement_mode": "VEHICLE",
+      "traversal_method": "DRIVE",
+      "custom_traversal_method": null,
+      "instruction": "후문으로 진입해 지하주차장 진입 램프 입구까지 이동한다.",
+      "is_indoor": false
+    },
+    {
+      "segment_code": "SEG_B_08",
+      "route_code": "ROUTE_B_01",
+      "sequence_no": 2,
+      "from_node_code": "NODE_B_04",
+      "to_node_code": "NODE_B_05",
+      "movement_mode": "VEHICLE",
+      "traversal_method": "DRIVE",
+      "custom_traversal_method": null,
+      "instruction": "지하주차장 진입 램프를 따라 내려가 지하 1층 차량 차단기 앞까지 이동한다.",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_B_02",
+      "route_code": "ROUTE_B_01",
+      "sequence_no": 3,
+      "from_node_code": "NODE_B_05",
+      "to_node_code": "NODE_B_07",
+      "movement_mode": "VEHICLE",
+      "traversal_method": "DRIVE",
+      "custom_traversal_method": null,
+      "instruction": "차단기에서 출입 확인을 받고 지하 2층으로 내려가 하역장에 차를 댄다.",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_B_03",
+      "route_code": "ROUTE_B_01",
+      "sequence_no": 4,
+      "from_node_code": "NODE_B_07",
+      "to_node_code": "NODE_B_08",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "CART",
+      "custom_traversal_method": null,
+      "instruction": "하역장에서 물품을 카트에 옮겨 싣고 방화문 앞까지 이동한다.",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_B_09",
+      "route_code": "ROUTE_B_01",
+      "sequence_no": 5,
+      "from_node_code": "NODE_B_08",
+      "to_node_code": "NODE_B_09",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "CART",
+      "custom_traversal_method": null,
+      "instruction": "방화문을 통과해 연결 통로로 들어간다.",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_B_04",
+      "route_code": "ROUTE_B_01",
+      "sequence_no": 6,
+      "from_node_code": "NODE_B_09",
+      "to_node_code": "NODE_B_10",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "CART",
+      "custom_traversal_method": null,
+      "instruction": "연결 통로를 따라 직진해 화물용 엘리베이터 홀까지 카트를 끌고 이동한다.",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_B_05",
+      "route_code": "ROUTE_B_01",
+      "sequence_no": 7,
+      "from_node_code": "NODE_B_10",
+      "to_node_code": "NODE_B_14",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "ELEVATOR",
+      "custom_traversal_method": null,
+      "instruction": "화물용 엘리베이터를 이용해 12층으로 올라가 입주사 안내데스크에 물품을 인계한다.",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_B_06",
+      "route_code": "ROUTE_B_02",
+      "sequence_no": 1,
+      "from_node_code": "NODE_B_02",
+      "to_node_code": "NODE_B_11",
+      "movement_mode": "VEHICLE",
+      "traversal_method": "DRIVE",
+      "custom_traversal_method": null,
+      "instruction": "정문으로 들어와 지상 순환 차로를 따라 1층 로비 회전문 앞까지 이동해 정차한다.",
+      "is_indoor": false
+    },
+    {
+      "segment_code": "SEG_B_07",
+      "route_code": "ROUTE_B_02",
+      "sequence_no": 2,
+      "from_node_code": "NODE_B_11",
+      "to_node_code": "NODE_B_12",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "WALK",
+      "custom_traversal_method": null,
+      "instruction": "로비 회전문으로 들어가 로비 승객용 엘리베이터 앞까지 이동한다.",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_B_10",
+      "route_code": "ROUTE_B_02",
+      "sequence_no": 3,
+      "from_node_code": "NODE_B_12",
+      "to_node_code": "NODE_B_14",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "ELEVATOR",
+      "custom_traversal_method": null,
+      "instruction": "로비 승객용 엘리베이터를 타고 12층 안내데스크까지 이동한다.",
+      "is_indoor": true
+    }
+  ],
+  "field_reports": [
+    {
+      "report_code": "REPORT_B_01",
+      "place_code": "PLACE_B",
+      "selected_scope_node_code": "NODE_B_03",
+      "source_type": "SYNTHETIC",
+      "transcript": "여기 후문으로 들어가는 게 제일 빨라요. 근데 지하 내려가는 램프 입구에 높이 제한 바가 2.3미터라서 탑차 높은 거는 아예 못 들어가요. 램프가 커브라 1톤이어도 한 번에 못 돌면 살살 돌아야 되고요. 내려가면 바로 차단기 있는데 거기서 방재실에 배송 왔다고 말하면 열어줍니다.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_B_001",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_03",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "배송차량은 후문으로 진입하는 것이 가장 빠르다.",
+          "action_text": "후문으로 진입한다.",
+          "source_excerpt": "여기 후문으로 들어가는 게 제일 빨라요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_B_002",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_04",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "PROHIBITED",
+          "statement": "높이 2.3미터를 초과하는 탑차는 지하주차장 진입 램프로 들어갈 수 없다.",
+          "action_text": null,
+          "source_excerpt": "높이 제한 바가 2.3미터라서 탑차 높은 거는 아예 못 들어가요.",
+          "conditions": {
+            "vehicle_class": "TRUCK",
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": 2.3,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "높이 제한 바 2.3미터를 초과하는 차량"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_003",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_04",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "지하 진입 램프가 곡선이라 1톤 차량도 한 번에 회전하기 어려워 서행해야 한다.",
+          "action_text": "램프에서 속도를 줄여 천천히 회전한다.",
+          "source_excerpt": "램프가 커브라 1톤이어도 한 번에 못 돌면 살살 돌아야 되고요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_B_004",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_05",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "지하 1층 차단기에서 방재실에 배송 목적을 알리면 차단기를 열어준다.",
+          "action_text": "차단기 앞에서 방재실에 배송 왔다고 알린다.",
+          "source_excerpt": "거기서 방재실에 배송 왔다고 말하면 열어줍니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_B_02",
+      "place_code": "PLACE_B",
+      "selected_scope_node_code": "NODE_B_11",
+      "source_type": "SYNTHETIC",
+      "transcript": "1톤 넘는 차는 지하 못 내려가니까 그냥 정문으로 들어와서 로비 앞에 대요. 로비 앞은 잠깐 세우는 건 되는데 오래 두면 경비가 빼라고 합니다.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_B_005",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_04",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "PROHIBITED",
+          "statement": "1톤을 초과하는 차량은 지하주차장으로 내려갈 수 없다.",
+          "action_text": null,
+          "source_excerpt": "1톤 넘는 차는 지하 못 내려가니까",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": 1.0,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "1톤을 초과하는 차량"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_006",
+          "target": {
+            "target_type": "SEGMENT",
+            "target_code": "SEG_B_06",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "1톤을 초과하는 차량은 정문으로 진입해 로비 앞에 정차한다.",
+          "action_text": "정문으로 진입한 뒤 로비 앞에 정차한다.",
+          "source_excerpt": "그냥 정문으로 들어와서 로비 앞에 대요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": 1.0,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "1톤을 초과하는 차량"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_B_007",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_11",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "로비 회전문 앞에는 잠깐 정차하는 것이 가능하다.",
+          "action_text": "로비 앞에 잠깐 정차한다.",
+          "source_excerpt": "로비 앞은 잠깐 세우는 건 되는데",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_B_008",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_11",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "로비 앞에 오래 정차하면 경비가 차량 이동을 요구한다.",
+          "action_text": null,
+          "source_excerpt": "오래 두면 경비가 빼라고 합니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_B_11",
+      "place_code": "PLACE_B",
+      "selected_scope_node_code": "NODE_B_11",
+      "source_type": "SYNTHETIC",
+      "transcript": "로비 회전문은 큰 박스 들고 가면 안 돌아가서, 옆에 여닫이 문으로 들어가는 게 나아요. 회전문 쪽으로 카트 밀고 가면 중간에 끼어요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_B_009",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_11",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "회전문 통과 문제",
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "큰 박스를 들고 로비 회전문을 통과하면 회전문이 돌아가지 않는다.",
+          "action_text": null,
+          "source_excerpt": "로비 회전문은 큰 박스 들고 가면 안 돌아가서",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "큰 박스를 들고 이동하는 경우"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_010",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_11",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "BUILDING_ENTRANCE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "회전문 옆 여닫이 문으로 들어가는 것이 낫다.",
+          "action_text": "회전문 대신 옆 여닫이 문을 이용한다.",
+          "source_excerpt": "옆에 여닫이 문으로 들어가는 게 나아요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_B_011",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_11",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "회전문 통과 문제",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "카트를 밀고 회전문으로 들어가면 중간에 카트가 끼인다.",
+          "action_text": null,
+          "source_excerpt": "회전문 쪽으로 카트 밀고 가면 중간에 끼어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_B_03",
+      "place_code": "PLACE_B",
+      "selected_scope_node_code": "NODE_B_07",
+      "source_type": "SYNTHETIC",
+      "transcript": "하역장에 차 대고 나서 카트로 가는데, 하역장에서 통로 넘어가는 방화문이 진짜 무거워요. 카트 잡고 한 손으로 밀면 문이 닫히면서 박스가 쏠려요. 그리고 화물 엘리베이터가 점심때 12시부터 1시까지는 이사짐이랑 겹쳐서 한참 기다립니다. 급하면 그 시간엔 하역장 옆 대기 공간에 카트 세워두고 기다리는 사람도 있어요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_B_012",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_08",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "방화문 통과 어려움",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "하역장에서 연결 통로로 넘어가는 방화문이 매우 무겁다.",
+          "action_text": null,
+          "source_excerpt": "하역장에서 통로 넘어가는 방화문이 진짜 무거워요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_013",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_08",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "방화문 통과 어려움",
+          "fact_type": "OTHER",
+          "custom_fact_type_label": "적재물 쏠림 위험",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "카트를 한 손으로 밀며 방화문을 통과하면 문이 닫히면서 적재된 박스가 쏠린다.",
+          "action_text": null,
+          "source_excerpt": "카트 잡고 한 손으로 밀면 문이 닫히면서 박스가 쏠려요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_014",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_10",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "ELEVATOR",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "화물용 엘리베이터는 12시부터 13시까지 이사 물량과 겹쳐 대기 시간이 길다.",
+          "action_text": null,
+          "source_excerpt": "화물 엘리베이터가 점심때 12시부터 1시까지는 이사짐이랑 겹쳐서 한참 기다립니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": "12:00",
+            "active_time_end": "13:00",
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_015",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "하역장 옆에서 카트를 세워두고 기다리는 대기 공간"
+          },
+          "category": "OTHER",
+          "custom_category_label": "임시 카트 대기 공간",
+          "fact_type": "LOCATION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "일부 기사는 하역장 옆 대기 공간에 카트를 세워두고 엘리베이터를 기다린다.",
+          "action_text": null,
+          "source_excerpt": "하역장 옆 대기 공간에 카트 세워두고 기다리는 사람도 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_B_04",
+      "place_code": "PLACE_B",
+      "selected_scope_node_code": "NODE_B_14",
+      "source_type": "SYNTHETIC",
+      "transcript": "12층은 엘리베이터 내리면 바로 앞이 안내데스크라 거기다 주면 돼요. 근데 데스크가 6시 넘으면 아무도 없어서 그때는 1층 로비에 무인 택배함에 넣습니다. 아, 로비에 있는 직원용 엘리베이터는 카트 들고 타면 경비가 뭐라 해요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_B_016",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_14",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "DELIVERY_POINT",
+          "custom_category_label": null,
+          "fact_type": "LOCATION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "12층 안내데스크는 엘리베이터에서 내리면 바로 앞에 있으며 그곳에 물품을 인계한다.",
+          "action_text": "12층에서 내려 정면의 안내데스크에 물품을 인계한다.",
+          "source_excerpt": "12층은 엘리베이터 내리면 바로 앞이 안내데스크라",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ROUTE_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_B_017",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_14",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "DELIVERY_POINT",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "GENERAL",
+          "traversal_method": "OTHER",
+          "custom_traversal_method": "인계 대기 인원 없음",
+          "access_state": null,
+          "statement": "12층 안내데스크는 18시 이후 근무자가 없다.",
+          "action_text": null,
+          "source_excerpt": "데스크가 6시 넘으면 아무도 없어서",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": "18:00",
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "저녁 6시 이후"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_018",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_13",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "DELIVERY_POINT",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "안내데스크에 근무자가 없는 시간에는 1층 로비 무인 택배함에 물품을 넣는다.",
+          "action_text": "1층 로비 무인 택배함에 물품을 넣는다.",
+          "source_excerpt": "그때는 1층 로비에 무인 택배함에 넣습니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": "18:00",
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "안내데스크에 근무자가 없는 경우"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_B_019",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_12",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ELEVATOR_STAIRS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "로비 승객용 엘리베이터에 카트를 가지고 타면 경비의 제지를 받는다.",
+          "action_text": null,
+          "source_excerpt": "로비에 있는 직원용 엘리베이터는 카트 들고 타면 경비가 뭐라 해요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "카트를 가지고 탑승하는 경우"
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_B_05",
+      "place_code": "PLACE_B",
+      "selected_scope_node_code": "NODE_B_02",
+      "source_type": "SYNTHETIC",
+      "transcript": "정문 들어와서 로비 쪽으로 도는 길에 중간에 화단 끼고 좁아지는 데가 있어요. 거기는 탑차면 한 번에 못 돌아서 후진 한 번 해야 돼요. 비 오면 그 앞 바닥이 미끄러워서 카트가 밀립니다. 그리고 그 옆에 흡연구역 있는 쪽은 사람이 많아서 카트 끌고 지나가기 애매해요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_B_020",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "정문에서 로비 쪽으로 도는 지상 순환로 중간의 화단 옆 좁아지는 구간"
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "LOCATION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "정문에서 로비로 도는 길 중간에 화단을 끼고 폭이 좁아지는 구간이 있다.",
+          "action_text": null,
+          "source_excerpt": "중간에 화단 끼고 좁아지는 데가 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_021",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "정문에서 로비 쪽으로 도는 지상 순환로 중간의 화단 옆 좁아지는 구간"
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "탑차는 화단 옆 좁아지는 구간을 한 번에 회전하지 못해 후진이 필요하다.",
+          "action_text": "좁아지는 구간에서 후진을 한 번 한 뒤 다시 진입한다.",
+          "source_excerpt": "거기는 탑차면 한 번에 못 돌아서 후진 한 번 해야 돼요.",
+          "conditions": {
+            "vehicle_class": "TRUCK",
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_B_022",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "화단 옆 좁아지는 구간 앞 노면"
+          },
+          "category": "OTHER",
+          "custom_category_label": "우천 시 노면 미끄러움",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "비가 오면 해당 구간 앞 바닥이 미끄러워 카트가 밀린다.",
+          "action_text": null,
+          "source_excerpt": "비 오면 그 앞 바닥이 미끄러워서 카트가 밀립니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "비가 오는 날"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_023",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "화단 옆 좁아지는 구간 옆 흡연구역 주변"
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "흡연구역 쪽은 사람이 많아 카트를 끌고 지나가기 어렵다.",
+          "action_text": null,
+          "source_excerpt": "흡연구역 있는 쪽은 사람이 많아서 카트 끌고 지나가기 애매해요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_B_06",
+      "place_code": "PLACE_B",
+      "selected_scope_node_code": "NODE_B_06",
+      "source_type": "SYNTHETIC",
+      "transcript": "지하 2층 내려가면 하역장 옆에 배송차 대는 칸이 따로 그려져 있어요. 거기 말고 일반 주차칸에 대면 방재실에서 방송 나옵니다. 근데 그 칸이 두 자리밖에 없어서 앞에 차 있으면 하역장 앞에서 좀 기다려야 돼요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_B_024",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_06",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "LOCATION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "지하 2층 하역장 옆에 배송차량 전용 주차 칸이 따로 표시되어 있다.",
+          "action_text": "하역장 옆 배송차량 전용 칸에 주차한다.",
+          "source_excerpt": "하역장 옆에 배송차 대는 칸이 따로 그려져 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_B_025",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "지하 2층 일반 주차칸"
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "배송차량이 일반 주차칸에 주차하면 방재실에서 안내 방송이 나온다.",
+          "action_text": null,
+          "source_excerpt": "일반 주차칸에 대면 방재실에서 방송 나옵니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_026",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_06",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "배송차량 주차 칸은 두 자리뿐이라 선점된 경우 하역장 앞에서 대기해야 한다.",
+          "action_text": null,
+          "source_excerpt": "그 칸이 두 자리밖에 없어서 앞에 차 있으면 하역장 앞에서 좀 기다려야 돼요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "앞차가 이미 주차되어 있는 경우"
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_B_07",
+      "place_code": "PLACE_B",
+      "selected_scope_node_code": "NODE_B_09",
+      "source_type": "SYNTHETIC",
+      "transcript": "하역장에서 화물 엘리베이터 가는 통로 중간에 배수구 턱이 하나 있어서 카트 바퀴가 걸려요. 통로가 좀 어두워서 밤에는 잘 안 보이고요. 화물 엘리베이터는 호출 버튼이 문 옆이 아니라 왼쪽 기둥 뒤에 있어서 처음 오면 못 찾습니다.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_B_027",
+          "target": {
+            "target_type": "SEGMENT",
+            "target_code": "SEG_B_04",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "바닥 턱으로 인한 카트 이동 어려움",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "연결 통로 중간의 배수구 턱에 카트 바퀴가 걸린다.",
+          "action_text": null,
+          "source_excerpt": "통로 중간에 배수구 턱이 하나 있어서 카트 바퀴가 걸려요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_028",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_09",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "통로 조명 부족",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "연결 통로가 어두워 야간에는 시야 확보가 어렵다.",
+          "action_text": null,
+          "source_excerpt": "통로가 좀 어두워서 밤에는 잘 안 보이고요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "야간"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_029",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_10",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "엘리베이터 호출 버튼 위치 특이",
+          "fact_type": "LOCATION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "ELEVATOR",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "화물용 엘리베이터 호출 버튼은 문 옆이 아니라 왼쪽 기둥 뒤에 있다.",
+          "action_text": "왼쪽 기둥 뒤의 호출 버튼을 누른다.",
+          "source_excerpt": "호출 버튼이 문 옆이 아니라 왼쪽 기둥 뒤에 있어서",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_B_08",
+      "place_code": "PLACE_B",
+      "selected_scope_node_code": "NODE_B_04",
+      "source_type": "SYNTHETIC",
+      "transcript": "아침 8시 반부터 9시까지는 램프에 출근 차량이 줄 서서 지하 내려가는 데 한참 걸려요. 주말에는 지하 차단기가 자동으로 안 열려서 옆에 인터폰 눌러야 됩니다. 토요일은 하역장에 상가 물건이 쌓여 있을 때가 많아요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_B_030",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_04",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "08시 30분부터 09시까지는 출근 차량 때문에 지하 진입 램프가 정체된다.",
+          "action_text": null,
+          "source_excerpt": "아침 8시 반부터 9시까지는 램프에 출근 차량이 줄 서서 지하 내려가는 데 한참 걸려요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": "08:30",
+            "active_time_end": "09:00",
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_031",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_05",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "주말에는 지하 차단기가 자동으로 열리지 않아 옆의 인터폰을 눌러야 한다.",
+          "action_text": "차단기 옆 인터폰을 누른다.",
+          "source_excerpt": "주말에는 지하 차단기가 자동으로 안 열려서 옆에 인터폰 눌러야 됩니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": [
+              "SAT",
+              "SUN"
+            ],
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_B_032",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_07",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "LOADING",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "GENERAL",
+          "traversal_method": "OTHER",
+          "custom_traversal_method": "하역 공간 점유 상태",
+          "access_state": null,
+          "statement": "토요일에는 하역장에 상가 물건이 쌓여 있는 경우가 많다.",
+          "action_text": null,
+          "source_excerpt": "토요일은 하역장에 상가 물건이 쌓여 있을 때가 많아요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": [
+              "SAT"
+            ],
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_B_09",
+      "place_code": "PLACE_B",
+      "selected_scope_node_code": "NODE_B_14",
+      "source_type": "SYNTHETIC",
+      "transcript": "저층 상가로 가는 물건은 하역장 반대편에 상가 전용 통로가 따로 있어서 그쪽으로 넘겨요. 화물 엘리베이터가 3층에서 자주 서서 12층까지 생각보다 오래 걸립니다. 12층 데스크에서는 인수증에 서명 받고 가야 돼요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_B_033",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "하역장 반대편에 있는 저층 상가 전용 통로"
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "저층 상가로 가는 물품은 하역장 반대편 상가 전용 통로를 통해 넘긴다.",
+          "action_text": "저층 상가 물품은 하역장 반대편 상가 전용 통로로 넘긴다.",
+          "source_excerpt": "하역장 반대편에 상가 전용 통로가 따로 있어서 그쪽으로 넘겨요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "저층 상가로 배송되는 물품인 경우"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_B_034",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_10",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ELEVATOR_STAIRS",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "ELEVATOR",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "화물용 엘리베이터가 3층에 자주 정차해 12층까지 이동 시간이 길어진다.",
+          "action_text": null,
+          "source_excerpt": "화물 엘리베이터가 3층에서 자주 서서 12층까지 생각보다 오래 걸립니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_035",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_14",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "DELIVERY_POINT",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "GENERAL",
+          "traversal_method": "OTHER",
+          "custom_traversal_method": "물품 인계 절차",
+          "access_state": null,
+          "statement": "12층 안내데스크에서는 인수증에 서명을 받아야 한다.",
+          "action_text": "12층 안내데스크에서 인수증 서명을 받는다.",
+          "source_excerpt": "12층 데스크에서는 인수증에 서명 받고 가야 돼요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_B_10",
+      "place_code": "PLACE_B",
+      "selected_scope_node_code": "NODE_B_03",
+      "source_type": "SYNTHETIC",
+      "transcript": "후문은 밤 10시 넘으면 아예 닫혀요. 그리고 1층 무인 택배함은 칸이 작아서 큰 박스는 안 들어갑니다.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_B_036",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_03",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "PROHIBITED",
+          "statement": "후문은 22시 이후 폐쇄되어 진입할 수 없다.",
+          "action_text": null,
+          "source_excerpt": "후문은 밤 10시 넘으면 아예 닫혀요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": "22:00",
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "밤 10시 이후"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_B_037",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_B_13",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "DELIVERY_POINT",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "1층 무인 택배함은 칸이 작아 큰 박스를 넣을 수 없다.",
+          "action_text": null,
+          "source_excerpt": "1층 무인 택배함은 칸이 작아서 큰 박스는 안 들어갑니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "큰 박스인 경우"
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    }
+  ],
+  "rag_test_queries": [
+    {
+      "query_code": "QUERY_B_01",
+      "place_code": "PLACE_B",
+      "question": "2.5톤 탑차인데 지하로 내려가도 돼?",
+      "context": {
+        "vehicle_class": "TRUCK",
+        "vehicle_tonnage": 2.5,
+        "vehicle_height_m": 2.7,
+        "vehicle_width_m": null,
+        "movement_mode": "VEHICLE"
+      },
+      "expected_knowledge_codes": [
+        "K_B_005",
+        "K_B_002",
+        "K_B_006"
+      ],
+      "must_not_return_codes": [
+        "K_B_003",
+        "K_B_011"
+      ],
+      "reason": "톤수 초과와 높이 제한이라는 두 가지 제약이 모두 검색되어야 하고, 원문에 있는 대체 진입(정문 로비 하차)까지 연결되어야 한다. 1톤 차량 기준의 램프 회전 요령이나 도보 카트 정보는 핵심 답변으로 나오면 안 된다."
+    },
+    {
+      "query_code": "QUERY_B_02",
+      "place_code": "PLACE_B",
+      "question": "1톤인데 어디로 들어가는 게 나아?",
+      "context": {
+        "vehicle_class": "TRUCK",
+        "vehicle_tonnage": 1.0,
+        "vehicle_height_m": 2.1,
+        "vehicle_width_m": null,
+        "movement_mode": "VEHICLE"
+      },
+      "expected_knowledge_codes": [
+        "K_B_001",
+        "K_B_003",
+        "K_B_004"
+      ],
+      "must_not_return_codes": [
+        "K_B_005",
+        "K_B_006"
+      ],
+      "reason": "동일한 장소에서 1톤과 1톤 초과의 결과가 갈리는 사례다. 1톤 이하는 후문·지하 경로가 정답이며, 1톤 초과 차량용 정문 안내는 검색되면 안 된다."
+    },
+    {
+      "query_code": "QUERY_B_03",
+      "place_code": "PLACE_B",
+      "question": "카트 끌고 갈 때 조심할 데 있어?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "PEDESTRIAN"
+      },
+      "expected_knowledge_codes": [
+        "K_B_011",
+        "K_B_013",
+        "K_B_027",
+        "K_B_022"
+      ],
+      "must_not_return_codes": [
+        "K_B_003",
+        "K_B_021"
+      ],
+      "reason": "같은 장소지만 이동 방식이 도보/카트일 때만 유효한 지식이 검색되어야 한다. 정답이 대부분 category=OTHER인 예상 밖 지식이며, 차량 회전·후진 관련 지식은 배제되어야 한다."
+    },
+    {
+      "query_code": "QUERY_B_04",
+      "place_code": "PLACE_B",
+      "question": "점심때 엘리베이터 많이 기다려?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "PEDESTRIAN"
+      },
+      "expected_knowledge_codes": [
+        "K_B_014",
+        "K_B_034"
+      ],
+      "must_not_return_codes": [
+        "K_B_019"
+      ],
+      "reason": "'화물용 엘리베이터'와 '로비 승객용 엘리베이터'라는 이름이 비슷한 두 Node가 존재한다. 배송 동선의 화물용 엘리베이터 정보만 검색되어야 하며, 승객용 엘리베이터의 카트 제지 정보는 질문과 무관하다."
+    },
+    {
+      "query_code": "QUERY_B_05",
+      "place_code": "PLACE_B",
+      "question": "저녁 7시인데 12층에 아무도 없으면 어떻게 해?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "PEDESTRIAN"
+      },
+      "expected_knowledge_codes": [
+        "K_B_017",
+        "K_B_018",
+        "K_B_037"
+      ],
+      "must_not_return_codes": [
+        "K_B_032",
+        "K_B_035"
+      ],
+      "reason": "평시와 특정 시간대의 결과가 다른 사례다. 18시 이후 조건과 대체 인계 지점, 그리고 그 대체 지점의 크기 제약까지 함께 나와야 한다. 토요일 하역장 상태나 평시 서명 절차는 이 상황의 핵심 답변이 아니다."
+    }
+  ]
+}

@@ -1,0 +1,921 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>MOVE-AI 기획·디자인 이해 자료</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 18mm 15mm; }
+
+  :root{
+    --ink:#1A2229;
+    --ink-soft:#4E5D68;
+    --ink-faint:#84949C;
+    --line:#D3DCDD;
+    --line-soft:#E8EEEE;
+    --route:#1B6F80;
+    --route-bg:#E4F1F3;
+    --know:#B96E1B;
+    --know-bg:#FBEEDA;
+    --stop:#A83A3A;
+    --stop-bg:#F7E3E3;
+    --paper:#FFFFFF;
+    --panel:#F6F8F8;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ margin:0; padding:0; }
+  body{
+    font-family:"Malgun Gothic","맑은 고딕","Apple SD Gothic Neo",sans-serif;
+    color:var(--ink);
+    font-size:10.2pt;
+    line-height:1.72;
+    background:var(--paper);
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  h1,h2,h3,h4{ margin:0; font-weight:700; text-wrap:balance; }
+
+  /* ───── 표지 ───── */
+  .cover{
+    height:250mm;
+    display:flex; flex-direction:column; justify-content:center;
+    page-break-after:always;
+  }
+  .cover .rule{ width:52px; height:3px; background:var(--route); margin-bottom:20px; }
+  .cover .kicker{
+    font-size:9.5pt; letter-spacing:.18em; color:var(--route);
+    font-weight:700; margin-bottom:14px;
+  }
+  .cover h1{ font-size:30pt; line-height:1.28; letter-spacing:-.02em; margin-bottom:16px; }
+  .cover h1 em{ font-style:normal; color:var(--know); }
+  .cover .sub{ font-size:11.5pt; color:var(--ink-soft); line-height:1.7; max-width:135mm; }
+  .cover .meta{
+    margin-top:44px; padding-top:16px; border-top:1px solid var(--line);
+    font-size:9.5pt; color:var(--ink-faint); line-height:2;
+  }
+  .cover .meta b{ color:var(--ink-soft); font-weight:700; display:inline-block; width:74px; }
+
+  /* ───── 파트 ───── */
+  .part{ page-break-before:always; }
+  .part-head{
+    border-top:3px solid var(--ink); padding-top:10px; margin-bottom:22px;
+  }
+  .part-head .n{
+    font-size:9pt; letter-spacing:.16em; color:var(--route); font-weight:700;
+  }
+  .part-head h2{ font-size:19pt; margin-top:4px; letter-spacing:-.01em; }
+  .part-head .d{ font-size:10pt; color:var(--ink-soft); margin-top:6px; }
+
+  section{ page-break-inside:auto; margin-bottom:20px; }
+  h3{
+    font-size:13pt; margin:22px 0 8px; padding-bottom:5px;
+    border-bottom:1px solid var(--line);
+  }
+  h3:first-child{ margin-top:0; }
+  h4{ font-size:11pt; margin:16px 0 5px; color:var(--ink); }
+  p{ margin:0 0 9px; }
+  ul,ol{ margin:0 0 10px; padding-left:19px; }
+  li{ margin-bottom:4px; }
+  b,strong{ font-weight:700; }
+  .dim{ color:var(--ink-soft); }
+
+  /* ───── 박스류 ───── */
+  .note{
+    background:var(--panel); border-left:3px solid var(--route);
+    padding:10px 14px; margin:12px 0; font-size:9.8pt;
+    page-break-inside:avoid;
+  }
+  .note.know{ border-left-color:var(--know); background:var(--know-bg); }
+  .note.stop{ border-left-color:var(--stop); background:var(--stop-bg); }
+  .note .t{ font-weight:700; display:block; margin-bottom:3px; color:var(--route); }
+  .note.know .t{ color:var(--know); }
+  .note.stop .t{ color:var(--stop); }
+
+  .quote{
+    border:1px solid var(--line); border-radius:3px;
+    padding:10px 14px; margin:10px 0; font-size:9.8pt; color:var(--ink-soft);
+    background:#FCFDFD; page-break-inside:avoid;
+  }
+
+  .appendix-flag{
+    display:inline-block; font-size:8pt; font-weight:700; letter-spacing:.06em;
+    color:#fff; background:var(--ink-faint); padding:2px 7px; border-radius:2px;
+    vertical-align:middle; margin-left:8px;
+  }
+
+  /* ───── 3단 카드 ───── */
+  .trio{ display:flex; gap:10px; margin:14px 0; page-break-inside:avoid; }
+  .trio > div{
+    flex:1; border:1px solid var(--line); border-top:3px solid var(--route);
+    padding:11px 12px; background:#FCFDFD;
+  }
+  .trio .k{ font-size:8.5pt; letter-spacing:.1em; color:var(--ink-faint); font-weight:700; }
+  .trio h4{ margin:4px 0 4px; font-size:11pt; }
+  .trio p{ font-size:9.3pt; color:var(--ink-soft); margin:0; line-height:1.6; }
+
+  /* ───── 표 ───── */
+  table{ width:100%; border-collapse:collapse; font-size:9.4pt; margin:10px 0 12px; }
+  th,td{ text-align:left; padding:6px 9px; border-bottom:1px solid var(--line); vertical-align:top; }
+  th{ font-size:8.6pt; letter-spacing:.05em; color:var(--ink-faint); font-weight:700;
+      border-bottom:1.5px solid var(--line); background:var(--panel); }
+  td.c{ text-align:center; } td.r{ text-align:right; }
+  .num{ font-variant-numeric:tabular-nums; }
+  tr{ page-break-inside:avoid; }
+
+  /* ───── 도식 ───── */
+  figure{ margin:14px 0; page-break-inside:avoid; }
+  figure svg{ display:block; width:100%; height:auto; }
+  figcaption{ font-size:8.8pt; color:var(--ink-faint); margin-top:6px; line-height:1.55; }
+
+  /* ───── 화면 목업 ───── */
+  .screen{
+    width:74mm; border:1px solid #9FB0B0; border-radius:8px;
+    padding:11px 12px; background:#fff; font-size:9pt; page-break-inside:avoid;
+  }
+  .screen .step{ font-size:8.4pt; color:var(--ink-faint); margin-bottom:5px; }
+  .screen .move{ font-weight:700; font-size:10.5pt; margin-bottom:9px; }
+  .screen .card{
+    border:1px solid var(--line); border-left-width:3px; border-radius:3px;
+    padding:6px 9px; margin-bottom:6px; line-height:1.5;
+  }
+  .screen .card.w{ border-left-color:var(--know); }
+  .screen .card.a{ border-left-color:var(--route); }
+  .screen .card.n{ border-left-color:#4C9A5E; background:#EDF6EF; }
+  .screen .tag{
+    font-size:7.8pt; font-weight:700; letter-spacing:.05em;
+    display:inline-block; margin-bottom:2px;
+  }
+  .screen .card.w .tag{ color:var(--know); }
+  .screen .card.a .tag{ color:var(--route); }
+  .screen .card.n .tag{ color:#3D7F4D; }
+  .screen .btn{
+    display:inline-block; margin-top:4px; background:var(--ink); color:#fff;
+    padding:5px 14px; border-radius:4px; font-size:8.6pt; font-weight:700;
+  }
+  .pair{ display:flex; gap:12px; align-items:flex-start; margin:12px 0; page-break-inside:avoid; }
+  .pair .lbl{ font-size:8.6pt; font-weight:700; letter-spacing:.05em; margin-bottom:5px; }
+  .pair .lbl.before{ color:var(--ink-faint); }
+  .pair .lbl.after{ color:#3D7F4D; }
+
+  /* ───── 컷 리스트 ───── */
+  .cut{
+    display:flex; gap:12px; padding:10px 0; border-top:1px solid var(--line-soft);
+    page-break-inside:avoid;
+  }
+  .cut:first-of-type{ border-top:1px solid var(--line); }
+  .cut .no{
+    flex:none; width:30px; height:30px; border-radius:50%;
+    background:var(--route-bg); color:var(--route);
+    font-weight:700; font-size:10pt;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .cut .body{ flex:1; }
+  .cut .ttl{ font-weight:700; font-size:10.4pt; margin-bottom:2px; }
+  .cut .scr{ font-size:8.8pt; color:var(--route); font-weight:700; margin-bottom:3px; }
+  .cut p{ margin:0 0 4px; font-size:9.5pt; }
+  .cut .say{
+    font-size:9.2pt; color:var(--ink-soft); background:var(--panel);
+    padding:5px 9px; border-radius:3px; margin-top:4px;
+  }
+
+  .kv{ font-size:9.4pt; }
+  .kv div{ display:flex; gap:10px; padding:3px 0; }
+  .kv .k{ flex:none; width:88px; color:var(--ink-faint); font-weight:700; font-size:8.8pt; padding-top:2px; }
+
+  .qa{ page-break-inside:avoid; margin-bottom:13px; }
+  .qa .q{ font-weight:700; font-size:10.2pt; margin-bottom:3px; }
+  .qa .q::before{ content:"Q. "; color:var(--route); }
+  .qa .a{ font-size:9.6pt; color:var(--ink-soft); }
+  .qa .a::before{ content:"A. "; color:var(--ink-faint); font-weight:700; }
+
+  .toc{ font-size:10pt; }
+  .toc .row{ display:flex; gap:12px; padding:7px 0; border-bottom:1px solid var(--line-soft); }
+  .toc .p{ flex:none; width:52px; font-weight:700; color:var(--route); font-size:9pt; padding-top:1px; }
+  .toc .t{ flex:1; }
+  .toc .t b{ display:block; }
+  .toc .t span{ font-size:9pt; color:var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ 표지 ══════════════ -->
+<div class="cover">
+  <div class="rule"></div>
+  <div class="kicker">기획 · 디자인 이해 자료</div>
+  <h1>기사의 한마디가,<br><em>다음 기사의 길</em>이 된다</h1>
+  <p class="sub">MOVE-AI가 무엇을 만드는 서비스인지, 어떤 원리로 동작하는지, 그리고 본선 당일 PPT와 시연 녹화에 무엇을 담아야 하는지를 개발 지식 없이 이해할 수 있도록 정리했습니다.</p>
+  <div class="meta">
+    <div><b>대상</b> 기획 · 디자인 담당</div>
+    <div><b>용도</b> 본선 당일 PPT 제작 및 시연 녹화 기준 자료</div>
+    <div><b>기준</b> MVP PRD · 기능원리 안내 · 검증 완료된 합성 데이터셋 4종</div>
+    <div><b>팀 / 대회</b> <span class="dim">(     )</span></div>
+    <div><b>작성일</b> <span class="dim">(     )</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ 문서 지도 ══════════════ -->
+<div class="part">
+  <div class="part-head">
+    <div class="n">READ ME FIRST</div>
+    <h2>이 문서를 읽는 법</h2>
+    <div class="d">전부 읽지 않아도 됩니다. 맡은 역할에 따라 필요한 부분만 보세요.</div>
+  </div>
+
+  <div class="toc">
+    <div class="row"><div class="p">1부</div><div class="t"><b>서비스 이해</b><span>이 서비스가 무엇을 푸는지, 핵심 구조가 무엇인지. 전원 필독.</span></div></div>
+    <div class="row"><div class="p">2부</div><div class="t"><b>기능이 어떻게 동작하는가</b><span>음성 제보부터 안내까지 각 단계의 원리. 발표 담당·기획 필독.</span></div></div>
+    <div class="row"><div class="p">3부</div><div class="t"><b>화면 설계 지침</b><span>디자이너가 지켜야 할 정보 우선순위와 카드 규칙.</span></div></div>
+    <div class="row"><div class="p">4부</div><div class="t"><b>시연 녹화 시나리오</b><span>제출용 영상의 컷 구성과 대사. 확정 초안.</span></div></div>
+    <div class="row"><div class="p">5부</div><div class="t"><b>PPT 제작 가이드</b><span>슬라이드 구성, 핵심 문장, 피해야 할 표현.</span></div></div>
+    <div class="row"><div class="p">부록</div><div class="t"><b>구현 근거</b><span>질문 대비용. PPT에 넣을 필요 없습니다.</span></div></div>
+  </div>
+
+  <div class="note">
+    <span class="t">부록 표시에 대하여</span>
+    본문 중 <span class="appendix-flag">PPT 미반영</span> 표시가 붙은 내용은 <b>이해와 질의응답 대비용</b>입니다. 슬라이드에 넣지 마세요. 기술 심사 비중이 높지 않으므로, 알고는 있되 발표에서는 꺼내지 않는 것이 좋습니다.
+  </div>
+</div>
+
+<!-- ══════════════ 1부 ══════════════ -->
+<div class="part">
+  <div class="part-head">
+    <div class="n">PART 1</div>
+    <h2>서비스 이해</h2>
+    <div class="d">MOVE-AI는 챗봇도, 길을 만들어주는 AI도 아닙니다. 무엇인지부터 맞춥니다.</div>
+  </div>
+
+  <h3>지도는 건물까지, 배송은 그 다음부터</h3>
+  <p>일반 지도와 내비게이션은 주소와 건물까지 안내합니다. 그런데 배송 기사의 일은 거기서 시작됩니다. 처음 방문한 기사는 도착해서도 이런 질문에 부딪힙니다.</p>
+  <div class="quote">정문으로 큰 차가 들어갈 수 있나? 하역장은 어디지? 카트로 지나가기 힘든 문턱이 있나? 화물 엘리베이터는 어디 있고 언제 붐비지?</div>
+  <p>이 답은 늘 존재합니다. 다만 <b>여러 번 방문한 기사 개인의 기억 속에만</b> 있고, 담당자가 바뀌는 순간 함께 사라집니다. MOVE-AI는 이 사라지는 현장 경험을 데이터로 쌓아, 다음 기사가 같은 시행착오를 반복하지 않게 합니다.</p>
+
+  <h3>핵심은 세 단계의 순환입니다</h3>
+  <p>기능을 하나씩 나열하는 것보다, <b>이 세 단계가 돌아간다는 것 자체</b>가 이 서비스의 정체성입니다. 발표의 중심 메시지도 여기서 나옵니다.</p>
+  <div class="trio">
+    <div>
+      <div class="k">01 &middot; 수집</div>
+      <h4>경험을 모은다</h4>
+      <p>베테랑 기사가 평소 말투 그대로 음성을 남기고, 그것을 글로 옮깁니다.</p>
+    </div>
+    <div>
+      <div class="k">02 &middot; 검증</div>
+      <h4>믿을 수 있게 만든다</h4>
+      <p>AI가 구조화하고, 사람이 원문과 비교해 검수한 뒤에만 승인합니다.</p>
+    </div>
+    <div>
+      <div class="k">03 &middot; 재사용</div>
+      <h4>다시 꺼내 쓴다</h4>
+      <p>승인된 지식만, 다음 기사의 배송 경로 위 필요한 순간에 다시 나타납니다.</p>
+    </div>
+  </div>
+
+  <h3>전체 흐름 한 장</h3>
+  <p>시간이 부족하면 PPT에서 이 그림 하나만 잘 만들면 됩니다. 서비스 전체가 여기에 담깁니다.</p>
+
+  <figure>
+    <svg viewBox="0 0 780 390" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="베테랑 기사의 음성 제보가 받아쓰기와 AI 지식화를 거쳐 관리자 검수라는 점선 게이트를 통과해야만 현장 지식 DB에 저장되고, 상황별 검색을 통해 다음 기사의 안내로 다시 나타나는 순환 흐름">
+      <defs>
+        <marker id="ar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#4E5D68"/>
+        </marker>
+      </defs>
+      <!-- 1행 연결 -->
+      <g stroke="#4E5D68" stroke-width="1.6" fill="none">
+        <line x1="185" y1="82" x2="201" y2="82" marker-end="url(#ar)"/>
+        <line x1="368" y1="82" x2="384" y2="82" marker-end="url(#ar)"/>
+        <line x1="551" y1="82" x2="567" y2="82" marker-end="url(#ar)"/>
+        <!-- U턴: 관리자 검수 → 현장 지식 DB -->
+        <path d="M734,82 L758,82 L758,175 L102,175 L102,228" marker-end="url(#ar)"/>
+        <!-- 2행 연결 -->
+        <line x1="185" y1="270" x2="201" y2="270" marker-end="url(#ar)"/>
+        <line x1="368" y1="270" x2="384" y2="270" marker-end="url(#ar)"/>
+      </g>
+      <g font-family="Malgun Gothic" font-size="13" text-anchor="middle" fill="#84949C">
+        <text x="193" y="30">받아쓰기</text>
+        <text x="376" y="30">지식화</text>
+        <text x="559" y="30">승인</text>
+        <text x="430" y="167">통과한 것만 저장</text>
+        <text x="193" y="218">검색</text>
+        <text x="376" y="218">안내</text>
+      </g>
+      <g font-family="Malgun Gothic">
+        <!-- 1행 -->
+        <rect x="20" y="40" width="165" height="84" rx="4" fill="#fff" stroke="#4E5D68" stroke-width="1.4"/>
+        <text x="102" y="80" text-anchor="middle" font-size="17" font-weight="700" fill="#1A2229">베테랑 기사</text>
+        <text x="102" y="103" text-anchor="middle" font-size="13" fill="#84949C">현장 경험</text>
+
+        <rect x="203" y="40" width="165" height="84" rx="4" fill="#fff" stroke="#4E5D68" stroke-width="1.4"/>
+        <text x="285" y="80" text-anchor="middle" font-size="17" font-weight="700" fill="#1A2229">음성 제보</text>
+        <text x="285" y="103" text-anchor="middle" font-size="13" fill="#84949C">기사가 직접 확인</text>
+
+        <rect x="386" y="40" width="165" height="84" rx="4" fill="#FBEEDA" stroke="#B96E1B" stroke-width="1.8"/>
+        <text x="468" y="80" text-anchor="middle" font-size="17" font-weight="700" fill="#B96E1B">AI 지식화</text>
+        <text x="468" y="103" text-anchor="middle" font-size="13" fill="#B96E1B">여러 조각으로 분해</text>
+
+        <rect x="569" y="40" width="165" height="84" rx="4" fill="#fff" stroke="#1A2229" stroke-width="1.8" stroke-dasharray="6 4"/>
+        <text x="651" y="80" text-anchor="middle" font-size="17" font-weight="700" fill="#1A2229">관리자 검수</text>
+        <text x="651" y="103" text-anchor="middle" font-size="13" fill="#84949C">통과해야만 진행</text>
+
+        <!-- 2행 -->
+        <rect x="20" y="228" width="165" height="84" rx="4" fill="#E4F1F3" stroke="#1B6F80" stroke-width="1.8"/>
+        <text x="102" y="268" text-anchor="middle" font-size="17" font-weight="700" fill="#1B6F80">현장 지식 DB</text>
+        <text x="102" y="291" text-anchor="middle" font-size="13" fill="#1B6F80">승인된 것만</text>
+
+        <rect x="203" y="228" width="165" height="84" rx="4" fill="#E4F1F3" stroke="#1B6F80" stroke-width="1.8"/>
+        <text x="285" y="268" text-anchor="middle" font-size="17" font-weight="700" fill="#1B6F80">상황별 검색</text>
+        <text x="285" y="291" text-anchor="middle" font-size="13" fill="#1B6F80">차량·시간·위치</text>
+
+        <rect x="386" y="228" width="185" height="84" rx="4" fill="#fff" stroke="#4E5D68" stroke-width="1.4"/>
+        <text x="478" y="268" text-anchor="middle" font-size="17" font-weight="700" fill="#1A2229">다음 기사</text>
+        <text x="478" y="291" text-anchor="middle" font-size="13" fill="#84949C">Last 100m 안내</text>
+      </g>
+    </svg>
+    <figcaption>관리자 검수를 점선으로 그린 것은 의도적입니다. 이 게이트를 통과하지 못한 정보는 다음 단계로 넘어가지 않습니다 &mdash; 서비스 신뢰의 핵심입니다.</figcaption>
+  </figure>
+
+  <h3>Last 100m이란</h3>
+  <p>주소에 도착한 뒤부터 물건을 실제로 건네줄 때까지의 구간입니다. 일반 내비게이션이 끝나는 지점에서 MOVE-AI가 시작합니다.</p>
+  <div class="kv">
+    <div><span class="k">일반 내비</span><span>현재 위치 &rarr; 건물 주소</span></div>
+    <div><span class="k">MOVE-AI</span><span>건물 도착 &rarr; 진입구 &rarr; 정차·하역 &rarr; 건물 출입 &rarr; 내부 이동 &rarr; 엘리베이터 &rarr; 인계점</span></div>
+  </div>
+</div>
+
+<!-- ══════════════ 2부 ══════════════ -->
+<div class="part">
+  <div class="part-head">
+    <div class="n">PART 2</div>
+    <h2>기능이 어떻게 동작하는가</h2>
+    <div class="d">화면 단위가 아니라 "무슨 일이 일어나는지" 순서로 정리했습니다.</div>
+  </div>
+
+  <h3 style="margin-top:0">헷갈리면 안 되는 세 가지</h3>
+  <p>발표에서 가장 자주 섞이는 지점입니다. 이 셋을 구분하지 않고 설명하면 듣는 사람도 헷갈립니다.</p>
+  <table>
+    <thead><tr><th style="width:88px">개념</th><th style="width:150px">한 줄 정의</th><th>누가 만드는가</th></tr></thead>
+    <tbody>
+      <tr><td><b>경로</b><br><span class="dim" style="font-size:8.6pt">Route</span></td><td>어디로 갈 것인가</td><td>관리자가 <b>미리 등록</b>합니다. AI가 만들거나 즉석에서 바꾸지 않습니다.</td></tr>
+      <tr><td><b>현장 지식</b><br><span class="dim" style="font-size:8.6pt">Knowledge</span></td><td>거기서 무엇을 알아야 하는가</td><td>기사의 제보에서 태어나 <b>관리자 검수를 거쳐야</b> 존재하게 됩니다.</td></tr>
+      <tr><td><b>검색</b><br><span class="dim" style="font-size:8.6pt">RAG</span></td><td>지금 무엇이 필요한가</td><td>시스템이 <b>매 단계 자동으로</b> 고릅니다. 기사는 아무것도 묻지 않습니다.</td></tr>
+    </tbody>
+  </table>
+  <div class="note">
+    <span class="t">가장 중요한 오해 방지</span>
+    &ldquo;AI가 길을 찾아준다&rdquo;고 설명하면 안 됩니다. 경로는 고정돼 있고, <b>AI가 하는 일은 그 경로 위에 지금 필요한 현장 정보를 얹는 것</b>입니다. 이 구분이 서비스의 신뢰성 근거이기도 합니다.
+  </div>
+
+  <h3>기능 1 &mdash; 기사가 음성으로 남긴다</h3>
+  <p>기사는 장소와 대표 위치를 고르고 녹음 버튼을 누른 뒤, 평소 말투 그대로 말합니다. 받아쓰기 결과를 눈으로 확인하고 필요하면 고친 다음 제출합니다.</p>
+  <div class="note know">
+    <span class="t">UX 원칙</span>
+    기사에게 <b>분류·조건 같은 항목을 직접 입력시키지 않습니다.</b> 어려운 입력 화면은 제보 자체를 줄입니다. 그 정리 작업이 바로 AI가 할 일입니다.
+  </div>
+  <p>받아쓰기 결과를 굳이 다시 보여주는 이유가 있습니다. 받아쓰기도 틀리기 때문입니다.</p>
+  <div class="quote">기사가 말한 것: &ldquo;2.5톤 탑차는 못 들어가요&rdquo; &nbsp;&rarr;&nbsp; 받아쓴 결과: &ldquo;2.5톤 <b>택시</b>는 못 들어가요&rdquo;</div>
+
+  <h3>기능 2 &mdash; AI가 여러 조각으로 나눈다</h3>
+  <p>기사 한 명의 제보에는 보통 서너 개의 사실이 섞여 있습니다. AI는 이것을 한 덩어리로 저장하지 않고 <b>더 이상 쪼갤 수 없는 단위</b>로 나눕니다. 나중에 필요한 조각만 정확히 꺼내기 위해서입니다.</p>
+
+  <figure>
+    <svg viewBox="0 0 780 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="정문이 좁고 후문으로 들어가 지하에 세운 뒤 걸어가며 점심에는 엘리베이터가 붐빈다는 하나의 제보가 네 개의 지식 조각으로 나뉘는 모습">
+      <defs>
+        <marker id="ar2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#4E5D68"/>
+        </marker>
+      </defs>
+      <rect x="150" y="8" width="480" height="108" rx="6" fill="#fff" stroke="#4E5D68" stroke-width="1.4"/>
+      <g font-family="Malgun Gothic" text-anchor="middle">
+        <text x="390" y="31" font-size="13" fill="#84949C">기사 제보 원문</text>
+        <text x="390" y="58" font-size="15" fill="#1A2229">&ldquo;1.5톤 탑차는 정문이 좀 좁아요. 후문으로 들어가서</text>
+        <text x="390" y="80" font-size="15" fill="#1A2229">지하에 세우고 걸어가면 돼요.</text>
+        <text x="390" y="102" font-size="15" fill="#1A2229">점심엔 엘리베이터가 많이 밀려요.&rdquo;</text>
+      </g>
+      <g stroke="#4E5D68" stroke-width="1.3" fill="none">
+        <path d="M390,116 L390,146 L112,146 L112,182" marker-end="url(#ar2)"/>
+        <path d="M390,116 L390,146 L297,146 L297,182" marker-end="url(#ar2)"/>
+        <path d="M390,116 L390,146 L483,146 L483,182" marker-end="url(#ar2)"/>
+        <path d="M390,116 L390,146 L668,146 L668,182" marker-end="url(#ar2)"/>
+      </g>
+      <g font-family="Malgun Gothic">
+        <rect x="20" y="182" width="185" height="132" rx="4" fill="#FBEEDA" stroke="#B96E1B" stroke-width="1.5"/>
+        <text x="33" y="207" font-size="12.5" font-weight="700" fill="#B96E1B">조각 1 &middot; 차량</text>
+        <text x="33" y="235" font-size="14" fill="#1A2229">1.5톤 탑차는</text>
+        <text x="33" y="256" font-size="14" fill="#1A2229">정문 진입이</text>
+        <text x="33" y="277" font-size="14" fill="#1A2229">어렵다.</text>
+
+        <rect x="205" y="182" width="185" height="132" rx="4" fill="#FBEEDA" stroke="#B96E1B" stroke-width="1.5"/>
+        <text x="218" y="207" font-size="12.5" font-weight="700" fill="#B96E1B">조각 2 &middot; 차량</text>
+        <text x="218" y="235" font-size="14" fill="#1A2229">후문으로 차량</text>
+        <text x="218" y="256" font-size="14" fill="#1A2229">진입이 가능하다.</text>
+
+        <rect x="390" y="182" width="185" height="132" rx="4" fill="#FBEEDA" stroke="#B96E1B" stroke-width="1.5"/>
+        <text x="403" y="207" font-size="12.5" font-weight="700" fill="#B96E1B">조각 3 &middot; 도보</text>
+        <text x="403" y="235" font-size="14" fill="#1A2229">정차 지점에서</text>
+        <text x="403" y="256" font-size="14" fill="#1A2229">걸어서 이동한다.</text>
+
+        <rect x="575" y="182" width="185" height="132" rx="4" fill="#FBEEDA" stroke="#B96E1B" stroke-width="1.5"/>
+        <text x="588" y="207" font-size="12.5" font-weight="700" fill="#B96E1B">조각 4 &middot; 공통</text>
+        <text x="588" y="235" font-size="14" fill="#1A2229">점심시간에는</text>
+        <text x="588" y="256" font-size="14" fill="#1A2229">엘리베이터가</text>
+        <text x="588" y="277" font-size="14" fill="#1A2229">붐빈다.</text>
+      </g>
+    </svg>
+    <figcaption>차량으로 움직일 때의 정보와 걸어서 움직일 때의 정보는 <b>반드시 다른 조각으로 나눕니다.</b> 차로 이동 중인 기사에게 카트 주의사항을 띄우지 않기 위해서입니다.</figcaption>
+  </figure>
+
+  <h4>AI가 절대 하면 안 되는 것</h4>
+  <p>이 기능에서 중요한 건 AI가 그럴듯한 문장을 만드는 게 아니라, <b>기사의 원래 말을 왜곡하지 않는 것</b>입니다.</p>
+  <table>
+    <thead><tr><th style="width:38%">기사가 한 말</th><th style="width:31%">이렇게 하면 안 됨</th><th>이렇게 해야 함</th></tr></thead>
+    <tbody>
+      <tr><td>&ldquo;정문이 좀 빡빡해요&rdquo;</td><td style="color:var(--stop)">정문 진입 금지</td><td>정문 진입이 어렵다 <span class="dim">(조건부)</span></td></tr>
+      <tr><td>&ldquo;큰 차는 정문이 힘들어요&rdquo;<br><span class="dim">(대안 언급 없음)</span></td><td style="color:var(--stop)">그러니 후문으로 가세요</td><td>주의만 표시하고 <b>행동 안내는 비움</b></td></tr>
+      <tr><td>&ldquo;큰 차는 좀 힘들어요&rdquo;<br><span class="dim">(숫자 없음)</span></td><td style="color:var(--stop)">2.5톤 이상 제한</td><td>숫자를 <b>만들어내지 않음</b></td></tr>
+      <tr><td>&ldquo;화단 옆 좁아지는 길&rdquo;<br><span class="dim">(등록 안 된 위치)</span></td><td style="color:var(--stop)">비슷한 곳에 억지로 연결</td><td>&ldquo;확인 필요&rdquo;로 두고 <b>표현 그대로 보존</b></td></tr>
+    </tbody>
+  </table>
+  <p>마지막 항목이 특히 중요합니다. 기사는 우리가 미리 등록하지 않은 장소를 얼마든지 말할 수 있습니다. 그걸 버리거나 억지로 끼워 맞추지 않고 그대로 남겨두면, 나중에 관리자가 새 지점으로 추가할 수 있습니다. <b>장소 정보가 제보를 통해 계속 자라납니다.</b></p>
+
+  <h3>기능 3 &mdash; 사람이 확인하고 승인한다</h3>
+  <p>AI가 만든 결과는 아직 <b>초안</b>일 뿐, 바로 서비스에 쓰이지 않습니다. 관리자가 음성·원문·AI 결과를 나란히 놓고 비교한 뒤 승인해야 실제 지식이 됩니다.</p>
+  <div class="note">
+    <span class="t">발표에서 강조할 지점</span>
+    &ldquo;AI를 믿는다&rdquo;가 아니라 <b>&ldquo;AI가 정리하고 사람이 최종 확인한다&rdquo;</b>입니다. AI가 잘못 이해한 정보가 현장 안내로 나가는 것을 막는 장치이며, 물류 현장에서는 이 안전장치 자체가 설득 포인트입니다.
+  </div>
+
+  <h3>기능 4 &mdash; 지금 필요한 것만 골라낸다</h3>
+  <p>승인된 지식은 <b>문장의 의미를 숫자로 바꾼 형태</b>로도 함께 저장됩니다. 사람은 같은 뜻을 늘 같은 단어로 말하지 않기 때문입니다.</p>
+  <div class="quote">저장된 문장: &ldquo;화물 엘리베이터 대기시간이 길다&rdquo; &nbsp;/&nbsp; 상황: &ldquo;점심에 엘베 많이 기다려?&rdquo; &mdash; 단어는 다르지만 같은 뜻입니다.</div>
+  <p>그런데 <b>의미만으로는 부족합니다.</b> 이것이 이 서비스 검색의 핵심입니다.</p>
+
+  <figure>
+    <svg viewBox="0 0 780 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="현재 차량이 5톤일 때 저장된 네 개 정보 중 1톤 전용 정보를 조건으로 먼저 걸러내고, 남은 세 개 중 의미가 가까운 두 개를 최종 안내로 고르는 두 단계 과정">
+      <defs>
+        <marker id="ar3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#4E5D68"/>
+        </marker>
+      </defs>
+      <text x="20" y="22" font-family="Malgun Gothic" font-size="14" fill="#84949C">지금 상황 &mdash; 5톤 트럭으로 정문 접근 중</text>
+
+      <text x="20" y="58" font-family="Malgun Gothic" font-size="14" font-weight="700" fill="#1A2229">저장된 정보 (4)</text>
+      <g font-family="Malgun Gothic" font-size="14">
+        <rect x="20" y="70" width="215" height="38" rx="3" fill="#F7E3E3" stroke="#A83A3A" stroke-width="1.3"/>
+        <text x="33" y="95" fill="#A83A3A">1톤 진입 가능</text>
+        <line x1="31" y1="89" x2="139" y2="89" stroke="#A83A3A" stroke-width="1.3"/>
+        <rect x="20" y="116" width="215" height="38" rx="3" fill="#fff" stroke="#4E5D68" stroke-width="1.2"/>
+        <text x="33" y="141" fill="#1A2229">5톤 진입 조건부</text>
+        <rect x="20" y="162" width="215" height="38" rx="3" fill="#fff" stroke="#4E5D68" stroke-width="1.2"/>
+        <text x="33" y="187" fill="#1A2229">정문 진입 안내</text>
+        <rect x="20" y="208" width="215" height="38" rx="3" fill="#fff" stroke="#4E5D68" stroke-width="1.2"/>
+        <text x="33" y="233" fill="#1A2229">점심시간 혼잡</text>
+      </g>
+
+      <path d="M245,158 L275,158" stroke="#4E5D68" stroke-width="1.5" fill="none" marker-end="url(#ar3)"/>
+      <text x="283" y="300" font-family="Malgun Gothic" font-size="14" font-weight="700" fill="#1B6F80">1단계 &middot; 조건으로 거르기</text>
+      <text x="283" y="322" font-family="Malgun Gothic" font-size="12.5" fill="#84949C">톤수가 안 맞으면 제외</text>
+
+      <text x="285" y="104" font-family="Malgun Gothic" font-size="14" font-weight="700" fill="#1A2229">조건 통과 (3)</text>
+      <g font-family="Malgun Gothic" font-size="14">
+        <rect x="285" y="116" width="215" height="38" rx="3" fill="#fff" stroke="#4E5D68" stroke-width="1.2"/>
+        <text x="298" y="141" fill="#1A2229">5톤 진입 조건부</text>
+        <rect x="285" y="162" width="215" height="38" rx="3" fill="#fff" stroke="#4E5D68" stroke-width="1.2"/>
+        <text x="298" y="187" fill="#1A2229">정문 진입 안내</text>
+        <rect x="285" y="208" width="215" height="38" rx="3" fill="#fff" stroke="#4E5D68" stroke-width="1.2"/>
+        <text x="298" y="233" fill="#1A2229">점심시간 혼잡</text>
+      </g>
+
+      <path d="M510,158 L540,158" stroke="#4E5D68" stroke-width="1.5" fill="none" marker-end="url(#ar3)"/>
+      <text x="283" y="352" font-family="Malgun Gothic" font-size="14" font-weight="700" fill="#1B6F80">2단계 &middot; 의미로 순위</text>
+      <text x="283" y="374" font-family="Malgun Gothic" font-size="12.5" fill="#84949C">지금 상황과 가까운 순으로 정렬</text>
+
+      <text x="550" y="104" font-family="Malgun Gothic" font-size="14" font-weight="700" fill="#1A2229">최종 안내 (2)</text>
+      <g font-family="Malgun Gothic" font-size="14">
+        <rect x="550" y="116" width="215" height="38" rx="3" fill="#E4F1F3" stroke="#1B6F80" stroke-width="1.7"/>
+        <text x="563" y="141" fill="#1B6F80">5톤 진입 조건부</text>
+        <rect x="550" y="162" width="215" height="38" rx="3" fill="#E4F1F3" stroke="#1B6F80" stroke-width="1.7"/>
+        <text x="563" y="187" fill="#1B6F80">정문 진입 안내</text>
+      </g>
+      <line x1="20" y1="278" x2="765" y2="278" stroke="#D3DCDD" stroke-width="1"/>
+    </svg>
+    <figcaption>&ldquo;1톤은 가능&rdquo;과 &ldquo;5톤은 어려움&rdquo; 두 문장은 <b>의미가 거의 같습니다.</b> 의미만으로 찾으면 둘 다 높은 점수가 나옵니다. 그래서 톤수·높이·시간처럼 명확한 조건은 계산으로 먼저 걸러내고, 남은 것 중에서만 의미를 따집니다.</figcaption>
+  </figure>
+
+  <div class="note">
+    <span class="t">발표에서 이렇게 말하면 됩니다</span>
+    &ldquo;조건이 맞는 것만 먼저 추리고, 그중에서 지금 상황과 <b>의미가 가까운 경험</b>을 찾습니다.&rdquo; 이 한 문장이면 충분합니다.
+  </div>
+
+  <h3>기능 5 &mdash; 기사에게는 짧게 보여준다</h3>
+  <p>기사에게 데이터 구조나 점수를 보여주지 않습니다. 지금 단계, 다음 행동, 주의사항만 보면 됩니다.</p>
+  <div class="pair">
+    <div>
+      <div class="lbl before">화면 예시</div>
+      <div class="screen">
+        <div class="step">4 / 7 단계 &middot; 지하 2층 하역장 &rarr; 방화문</div>
+        <div class="move">카트에 싣고 방화문까지 이동하세요</div>
+        <div class="card w"><span class="tag">주의</span><br>방화문이 매우 무겁습니다.</div>
+        <div class="card w"><span class="tag">주의</span><br>한 손으로 밀면 문이 닫히면서 박스가 쏠립니다.</div>
+        <span class="btn">다음</span>
+      </div>
+    </div>
+    <div style="flex:1; padding-top:22px;">
+      <p style="font-size:9.6pt">마지막 단계에 도착했다고 <b>자동으로 배송 완료 처리하지 않습니다.</b> 기사가 직접 누르는 [배송 완료] 버튼이 최종 신호입니다.</p>
+      <p style="font-size:9.6pt">현장 상황은 늘 예외가 있고, 완료 판단은 사람이 해야 한다는 원칙입니다.</p>
+    </div>
+  </div>
+
+  <h3>배송 건을 고르면 어떻게 이어지는가</h3>
+  <p>기사는 배송 목록에서 건을 하나 고릅니다. 주소까지는 기존 내비게이션이 안내하고, 현장에 도착해 <b>[현장 도착]</b>을 누르면 그때부터 MOVE-AI가 이어받습니다.</p>
+
+  <figure>
+    <svg viewBox="0 0 780 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="배송 목록에서 건을 고르고 일반 내비로 주소까지 이동한 뒤 현장 도착 버튼을 누르면 차량 정보에 따라 경로가 선택되고 Last 100m 안내가 시작되는 흐름">
+      <defs>
+        <marker id="ar4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#4E5D68"/>
+        </marker>
+      </defs>
+      <rect x="272" y="8" width="212" height="46" rx="4" fill="#F6F8F8" stroke="#84949C" stroke-width="1.3" stroke-dasharray="5 4"/>
+      <text x="378" y="27" text-anchor="middle" font-family="Malgun Gothic" font-size="13.5" font-weight="700" fill="#84949C">일반 내비게이션 구간</text>
+      <text x="378" y="46" text-anchor="middle" font-family="Malgun Gothic" font-size="12" fill="#84949C">우리가 만들지 않습니다</text>
+
+      <g font-family="Malgun Gothic">
+        <rect x="60" y="70" width="200" height="72" rx="4" fill="#fff" stroke="#4E5D68" stroke-width="1.4"/>
+        <text x="160" y="103" text-anchor="middle" font-size="16" font-weight="700" fill="#1A2229">배송 목록</text>
+        <text x="160" y="125" text-anchor="middle" font-size="12.5" fill="#84949C">건 선택</text>
+
+        <rect x="290" y="70" width="200" height="72" rx="4" fill="#fff" stroke="#4E5D68" stroke-width="1.4"/>
+        <text x="390" y="103" text-anchor="middle" font-size="16" font-weight="700" fill="#1A2229">주소까지 주행</text>
+        <text x="390" y="125" text-anchor="middle" font-size="12.5" fill="#84949C">기존 지도 앱</text>
+
+        <rect x="520" y="70" width="200" height="72" rx="4" fill="#FBEEDA" stroke="#B96E1B" stroke-width="1.8"/>
+        <text x="620" y="103" text-anchor="middle" font-size="16" font-weight="700" fill="#B96E1B">[현장 도착]</text>
+        <text x="620" y="125" text-anchor="middle" font-size="12.5" fill="#B96E1B">기사가 직접 누름</text>
+
+        <rect x="175" y="238" width="200" height="72" rx="4" fill="#E4F1F3" stroke="#1B6F80" stroke-width="1.8"/>
+        <text x="275" y="271" text-anchor="middle" font-size="16" font-weight="700" fill="#1B6F80">경로 자동 선택</text>
+        <text x="275" y="293" text-anchor="middle" font-size="12.5" fill="#1B6F80">차량 조건에 따라</text>
+
+        <rect x="405" y="238" width="200" height="72" rx="4" fill="#E4F1F3" stroke="#1B6F80" stroke-width="1.8"/>
+        <text x="505" y="271" text-anchor="middle" font-size="16" font-weight="700" fill="#1B6F80">Last 100m 안내</text>
+        <text x="505" y="293" text-anchor="middle" font-size="12.5" fill="#1B6F80">단계별 카드</text>
+      </g>
+      <g stroke="#4E5D68" stroke-width="1.5" fill="none">
+        <line x1="260" y1="106" x2="284" y2="106" marker-end="url(#ar4)"/>
+        <line x1="490" y1="106" x2="514" y2="106" marker-end="url(#ar4)"/>
+        <path d="M720,106 L748,106 L748,190 L275,190 L275,232" marker-end="url(#ar4)"/>
+        <line x1="375" y1="274" x2="399" y2="274" marker-end="url(#ar4)"/>
+      </g>
+      <text x="500" y="182" text-anchor="middle" font-family="Malgun Gothic" font-size="12.5" fill="#84949C">위치를 자동 감지하지 않습니다 &mdash; 어디에 차를 세울지는 기사가 판단하는 일입니다</text>
+    </svg>
+    <figcaption>일반 도로 주행은 기존 지도 앱이 이미 잘 하는 일이라 다시 만들지 않습니다. 우리 서비스의 정의 자체가 &ldquo;주소 도착 이후&rdquo;입니다.</figcaption>
+  </figure>
+
+  <h4>같은 배송지인데 경로가 갈립니다</h4>
+  <p>차량 정보를 받는 이유가 여기 있습니다. 같은 건물, 같은 수취인이라도 <b>차 크기에 따라 들어가는 길이 완전히 다릅니다.</b></p>
+  <table>
+    <thead><tr><th style="width:78px">차량</th><th style="width:230px">선택되는 경로</th><th>단계 수 / 성격</th></tr></thead>
+    <tbody>
+      <tr><td><b>1톤</b></td><td>후문 &rarr; 지하 2층 하역장 &rarr; 방화문 &rarr; 연결통로 &rarr; 화물 엘리베이터 &rarr; 12층</td><td><b>7단계</b> &middot; 지하로 내려가 하역장 이용</td></tr>
+      <tr><td><b>2.5톤</b></td><td>정문 &rarr; 1층 로비 &rarr; 승객용 엘리베이터 &rarr; 12층</td><td><b>3단계</b> &middot; 지상 로비 앞 하차</td></tr>
+    </tbody>
+  </table>
+  <div class="note know">
+    <span class="t">왜 이렇게 갈리나</span>
+    지하 진입 램프에 <b>높이 2.3m 제한</b>이 있고 <b>1톤 초과 차량은 내려갈 수 없기</b> 때문입니다. 이 제약은 관리자가 경로에 미리 등록해 둔 것이고, 시스템은 기사 차량과 비교해 자동으로 맞는 경로를 고릅니다. <b>AI의 추측이 아니라 계산</b>입니다.
+  </div>
+</div>
+
+<!-- ══════════════ 3부 ══════════════ -->
+<div class="part">
+  <div class="part-head">
+    <div class="n">PART 3</div>
+    <h2>화면 설계 지침</h2>
+    <div class="d">디자이너가 지켜야 할 규칙. 이걸 어기면 서비스가 다른 것처럼 보입니다.</div>
+  </div>
+
+  <h3 style="margin-top:0">채팅처럼 보이면 안 됩니다</h3>
+  <p>MOVE-AI는 AI 챗봇이 아닙니다. 현장 지식은 대화 말풍선이 아니라 <b>짧은 신호 카드</b>로 보여야 합니다. 기사는 운전 중이거나 카트를 밀고 있고, 읽을 시간이 몇 초뿐입니다.</p>
+
+  <h3>카드는 세 종류뿐입니다</h3>
+  <table>
+    <thead><tr><th style="width:76px">종류</th><th style="width:150px">언제 쓰나</th><th>예시</th></tr></thead>
+    <tbody>
+      <tr><td><b>주의</b></td><td>위험·제약은 있는데 해법은 확인되지 않음</td><td>방화문이 매우 무겁습니다.</td></tr>
+      <tr><td><b>행동</b></td><td>무엇을 하면 되는지 원문에 명확히 있음</td><td>차단기에서 방재실에 배송 왔다고 알리세요.</td></tr>
+      <tr><td><b>참고</b></td><td>알아두면 좋지만 당장 행동은 아님</td><td>왼쪽 출입구는 카트로 통과할 수 있습니다.</td></tr>
+    </tbody>
+  </table>
+  <p><b>&ldquo;주의&rdquo; 카드에 행동 문구를 붙이지 마세요.</b> 기사가 대안을 말하지 않았다면 시스템도 대안을 말하지 않는다는 원칙이 화면에서 지켜져야 합니다.</p>
+
+  <h3>정보 우선순위</h3>
+  <ol>
+    <li><b>현재 위치 / 단계</b> &mdash; 몇 번째 중 몇 번째인지</li>
+    <li><b>다음 이동 행동</b> &mdash; 지금 무엇을 하면 되는지</li>
+    <li><b>주의</b> &mdash; 다치거나 물건이 상할 수 있는 것</li>
+    <li><b>추가 팁</b></li>
+    <li><b>다음 버튼</b></li>
+  </ol>
+  <p>지도를 크게 넣고 싶은 유혹이 있지만, <b>지도 자체는 차별점이 아닙니다.</b> 이 카드들이 차별점입니다. 지도는 보조로 두세요.</p>
+
+  <h3>관리자 검수 화면</h3>
+  <p>원문과 AI 결과를 <b>나란히</b> 배치하세요. &ldquo;AI가 정리하고 사람이 확인한다&rdquo;는 인상이 화면 구조에서 나와야 합니다. AI 결과를 데이터 형식 그대로 노출하지 말고 카드로 보여주세요.</p>
+  <div class="note">
+    <span class="t">꼭 넣어야 할 것</span>
+    음성 재생 &middot; 받아쓴 원문 &middot; AI가 만든 지식 카드 &middot; <b>근거가 된 원문 구절</b> &middot; 승인 / 수정 후 승인 / 반려. 특히 &ldquo;근거 구절&rdquo;은 AI가 어디를 보고 판단했는지 보여주는 장치라 반드시 있어야 합니다.
+  </div>
+
+  <h3>새로 추가된 지식 표시</h3>
+  <p>방금 승인된 지식이 안내에 나타날 때 <b>&ldquo;새로 추가된 팁&rdquo; 배지</b>를 붙이는 화면을 준비해 주세요. 시연에서 &ldquo;방금 그 제보가 여기 나왔습니다&rdquo;를 손으로 짚을 수 있는 유일한 장치입니다.</p>
+</div>
+
+<!-- ══════════════ 4부 ══════════════ -->
+<div class="part">
+  <div class="part-head">
+    <div class="n">PART 4</div>
+    <h2>시연 녹화 시나리오</h2>
+    <div class="d">제출용 영상의 컷 구성입니다. 확정 초안이며 당일 조정 가능합니다.</div>
+  </div>
+
+  <h3 style="margin-top:0">무대 설정</h3>
+  <div class="kv" style="margin-bottom:12px">
+    <div><span class="k">장소</span><span><b>가온스퀘어 오피스타워</b> &mdash; 같은 배송지에서 차량에 따라 경로가 갈리는 유일한 데이터</span></div>
+    <div><span class="k">배송 건</span><span>12층 입주사 안내데스크 인계</span></div>
+    <div><span class="k">등장 인물</span><span>베테랑 기사 &middot; 신규 기사 &middot; 관리자</span></div>
+    <div><span class="k">길이 목표</span><span>2~3분</span></div>
+  </div>
+
+  <p>영상은 두 막으로 구성합니다. <b>1막은 서비스가 무엇인지</b>, <b>2막은 왜 이 서비스가 계속 좋아지는지</b>를 보여줍니다.</p>
+
+  <h3>1막 &mdash; 차량이 다르면 길이 다르다 <span class="dim" style="font-size:9.5pt; font-weight:400">(약 40초)</span></h3>
+
+  <div class="cut">
+    <div class="no">1</div>
+    <div class="body">
+      <div class="ttl">배송 건 선택</div>
+      <div class="scr">화면 &mdash; 배송 목록 &rarr; 배송 상세</div>
+      <p>가온스퀘어 12층 배송 건을 선택하고 [현장 도착]을 누릅니다. 차량은 <b>1톤</b>으로 지정.</p>
+      <div class="say">&ldquo;주소까지는 기존 내비게이션이 안내합니다. 도착한 다음부터가 MOVE-AI입니다.&rdquo;</div>
+    </div>
+  </div>
+
+  <div class="cut">
+    <div class="no">2</div>
+    <div class="body">
+      <div class="ttl">1톤 &mdash; 7단계 지하 경로</div>
+      <div class="scr">화면 &mdash; Last 100m 1단계, 그리고 4단계</div>
+      <p>후문 &rarr; 지하 2층 하역장 경로가 뜹니다. 1단계에서 <b>&ldquo;2.3m 초과 차량 진입 불가&rdquo;</b>, <b>&ldquo;램프가 곡선이라 서행&rdquo;</b> 카드가 보이는 것을 잠깐 비춥니다.</p>
+      <div class="say">&ldquo;경로는 AI가 만든 게 아니라 관리자가 미리 등록한 실제 배송 동선입니다. 그 위에 지금 필요한 현장 정보가 얹힙니다.&rdquo;</div>
+    </div>
+  </div>
+
+  <div class="cut">
+    <div class="no">3</div>
+    <div class="body">
+      <div class="ttl">차량만 2.5톤으로 바꿔 다시 시작</div>
+      <div class="scr">화면 &mdash; 같은 배송 건, 차량 변경 후 안내 재시작</div>
+      <p>같은 배송 건인데 <b>정문 &rarr; 1층 로비 &rarr; 승객용 엘리베이터, 3단계</b>로 완전히 다른 경로가 나옵니다. 두 화면을 나란히 붙여 대비를 보여주세요.</p>
+      <div class="say">&ldquo;같은 주소, 같은 수취인입니다. 그런데 차가 다르면 들어가는 길 자체가 다릅니다. 일반 내비게이션은 이걸 구분하지 못합니다.&rdquo;</div>
+    </div>
+  </div>
+
+  <h3>2막 &mdash; 경험이 지식이 되어 돌아온다 <span class="dim" style="font-size:9.5pt; font-weight:400">(약 90초)</span></h3>
+
+  <div class="cut">
+    <div class="no">4</div>
+    <div class="body">
+      <div class="ttl">문제 장면 &mdash; 주의는 있는데 해법이 없다</div>
+      <div class="scr">화면 &mdash; 1톤 경로 4단계 (하역장 &rarr; 방화문)</div>
+      <p>&ldquo;방화문이 무겁다&rdquo;, &ldquo;한 손으로 밀면 박스가 쏠린다&rdquo; 두 개의 <b>주의</b> 카드만 있고 <b>해결 방법은 없습니다.</b> 이 화면을 잠시 머물러 주세요.</p>
+      <div class="say">&ldquo;위험은 알려주지만, 어떻게 하라는 말은 없습니다. 아무도 알려준 적이 없기 때문입니다.&rdquo;</div>
+    </div>
+  </div>
+
+  <div class="cut">
+    <div class="no">5</div>
+    <div class="body">
+      <div class="ttl">베테랑 기사의 음성 제보</div>
+      <div class="scr">화면 &mdash; 팁 등록, 녹음 중</div>
+      <p>실제로 녹음합니다. 대본을 그대로 읽지 말고 말하듯이 하세요.</p>
+      <div class="say">&ldquo;아 방화문 옆에 요즘 고정용 고리가 걸려 있거든요. 그거 걸어두면 문 잡고 있을 필요가 없어요. 카트 두 번 왔다 갔다 할 때 훨씬 편합니다.&rdquo;</div>
+    </div>
+  </div>
+
+  <div class="cut">
+    <div class="no">6</div>
+    <div class="body">
+      <div class="ttl">받아쓰기 확인 &rarr; AI가 조각으로 분해</div>
+      <div class="scr">화면 &mdash; 받아쓴 텍스트, 그다음 AI 결과 카드</div>
+      <p>받아쓴 문장을 기사가 확인하고 제출합니다. 이어서 AI가 <b>두 개의 지식 조각</b>으로 나누는 화면. 원문 말풍선에서 카드가 갈라져 나오는 연출이 좋습니다.</p>
+      <div class="say">&ldquo;한 마디 안에 섞여 있던 사실을, 나중에 따로 꺼내 쓸 수 있는 단위로 나눕니다.&rdquo;</div>
+    </div>
+  </div>
+
+  <div class="cut">
+    <div class="no">7</div>
+    <div class="body">
+      <div class="ttl">관리자 검수 &mdash; 원문과 나란히 놓고 승인</div>
+      <div class="scr">화면 &mdash; 관리자 검수</div>
+      <p>왼쪽에 기사 원문, 오른쪽에 AI 결과. <b>근거가 된 원문 구절</b>이 표시된 것을 짚어주고 [승인]을 누릅니다.</p>
+      <div class="say">&ldquo;AI가 만든 결과는 아직 초안입니다. 사람이 원문과 비교해 확인한 것만 실제 안내로 나갑니다.&rdquo;</div>
+    </div>
+  </div>
+
+  <div class="cut">
+    <div class="no">8</div>
+    <div class="body">
+      <div class="ttl">★ 다른 기사, 같은 경로 &mdash; 새 카드가 나타난다</div>
+      <div class="scr">화면 &mdash; 안내 재시작 후 4단계</div>
+      <p>같은 4단계 화면입니다. 아까와 달리 <b>&ldquo;새로 추가된 팁&rdquo; 배지가 붙은 카드</b>가 하나 늘어 있습니다. 4번 컷 화면과 나란히 놓아 <b>Before / After</b>로 보여주세요. <b>이 장면이 영상 전체의 핵심입니다.</b></p>
+      <div class="say">&ldquo;조금 전 한 기사가 남긴 한마디가, 지금 다른 기사의 화면에 도착했습니다.&rdquo;</div>
+    </div>
+  </div>
+
+  <div class="cut">
+    <div class="no">9</div>
+    <div class="body">
+      <div class="ttl">배송 완료</div>
+      <div class="scr">화면 &mdash; 마지막 단계 &rarr; [배송 완료]</div>
+      <p>기사가 직접 완료 버튼을 누르며 마무리합니다.</p>
+      <div class="say">&ldquo;한 사람의 경험이, 다음 사람의 길이 됩니다.&rdquo;</div>
+    </div>
+  </div>
+
+  <h3>8번 컷의 Before / After</h3>
+  <div class="pair">
+    <div>
+      <div class="lbl before">BEFORE &mdash; 제보 전</div>
+      <div class="screen">
+        <div class="step">4 / 7 단계 &middot; 하역장 &rarr; 방화문</div>
+        <div class="move">카트에 싣고 방화문까지 이동하세요</div>
+        <div class="card w"><span class="tag">주의</span><br>방화문이 매우 무겁습니다.</div>
+        <div class="card w"><span class="tag">주의</span><br>한 손으로 밀면 박스가 쏠립니다.</div>
+      </div>
+    </div>
+    <div>
+      <div class="lbl after">AFTER &mdash; 승인 직후</div>
+      <div class="screen">
+        <div class="step">4 / 7 단계 &middot; 하역장 &rarr; 방화문</div>
+        <div class="move">카트에 싣고 방화문까지 이동하세요</div>
+        <div class="card w"><span class="tag">주의</span><br>방화문이 매우 무겁습니다.</div>
+        <div class="card n"><span class="tag">새로 추가된 팁</span><br>문 옆 고정용 고리를 걸면 문을 잡고 있지 않아도 됩니다.</div>
+      </div>
+    </div>
+  </div>
+  <div class="note know">
+    <span class="t">이 시나리오를 고른 이유</span>
+    새 지식이 <b>바로 위 &ldquo;주의&rdquo; 카드의 해법</b>이 됩니다. 그래서 문제 &rarr; 제보 &rarr; 해결이 한 화면에서 눈으로 읽힙니다. 새 지식을 다른 것으로 바꾸더라도 <b>&ldquo;기존 주의사항을 해소하는 내용&rdquo;</b>이라는 성질은 유지하세요.
+  </div>
+  <div class="note stop">
+    <span class="t">주의</span>
+    시연용 새 지식은 <b>기존에 없던 내용</b>이어야 합니다. 비슷한 지식이 이미 있으면 화면에 유사한 카드가 두 장 뜨고, &ldquo;원래 있던 것 아닌가?&rdquo;로 읽혀 핵심 장면이 무너집니다.
+  </div>
+</div>
+
+<!-- ══════════════ 5부 ══════════════ -->
+<div class="part">
+  <div class="part-head">
+    <div class="n">PART 5</div>
+    <h2>PPT 제작 가이드</h2>
+    <div class="d">당일 시간이 촉박하므로, 순서를 그대로 쓰는 것을 권합니다.</div>
+  </div>
+
+  <h3 style="margin-top:0">슬라이드 구성</h3>
+  <table>
+    <thead><tr><th style="width:26px">#</th><th style="width:132px">슬라이드</th><th>담을 내용</th></tr></thead>
+    <tbody>
+      <tr><td class="num">1</td><td><b>문제 제기</b></td><td>지도는 건물까지, 배송은 그 다음부터. 주소 이후의 정보 공백.</td></tr>
+      <tr><td class="num">2</td><td><b>경험이 사라진다</b></td><td>현장 경험 &rarr; 개인 기억 &rarr; 전달 안 됨 &rarr; 신규 기사 시행착오 반복</td></tr>
+      <tr><td class="num">3</td><td><b>해결 한 줄</b></td><td>말하면 &rarr; AI가 정리 &rarr; 사람이 검수 &rarr; 다음 기사에게 다시 안내</td></tr>
+      <tr><td class="num">4</td><td><b>전체 흐름</b> ★</td><td>1부의 파이프라인 그림. <b>가장 공들일 한 장.</b></td></tr>
+      <tr><td class="num">5</td><td><b>AI가 하는 일</b></td><td>원문 말풍선이 지식 카드 여러 개로 갈라지는 시각화</td></tr>
+      <tr><td class="num">6</td><td><b>믿을 수 있는 이유</b></td><td>AI 자동 확정 없음 &rarr; 사람 검수 &rarr; 승인된 것만 사용</td></tr>
+      <tr><td class="num">7</td><td><b>상황에 맞게 골라낸다</b></td><td>2부의 두 단계 검색 그림. 1톤/5톤 예시.</td></tr>
+      <tr><td class="num">8</td><td><b>같은 곳, 다른 길</b> ★</td><td>1톤 7단계 vs 2.5톤 3단계 대비. <b>가장 임팩트 있는 한 장.</b></td></tr>
+      <tr><td class="num">9</td><td><b>Last 100m 화면</b></td><td>단계 + 주의/행동 카드 목업</td></tr>
+      <tr><td class="num">10</td><td><b>시연</b></td><td>Before / After 두 화면 대비</td></tr>
+      <tr><td class="num">11</td><td><b>기대 효과</b></td><td>신규 기사 시행착오 감소 &middot; 노하우 전승 &middot; 현장 정보 자산화</td></tr>
+      <tr><td class="num">12</td><td><b>확장 가능성</b></td><td>고객 메시지 응답 보조 &middot; 지도 연동 &middot; 지식 누적에 따른 고도화</td></tr>
+    </tbody>
+  </table>
+  <p>4번과 8번에 시간을 몰아주세요. 나머지는 문장 위주로 가도 됩니다.</p>
+
+  <h3>발표용 핵심 문장</h3>
+  <table>
+    <thead><tr><th style="width:70px">용도</th><th>문장</th></tr></thead>
+    <tbody>
+      <tr><td><b>문제</b></td><td>배송의 마지막 100m에는 지도에 없는 정보가 존재합니다.</td></tr>
+      <tr><td><b>해결</b></td><td>기사의 경험을 말로 남기면, 다음 배송에서 쓸 수 있는 현장 지식으로 바뀝니다.</td></tr>
+      <tr><td><b>신뢰</b></td><td>AI가 정리하고, 사람이 확인한 것만 실제 안내로 나갑니다.</td></tr>
+      <tr><td><b>차별점</b></td><td>같은 주소여도 차가 다르면 들어가는 길이 다릅니다.</td></tr>
+      <tr><td><b>가치</b></td><td>개인의 경험을 일회성 노하우가 아닌 조직의 배송 데이터로 전환합니다.</td></tr>
+      <tr><td><b>마무리</b></td><td>한 사람의 경험이, 다음 사람의 길이 됩니다.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>피해야 할 표현</h3>
+  <table>
+    <thead><tr><th style="width:46%">이렇게 말하면 안 됨</th><th>이유 / 대체</th></tr></thead>
+    <tbody>
+      <tr><td style="color:var(--stop)">AI가 최적 경로를 찾아줍니다</td><td>경로는 관리자가 등록한 고정 동선입니다. &rarr; &ldquo;정해진 경로 위에 필요한 정보를 얹습니다&rdquo;</td></tr>
+      <tr><td style="color:var(--stop)">AI 챗봇으로 물어볼 수 있습니다</td><td>기사는 아무것도 묻지 않습니다. 시스템이 알아서 띄웁니다.</td></tr>
+      <tr><td style="color:var(--stop)">AI가 자동으로 지식을 쌓습니다</td><td>사람 검수가 핵심 차별점인데 스스로 지워버립니다.</td></tr>
+      <tr><td style="color:var(--stop)">고객에게 자동으로 답장합니다</td><td>기사가 버튼을 눌러야 전송됩니다. (확장 기능)</td></tr>
+      <tr><td style="color:var(--stop)">벡터 DB / 코사인 유사도 …</td><td>메인 슬라이드에 넣지 마세요. 질문받으면 그때 답하면 됩니다.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>지금 확정된 규모 <span class="appendix-flag">PPT 미반영</span></h3>
+  <p>슬라이드에 숫자를 넣을 필요는 없지만, 질문받으면 답할 수 있도록 알아두세요.</p>
+  <table>
+    <thead><tr><th>장소</th><th class="c">경로</th><th class="c">단계</th><th class="c">제보</th><th class="c">현장 지식</th></tr></thead>
+    <tbody>
+      <tr><td>해든마루 센트럴 아파트</td><td class="c num">2</td><td class="c num">6</td><td class="c num">10</td><td class="c num">36</td></tr>
+      <tr><td>가온스퀘어 오피스타워 <span class="dim">(시연)</span></td><td class="c num">2</td><td class="c num">10</td><td class="c num">11</td><td class="c num">37</td></tr>
+      <tr><td>한빛 스마트물류센터</td><td class="c num">2</td><td class="c num">8</td><td class="c num">10</td><td class="c num">40</td></tr>
+      <tr><td>해피가든몰 복합단지</td><td class="c num">2</td><td class="c num">6</td><td class="c num">10</td><td class="c num">33</td></tr>
+      <tr style="border-top:1.5px solid var(--line)"><td><b>합계</b></td><td class="c num"><b>8</b></td><td class="c num"><b>30</b></td><td class="c num"><b>41</b></td><td class="c num"><b>146</b></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:9.6pt">별도로 <b>검색 정답 질문 20개</b>를 사람이 미리 만들어 두었습니다. &ldquo;AI가 잘 작동합니다&rdquo;가 아니라 <b>&ldquo;사람이 검수한 정답을 기준으로 검증합니다&rdquo;</b>라고 말할 수 있는 근거입니다.</p>
+</div>
+
+<!-- ══════════════ 부록 ══════════════ -->
+<div class="part">
+  <div class="part-head">
+    <div class="n">APPENDIX</div>
+    <h2>구현 근거 <span class="appendix-flag">PPT 미반영</span></h2>
+    <div class="d">질문 대비용입니다. 슬라이드에 넣지 마세요. 읽어두기만 하면 됩니다.</div>
+  </div>
+
+  <h3 style="margin-top:0">예상 질문과 답변</h3>
+
+  <div class="qa">
+    <div class="q">AI가 잘못된 정보를 만들어내면 어떻게 하나요?</div>
+    <div class="a">AI 결과는 초안 상태로만 저장되고, 관리자가 승인하기 전에는 검색 대상에 들어가지 않습니다. 또 AI가 만든 각 지식에는 <b>근거가 된 원문 구절</b>이 붙어 있어서, 관리자가 원문과 대조해 확인할 수 있습니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">왜 별도의 검색 전용 데이터베이스를 쓰지 않나요?</div>
+    <div class="a">현재 지식이 약 150개 규모입니다. 이 정도는 기존 데이터베이스에 함께 저장하고 계산하는 편이 빠르고, 구성 요소를 하나 줄여 안정성이 높습니다. 데이터가 크게 늘면 전환할 수 있는 구조로 두었습니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">검색이라고 하는데, AI가 답변을 생성하는 건 아닌가요?</div>
+    <div class="a">의도적으로 생성하지 않습니다. <b>검수를 통과한 문장을 변형 없이 그대로 보여줍니다.</b> 현장 안내에서는 AI가 문장을 다시 쓰는 순간 왜곡 위험이 생기기 때문입니다. 저희 설계 전체가 그 위험을 막는 방향입니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">등록되지 않은 장소를 기사가 말하면요?</div>
+    <div class="a">비슷한 곳에 억지로 연결하지 않고 &ldquo;확인 필요&rdquo; 상태로 표현을 그대로 보존합니다. 관리자가 나중에 새 지점으로 추가할 수 있습니다. 실제로 전체 지식의 약 18%가 이런 미등록 위치 정보이며, 의미 기반 검색이 이 부분에서 특히 역할을 합니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">지식이 쌓이면 중복이나 충돌은 어떻게 관리하나요?</div>
+    <div class="a">이번 범위에는 넣지 않았습니다. 다만 모든 승인 지식이 이미 의미 형태로 저장돼 있어서, 검수 화면에서 유사 지식을 자동 대조하는 것은 <b>추가 인프라 없이 확장 가능</b>합니다.</div>
+  </div>
+
+  <div class="qa">
+    <div class="q">실제 배송 시스템과 연동되나요?</div>
+    <div class="a">이번에는 배송 건을 고르고 경로를 결정하는 최소한만 구현했습니다. 실제 배송 관리 시스템 연동, 실시간 순서 최적화, 실내 위치 추적은 범위 밖으로 두었습니다. 핵심 순환을 먼저 완성하는 것이 우선이라고 판단했습니다.</div>
+  </div>
+
+  <h3>기술 구성</h3>
+  <div class="kv">
+    <div><span class="k">화면</span><span>React &middot; TypeScript</span></div>
+    <div><span class="k">서버</span><span>Spring Boot &mdash; 장소·경로·제보·검수·검색 조립</span></div>
+    <div><span class="k">AI</span><span>Python FastAPI &mdash; 음성 인식, 지식 추출, 의미 변환</span></div>
+    <div><span class="k">데이터</span><span>MariaDB &mdash; 구조화 데이터와 의미 데이터를 함께 저장</span></div>
+  </div>
+  <p style="margin-top:10px">기술 스택 슬라이드를 넣는다면 이 정도면 충분합니다. 구현 방식까지 적을 필요는 없습니다.</p>
+
+  <h3>검색이 동작하는 순서</h3>
+  <ol>
+    <li>현재 배송 단계를 확인합니다.</li>
+    <li>그 단계에서 마주칠 지점에 붙은 지식을 후보로 모읍니다.</li>
+    <li>차로 이동 중이면 차량 정보만, 걸어서 이동 중이면 보행 정보만 남깁니다.</li>
+    <li>차량 톤수·높이, 현재 시각·요일 조건이 맞지 않는 것을 계산으로 제외합니다.</li>
+    <li>남은 후보 중 지금 상황과 의미가 가까운 순으로 정렬합니다.</li>
+    <li>현재 단계에 직접 연결된 지식과 최근 승인된 지식에 가산점을 줍니다.</li>
+    <li>상위 몇 개만 카드로 내보냅니다.</li>
+  </ol>
+  <p><b>3~4번이 계산이고 5번이 의미 검색입니다.</b> 이 둘을 함께 쓰는 것이 이 서비스 검색의 특징이며, 발표에서는 &ldquo;조건으로 거르고 의미로 고른다&rdquo; 한 문장이면 충분합니다.</p>
+
+  <h3>이번 범위에 넣지 않은 것</h3>
+  <p>확장 슬라이드를 쓸 때 이 선을 넘지 않도록 주의하세요. 하지 않기로 한 것을 할 수 있는 것처럼 말하면 질문에서 무너집니다.</p>
+  <ul>
+    <li>AI가 실시간으로 경로를 만들거나 다시 계산하는 것</li>
+    <li>실내 정밀 위치 추적, 위치 기반 자동 단계 전환</li>
+    <li>배송 관리 시스템 전면 연동, 배송 순서 최적화</li>
+    <li>고객 메시지 자동 발송 <span class="dim">(답장 후보 제안까지만, 전송은 기사가)</span></li>
+    <li>지식 충돌 자동 판정</li>
+  </ul>
+
+  <div class="note" style="margin-top:22px">
+    <span class="t">마지막으로</span>
+    발표에서 가장 중요한 것은 기능을 몇 개 보여주느냐가 아니라, <b>한 정보가 생겨나서 다시 쓰이는 과정</b>이 눈에 보이느냐입니다. 그 장면 하나가 남으면 성공입니다.
+  </div>
+</div>
+
+</body>
+</html>

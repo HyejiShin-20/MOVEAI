@@ -1,0 +1,1629 @@
+{
+  "dataset_meta": {
+    "dataset_version": "synthetic_v2_normalized",
+    "author_prefix": "A",
+    "synthetic": true
+  },
+  "place": {
+    "place_code": "PLACE_A",
+    "name": "해든마루 센트럴 아파트",
+    "place_type": "APARTMENT",
+    "custom_place_type": null,
+    "description": "대규모 공동주택 단지의 차량 진입·주차·보행·엘리베이터 조건 검증용 합성 장소",
+    "synthetic": true
+  },
+  "nodes": [
+    {
+      "node_code": "NODE_A_01",
+      "parent_node_code": null,
+      "node_type": "ENTRANCE",
+      "custom_node_type": null,
+      "name": "정문",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "단지 정문 차량·보행 출입 지점"
+    },
+    {
+      "node_code": "NODE_A_02",
+      "parent_node_code": null,
+      "node_type": "ENTRANCE",
+      "custom_node_type": null,
+      "name": "후문",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "단지 후문 차량·보행 출입 지점"
+    },
+    {
+      "node_code": "NODE_A_03",
+      "parent_node_code": "NODE_A_04",
+      "node_type": "PARKING_POINT",
+      "custom_node_type": null,
+      "name": "101동 지하주차장 정문측 진입구",
+      "floor_label": "B1",
+      "is_indoor": false,
+      "description": "101동 지하주차장 정문측 차량 진입구"
+    },
+    {
+      "node_code": "NODE_A_04",
+      "parent_node_code": null,
+      "node_type": "BUILDING",
+      "custom_node_type": null,
+      "name": "101동",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "101동 건물"
+    },
+    {
+      "node_code": "NODE_A_05",
+      "parent_node_code": "NODE_A_04",
+      "node_type": "PARKING_POINT",
+      "custom_node_type": null,
+      "name": "101동 뒤편 임시정차지",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "101동 뒤편의 짧은 상하차용 정차 지점"
+    },
+    {
+      "node_code": "NODE_A_06",
+      "parent_node_code": "NODE_A_04",
+      "node_type": "BUILDING_ENTRANCE",
+      "custom_node_type": null,
+      "name": "101동 오른쪽 출입구",
+      "floor_label": "1F",
+      "is_indoor": false,
+      "description": "101동 오른쪽 출입구"
+    },
+    {
+      "node_code": "NODE_A_07",
+      "parent_node_code": "NODE_A_04",
+      "node_type": "BUILDING_ENTRANCE",
+      "custom_node_type": null,
+      "name": "101동 왼쪽 출입구",
+      "floor_label": "1F",
+      "is_indoor": false,
+      "description": "101동 왼쪽 출입구"
+    },
+    {
+      "node_code": "NODE_A_08",
+      "parent_node_code": "NODE_A_04",
+      "node_type": "ELEVATOR",
+      "custom_node_type": null,
+      "name": "101동 B 엘리베이터",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "101동 B 라인 엘리베이터"
+    },
+    {
+      "node_code": "NODE_A_09",
+      "parent_node_code": "NODE_A_04",
+      "node_type": "OTHER",
+      "custom_node_type": "방화문",
+      "name": "101동 방화문",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "101동 내부 보행 구간의 방화문"
+    },
+    {
+      "node_code": "NODE_A_10",
+      "parent_node_code": "NODE_A_04",
+      "node_type": "DELIVERY_POINT",
+      "custom_node_type": null,
+      "name": "101동 배송지",
+      "floor_label": "고층부",
+      "is_indoor": true,
+      "description": "101동 가상 최종 배송 지점"
+    },
+    {
+      "node_code": "NODE_A_11",
+      "parent_node_code": null,
+      "node_type": "BUILDING",
+      "custom_node_type": null,
+      "name": "102동",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "102동 건물"
+    },
+    {
+      "node_code": "NODE_A_12",
+      "parent_node_code": "NODE_A_11",
+      "node_type": "PARKING_POINT",
+      "custom_node_type": null,
+      "name": "102동 지하주차장 정문측 진입구",
+      "floor_label": "B1",
+      "is_indoor": false,
+      "description": "102동 지하주차장 정문측 차량 진입구"
+    },
+    {
+      "node_code": "NODE_A_13",
+      "parent_node_code": "NODE_A_11",
+      "node_type": "PARKING_POINT",
+      "custom_node_type": null,
+      "name": "102동 지하주차장 후문측 진입구",
+      "floor_label": "B1",
+      "is_indoor": false,
+      "description": "102동 지하주차장 후문측 차량 진입구"
+    },
+    {
+      "node_code": "NODE_A_14",
+      "parent_node_code": "NODE_A_11",
+      "node_type": "DELIVERY_POINT",
+      "custom_node_type": null,
+      "name": "102동 배송지",
+      "floor_label": "중층부",
+      "is_indoor": true,
+      "description": "102동 가상 최종 배송 지점"
+    },
+    {
+      "node_code": "NODE_A_15",
+      "parent_node_code": "NODE_A_04",
+      "node_type": "PARKING_POINT",
+      "custom_node_type": null,
+      "name": "101동 지하주차장 후문측 진입구",
+      "floor_label": "B1",
+      "is_indoor": false,
+      "description": "101동 지하주차장 후문측 차량 진입구"
+    }
+  ],
+  "routes": [
+    {
+      "route_code": "ROUTE_A_01",
+      "name": "후문-101동 기본 배송 경로",
+      "start_node_code": "NODE_A_02",
+      "destination_node_code": "NODE_A_10",
+      "vehicle_class": "TRUCK",
+      "min_tonnage": null,
+      "max_tonnage": null,
+      "max_vehicle_height_m": null,
+      "max_vehicle_width_m": null,
+      "is_default": true
+    },
+    {
+      "route_code": "ROUTE_A_02",
+      "name": "정문-102동 후문측 지하진입-배송 경로",
+      "start_node_code": "NODE_A_01",
+      "destination_node_code": "NODE_A_14",
+      "vehicle_class": "TRUCK",
+      "min_tonnage": null,
+      "max_tonnage": null,
+      "max_vehicle_height_m": null,
+      "max_vehicle_width_m": null,
+      "is_default": false
+    }
+  ],
+  "route_segments": [
+    {
+      "segment_code": "SEG_A_01",
+      "route_code": "ROUTE_A_01",
+      "sequence_no": 1,
+      "from_node_code": "NODE_A_02",
+      "to_node_code": "NODE_A_05",
+      "movement_mode": "VEHICLE",
+      "traversal_method": "DRIVE",
+      "custom_traversal_method": null,
+      "instruction": "후문으로 진입해 101동 뒤편 임시정차지까지 이동",
+      "is_indoor": false
+    },
+    {
+      "segment_code": "SEG_A_02",
+      "route_code": "ROUTE_A_01",
+      "sequence_no": 2,
+      "from_node_code": "NODE_A_05",
+      "to_node_code": "NODE_A_06",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "CART",
+      "custom_traversal_method": null,
+      "instruction": "정차 후 101동 오른쪽 출입구까지 카트 또는 도보 이동",
+      "is_indoor": false
+    },
+    {
+      "segment_code": "SEG_A_03",
+      "route_code": "ROUTE_A_01",
+      "sequence_no": 3,
+      "from_node_code": "NODE_A_06",
+      "to_node_code": "NODE_A_08",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "WALK",
+      "custom_traversal_method": null,
+      "instruction": "오른쪽 출입구에서 B 엘리베이터까지 이동",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_A_04",
+      "route_code": "ROUTE_A_01",
+      "sequence_no": 4,
+      "from_node_code": "NODE_A_08",
+      "to_node_code": "NODE_A_10",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "ELEVATOR",
+      "custom_traversal_method": null,
+      "instruction": "B 엘리베이터를 이용해 101동 배송지로 이동",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_A_05",
+      "route_code": "ROUTE_A_02",
+      "sequence_no": 1,
+      "from_node_code": "NODE_A_01",
+      "to_node_code": "NODE_A_13",
+      "movement_mode": "VEHICLE",
+      "traversal_method": "DRIVE",
+      "custom_traversal_method": null,
+      "instruction": "정문으로 진입해 102동 지하주차장 후문측 진입구까지 이동",
+      "is_indoor": false
+    },
+    {
+      "segment_code": "SEG_A_06",
+      "route_code": "ROUTE_A_02",
+      "sequence_no": 2,
+      "from_node_code": "NODE_A_13",
+      "to_node_code": "NODE_A_14",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "CART",
+      "custom_traversal_method": null,
+      "instruction": "주차 후 카트로 102동 배송지까지 이동",
+      "is_indoor": true
+    }
+  ],
+  "field_reports": [
+    {
+      "report_code": "REPORT_A_01",
+      "place_code": "PLACE_A",
+      "selected_scope_node_code": "NODE_A_01",
+      "source_type": "SYNTHETIC",
+      "transcript": "여기 1.5톤 탑차로 오면 정문 쪽이 좀 빡빡해요. 저는 그냥 후문으로 들어가서 101동 뒤에 잠깐 세워요. 거기서 오른쪽 출입구까지는 걸어가면 되고요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_A_001",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_01",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "1.5톤 탑차는 정문 진입이 빡빡하다.",
+          "action_text": null,
+          "source_excerpt": "1.5톤 탑차로 오면 정문 쪽이 좀 빡빡해요.",
+          "conditions": {
+            "vehicle_class": "TRUCK",
+            "min_tonnage": 1.5,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_002",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "제보자는 1.5톤 탑차로 후문으로 진입했다.",
+          "action_text": "후문으로 들어간다.",
+          "source_excerpt": "저는 그냥 후문으로 들어가서",
+          "conditions": {
+            "vehicle_class": "TRUCK",
+            "min_tonnage": 1.5,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_A_003",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_05",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "제보자는 후문으로 진입해 101동 뒤에 잠깐 정차한다.",
+          "action_text": "101동 뒤에 잠깐 세운다.",
+          "source_excerpt": "저는 그냥 후문으로 들어가서 101동 뒤에 잠깐 세워요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_A_004",
+          "target": {
+            "target_type": "SEGMENT",
+            "target_code": "SEG_A_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "101동 뒤편 임시정차지에서 오른쪽 출입구까지 도보로 이동할 수 있다.",
+          "action_text": "오른쪽 출입구까지 걸어간다.",
+          "source_excerpt": "101동 뒤에 잠깐 세워요. 거기서 오른쪽 출입구까지는 걸어가면 되고요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ROUTE_GUIDANCE"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_A_02",
+      "place_code": "PLACE_A",
+      "selected_scope_node_code": "NODE_A_03",
+      "source_type": "SYNTHETIC",
+      "transcript": "101동 지하주차장은 정문 쪽 높이가 2.7m고 후문 쪽은 2.3m예요. 높이 2.5m 탑차면 후문은 못 들어가고 정문 쪽으로 들어가야 돼요. 아침 8시부터 9시까지는 정문 쪽 입구가 많이 막혀요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_A_005",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_03",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "101동 지하주차장 정문측 진입구의 차량 높이 제한은 2.7m다.",
+          "action_text": null,
+          "source_excerpt": "정문 쪽 높이가 2.7m고",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": 2.7,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_006",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_15",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "101동 지하주차장 후문측 진입구의 차량 높이 제한은 2.3m다.",
+          "action_text": null,
+          "source_excerpt": "후문 쪽은 2.3m예요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": 2.3,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_007",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_03",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "높이 2.5m 탑차는 101동 지하주차장 정문측 진입구를 이용해야 한다.",
+          "action_text": "정문측 진입구를 이용한다.",
+          "source_excerpt": "높이 2.5m 탑차면 후문은 못 들어가고 정문 쪽으로 들어가야 돼요.",
+          "conditions": {
+            "vehicle_class": "TRUCK",
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "높이 2.5m 탑차"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_A_008",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_03",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "101동 지하주차장 정문측 진입구는 08:00~09:00에 혼잡하다.",
+          "action_text": null,
+          "source_excerpt": "아침 8시부터 9시까지는 정문 쪽 입구가 많이 막혀요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": "08:00",
+            "active_time_end": "09:00",
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_A_03",
+      "place_code": "PLACE_A",
+      "selected_scope_node_code": "NODE_A_06",
+      "source_type": "SYNTHETIC",
+      "transcript": "101동 오른쪽 출입구는 카트 끌고 들어가면 자동문이 사람만 지나갈 때보다 빨리 닫히는 느낌이 있어요. 박스 높게 쌓았으면 문 지나갈 때 특히 조심해야 돼요. 왼쪽 출입구는 카트가 그냥 들어가도 괜찮아요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_A_009",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_06",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "자동문 센서 반응",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": "자동문 조기 닫힘",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "101동 오른쪽 출입구 자동문은 카트 이동 시 빨리 닫히는 느낌이 있다.",
+          "action_text": null,
+          "source_excerpt": "카트 끌고 들어가면 자동문이 사람만 지나갈 때보다 빨리 닫히는 느낌이 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_010",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_06",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "카트 적재물 통과 위험",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": "높은 적재물 통과 주의",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "박스를 높게 쌓은 카트는 101동 오른쪽 출입구를 통과할 때 주의가 필요하다.",
+          "action_text": "문을 지날 때 특히 조심한다.",
+          "source_excerpt": "박스 높게 쌓았으면 문 지나갈 때 특히 조심해야 돼요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_A_011",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_07",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "BUILDING_ENTRANCE",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "101동 왼쪽 출입구는 카트로 통과할 수 있다.",
+          "action_text": null,
+          "source_excerpt": "왼쪽 출입구는 카트가 그냥 들어가도 괜찮아요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_A_04",
+      "place_code": "PLACE_A",
+      "selected_scope_node_code": "NODE_A_08",
+      "source_type": "SYNTHETIC",
+      "transcript": "101동 B엘리베이터는 점심 12시부터 1시 사이에 진짜 오래 기다려요. 박스 한두 개면 왼쪽 계단으로 가는 기사도 있는데, 카트 있으면 계단은 못 가니까 그냥 엘리베이터 기다리는 게 나아요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_A_012",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_08",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "ELEVATOR",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "101동 B 엘리베이터는 12시부터 13시 사이에 대기 시간이 길다.",
+          "action_text": null,
+          "source_excerpt": "점심 12시부터 1시 사이에 진짜 오래 기다려요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": "12:00",
+            "active_time_end": "13:00",
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_013",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "101동 왼쪽 계단"
+          },
+          "category": "ELEVATOR_STAIRS",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "STAIRS",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "박스 한두 개를 든 기사는 101동 왼쪽 계단을 이용하기도 한다.",
+          "action_text": null,
+          "source_excerpt": "박스 한두 개면 왼쪽 계단으로 가는 기사도 있는데",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "박스 한두 개를 드는 경우"
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_014",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "101동 왼쪽 계단"
+          },
+          "category": "ELEVATOR_STAIRS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": "PROHIBITED",
+          "statement": "카트가 있으면 101동 왼쪽 계단을 이용할 수 없다.",
+          "action_text": null,
+          "source_excerpt": "카트 있으면 계단은 못 가니까",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_015",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_08",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ELEVATOR_STAIRS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "ELEVATOR",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "카트가 있으면 B 엘리베이터를 기다려 이용하는 것이 낫다.",
+          "action_text": "B 엘리베이터를 기다린다.",
+          "source_excerpt": "그냥 엘리베이터 기다리는 게 나아요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "카트가 있는 경우"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_A_05",
+      "place_code": "PLACE_A",
+      "selected_scope_node_code": "NODE_A_06",
+      "source_type": "SYNTHETIC",
+      "transcript": "101동 오른쪽 출입구 들어가기 전에 왼쪽으로 한번 꺾는 길 있죠. 거긴 1.5톤 탑차가 돌기 좀 힘들어요. 근데 승용차나 작은 밴은 크게 문제 없었어요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_A_016",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "101동 오른쪽 출입구 진입 전 왼쪽으로 꺾는 길"
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "101동 오른쪽 출입구 진입 전 왼쪽으로 꺾는 길은 1.5톤 탑차가 회전하기 어렵다.",
+          "action_text": null,
+          "source_excerpt": "101동 오른쪽 출입구 들어가기 전에 왼쪽으로 한번 꺾는 길 있죠. 거긴 1.5톤 탑차가 돌기 좀 힘들어요.",
+          "conditions": {
+            "vehicle_class": "TRUCK",
+            "min_tonnage": 1.5,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_017",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "101동 오른쪽 출입구 진입 전 왼쪽으로 꺾는 길"
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "승용차나 작은 밴은 해당 꺾이는 길에서 크게 문제 없이 이동했다.",
+          "action_text": null,
+          "source_excerpt": "근데 승용차나 작은 밴은 크게 문제 없었어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "승용차 또는 작은 밴"
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_A_06",
+      "place_code": "PLACE_A",
+      "selected_scope_node_code": "NODE_A_12",
+      "source_type": "SYNTHETIC",
+      "transcript": "102동 지하주차장은 정문 쪽이 2.3m고 후문 쪽이 2.7m예요. 높이 2.5m 탑차면 정문 쪽은 못 들어가고 후문 쪽으로 가면 돼요. 오후 6시쯤에는 후문 쪽 입구가 차가 몰려요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_A_018",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_12",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "102동 지하주차장 정문측 진입구의 차량 높이 제한은 2.3m다.",
+          "action_text": null,
+          "source_excerpt": "정문 쪽이 2.3m고",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": 2.3,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_019",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_13",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "102동 지하주차장 후문측 진입구의 차량 높이 제한은 2.7m다.",
+          "action_text": null,
+          "source_excerpt": "후문 쪽이 2.7m예요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": 2.7,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_020",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_13",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "높이 2.5m 탑차는 102동 지하주차장 후문측 진입구를 이용해야 한다.",
+          "action_text": "후문측 진입구를 이용한다.",
+          "source_excerpt": "높이 2.5m 탑차면 정문 쪽은 못 들어가고 후문 쪽으로 가면 돼요.",
+          "conditions": {
+            "vehicle_class": "TRUCK",
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "높이 2.5m 탑차"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_A_021",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_13",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "102동 지하주차장 후문측 진입구는 오후 6시쯤 차량이 몰린다.",
+          "action_text": null,
+          "source_excerpt": "오후 6시쯤에는 후문 쪽 입구가 차가 몰려요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "오후 6시쯤"
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_A_07",
+      "place_code": "PLACE_A",
+      "selected_scope_node_code": "NODE_A_02",
+      "source_type": "SYNTHETIC",
+      "transcript": "후문은 평소에는 괜찮은데 아침 8시 반쯤 가면 차가 몰려서 좀 답답해요. 그래도 차량 출입이 막히는 건 아니고요. 보행자는 그 시간에도 그냥 지나갈 수 있어요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_A_022",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "후문은 아침 8시 반쯤 차량이 몰려 혼잡하다.",
+          "action_text": null,
+          "source_excerpt": "아침 8시 반쯤 가면 차가 몰려서 좀 답답해요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "아침 8시 반쯤"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_023",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "후문은 아침 8시 반쯤 혼잡해도 차량 출입이 막히지는 않는다.",
+          "action_text": null,
+          "source_excerpt": "후문은 평소에는 괜찮은데 아침 8시 반쯤 가면 차가 몰려서 좀 답답해요. 그래도 차량 출입이 막히는 건 아니고요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "아침 8시 반쯤"
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_024",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "보행자는 아침 8시 반쯤에도 후문을 통과할 수 있다.",
+          "action_text": null,
+          "source_excerpt": "보행자는 그 시간에도 그냥 지나갈 수 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "아침 8시 반쯤"
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_A_08",
+      "place_code": "PLACE_A",
+      "selected_scope_node_code": "NODE_A_09",
+      "source_type": "SYNTHETIC",
+      "transcript": "101동 방화문은 카트에 박스를 너무 높게 쌓으면 위쪽이 걸릴 때가 있어요. 문턱도 살짝 있어서 유리 제품 싣고 갈 때는 천천히 넘는 게 좋아요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_A_025",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_09",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "카트 적재 높이 장애",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": "상부 걸림 위험",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "101동 방화문은 박스를 너무 높게 쌓은 카트의 상부가 걸릴 수 있다.",
+          "action_text": null,
+          "source_excerpt": "카트에 박스를 너무 높게 쌓으면 위쪽이 걸릴 때가 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_026",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_09",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "카트 이동 장애물",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": "문턱 통과 위험",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "101동 방화문에는 카트 이동에 영향을 줄 수 있는 문턱이 있다.",
+          "action_text": null,
+          "source_excerpt": "문턱도 살짝 있어서",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_027",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_09",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "유리 제품을 카트에 싣고 101동 방화문 문턱을 지날 때 주의가 필요하다.",
+          "action_text": null,
+          "source_excerpt": "문턱도 살짝 있어서 유리 제품 싣고 갈 때는 천천히 넘는 게 좋아요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "유리 제품을 실은 경우"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_028",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_09",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "유리 제품을 실은 카트는 101동 방화문 문턱을 천천히 넘어야 한다.",
+          "action_text": "천천히 넘는다.",
+          "source_excerpt": "문턱도 살짝 있어서 유리 제품 싣고 갈 때는 천천히 넘는 게 좋아요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "유리 제품을 실은 경우"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_A_09",
+      "place_code": "PLACE_A",
+      "selected_scope_node_code": "NODE_A_05",
+      "source_type": "SYNTHETIC",
+      "transcript": "101동 뒤에 차 세우는 데는 오래 세워두면 안 돼요. 잠깐 짐 내리는 정도로만 쓰고, 거기서 오른쪽 출입구까지 카트로 가는 길은 바닥이 좀 기울어져 있어요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_A_029",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_05",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "PROHIBITED",
+          "statement": "101동 뒤편 임시정차지에는 오래 주차해 두면 안 된다.",
+          "action_text": null,
+          "source_excerpt": "오래 세워두면 안 돼요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_030",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_05",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "LOADING",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "CONDITIONAL",
+          "statement": "101동 뒤편 임시정차지는 잠깐 짐을 내리는 용도로 사용할 수 있다.",
+          "action_text": "잠깐 짐을 내린다.",
+          "source_excerpt": "잠깐 짐 내리는 정도로만 쓰고",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_A_031",
+          "target": {
+            "target_type": "SEGMENT",
+            "target_code": "SEG_A_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "101동 뒤편 임시정차지에서 오른쪽 출입구까지 카트로 이동할 수 있다.",
+          "action_text": "오른쪽 출입구까지 카트로 이동한다.",
+          "source_excerpt": "거기서 오른쪽 출입구까지 카트로 가는 길은",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ROUTE_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_A_032",
+          "target": {
+            "target_type": "SEGMENT",
+            "target_code": "SEG_A_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "카트 이동 경사",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": "경사면 이동 주의",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "101동 뒤편 임시정차지에서 오른쪽 출입구로 가는 카트 이동 구간의 바닥이 기울어져 있다.",
+          "action_text": null,
+          "source_excerpt": "잠깐 짐 내리는 정도로만 쓰고, 거기서 오른쪽 출입구까지 카트로 가는 길은 바닥이 좀 기울어져 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_A_10",
+      "place_code": "PLACE_A",
+      "selected_scope_node_code": "NODE_A_11",
+      "source_type": "SYNTHETIC",
+      "transcript": "102동 정문 출입구는 큰 박스 들고 들어가면 안쪽 회전문이 좀 불편해요. 옆에 일반문이 있기는 한데 카트 끌 때는 그 문이 더 편해요. 배송지는 들어가서 안쪽에 있는데 처음 가면 표지판이 잘 안 보여요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_A_033",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "102동 정문 출입구 안쪽 회전문"
+          },
+          "category": "OTHER",
+          "custom_category_label": "회전문 대형 화물 통과 불편",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": "대형 박스 통과 불편",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "102동 정문 출입구 안쪽 회전문은 큰 박스를 들고 통과하기 불편하다.",
+          "action_text": null,
+          "source_excerpt": "큰 박스 들고 들어가면 안쪽 회전문이 좀 불편해요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "큰 박스를 드는 경우"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_034",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "102동 정문 출입구 옆 일반문"
+          },
+          "category": "BUILDING_ENTRANCE",
+          "custom_category_label": null,
+          "fact_type": "LOCATION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "102동 정문 출입구의 회전문 옆에 일반문이 있다.",
+          "action_text": null,
+          "source_excerpt": "옆에 일반문이 있기는 한데",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        },
+        {
+          "knowledge_code": "K_A_035",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "102동 정문 출입구 옆 일반문"
+          },
+          "category": "BUILDING_ENTRANCE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "카트를 끌 때는 102동 정문 출입구 옆 일반문이 더 편하다.",
+          "action_text": "카트 이동 시 옆 일반문을 이용한다.",
+          "source_excerpt": "카트 끌 때는 그 문이 더 편해요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_A_036",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_A_14",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "안내 표지 가시성",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": "표지판 식별 어려움",
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "102동 배송지는 처음 방문하면 안내 표지판을 찾기 어렵다.",
+          "action_text": null,
+          "source_excerpt": "배송지는 들어가서 안쪽에 있는데 처음 가면 표지판이 잘 안 보여요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    }
+  ],
+  "rag_test_queries": [
+    {
+      "query_code": "QUERY_A_01",
+      "place_code": "PLACE_A",
+      "question": "1.5톤 탑차로 101동 가는데 정문으로 들어가도 괜찮아?",
+      "context": {
+        "vehicle_class": "TRUCK",
+        "vehicle_tonnage": 1.5,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "VEHICLE"
+      },
+      "expected_knowledge_codes": [
+        "K_A_001",
+        "K_A_002"
+      ],
+      "must_not_return_codes": [
+        "K_A_016"
+      ],
+      "reason": "정확히 1.5톤 조건을 테스트한다."
+    },
+    {
+      "query_code": "QUERY_A_02",
+      "place_code": "PLACE_A",
+      "question": "101동 지하주차장에 높이 2.5m 탑차면 어디로 들어가?",
+      "context": {
+        "vehicle_class": "TRUCK",
+        "vehicle_tonnage": null,
+        "vehicle_height_m": 2.5,
+        "vehicle_width_m": null,
+        "movement_mode": "VEHICLE"
+      },
+      "expected_knowledge_codes": [
+        "K_A_005",
+        "K_A_006",
+        "K_A_007"
+      ],
+      "must_not_return_codes": [
+        "K_A_018",
+        "K_A_019",
+        "K_A_020"
+      ],
+      "reason": "정문 2.7m / 후문 2.3m 사례."
+    },
+    {
+      "query_code": "QUERY_A_03",
+      "place_code": "PLACE_A",
+      "question": "102동 지하주차장에 높이 2.5m 탑차면 어디로 들어가?",
+      "context": {
+        "vehicle_class": "TRUCK",
+        "vehicle_tonnage": null,
+        "vehicle_height_m": 2.5,
+        "vehicle_width_m": null,
+        "movement_mode": "VEHICLE"
+      },
+      "expected_knowledge_codes": [
+        "K_A_018",
+        "K_A_019",
+        "K_A_020"
+      ],
+      "must_not_return_codes": [
+        "K_A_005",
+        "K_A_006",
+        "K_A_007"
+      ],
+      "reason": "정문 2.3m / 후문 2.7m 반대 사례."
+    },
+    {
+      "query_code": "QUERY_A_04",
+      "place_code": "PLACE_A",
+      "question": "카트로 101동 오른쪽 출입구 갈 때 조심할 게 있어?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "PEDESTRIAN"
+      },
+      "expected_knowledge_codes": [
+        "K_A_009",
+        "K_A_010"
+      ],
+      "must_not_return_codes": [
+        "K_A_011"
+      ],
+      "reason": "OTHER/custom 카트 위험 검색."
+    },
+    {
+      "query_code": "QUERY_A_05",
+      "place_code": "PLACE_A",
+      "question": "점심에 101동 B 엘리베이터 많이 기다려?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "PEDESTRIAN"
+      },
+      "expected_knowledge_codes": [
+        "K_A_012"
+      ],
+      "must_not_return_codes": [
+        "K_A_015",
+        "K_A_021"
+      ],
+      "reason": "시간 조건 검색."
+    }
+  ]
+}

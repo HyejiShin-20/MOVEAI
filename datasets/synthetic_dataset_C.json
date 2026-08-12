@@ -1,0 +1,1767 @@
+{
+  "dataset_meta": {
+    "dataset_version": "synthetic_v1",
+    "author_prefix": "C",
+    "synthetic": true
+  },
+  "place": {
+    "place_code": "PLACE_C",
+    "name": "한빛 스마트물류센터",
+    "place_type": "LOGISTICS_CENTER",
+    "custom_place_type": null,
+    "description": "상온·냉장 구역이 분리되어 있고 차량 게이트, 하역 도크, 내부 카트 동선이 함께 있는 가상 물류센터",
+    "synthetic": true
+  },
+  "nodes": [
+    {
+      "node_code": "NODE_C_01",
+      "parent_node_code": null,
+      "node_type": "SITE",
+      "custom_node_type": null,
+      "name": "한빛 스마트물류센터 부지",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "센터 전체 부지를 나타내는 기준 지점"
+    },
+    {
+      "node_code": "NODE_C_02",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "ENTRANCE",
+      "custom_node_type": null,
+      "name": "1번 게이트",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "상온 배송 차량이 주로 사용하는 동측 차량 출입 게이트"
+    },
+    {
+      "node_code": "NODE_C_03",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "ENTRANCE",
+      "custom_node_type": null,
+      "name": "2번 게이트",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "대형 차량과 냉장 배송 차량이 주로 사용하는 서측 차량 출입 게이트"
+    },
+    {
+      "node_code": "NODE_C_04",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "SECURITY_GATE",
+      "custom_node_type": null,
+      "name": "동측 보안 확인대",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "1번 게이트 진입 차량의 배송 목적을 확인하는 보안 지점"
+    },
+    {
+      "node_code": "NODE_C_05",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "PARKING_POINT",
+      "custom_node_type": null,
+      "name": "입차 대기장",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "도크 배정 전 차량이 임시로 대기하는 구역"
+    },
+    {
+      "node_code": "NODE_C_06",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "LOADING_POINT",
+      "custom_node_type": null,
+      "name": "상온 A 도크",
+      "floor_label": "1F",
+      "is_indoor": false,
+      "description": "상온 화물을 하역하는 기본 도크"
+    },
+    {
+      "node_code": "NODE_C_07",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "LOADING_POINT",
+      "custom_node_type": null,
+      "name": "냉장 B 도크",
+      "floor_label": "1F",
+      "is_indoor": false,
+      "description": "냉장 화물을 하역하는 기본 도크"
+    },
+    {
+      "node_code": "NODE_C_08",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "BUILDING_ENTRANCE",
+      "custom_node_type": null,
+      "name": "상온창고 출입문",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "상온 A 도크에서 상온창고 내부로 들어가는 출입문"
+    },
+    {
+      "node_code": "NODE_C_09",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "CORRIDOR",
+      "custom_node_type": null,
+      "name": "상온창고 카트 통로",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "상온창고 출입문에서 상온 배송 인계점으로 이어지는 내부 카트 이동 통로"
+    },
+    {
+      "node_code": "NODE_C_10",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "OTHER",
+      "custom_node_type": "냉장창고 전실",
+      "name": "냉장창고 전실",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "냉장 B 도크와 냉장창고 내부 사이의 온도 완충 구역"
+    },
+    {
+      "node_code": "NODE_C_11",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "DELIVERY_POINT",
+      "custom_node_type": null,
+      "name": "상온 배송 인계점",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "상온 화물을 최종 인계하는 지정 지점"
+    },
+    {
+      "node_code": "NODE_C_12",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "DELIVERY_POINT",
+      "custom_node_type": null,
+      "name": "냉장 배송 인계점",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "냉장 화물을 최종 인계하는 지정 지점"
+    },
+    {
+      "node_code": "NODE_C_13",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "OTHER",
+      "custom_node_type": "지게차 교차구간",
+      "name": "지게차 교차구간",
+      "floor_label": "1F",
+      "is_indoor": true,
+      "description": "작업용 지게차와 카트 동선이 교차하는 내부 안전 주의 구간"
+    },
+    {
+      "node_code": "NODE_C_14",
+      "parent_node_code": "NODE_C_01",
+      "node_type": "EXIT_POINT",
+      "custom_node_type": null,
+      "name": "출차 게이트",
+      "floor_label": null,
+      "is_indoor": false,
+      "description": "배송 완료 차량이 센터 밖으로 나가는 출차 전용 게이트"
+    }
+  ],
+  "routes": [
+    {
+      "route_code": "ROUTE_C_01",
+      "name": "1번 게이트-상온 인계점 기본 경로",
+      "start_node_code": "NODE_C_02",
+      "destination_node_code": "NODE_C_11",
+      "vehicle_class": "TRUCK",
+      "min_tonnage": null,
+      "max_tonnage": null,
+      "max_vehicle_height_m": null,
+      "max_vehicle_width_m": null,
+      "is_default": true
+    },
+    {
+      "route_code": "ROUTE_C_02",
+      "name": "2번 게이트-냉장 인계점 기본 경로",
+      "start_node_code": "NODE_C_03",
+      "destination_node_code": "NODE_C_12",
+      "vehicle_class": "TRUCK",
+      "min_tonnage": null,
+      "max_tonnage": null,
+      "max_vehicle_height_m": null,
+      "max_vehicle_width_m": null,
+      "is_default": true
+    }
+  ],
+  "route_segments": [
+    {
+      "segment_code": "SEG_C_01",
+      "route_code": "ROUTE_C_01",
+      "sequence_no": 1,
+      "from_node_code": "NODE_C_02",
+      "to_node_code": "NODE_C_04",
+      "movement_mode": "VEHICLE",
+      "traversal_method": "OTHER",
+      "custom_traversal_method": "배송차량 주행",
+      "instruction": "1번 게이트로 진입하여 동측 보안 확인대까지 이동한다.",
+      "is_indoor": false
+    },
+    {
+      "segment_code": "SEG_C_02",
+      "route_code": "ROUTE_C_01",
+      "sequence_no": 2,
+      "from_node_code": "NODE_C_04",
+      "to_node_code": "NODE_C_06",
+      "movement_mode": "VEHICLE",
+      "traversal_method": "OTHER",
+      "custom_traversal_method": "배송차량 주행",
+      "instruction": "보안 확인을 마친 뒤 상온 A 도크까지 차량으로 이동한다.",
+      "is_indoor": false
+    },
+    {
+      "segment_code": "SEG_C_03",
+      "route_code": "ROUTE_C_01",
+      "sequence_no": 3,
+      "from_node_code": "NODE_C_06",
+      "to_node_code": "NODE_C_08",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "CART",
+      "custom_traversal_method": null,
+      "instruction": "상온 A 도크에서 화물을 카트에 옮겨 상온창고 출입문까지 이동한다.",
+      "is_indoor": false
+    },
+    {
+      "segment_code": "SEG_C_04",
+      "route_code": "ROUTE_C_01",
+      "sequence_no": 4,
+      "from_node_code": "NODE_C_08",
+      "to_node_code": "NODE_C_09",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "CART",
+      "custom_traversal_method": null,
+      "instruction": "상온창고 출입문을 통과하여 상온창고 카트 통로까지 이동한다.",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_C_05",
+      "route_code": "ROUTE_C_01",
+      "sequence_no": 5,
+      "from_node_code": "NODE_C_09",
+      "to_node_code": "NODE_C_11",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "CART",
+      "custom_traversal_method": null,
+      "instruction": "상온창고 카트 통로를 지나 상온 배송 인계점까지 이동한다.",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_C_06",
+      "route_code": "ROUTE_C_02",
+      "sequence_no": 1,
+      "from_node_code": "NODE_C_03",
+      "to_node_code": "NODE_C_07",
+      "movement_mode": "VEHICLE",
+      "traversal_method": "OTHER",
+      "custom_traversal_method": "배송차량 주행",
+      "instruction": "2번 게이트로 진입하여 냉장 B 도크까지 차량으로 이동한다.",
+      "is_indoor": false
+    },
+    {
+      "segment_code": "SEG_C_07",
+      "route_code": "ROUTE_C_02",
+      "sequence_no": 2,
+      "from_node_code": "NODE_C_07",
+      "to_node_code": "NODE_C_10",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "CART",
+      "custom_traversal_method": null,
+      "instruction": "냉장 B 도크에서 화물을 카트에 옮겨 냉장창고 전실까지 이동한다.",
+      "is_indoor": true
+    },
+    {
+      "segment_code": "SEG_C_08",
+      "route_code": "ROUTE_C_02",
+      "sequence_no": 3,
+      "from_node_code": "NODE_C_10",
+      "to_node_code": "NODE_C_12",
+      "movement_mode": "PEDESTRIAN",
+      "traversal_method": "CART",
+      "custom_traversal_method": null,
+      "instruction": "냉장창고 전실을 지나 냉장 배송 인계점까지 카트로 이동한다.",
+      "is_indoor": true
+    }
+  ],
+  "field_reports": [
+    {
+      "report_code": "REPORT_C_01",
+      "place_code": "PLACE_C",
+      "selected_scope_node_code": "NODE_C_02",
+      "source_type": "SYNTHETIC",
+      "transcript": "여기 상온 물건이면 보통 1번 게이트로 들어와요. 1번 게이트 들어오면 바로 오른쪽 보안 확인대에서 배송 왔다고 말하고, 확인 끝나면 A 도크 쪽으로 가면 됩니다. 아침 여덟 시 반쯤에는 1번 게이트 앞에 차가 좀 밀려요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_C_001",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "상온 물품 배송 차량은 보통 1번 게이트로 진입한다.",
+          "action_text": null,
+          "source_excerpt": "상온 물건이면 보통 1번 게이트로 들어와요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "상온 물품 배송"
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_002",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_04",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "1번 게이트 진입 후 보안 확인대에서 배송 목적을 알린다.",
+          "action_text": "보안 확인대에서 배송 왔다고 말한다.",
+          "source_excerpt": "바로 오른쪽 보안 확인대에서 배송 왔다고 말하고",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "1번 게이트로 진입한 경우"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_003",
+          "target": {
+            "target_type": "SEGMENT",
+            "target_code": "SEG_C_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "보안 확인 후 상온 A 도크로 이동한다.",
+          "action_text": "상온 A 도크로 이동한다.",
+          "source_excerpt": "확인 끝나면 A 도크 쪽으로 가면 됩니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "보안 확인을 마친 경우"
+          },
+          "usage_scope": "ROUTE_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_004",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_02",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "OTHER",
+          "custom_traversal_method": "차량 대기",
+          "access_state": null,
+          "statement": "1번 게이트 앞은 아침 8시 30분 전후에 차량이 밀릴 수 있다.",
+          "action_text": null,
+          "source_excerpt": "아침 여덟 시 반쯤에는 1번 게이트 앞에 차가 좀 밀려요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "아침 8시 30분 전후"
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_C_02",
+      "place_code": "PLACE_C",
+      "selected_scope_node_code": "NODE_C_03",
+      "source_type": "SYNTHETIC",
+      "transcript": "5톤 이상 트럭은 1번 말고 2번 게이트로 들어오라고 해요. 2번 게이트는 높이 3.6m까지는 들어갈 수 있어요. 게이트 지나자마자 왼쪽에서 지게차가 튀어나올 때가 있어서 천천히 가는 게 좋아요. 그리고 냉장 B 도크 쪽 캐노피는 높이 제한이 3.6미터라서 그보다 높은 탑차는 못 들어가요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_C_005",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_03",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "5톤 이상 트럭은 2번 게이트로 진입한다.",
+          "action_text": "5톤 이상 트럭은 2번 게이트로 진입한다.",
+          "source_excerpt": "5톤 이상 트럭은 1번 말고 2번 게이트로 들어오라고 해요.",
+          "conditions": {
+            "vehicle_class": "TRUCK",
+            "min_tonnage": 5.0,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_006",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_03",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "차량 높이 3.6m까지는 2번 게이트로 진입할 수 있다.",
+          "action_text": null,
+          "source_excerpt": "2번 게이트는 높이 3.6m까지는 들어갈 수 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": 3.6,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_007",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "2번 게이트 통과 직후 왼쪽 지게차 진입 지점"
+          },
+          "category": "OTHER",
+          "custom_category_label": "지게차 돌발 진입 위험",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "2번 게이트 통과 직후 왼쪽에서 지게차가 갑자기 진입할 수 있다.",
+          "action_text": null,
+          "source_excerpt": "게이트 지나자마자 왼쪽에서 지게차가 튀어나올 때가 있어서",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_008",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "2번 게이트 통과 직후 왼쪽 지게차 진입 지점"
+          },
+          "category": "OTHER",
+          "custom_category_label": "지게차 돌발 진입 대응",
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "2번 게이트 통과 직후 지게차 진입 가능 지점에서는 천천히 주행하는 것이 좋다.",
+          "action_text": "천천히 주행한다.",
+          "source_excerpt": "지게차가 튀어나올 때가 있어서 천천히 가는 게 좋아요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_038",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "냉장 B 도크 쪽 캐노피"
+          },
+          "category": "ACCESS",
+          "custom_category_label": null,
+          "fact_type": "RESTRICTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "PROHIBITED",
+          "statement": "냉장 B 도크 쪽 캐노피의 높이 제한은 3.6m이며 그보다 높은 탑차는 진입할 수 없다.",
+          "action_text": null,
+          "source_excerpt": "냉장 B 도크 쪽 캐노피는 높이 제한이 3.6미터라서 그보다 높은 탑차는 못 들어가요.",
+          "conditions": {
+            "vehicle_class": "TRUCK",
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": 3.6,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "냉장 B 도크 쪽 캐노피 높이 제한"
+          },
+          "usage_scope": "WARNING_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_C_03",
+      "place_code": "PLACE_C",
+      "selected_scope_node_code": "NODE_C_06",
+      "source_type": "SYNTHETIC",
+      "transcript": "A 도크에 차 대면 상온 물건은 거기서 바로 내리면 돼요. 근데 도크 바닥 끝쪽에 철판이 하나 들떠 있어서 카트 바퀴가 걸릴 수 있어요. 무거운 박스 실었으면 그쪽은 속도 줄이고 넘어가세요. 도크에서 상온창고 문까지는 카트로 가면 됩니다.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_C_009",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_06",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "LOADING",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "상온 화물은 상온 A 도크에서 하역한다.",
+          "action_text": "상온 A 도크에서 상온 화물을 내린다.",
+          "source_excerpt": "A 도크에 차 대면 상온 물건은 거기서 바로 내리면 돼요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "상온 물품 하역"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_010",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "상온 A 도크 바닥 끝쪽의 들뜬 철판"
+          },
+          "category": "OTHER",
+          "custom_category_label": "들뜬 철판",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "상온 A 도크 바닥 끝쪽의 들뜬 철판에 카트 바퀴가 걸릴 수 있다.",
+          "action_text": null,
+          "source_excerpt": "도크 바닥 끝쪽에 철판이 하나 들떠 있어서 카트 바퀴가 걸릴 수 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_011",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "상온 A 도크 바닥 끝쪽의 들뜬 철판"
+          },
+          "category": "OTHER",
+          "custom_category_label": "카트 바퀴 장애물",
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "무거운 박스를 실은 카트는 들뜬 철판 구간에서 속도를 줄여 통과하는 것이 좋다.",
+          "action_text": "속도를 줄여 통과한다.",
+          "source_excerpt": "무거운 박스 실었으면 그쪽은 속도 줄이고 넘어가세요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "무거운 박스를 실은 카트"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_012",
+          "target": {
+            "target_type": "SEGMENT",
+            "target_code": "SEG_C_03",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "상온 A 도크에서 상온창고 출입문까지 카트로 이동한다.",
+          "action_text": "상온창고 출입문까지 카트로 이동한다.",
+          "source_excerpt": "도크에서 상온창고 문까지는 카트로 가면 됩니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ROUTE_GUIDANCE"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_C_04",
+      "place_code": "PLACE_C",
+      "selected_scope_node_code": "NODE_C_08",
+      "source_type": "SYNTHETIC",
+      "transcript": "상온창고 문이 좀 무거워서 카트 밀면서 한 손으로 열기 힘들어요. 문 아래 턱도 낮긴 한데 작은 바퀴 카트는 한번 걸릴 때가 있어요. 문 지나서 안쪽으로 들어가면 왼쪽 인계점에 놓으면 돼요. 사람만 지나가는 건 문제없어요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_C_013",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_08",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "BUILDING_ENTRANCE",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "상온창고 출입문은 무거워 카트를 밀면서 한 손으로 열기 어렵다.",
+          "action_text": null,
+          "source_excerpt": "상온창고 문이 좀 무거워서 카트 밀면서 한 손으로 열기 힘들어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_014",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_08",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "OTHER",
+          "custom_category_label": "카트 문턱 걸림",
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "상온창고 출입문 아래 낮은 턱에 작은 바퀴 카트가 걸릴 수 있다.",
+          "action_text": null,
+          "source_excerpt": "문 아래 턱도 낮긴 한데 작은 바퀴 카트는 한번 걸릴 때가 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "작은 바퀴 카트"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_015",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_11",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "DELIVERY_POINT",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "상온창고 출입문을 지나 안쪽 왼쪽의 인계점에 화물을 둔다.",
+          "action_text": "안쪽 왼쪽 상온 배송 인계점에 화물을 둔다.",
+          "source_excerpt": "문 지나서 안쪽으로 들어가면 왼쪽 인계점에 놓으면 돼요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_016",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_08",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "BUILDING_ENTRANCE",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "WALK",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "상온창고 출입문은 보행자가 통과하는 데 문제가 없다.",
+          "action_text": null,
+          "source_excerpt": "사람만 지나가는 건 문제없어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_C_05",
+      "place_code": "PLACE_C",
+      "selected_scope_node_code": "NODE_C_09",
+      "source_type": "SYNTHETIC",
+      "transcript": "오후 다섯 시쯤 되면 상온창고 안쪽 카트 통로에 빈 팔레트가 많이 나와 있어요. 그래서 그 시간에는 카트 두 대가 마주 지나가기 좀 빡빡합니다. 혼자 끌고 가는 건 괜찮은데 반대편에서 카트 오면 먼저 한 대 보내고 가는 게 편해요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_C_017",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_09",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "상온창고 카트 통로에는 오후 5시 전후 빈 팔레트가 많이 놓일 수 있다.",
+          "action_text": null,
+          "source_excerpt": "오후 다섯 시쯤 되면 상온창고 안쪽 카트 통로에 빈 팔레트가 많이 나와 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "오후 5시 전후"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_018",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_09",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "오후 5시 전후에는 상온창고 카트 통로에서 카트 두 대가 마주 통과하기 어렵다.",
+          "action_text": null,
+          "source_excerpt": "그 시간에는 카트 두 대가 마주 지나가기 좀 빡빡합니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "오후 5시 전후"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_019",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_09",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "상온창고 카트 통로는 카트 한 대가 단독으로 이동하는 데에는 큰 문제가 없다.",
+          "action_text": null,
+          "source_excerpt": "혼자 끌고 가는 건 괜찮은데",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "오후 5시 전후"
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_020",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_09",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "반대편에서 카트가 오면 먼저 한 대를 보내고 이동하는 것이 편하다.",
+          "action_text": "반대편 카트를 먼저 보내고 이동한다.",
+          "source_excerpt": "반대편에서 카트 오면 먼저 한 대 보내고 가는 게 편해요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "오후 5시 전후"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_C_06",
+      "place_code": "PLACE_C",
+      "selected_scope_node_code": "NODE_C_07",
+      "source_type": "SYNTHETIC",
+      "transcript": "냉장 물건이면 2번 게이트에서 바로 B 도크 쪽으로 가요. B 도크 문 앞은 바닥에 물기가 생길 때가 있어서 카트가 미끄러질 수 있습니다. 특히 비 오는 날에는 냉장창고 전실 들어가기 전에 바퀴 한번 보고 가는 게 좋아요. 전실 지나면 오른쪽 인계점이 냉장 물건 놓는 데예요.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_C_021",
+          "target": {
+            "target_type": "SEGMENT",
+            "target_code": "SEG_C_06",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "냉장 화물 배송 차량은 2번 게이트에서 냉장 B 도크로 이동한다.",
+          "action_text": "냉장 B 도크로 이동한다.",
+          "source_excerpt": "냉장 물건이면 2번 게이트에서 바로 B 도크 쪽으로 가요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "냉장 물품 배송"
+          },
+          "usage_scope": "ROUTE_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_022",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_07",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "LOADING",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "냉장 B 도크 문 앞은 바닥에 물기가 생겨 카트가 미끄러질 수 있다.",
+          "action_text": null,
+          "source_excerpt": "B 도크 문 앞은 바닥에 물기가 생길 때가 있어서 카트가 미끄러질 수 있습니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_023",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_10",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "비 오는 날에는 냉장창고 전실에 들어가기 전에 카트 바퀴 상태를 확인하는 것이 좋다.",
+          "action_text": "전실에 들어가기 전에 카트 바퀴를 확인한다.",
+          "source_excerpt": "비 오는 날에는 냉장창고 전실 들어가기 전에 바퀴 한번 보고 가는 게 좋아요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "비 오는 날"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_024",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_12",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "DELIVERY_POINT",
+          "custom_category_label": null,
+          "fact_type": "LOCATION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "냉장 배송 인계점은 냉장창고 전실을 지난 뒤 오른쪽에 있다.",
+          "action_text": null,
+          "source_excerpt": "전실 지나면 오른쪽 인계점이 냉장 물건 놓는 데예요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_C_07",
+      "place_code": "PLACE_C",
+      "selected_scope_node_code": "NODE_C_05",
+      "source_type": "SYNTHETIC",
+      "transcript": "입차 대기장에 차 세워두라고 연락 오면 거기서 기다리면 돼요. 대기장 안쪽은 바닥 화살표 방향으로 한 바퀴 돌아서 나오는 식이고요. 대기장 옆 좁은 길은 점심때 직원들이 많이 걸어 다녀서 차로 지나가기 좀 불편해요. 그 길은 아직 지도에 표시가 잘 안 돼 있을 거예요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_C_025",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_05",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "PARKING_STOPPING",
+          "custom_category_label": null,
+          "fact_type": "ALLOWANCE",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": "ALLOWED",
+          "statement": "입차 대기 지시를 받은 차량은 입차 대기장에서 기다릴 수 있다.",
+          "action_text": "입차 대기장에서 대기한다.",
+          "source_excerpt": "입차 대기장에 차 세워두라고 연락 오면 거기서 기다리면 돼요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "입차 대기 지시를 받은 경우"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_026",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_05",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "입차 대기장 내부에서는 바닥 화살표 방향으로 한 바퀴 돌아 출구 방향으로 이동한다.",
+          "action_text": "바닥 화살표 방향으로 순환한다.",
+          "source_excerpt": "대기장 안쪽은 바닥 화살표 방향으로 한 바퀴 돌아서 나오는 식이고요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_027",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "입차 대기장 옆 좁은 길"
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "입차 대기장 옆 좁은 길은 점심시간에 보행자가 많아 차량 통행이 불편하다.",
+          "action_text": null,
+          "source_excerpt": "대기장 옆 좁은 길은 점심때 직원들이 많이 걸어 다녀서 차로 지나가기 좀 불편해요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "점심시간"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_028",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "입차 대기장 옆 좁은 길"
+          },
+          "category": "OTHER",
+          "custom_category_label": "지도 미표시 구간",
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "GENERAL",
+          "traversal_method": "OTHER",
+          "custom_traversal_method": "미등록 구간",
+          "access_state": null,
+          "statement": "입차 대기장 옆 좁은 길은 지도에 명확히 표시되지 않았을 수 있다.",
+          "action_text": null,
+          "source_excerpt": "그 길은 아직 지도에 표시가 잘 안 돼 있을 거예요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_C_08",
+      "place_code": "PLACE_C",
+      "selected_scope_node_code": "NODE_C_13",
+      "source_type": "SYNTHETIC",
+      "transcript": "지게차 교차구간은 노란 선 밖에서 한번 보고 들어가는 게 좋아요. 오전 열 시에서 열한 시 사이에는 지게차가 특히 많이 오가고요. 카트 끌고 갈 때는 코너에서 바로 들어가지 말고 잠깐 멈췄다가 가세요. 차량으로 지나갈 때도 속도를 줄이는 편이 안전합니다.",
+      "audio_recording_candidate": false,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_C_029",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_13",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "GENERAL",
+          "traversal_method": "OTHER",
+          "custom_traversal_method": "교차구간 진입",
+          "access_state": null,
+          "statement": "지게차 교차구간에 들어가기 전 노란 선 밖에서 통행 상황을 확인하는 것이 좋다.",
+          "action_text": "노란 선 밖에서 통행 상황을 확인한다.",
+          "source_excerpt": "지게차 교차구간은 노란 선 밖에서 한번 보고 들어가는 게 좋아요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_030",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_13",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "CONDITION",
+          "custom_fact_type_label": null,
+          "movement_mode": "GENERAL",
+          "traversal_method": "OTHER",
+          "custom_traversal_method": "교차구간 통행",
+          "access_state": null,
+          "statement": "지게차 교차구간은 오전 10시부터 11시 사이에 지게차 통행이 많다.",
+          "action_text": null,
+          "source_excerpt": "오전 열 시에서 열한 시 사이에는 지게차가 특히 많이 오가고요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": "10:00",
+            "active_time_end": "11:00",
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_031",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_13",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "카트로 지게차 교차구간 코너에 진입할 때는 잠시 멈춘 뒤 이동한다.",
+          "action_text": "코너에서 잠시 멈춘 뒤 이동한다.",
+          "source_excerpt": "카트 끌고 갈 때는 코너에서 바로 들어가지 말고 잠깐 멈췄다가 가세요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_032",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_13",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "차량으로 지게차 교차구간을 통과할 때는 속도를 줄이는 것이 안전하다.",
+          "action_text": "속도를 줄여 통과한다.",
+          "source_excerpt": "차량으로 지나갈 때도 속도를 줄이는 편이 안전합니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_C_09",
+      "place_code": "PLACE_C",
+      "selected_scope_node_code": "NODE_C_03",
+      "source_type": "SYNTHETIC",
+      "transcript": "오늘처럼 비 많이 오면 2번 게이트에서 B 도크 내려가는 경사로 중간쯤이 미끄러워요. 특히 빈 차보다 짐 실은 차가 내려갈 때 더 밀리는 느낌이 있어요. 거기는 급하게 브레이크 밟지 말고 천천히 내려가는 게 낫습니다. 정확히 이름 붙은 구간은 아닌 것 같아요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_C_033",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "2번 게이트에서 냉장 B 도크로 내려가는 경사로 중간 구간"
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "비가 많이 오는 날에는 2번 게이트에서 냉장 B 도크로 내려가는 경사로 중간 구간이 미끄럽다.",
+          "action_text": null,
+          "source_excerpt": "비 많이 오면 2번 게이트에서 B 도크 내려가는 경사로 중간쯤이 미끄러워요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "비가 많이 오는 날"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_034",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "2번 게이트에서 냉장 B 도크로 내려가는 경사로 중간 구간"
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "해당 경사로에서는 화물을 실은 차량이 빈 차량보다 더 밀리는 느낌이 있을 수 있다.",
+          "action_text": null,
+          "source_excerpt": "빈 차보다 짐 실은 차가 내려갈 때 더 밀리는 느낌이 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "비가 많이 오는 날이며 화물을 실은 차량"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_035",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "2번 게이트에서 냉장 B 도크로 내려가는 경사로 중간 구간"
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "해당 경사로에서는 급하게 브레이크를 밟지 않는 것이 좋다.",
+          "action_text": "급하게 브레이크를 밟지 않는다.",
+          "source_excerpt": "거기는 급하게 브레이크 밟지 말고 천천히 내려가는 게 낫습니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "비가 많이 오는 날"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        },
+        {
+          "knowledge_code": "K_C_036",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "2번 게이트에서 냉장 B 도크로 내려가는 경사로 중간 구간"
+          },
+          "category": "INTERNAL_ROUTE",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "VEHICLE",
+          "traversal_method": "DRIVE",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "해당 경사로에서는 천천히 내려가는 것이 좋다.",
+          "action_text": "천천히 내려간다.",
+          "source_excerpt": "거기는 급하게 브레이크 밟지 말고 천천히 내려가는 게 낫습니다.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "비가 많이 오는 날"
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        }
+      ]
+    },
+    {
+      "report_code": "REPORT_C_10",
+      "place_code": "PLACE_C",
+      "selected_scope_node_code": "NODE_C_11",
+      "source_type": "SYNTHETIC",
+      "transcript": "상온 인계점은 문 들어가서 왼쪽 끝이에요. 상온 쪽은 오후 세 시쯤 검수 박스가 바닥에 쌓여 있을 때가 있어서 큰 카트는 돌기 빡빡해요. 냉장 쪽은 인계하고 나면 빈 보냉박스는 옆 선반에 두라고 적혀 있어요.",
+      "audio_recording_candidate": true,
+      "expected_knowledge_items": [
+        {
+          "knowledge_code": "K_C_037",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_11",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "DELIVERY_POINT",
+          "custom_category_label": null,
+          "fact_type": "LOCATION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "상온 배송 인계점은 상온창고 출입문을 지나 왼쪽 끝에 있다.",
+          "action_text": null,
+          "source_excerpt": "상온 인계점은 문 들어가서 왼쪽 끝이에요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "REFERENCE_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_039",
+          "target": {
+            "target_type": "NODE",
+            "target_code": "NODE_C_11",
+            "target_resolution_status": "RESOLVED",
+            "target_free_text": null
+          },
+          "category": "CONGESTION_WAIT",
+          "custom_category_label": null,
+          "fact_type": "WARNING",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "상온 배송 인계점은 오후 3시 전후 검수 박스가 바닥에 쌓이면 큰 카트가 회전하기 어렵다.",
+          "action_text": null,
+          "source_excerpt": "상온 쪽은 오후 세 시쯤 검수 박스가 바닥에 쌓여 있을 때가 있어서 큰 카트는 돌기 빡빡해요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": "오후 3시 전후에 검수 박스가 바닥에 쌓여 있는 경우"
+          },
+          "usage_scope": "WARNING_ONLY"
+        },
+        {
+          "knowledge_code": "K_C_040",
+          "target": {
+            "target_type": "UNKNOWN",
+            "target_code": null,
+            "target_resolution_status": "UNRESOLVED",
+            "target_free_text": "냉장 배송 인계점 옆 빈 보냉박스 선반"
+          },
+          "category": "DELIVERY_POINT",
+          "custom_category_label": null,
+          "fact_type": "INSTRUCTION",
+          "custom_fact_type_label": null,
+          "movement_mode": "PEDESTRIAN",
+          "traversal_method": "CART",
+          "custom_traversal_method": null,
+          "access_state": null,
+          "statement": "냉장 화물 인계 후 빈 보냉박스는 냉장 배송 인계점 옆 선반에 둔다.",
+          "action_text": "빈 보냉박스를 옆 선반에 둔다.",
+          "source_excerpt": "냉장 쪽은 인계하고 나면 빈 보냉박스는 옆 선반에 두라고 적혀 있어요.",
+          "conditions": {
+            "vehicle_class": null,
+            "min_tonnage": null,
+            "max_tonnage": null,
+            "max_vehicle_height_m": null,
+            "max_vehicle_width_m": null,
+            "active_time_start": null,
+            "active_time_end": null,
+            "active_days": null,
+            "extra_condition_text": null
+          },
+          "usage_scope": "ACTION_GUIDANCE"
+        }
+      ]
+    }
+  ],
+  "rag_test_queries": [
+    {
+      "query_code": "QUERY_C_01",
+      "place_code": "PLACE_C",
+      "question": "5톤 트럭이면 어느 게이트로 들어가?",
+      "context": {
+        "vehicle_class": "TRUCK",
+        "vehicle_tonnage": 5.0,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "VEHICLE"
+      },
+      "expected_knowledge_codes": [
+        "K_C_005"
+      ],
+      "must_not_return_codes": [
+        "K_C_001"
+      ],
+      "reason": "5톤 이상 트럭에 직접 적용되는 2번 게이트 지식이 핵심이며, 상온 화물의 일반적인 1번 게이트 이용 정보가 우선 답변으로 검색되면 안 된다."
+    },
+    {
+      "query_code": "QUERY_C_02",
+      "place_code": "PLACE_C",
+      "question": "상온 A 도크에서 카트 끌고 창고 문까지 어떻게 가?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "PEDESTRIAN"
+      },
+      "expected_knowledge_codes": [
+        "K_C_012"
+      ],
+      "must_not_return_codes": [
+        "K_C_021",
+        "K_C_023"
+      ],
+      "reason": "상온 A 도크에서 상온창고 출입문까지의 카트 이동 지식이 직접 정답이며, 냉장 구역 차량 경로나 우천 시 냉장 전실 점검 정보는 핵심 결과가 아니다."
+    },
+    {
+      "query_code": "QUERY_C_03",
+      "place_code": "PLACE_C",
+      "question": "비 많이 오는 날 냉장 B 도크 쪽 경사로 내려갈 때 뭐 조심해야 해?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "VEHICLE"
+      },
+      "expected_knowledge_codes": [
+        "K_C_033",
+        "K_C_035",
+        "K_C_036"
+      ],
+      "must_not_return_codes": [
+        "K_C_017",
+        "K_C_018"
+      ],
+      "reason": "비가 많이 오는 날 냉장 B 도크 방향 경사로의 미끄러움과 일반 차량 행동 지침이 정답이다. 화물 적재 차량에만 추가로 적용되는 K_C_034와 상온창고 카트 통로 혼잡 정보는 필수 답변이 아니다."
+    },
+    {
+      "query_code": "QUERY_C_04",
+      "place_code": "PLACE_C",
+      "question": "점심에 입차 대기장 옆 좁은 길로 차 지나가도 괜찮아?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "VEHICLE"
+      },
+      "expected_knowledge_codes": [
+        "K_C_027"
+      ],
+      "must_not_return_codes": [
+        "K_C_025",
+        "K_C_026"
+      ],
+      "reason": "질문은 입차 대기장 자체가 아니라 옆의 미등록 좁은 길에 관한 것이므로 해당 UNRESOLVED 위치의 점심시간 차량 통행 경고가 정답이다."
+    },
+    {
+      "query_code": "QUERY_C_05",
+      "place_code": "PLACE_C",
+      "question": "작은 바퀴 카트로 상온창고 문 들어갈 때 조심할 거 있어?",
+      "context": {
+        "vehicle_class": null,
+        "vehicle_tonnage": null,
+        "vehicle_height_m": null,
+        "vehicle_width_m": null,
+        "movement_mode": "PEDESTRIAN"
+      },
+      "expected_knowledge_codes": [
+        "K_C_013",
+        "K_C_014"
+      ],
+      "must_not_return_codes": [
+        "K_C_016",
+        "K_C_020"
+      ],
+      "reason": "작은 바퀴 카트로 상온창고 출입문을 통과할 때 무거운 문과 낮은 문턱 걸림 위험이 모두 직접 적용된다. 보행자 단독 통과 정보와 별도 보조 카트 통로의 양보 지침은 핵심 답변이 아니다."
+    }
+  ]
+}

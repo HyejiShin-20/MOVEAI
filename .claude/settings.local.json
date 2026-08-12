@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"/e/temp/claude/E--MOVE-AI/5160a877-a865-4eef-a209-d012ea9bc38f/scratchpad\")"
+    ]
+  }
+}
