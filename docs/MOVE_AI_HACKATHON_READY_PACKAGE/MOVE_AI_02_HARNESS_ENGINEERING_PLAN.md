@@ -6,6 +6,25 @@
 
 ---
 
+> ## ⚠ 이 문서는 초안이며 일부가 대체되었다
+>
+> 본선 전에 `04`(검색·안내 로직)와 `05`(DB·API·AI 계약)가 확정되면서 아래가 바뀌었다.
+> 본문에 `[정정 · 본선 전 확정]` 표시가 붙은 곳은 **그 내용이 우선**이다.
+>
+> | 이 문서의 내용 | 확정된 것 |
+> |---|---|
+> | `API_CONTRACT.md` / `DB_SCHEMA.md` 생성 (§3, §5) | **만들지 않는다.** 계약은 `05`가 유일한 출처 |
+> | `POST /similarity-search` 선택 가능 (§7) | **만들지 않는다.** 코사인은 Spring에서 계산 |
+> | Phase 정의와 완료 조건 (§11) | `05 §7`(설명) + `IMPLEMENTATION_STATUS.md`(체크리스트) |
+>
+> **이 문서에서 계속 유효한 것** — 작업 루프(§1), 우선순위(§2), 병렬 경계(§12),
+> 테스트 피라미드(§13), Gold 평가(§14), 오류 처리(§15), Git 규칙(§17),
+> 완료 정의(§18), 세션 종료 규칙(§19), 컷라인(§21).
+>
+> 충돌 시 우선순위: **사용자 지시 → 01 → 05 → 04 → 02 → 기존 코드**
+
+---
+
 # 1. Harness Engineering 목표
 
 하네스가 해야 할 일은 "새 설계를 제안하는 것"이 아니라,
@@ -62,8 +81,8 @@ move-ai/
 │  ├─ MOVE_AI_01_MVP_PRD.md
 │  ├─ MOVE_AI_02_HARNESS_ENGINEERING_PLAN.md
 │  ├─ IMPLEMENTATION_STATUS.md
-│  ├─ API_CONTRACT.md
-│  ├─ DB_SCHEMA.md
+│  ├─ MOVE_AI_04_RETRIEVAL_GUIDANCE_구현명세.md   ← 검색·안내 로직
+│  ├─ MOVE_AI_05_구현_상세명세.md                 ← DB·API·AI 계약 (아래 주석 참조)
 │  └─ DEMO_SCRIPT.md
 │
 ├─ datasets/
@@ -145,7 +164,11 @@ RouteSegment import + continuity test
 - DB logical fields
 - enum
 
-가능하면 첫 구현 Slice에서 `API_CONTRACT.md`를 만든다.
+> **[정정 · 본선 전 확정]**
+> `API_CONTRACT.md`와 `DB_SCHEMA.md`를 **만들지 않는다.**
+> 계약은 이미 `docs/MOVE_AI_05_구현_상세명세.md`에 확정되어 있다
+> (§2 DB 스키마 · §4 Spring API · §5 Python AI 서비스).
+> 같은 내용을 두 파일에 두면 반드시 어긋난다. **05가 유일한 출처다.**
 
 ---
 
@@ -224,8 +247,12 @@ GET  /health
 POST /stt
 POST /extract-knowledge
 POST /embed
-POST /similarity-search   # 선택. vector 계산을 Python에 모을 경우
 ```
+
+> **[정정 · 본선 전 확정]**
+> `POST /similarity-search`는 **만들지 않는다.** 코사인 유사도는 Spring에서 계산한다.
+> 후보 벡터를 HTTP로 넘기면 안내 단계마다 수백 KB가 오가고, 내적/노름 계산은 Java 20줄이다.
+> Python은 위 3개 엔드포인트만 제공한다. → `05 §1`, `04 §7`
 
 ---
 
@@ -346,6 +373,14 @@ Category는 기본적으로 hard filter로 사용하지 않는다.
 ---
 
 # 11. 본선 구현 Phase
+
+> **[정정 · 본선 전 확정]**
+> 아래 Phase 설명은 배경 이해용으로만 읽는다. **작업 기준은 아래 두 곳이다.**
+>
+> - `05 §7` — Phase별 목표 시간과 컷라인 발동 기준
+> - `docs/IMPLEMENTATION_STATUS.md` — **완료 조건 체크리스트 (유일한 진행 상태 기록)**
+>
+> Phase 2는 2a(DDL·임포트)와 2b(조회 API)로 분리되었다.
 
 중요:
 Phase 숫자보다 "vertical slice가 실제로 동작하는가"를 우선한다.

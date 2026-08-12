@@ -1,10 +1,12 @@
 # Implementation Status
 
+> **완료 조건 체크리스트는 이 파일에만 있다.** 다른 문서에 복사하지 않는다.
+> Phase의 목적·시간 예산·축소 경로는 `MOVE_AI_05_구현_상세명세.md §7`.
 > 하네스는 **세션 시작 시 이 파일을 먼저 읽고, 세션 종료 전 반드시 갱신**한다.
-> Phase 완료 조건은 `MOVE_AI_05_구현_상세명세.md §7`에 있다.
 
 **최종 갱신** — (미시작)
 **현재 Phase** — Phase 0 (미착수)
+**경과 시간** — T+0.0h
 
 ---
 
@@ -12,7 +14,7 @@
 
 ```
 Phase 0 — repository audit
-  tree / git status / 빌드 파일 / 기존 코드 확인 후 이 파일을 갱신한다.
+  tree / git status / 빌드 파일 / 기존 코드 확인 후 아래 Phase 표를 실제 상태에 맞게 갱신한다.
   바로 대규모 리팩터링을 시작하지 않는다.
 ```
 
@@ -30,64 +32,108 @@ python scripts/validate_datasets.py   → 전체 이슈 0건 (본선 전 확인 
 
 ---
 
+# 시간 기준
+
+작업 시작을 `T+0`으로 둔다. 지연되면 아래 기준으로 **즉시 잘라낸다.**
+
+```
+T+6.0h  Phase 3 미완  →  P1·지도·복수 장소 폐기. 장소 B 하나로 간다.
+T+8.0h  Phase 4 미완  →  Phase 5~7을 수동 시연으로 대체 검토
+T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
+```
+
+---
+
 # Phase 진행 상황
 
 범례 — `TODO` / `PARTIAL` / `DONE`
+각 Phase 완료 시 **커밋하고, 사람이 확인한 뒤** 다음으로 넘어간다.
 
-## Phase 0 — Repository Audit  `TODO`
-- [ ] tree / git status 확인
+## Phase 0 — 상황 파악  `TODO`  (0.5h / 누적 0.5h)
+- [ ] tree · git status 확인
 - [ ] 빌드·환경 파일 확인
-- [ ] 이 파일 갱신
+- [ ] 이 파일의 Phase 표를 실제 상태로 갱신
 
-## Phase 1 — Runtime Skeleton  `TODO`
+## Phase 1 — 뼈대  `TODO`  (1.0h / 누적 1.5h)
 - [ ] frontend 페이지 열림
 - [ ] backend `/health` 200
 - [ ] ai-service `/health` 200
 - [ ] MariaDB 연결 성공
+- [ ] **`CLAUDE.md`의 "명령" 절에 실제 빌드·실행 명령 추가**
+- [ ] 커밋
 
-## Phase 2 — Dataset Import  `TODO`
+## Phase 2a — DDL + 임포트  `TODO`  (1.5h / 누적 3.0h)
+- [ ] `python scripts/validate_datasets.py` → 이슈 0건
 - [ ] DDL 적용 (`05 §2`)
-- [ ] B 임포트 + 검증 통과
-- [ ] A / C / D 임포트
-- [ ] `GET /api/places` 실제 응답
-- [ ] `GET /api/routes/{id}` 실제 응답
-- [ ] 장소 4 · 지식 146건 확인
+- [ ] 장소 B 임포트 → SQL로 건수 확인 (지식 37)
+- [ ] A · C · D 임포트 → 장소 4 · 지식 146 확인
+- [ ] **톤수 포함/배타 파생 컬럼 생성 확인 (`05 §3-3`)**
+- [ ] 재실행해도 같은 결과 (idempotent)
+- [ ] 커밋
 
-## Phase 3 — Embedding + Retrieval  `TODO`
-- [ ] embedding_text 빌더
-- [ ] PUBLISHED 146건 일괄 임베딩 → DB 저장
-- [ ] `ConditionEvaluator` 단위 테스트
-- [ ] **톤수 경계 8건 테스트 통과 (`05 §3-3`)**
+> 막히면 **B 하나만 넣고 2b로 넘어간다.** 시연은 B에서만 한다.
+
+## Phase 2b — 조회 API  `TODO`  (1.0h / 누적 4.0h)
+- [ ] `GET /api/places` 실제 응답
+- [ ] `GET /api/places/{id}` 노드·경로 포함 응답
+- [ ] `GET /api/routes/{id}` 구간 순서대로 응답
+- [ ] 커밋
+
+## Phase 3 — 임베딩 + 검색  `TODO`  (2.0h / 누적 6.0h)
+- [ ] `EmbeddingTextBuilder` (`04 §5-1`)
+- [ ] PUBLISHED 전건 일괄 임베딩 → DB 저장
+- [ ] **톤수 경계 8건 단위 테스트 통과 (`05 §3-3`)**
+- [ ] 높이 부호 분기 테스트 (`K_B_002` 초과 적용 / `K_C_006` 이하 적용)
 - [ ] `CosineCalculator` 단위 테스트
 - [ ] 정답 질문 20개 평가 스크립트 동작, Hit@3 수치 확보
+- [ ] 커밋
 
-## Phase 4 — Guidance  `TODO`  ★ 첫 발표 가능 지점
+> **T+6.0h 체크포인트.** 여기 못 왔으면 P1·지도·복수 장소를 지금 버린다.
+
+## Phase 4 — 안내  `TODO`  (2.0h / 누적 8.0h)  ★ 첫 발표 가능 지점
 - [ ] 1톤 → `ROUTE_B_01` (7단계) 선택
 - [ ] 2.5톤 → `ROUTE_B_02` (3단계) 선택
+- [ ] 경로 후보 0개면 `404 NO_ROUTE_AVAILABLE` (기본 경로로 대체하지 않음)
 - [ ] 같은 지식이 연속 두 단계에 중복 노출되지 않음
 - [ ] 모든 단계에 카드 최소 1장
 - [ ] `contextTime=12:30` → `K_B_014` 노출 / `15:00` → 사라짐
 - [ ] `complete` 동작
+- [ ] 커밋
+- [ ] **★ 시연 영상 1막(컷 1~3) 녹화** — 미루지 않는다
 
-## Phase 5 — Field Report + STT  `TODO`
+> **T+8.0h 체크포인트.** 여기 못 왔으면 Phase 5~7 축소를 결정한다.
+
+## Phase 5 — 음성 제보  `TODO`  (1.0h / 누적 9.0h)
 - [ ] 녹음 → 업로드 → STT
 - [ ] 기사 텍스트 수정 → 저장
+- [ ] 커밋
 
-## Phase 6 — Extraction  `TODO`
+> STT가 막히면 **텍스트 직접 입력으로 대체**하고 진행한다.
+
+## Phase 6 — 추출  `TODO`  (1.0h / 누적 10.0h)
 - [ ] `corrected_stt_text` → Draft 생성
-- [ ] 스키마 검증 + 1회 재시도 + 실패 처리
+- [ ] 스키마 검증 + 1회 재시도 + `EXTRACTION_FAILED` 처리
+- [ ] `source_excerpt`가 원문 부분 문자열인지 검증
 - [ ] 데이터셋 transcript로 품질 확인
+- [ ] 커밋
 
-## Phase 7 — Moderation + Publish  `TODO`  ★ 핵심 완성 지점
+## Phase 7 — 검수 + 발행  `TODO`  (1.5h / 누적 11.5h)  ★ 핵심 완성 지점
 - [ ] 검수 화면 (원문 / AI 결과 / 근거 구절 나란히)
 - [ ] 승인 → PUBLISHED → 임베딩 (동기, 한 트랜잭션)
+- [ ] 실패 시 롤백 + 명시적 오류
 - [ ] 새 제보 승인 후 같은 경로 재시작 시 새 카드 노출
 - [ ] `isRecentlyAdded = true` 배지
+- [ ] 커밋
+- [ ] **★ 시연 영상 2막(컷 4~9) 녹화**
 
-## Phase 8 — Polish  `TODO`
+> **T+11.5h 체크포인트.** 미완이면 2막을 포기하고 1막으로 발표를 구성한다.
+> 없는 기능을 있는 것처럼 말하지 않는다.
+
+## Phase 8 — 다듬기  `TODO`  (0.5h / 누적 12.0h)
 - [ ] 로딩 / 오류 / 빈 상태
 - [ ] 카드 우선순위
 - [ ] 시연 동선 고정
+- [ ] 커밋
 
 ## Phase 9 — Reply Assist (P1)  `TODO`
 - [ ] P0 안정 확인 후에만 착수
@@ -99,7 +145,7 @@ python scripts/validate_datasets.py   → 전체 이슈 0건 (본선 전 확인 
 세션마다 아래 형식으로 **위에** 추가한다.
 
 ```
-## YYYY-MM-DD HH:MM  Phase N
+## T+N.Nh  Phase N
 변경   …
 검증   실행한 명령 / 결과
 남은것 …
