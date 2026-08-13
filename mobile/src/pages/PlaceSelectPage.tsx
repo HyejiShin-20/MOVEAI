@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { routes } from '../routes'
+import { reportDraftStore } from '../state/reportDraft'
 
 const mapImage = 'https://www.figma.com/api/mcp/asset/6acbc0da-7822-49de-844f-71a63603f417.png'
 const menuIcon = 'https://www.figma.com/api/mcp/asset/bf2948ce-d989-4f2b-b8ec-a274f5862119.svg'
@@ -20,15 +22,16 @@ const zones = ['101동 공동현관', '101동 후문', '경비실 앞', '지하�
 
 export function PlaceSelectPage() {
   const navigate = useNavigate()
-  const [selectedPlace, setSelectedPlace] = useState(1)
-  const [selectedZone, setSelectedZone] = useState(zones[0])
+  const savedDraft = reportDraftStore.get()
+  const [selectedPlace, setSelectedPlace] = useState(savedDraft.selectedPlace?.id ?? 1)
+  const [selectedZone, setSelectedZone] = useState(savedDraft.selectedZone ?? zones[0])
 
   return (
     <div className="mobile-page place-select-page">
       <header className="place-header">
-        <button type="button" aria-label="메뉴"><img src={menuIcon} alt="" /></button>
+        <button type="button" aria-label="메뉴" onClick={() => navigate(routes.reportDrafts)}><img src={menuIcon} alt="" /></button>
         <strong>Logistics Pro</strong>
-        <button type="button" aria-label="프로필"><img src={profileIcon} alt="" /></button>
+        <button type="button" aria-label="프로필" onClick={() => navigate(routes.myReports)}><img src={profileIcon} alt="" /></button>
       </header>
 
       <main className="place-main">
@@ -84,7 +87,7 @@ export function PlaceSelectPage() {
             <div className="place-list__bottom-space" />
           </div>
           <div className="place-complete-wrap">
-            <button className="place-complete" type="button" onClick={() => navigate('/reports/confirm')}>
+            <button className="place-complete" type="button" onClick={() => { const place = places.find((item) => item.number === selectedPlace) ?? places[0]; reportDraftStore.patch({ selectedPlace: { id: place.number, name: place.name, address: place.address, distance: place.distance }, selectedZone, stage: 'confirm' }); navigate(routes.reportConfirm) }}>
               <img src={completeIcon} alt="" /><span>장소 선택 완료</span>
             </button>
           </div>

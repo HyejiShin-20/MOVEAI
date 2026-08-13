@@ -68,7 +68,7 @@ export function AdminReviewListPage() {
               )}
             </div>
           ))}
-          <footer className="admin-pagination"><span>Showing 1 to 10 of 142 entries</span><div><button disabled>‹</button><button className="is-active">1</button><button>2</button><button>3</button><span>...</span><button>15</button><button>›</button></div></footer>
+          <footer className="admin-pagination"><span>Showing 1 to 10 of 142 entries</span><div><button type="button" disabled>‹</button><button type="button" className="is-active">1</button><button type="button">2</button><button type="button">3</button><span>...</span><button type="button">15</button><button type="button">›</button></div></footer>
         </section>
       </div>
     </AdminShell>

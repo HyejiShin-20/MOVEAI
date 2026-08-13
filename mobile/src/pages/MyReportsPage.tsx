@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { routes } from '../routes'
 
 const photos = [
   'https://www.figma.com/api/mcp/asset/0d708c47-c214-4dd0-a1d9-cb69d7d2302d.png',
@@ -59,7 +60,7 @@ export function MyReportsPage() {
     <div className="mobile-page my-reports-page" data-figma-node="118:9327">
       <header className="my-reports-header">
         <div>
-          <button type="button" aria-label="뒤로가기" onClick={() => navigate('/home')}><img src={backIcon} alt="" /></button>
+          <button type="button" aria-label="뒤로가기" onClick={() => navigate(routes.home)}><img src={backIcon} alt="" /></button>
           <strong>내 제보 내역</strong>
         </div>
         <button type="button" aria-label="프로필"><img src={profileIcon} alt="" /></button>
@@ -108,7 +109,7 @@ export function MyReportsPage() {
                     <img src={calendarIcon} alt="" />
                     <span>{report.date}</span>
                     {report.tone === 'rejected' && (
-                      <button type="button" onClick={() => navigate('/reports/record')}>다시 등록</button>
+                      <button type="button" onClick={() => navigate(routes.reportRecord)}>다시 등록</button>
                     )}
                   </div>
                 </div>
@@ -119,10 +120,10 @@ export function MyReportsPage() {
       </main>
 
       <nav className="history-nav" aria-label="하단 메뉴">
-        <button type="button" onClick={() => navigate('/home')}><img src={navDelivery} alt="" /><span>Deliveries</span></button>
-        <button type="button" className="active"><img src={navVoice} alt="" /><span>Voice Tip</span></button>
-        <button type="button" onClick={() => navigate('/guidance/preview')}><img src={navRoute} alt="" /><span>Navigation</span></button>
-        <button type="button"><img src={navProfile} alt="" /><span>Profile</span></button>
+        <button type="button" onClick={() => navigate(routes.home)}><img src={navDelivery} alt="" /><span>Deliveries</span></button>
+        <button type="button" onClick={() => navigate(routes.reportRecord)}><img src={navVoice} alt="" /><span>Voice Tip</span></button>
+        <button type="button" onClick={() => navigate(routes.guidancePreview)}><img src={navRoute} alt="" /><span>Navigation</span></button>
+        <button type="button" className="active" aria-current="page"><img src={navProfile} alt="" /><span>Profile</span></button>
       </nav>
     </div>
   )

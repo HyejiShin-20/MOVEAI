@@ -1,5 +1,6 @@
 import { FormEvent, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { routes } from '../routes'
 
 const authAssets = {
   back: 'https://www.figma.com/api/mcp/asset/49f41a89-1839-4b21-9956-67b81f3eb5de.svg',
@@ -30,7 +31,7 @@ export function MobileLoginPage() {
 
   const submitLogin = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    navigate('/home')
+    navigate(routes.home)
   }
 
   return (
@@ -65,7 +66,7 @@ export function MobileLoginPage() {
 
           <div className="mobile-login-actions">
             <button type="submit" className="mobile-login-button mobile-login-button--outline">로그인</button>
-            <button type="button" className="mobile-login-button mobile-login-button--kakao" onClick={() => navigate('/home')}>
+            <button type="button" className="mobile-login-button mobile-login-button--kakao" onClick={() => navigate(routes.home)}>
               <img src={authAssets.kakao} alt="" />
               <span>카카오로 로그인</span>
             </button>
@@ -74,7 +75,7 @@ export function MobileLoginPage() {
 
         <p className="mobile-login-footer">
           <span>아직 회원이 아니신가요?</span>
-          <button type="button" onClick={() => navigate('/signup')}>회원가입</button>
+          <button type="button" onClick={() => navigate(routes.signup)}>회원가입</button>
         </p>
       </div>
     </main>
@@ -96,7 +97,7 @@ export function MobileSignupTermsPage() {
 
   return (
     <main className="mobile-auth-screen mobile-signup-screen mobile-signup-terms" aria-labelledby="mobile-signup-terms-title">
-      <MobileSignupHeader onBack={() => navigate('/login')} />
+      <MobileSignupHeader onBack={() => navigate(routes.login)} />
 
       <section className="mobile-signup-progress" aria-label="회원가입 진행 단계">
         <div className="mobile-signup-progress__copy">
@@ -135,7 +136,7 @@ export function MobileSignupTermsPage() {
         </div>
       </section>
 
-      <button type="button" className="mobile-signup-next" onClick={() => navigate('/signup/info')}>다음</button>
+      <button type="button" className="mobile-signup-next" disabled={!terms.service || !terms.privacy} onClick={() => navigate(routes.signupInfo)}>다음</button>
     </main>
   )
 }
@@ -147,12 +148,12 @@ export function MobileSignupInfoPage() {
 
   const submitInfo = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    navigate('/login')
+    navigate(routes.login)
   }
 
   return (
     <main className="mobile-auth-screen mobile-signup-screen mobile-signup-info" aria-labelledby="mobile-signup-info-title">
-      <MobileSignupHeader onBack={() => navigate('/signup')} />
+      <MobileSignupHeader onBack={() => navigate(routes.signup)} />
 
       <form className="mobile-signup-info__main" onSubmit={submitInfo}>
         <section className="mobile-signup-progress mobile-signup-progress--complete" aria-label="회원가입 진행 단계">

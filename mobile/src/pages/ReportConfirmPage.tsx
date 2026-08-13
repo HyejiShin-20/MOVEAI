@@ -1,4 +1,8 @@
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { reportRepository } from '../api/reportRepository'
+import { routes } from '../routes'
+import { reportDraftStore } from '../state/reportDraft'
 
 const placePhoto = 'https://www.figma.com/api/mcp/asset/5a47eab3-0c50-474e-96ae-570f4bdeb08e.png'
 const evidencePhoto = 'https://www.figma.com/api/mcp/asset/d04e5861-5549-42f3-8ad6-c9860cfeb1b9.png'
@@ -15,11 +19,28 @@ const addIcon = 'https://www.figma.com/api/mcp/asset/b8b81c4e-f09e-4bda-8cc1-de6
 
 export function ReportConfirmPage() {
   const navigate = useNavigate()
+  const [submitting, setSubmitting] = useState(false)
+  const draft = reportDraftStore.get()
+  const selectedPlace = draft.selectedPlace ?? { id: 0, name: '강남 물류센터 A동', address: '서울 강남구 테헤란로 123' }
+  const selectedZone = draft.selectedZone ?? '지하 2층 하역장 B구역'
+  const transcript = draft.transcript || '기존 안내된 지하 1층 하역장은 현재 공사 중으로 출입이 불가능합니다. 임시로 지하 2층 B구역을 사용해야 하며, 화물 엘리베이터 3호기를 이용하세요.'
+
+  const submitReport = async () => {
+    if (submitting) return
+    setSubmitting(true)
+    try {
+      await reportRepository.submit(reportDraftStore.get())
+      reportDraftStore.clear()
+      navigate(routes.myReports)
+    } finally {
+      setSubmitting(false)
+    }
+  }
 
   return (
     <div className="mobile-page confirm-page" data-figma-node="118:8176">
       <header className="transaction-header">
-        <button type="button" aria-label="뒤로가기" onClick={() => navigate('/reports/place')}>
+        <button type="button" aria-label="뒤로가기" onClick={() => navigate(routes.reportPlace)}>
           <img src={backIcon} alt="" />
         </button>
         <strong>제보 확인</strong>
@@ -36,13 +57,13 @@ export function ReportConfirmPage() {
         <section className="confirm-card confirm-card--place">
           <div className="confirm-card__head">
             <span><img src={locationIcon} alt="" />선택한 장소</span>
-            <button type="button" onClick={() => navigate('/reports/place')}>수정</button>
+            <button type="button" onClick={() => navigate(routes.reportPlace)}>수정</button>
           </div>
           <div className="confirm-place-row">
             <img className="confirm-place-row__photo" src={placePhoto} alt="강남 물류센터 A동" />
             <div>
-              <strong>강남 물류센터 A동</strong>
-              <span><img src={addressIcon} alt="" />서울 강남구 테헤란로 123</span>
+              <strong>{selectedPlace.name}</strong>
+              <span><img src={addressIcon} alt="" />{selectedPlace.address}</span>
             </div>
           </div>
         </section>
@@ -50,18 +71,18 @@ export function ReportConfirmPage() {
         <section className="confirm-card">
           <div className="confirm-card__head">
             <span><img src={zoneIcon} alt="" />세부 구역</span>
-            <button type="button" onClick={() => navigate('/reports/place')}>수정</button>
+            <button type="button" onClick={() => navigate(routes.reportPlace)}>수정</button>
           </div>
-          <strong className="confirm-card__value">지하 2층 하역장 B구역</strong>
+          <strong className="confirm-card__value">{selectedZone}</strong>
           <span className="confirm-chip"><img src={truckIcon} alt="" />1.5t 진입가능</span>
         </section>
 
         <section className="confirm-card">
           <div className="confirm-card__head">
             <span><img src={textIcon} alt="" />수정/제보 내용</span>
-            <button type="button" onClick={() => navigate('/reports/transcription')}>수정</button>
+            <button type="button" onClick={() => navigate(routes.reportTranscription)}>수정</button>
           </div>
-          <blockquote>“기존 안내된 지하 1층 하역장은 현재 공사 중으로 출입이 불가능합니다. 임시로 지하 2층 B구역을 사용해야 하며, 화물 엘리베이터 3호기를 이용하세요.”</blockquote>
+          <blockquote>“{transcript}”</blockquote>
         </section>
 
         <section className="confirm-card">
@@ -75,10 +96,10 @@ export function ReportConfirmPage() {
       </main>
 
       <footer className="confirm-actions">
-        <button className="confirm-submit" type="button" onClick={() => navigate('/reports/mine')}>
-          <img src={submitIcon} alt="" />제보 등록하기
+        <button className="confirm-submit" type="button" disabled={submitting} onClick={submitReport}>
+          <img src={submitIcon} alt="" />{submitting ? '등록 중...' : '제보 등록하기'}
         </button>
-        <button className="confirm-cancel" type="button" onClick={() => navigate('/home')}>취소</button>
+        <button className="confirm-cancel" type="button" onClick={() => navigate(routes.home)}>취소</button>
       </footer>
     </div>
   )
