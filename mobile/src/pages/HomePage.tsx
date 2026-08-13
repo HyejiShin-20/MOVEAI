@@ -1,6 +1,8 @@
 import { useNavigate } from 'react-router-dom'
 import { BottomNav } from '../components/BottomNav'
 import { TopAppBar } from '../components/TopAppBar'
+import { routes } from '../routes'
+import { reportDraftStore } from '../state/reportDraft'
 
 const recentLocations = [
   { title: '송파구 올림픽로 300', subtitle: '롯데월드타워 하역장 B2' },
@@ -37,23 +39,23 @@ export function HomePage() {
   return (
     <div className="mobile-page home-page">
       <section className="home-hero">
-        <TopAppBar />
+        <TopAppBar onMenu={() => navigate(routes.reportDrafts)} onProfile={() => navigate(routes.myReports)} />
         <div className="ongoing-guidance">
           <div className="ongoing-guidance__copy">
             <strong>진행 중인 배송 안내가 있습니다</strong>
             <span>OO아파트 101동. 현재 단계: 101동 출입구</span>
           </div>
-          <button type="button" className="ongoing-guidance__end">종료</button>
+          <button type="button" className="ongoing-guidance__end" onClick={() => navigate(routes.guidanceCompleted)}>종료</button>
         </div>
       </section>
 
       <main className="home-content">
         <section className="primary-actions" aria-label="빠른 실행">
-          <button type="button" className="primary-action primary-action--tip" onClick={() => navigate('/reports/record')}>
+          <button type="button" className="primary-action primary-action--tip" onClick={() => { reportDraftStore.reset(); navigate(routes.reportRecord) }}>
             <img src="/assets/mic-white.svg" alt="" />
             <span>현장 팁 기록</span>
           </button>
-          <button type="button" className="primary-action primary-action--route" onClick={() => navigate('/guidance/preview')}>
+          <button type="button" className="primary-action primary-action--route" onClick={() => navigate(routes.guidancePreview)}>
             <img src="/assets/map.svg" alt="" />
             <span>배송지 안내</span>
           </button>
@@ -63,7 +65,7 @@ export function HomePage() {
           <h2>최근 검색 장소</h2>
           <div className="recent-location-list">
             {recentLocations.map((location, index) => (
-              <button type="button" className="recent-location" key={`${location.title}-${index}`}>
+              <button type="button" className="recent-location" key={`${location.title}-${index}`} onClick={() => navigate(routes.guidancePreview)}>
                 <img className="recent-location__pin" src="/assets/location.svg" alt="" />
                 <span className="recent-location__copy">
                   <strong>{location.title}</strong>

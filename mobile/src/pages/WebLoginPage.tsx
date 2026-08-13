@@ -17,7 +17,7 @@ export function WebLoginPage() {
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    navigate('/home')
+    navigate(adminLogin ? '/admin' : '/home')
   }
 
   return (
