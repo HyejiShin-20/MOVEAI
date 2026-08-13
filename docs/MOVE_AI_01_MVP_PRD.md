@@ -214,7 +214,7 @@ MariaDB
 +
 Embedding Vector JSON
 +
-Python cosine similarity
+Spring cosine similarity
 ```
 
 검색 순서:

@@ -19,8 +19,8 @@
 ```
 backend/     Spring Boot   장소·경로·제보·검수·검색·안내 · MariaDB
 ai-service/  FastAPI       STT · 지식 추출 · 임베딩
-mobile/      Flutter       기사 앱 — 배송 목록 · Last 100m 안내 · 팁 등록
-admin-web/   React + Vite  관리자 검수 화면
+mobile/      React + Vite  기사 모바일 웹 — 배송 목록 · Last 100m 안내 · 팁 등록
+admin-web/   React + Vite  관리자 검수 웹
 datasets/    합성 데이터 4종 (임포트 대상)
 docs/        기획·구현 문서
 scripts/     검증 스크립트
@@ -35,13 +35,15 @@ python scripts/validate_datasets.py   # 데이터셋 정합성 (기대: 이슈 0
 pip install -r ai-service/requirements.txt
 ```
 
+전달용 압축은 탐색기에서 직접 만들지 않고 아래 명령을 사용한다.
+
+```bash
+python scripts/build_release_zip.py   # dist/MOVE-AI.zip (.env/.git/data 제외)
+```
+
 **처음이라면 [`docs/SETUP.md`](docs/SETUP.md) 부터 본다.** 설치를 순서대로 안내한다.
 이어서 [`docs/PREP_CHECKLIST.md`](docs/PREP_CHECKLIST.md)(모델·키 준비),
 역할 분담은 [`docs/TEAM_ROLES.md`](docs/TEAM_ROLES.md).
-
-```bash
-flutter doctor          # 경고 0건이어야 한다
-```
 
 각 스택 실행 명령은 구현 후 이 절에 추가한다.
 

@@ -187,14 +187,23 @@ POST /api/moderation/drafts/{id}/reject
      → { draftId, status:"REJECTED" }
 ```
 
-**승인은 하나의 트랜잭션이다.**
+**승인 HTTP 요청은 동기지만, 외부 `/embed` 호출은 DB 트랜잭션 밖에서 한다.**
 
 ```text
-PUBLISHED 전환 → embedding_text 생성 → Python /embed 호출(동기)
-              → knowledge_embeddings 저장 → 커밋
+1. Draft가 PENDING인지 확인하고 최종 payload 확정
+2. embedding_text 생성 → Python /embed 호출(동기)       ← DB transaction 밖
+3. 성공하면 DB transaction 시작
+   → Draft 상태 재확인/잠금
+   → KnowledgeItem PUBLISHED INSERT
+   → KnowledgeEmbedding INSERT
+   → ModerationReview INSERT
+   → Draft APPROVED 전환
+4. COMMIT → 200
 ```
 
-비동기로 빼면 "승인 직후 재조회"라는 시연의 결정적 순간에 경합이 생긴다. 관리자 한 명이 버튼 한 번 누르는 상황이므로 동기가 맞다. 실패하면 **롤백하고 명시적 오류**를 띄운다. 조용히 넘어가면 검색되지 않는 지식이 생긴다.
+전체 사용자 흐름은 여전히 동기이므로 "승인 직후 재조회"에서 경합이 없다. `/embed`가 실패하면
+DB 상태를 바꾸지 않고 명시적 오류를 반환한다. 임베딩 성공 뒤 DB 저장이 실패하면 트랜잭션을
+롤백한다. 재시도와 중복 클릭은 PENDING 재확인과 draft 기준 유일성으로 막는다.
 
 ---
 
@@ -216,7 +225,7 @@ POST /stt          multipart: audio
      → { "text":"...", "durationMs":8200 }
 
 POST /embed        { "texts": ["...", "..."] }
-     → { "model":"...", "dimension":1536,
+     → { "model":"text-embedding-3-small", "dimension":1536,
          "vectors":[[0.12,-0.44,...], [...]] }
 ```
 

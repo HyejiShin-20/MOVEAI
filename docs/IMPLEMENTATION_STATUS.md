@@ -4,7 +4,7 @@
 > Phase의 목적·시간 예산·축소 경로는 `MOVE_AI_05C_구현순서_운용.md §7`.
 > 하네스는 **세션 시작 시 이 파일을 먼저 읽고, 세션 종료 전 반드시 갱신**한다.
 
-**최종 갱신** — (미시작)
+**최종 갱신** — 2026-08-13 (본선 전 문서·validator 정비)
 **현재 Phase** — Phase 0 (미착수)
 **경과 시간** — T+0.0h
 
@@ -21,13 +21,15 @@ Phase 0 — repository audit
 ## 현재 blocker
 
 ```
-없음
+LLM_API_KEY 미설정. 본선 전 또는 Phase 0에서 확정한 LLM/Embedding/STT 모델의 실제 호출을 확인한다.
 ```
 
 ## 마지막으로 검증한 명령
 
 ```
 python scripts/validate_datasets.py   → 전체 이슈 0건 (본선 전 확인 완료)
+python -m compileall scripts          → 성공
+python scripts/build_release_zip.py  → 생성 및 제외 규칙 검증 성공
 ```
 
 ---
@@ -54,11 +56,11 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 - [ ] 빌드·환경 파일 확인
 - [ ] 이 파일의 Phase 표를 실제 상태로 갱신
 
-## Phase 1 — 뼈대  `TODO`  (1.0h / 누적 1.5h)
-- [ ] mobile · admin-web 프로젝트 생성 및 실행 확인
+## Phase 1 — Server Runtime  `TODO`  (1.0h / 누적 1.5h)
 - [ ] backend `/health` 200
 - [ ] ai-service `/health` 200
 - [ ] MariaDB 연결 성공
+- [ ] backend → ai-service `/health` 호출 성공
 - [ ] **`CLAUDE.md`의 "명령" 절에 실제 빌드·실행 명령 추가**
 - [ ] 커밋
 
@@ -97,7 +99,8 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 - [ ] 경로 후보 0개면 `404 NO_ROUTE_AVAILABLE` (기본 경로로 대체하지 않음)
 - [ ] **같은 배송 건을 차량만 바꿔 다시 시작할 수 있다 (`05B §4-3`)**
 - [ ] 같은 지식이 연속 두 단계에 중복 노출되지 않음
-- [ ] 모든 단계에 카드 최소 1장
+- [ ] Demo fixture B의 시연 단계마다 예상 Knowledge가 1개 이상 노출
+- [ ] 일반 Guidance는 relevant Knowledge가 없으면 카드 0개 허용
 - [ ] `contextTime=12:30` → `K_B_014` 노출 / `15:00` → 사라짐
 - [ ] `complete` 동작
 - [ ] 커밋
@@ -121,7 +124,8 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 
 ## Phase 7 — 검수 + 발행  `TODO`  (1.5h / 누적 11.5h)  ★ 핵심 완성 지점
 - [ ] 검수 화면 (원문 / AI 결과 / 근거 구절 나란히)
-- [ ] 승인 → PUBLISHED → 임베딩 (동기, 한 트랜잭션)
+- [ ] 승인 요청 중 `/embed` 동기 호출은 DB 트랜잭션 밖에서 수행
+- [ ] 임베딩 성공 후 PUBLISHED·Embedding·Review·Draft 상태를 한 DB 트랜잭션으로 저장
 - [ ] 실패 시 롤백 + 명시적 오류
 - [ ] 새 제보 승인 후 같은 경로 재시작 시 새 카드 노출
 - [ ] `isRecentlyAdded = true` 배지
@@ -149,7 +153,7 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 > API 계약(`05B`)이 이미 확정돼 있어 **서버가 안 끝나도 Mock으로 만들 수 있다.**
 > 디자인 시안 — [Figma](https://www.figma.com/design/4girj3oH3g2JxyIM5erfUC/Untitled?node-id=0-1)
 
-## M — 기사 앱 (Flutter)  `TODO`
+## M — 기사 모바일 웹 (React)  `TODO`
 
 ```
 합류 지점   T+1.5h  Phase 1 완료 후 Mock 으로 시작
@@ -157,7 +161,7 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 ```
 
 ### M1 — 프로젝트 뼈대  `TODO`
-- [ ] `flutter create` + 실행 확인 (에뮬레이터 또는 실기기)
+- [ ] React 18 + TypeScript + Vite 프로젝트 생성 및 실행 확인
 - [ ] API 클라이언트 · 모델 클래스 (`05B` 계약 그대로)
 - [ ] Mock 응답으로 화면 전환 동작
 
@@ -189,7 +193,8 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
            Phase 7 완료 후 실제 승인 연결
 ```
 
-### W1 — 검수 대기 목록  `TODO`
+### W1 — Admin Runtime · 검수 대기 목록  `TODO`
+- [ ] React 18 + TypeScript + Vite 프로젝트 생성 및 실행 확인
 - [ ] 초안 목록 표시
 
 ### W2 — 검수 상세  `TODO`  ★ 신뢰성의 근거
@@ -239,3 +244,12 @@ T+10.0h  W2 미완  →  검수를 API 직접 호출로 대체하고 화면은 �
 ```
 
 <!-- 여기부터 기록 -->
+
+## 본선 전 정비 — 2026-08-13
+변경   폐기 문서 격리, React 프론트 통일, Phase 책임 경계·승인 트랜잭션·카드 규칙 정정,
+       AI 모델 확정, validator 경로/Route 연속성 보강, 안전한 전달 ZIP 스크립트 추가
+검증   `python scripts/validate_datasets.py` → 4개 데이터셋 전체 이슈 0건
+       `python -m compileall scripts` → 성공
+       `python scripts/build_release_zip.py` → 금지 파일 제외 검증 성공
+남은것 LLM API 키 발급 및 세 모델 실제 호출 확인
+다음   본선 당일 Phase 0 repository audit부터 시작

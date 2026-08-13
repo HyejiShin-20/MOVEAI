@@ -79,28 +79,7 @@ Spring Initializr에서 빈 프로젝트를 받아 한 번 빌드하면 배포�
 - [ ] JDK 17 이상 설치 확인 (`java -version`)
 - [ ] 빈 Spring Boot 프로젝트 빌드 1회 성공
 
-## Flutter — ★ 가장 오래 걸린다  (기사 앱 담당만)
-
-설치 방법과 경로 선택은 `SETUP.md §4`. **웹 경로(A)로 시작하면 설치가 몇 배 빠르다.**
-
-```bash
-flutter --version
-```
-
-```bash
-flutter devices
-```
-
-- [ ] Flutter 3.24+ 설치 (`flutter --version`)
-- [ ] **경로 결정** — A(웹, 권장) / B(Android 포함)
-- [ ] `flutter devices` 에 실행 대상이 보임 (A면 Chrome, B면 에뮬레이터)
-- [ ] `flutter create` + 실행 1회 성공 (pub·Gradle 캐시 채우기)
-- [ ] **마이크 녹음 확인** — A는 브라우저 권한, B는 에뮬레이터 마이크 설정
-- [ ] 화면 녹화 방식 결정 → `mobile/README.md`
-
-> B로 갈 경우 Android SDK·에뮬레이터 이미지가 수 GB다. **반드시 본선 전에 받는다.**
-
-## Node (관리자 검수 화면)
+## Node (기사 모바일 웹 · 관리자 검수 웹)
 
 ```bash
 npm create vite@latest _warmup -- --template react-ts
@@ -112,6 +91,9 @@ cd _warmup && npm install
 
 - [ ] Node 20 이상 (`node -v`)
 - [ ] `npm install` 1회 성공 (캐시 채우기)
+- [ ] `mobile/`, `admin-web/` 두 React 앱의 `npm run dev` 실행 확인
+- [ ] `mobile/`에서 브라우저 마이크 권한·녹음 확인
+- [ ] 360px 모바일 뷰포트에서 S3 화면 확인
 - [ ] `_warmup` 폴더는 지워도 됨
 
 ---
@@ -120,10 +102,9 @@ cd _warmup && npm install
 
 ## STT
 
-**미리 정해야 한다.** 당일 처음 돌렸는데 "2.5톤 택시"로 나오면 대안을 찾을 시간이 없다.
+**확정: `gpt-4o-mini-transcribe`.** 당일 처음 돌렸는데 "2.5톤 택시"로 나오면 대안을 찾을 시간이 없다.
 
-- [ ] 로컬(Whisper)인지 API인지 결정
-- [ ] 로컬이면 **가중치 파일 미리 다운로드** (수 GB)
+- [x] OpenAI Transcription API 방식과 모델 결정
 - [ ] `datasets/`의 음성 후보 중 **3건 이상 실제로 녹음해서 돌려봄**
 - [ ] 한국어 구어체 인식 확인 — "빡빡해요", "탑차", "1.5톤", "방화문"
 - [ ] 숫자가 제대로 나오는지 확인 (톤수·시간이 틀리면 추출이 전부 틀어진다)
@@ -132,17 +113,20 @@ cd _warmup && npm install
 
 ## 임베딩
 
-모델을 바꾸면 저장된 벡터를 전부 다시 만들어야 한다. **당일 변경은 사실상 불가능하다.**
+**확정: `text-embedding-3-small`, 1536차원.** 모델을 바꾸면 저장된 벡터를 전부
+다시 만들어야 한다. **당일 변경은 사실상 불가능하다.**
 
-- [ ] 모델 결정
-- [ ] **차원 수 확인** → `05A §2-3`의 `embedding_dimension`
+- [x] 모델과 차원 수 결정 → `05A §2-3`의 `embedding_dimension`에 함께 저장
 - [ ] 한국어 문장 2개로 유사도 계산해 보기 (비슷한 문장이 실제로 가까운지)
 - [ ] 146건 임베딩 비용·소요 시간 대략 확인
 
 ## LLM (지식 추출)
 
-- [ ] 모델 결정
-- [ ] JSON 스키마 강제 출력이 되는지 확인
+**확정: `gpt-4o-mini`.** 현재 Python SDK와 호환되고 Structured Outputs를 지원하는
+저비용 모델을 사용한다.
+
+- [x] 모델 결정
+- [x] Structured Outputs 지원 여부 공식 문서 확인
 - [ ] `datasets/`의 transcript 1건으로 추출 시험 → `expected_knowledge_items`와 비교
 
 ---

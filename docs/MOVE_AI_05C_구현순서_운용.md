@@ -16,7 +16,7 @@
 # 1. 시스템 구성과 책임 경계
 
 ```text
-   Flutter (기사 앱)     React (관리자 검수)
+ React (기사 모바일 웹)  React (관리자 검수 웹)
           │                     │
           └────── REST ─────────┘
                     ▼
@@ -33,8 +33,7 @@
 ```
 Java 17          Spring Boot 3.4.x   Gradle
 Python 3.12      FastAPI
-Flutter 3.24+    Dart 3.5+
-Node 20+         React 18 + TypeScript + Vite
+Node 20+         React 18 + TypeScript + Vite (화면 2개 공통)
 MariaDB 11.4+
 ```
 
@@ -111,7 +110,7 @@ Phase 번호보다 **"세로로 한 줄이 실제로 동작하는가"**가 우�
 > ### ⚠ 아래 표는 **백엔드·AI 전용 일정**이다
 >
 > 12시간이 전부 서버 작업으로 차 있다. **화면 작업은 이 표에 포함되지 않았다.**
-> `mobile`(Flutter 4화면)과 `admin-web`(React 2화면)은 **별도 인력이 병렬로** 진행해야 한다.
+> `mobile`(React 4화면)과 `admin-web`(React 2화면)은 **별도 인력이 병렬로** 진행해야 한다.
 >
 > | 인원 | 성립 여부 |
 > |---|---|
@@ -125,7 +124,7 @@ Phase 번호보다 **"세로로 한 줄이 실제로 동작하는가"**가 우�
 | Phase | 내용 | 소요 | 누적 | 못 지키면 |
 |---|---|---:|---:|---|
 | 0 | 상황 파악 | 0.5h | 0.5h | — |
-| 1 | 뼈대 (4개 기동) | 1.0h | 1.5h | 환경 문제. 즉시 팀 전체 투입 |
+| 1 | Server Runtime | 1.0h | 1.5h | 환경 문제. 즉시 서버 담당 투입 |
 | **2a** | **DDL + 임포트** | 1.5h | 3.0h | 장소 B만 임포트로 축소 |
 | **2b** | **조회 API** | 1.0h | 4.0h | — |
 | 3 | 임베딩 + 검색 | 2.0h | 6.0h | **P1·지도 즉시 폐기** |
@@ -156,9 +155,11 @@ repository tree, git status, 빌드 파일, 기존 코드 확인.
 `IMPLEMENTATION_STATUS.md`의 Phase 표를 실제 상태와 대조해 갱신한다.
 **바로 대규모 리팩터링 하지 않는다.**
 
-## Phase 1 — 뼈대  `1.0h`
+## Phase 1 — Server Runtime  `1.0h`
 
-프론트·백엔드·AI 서비스·DB가 전부 뜨는 상태. 핵심 로직은 없어도 된다.
+`backend /health`, `ai-service /health`, MariaDB 연결, backend → ai-service 호출이 되는 상태.
+핵심 로직은 없어도 된다. `mobile`과 `admin-web` 실행은 화면 트랙의 M1/W1에서 확인하며
+서버 Phase 1의 완료를 막지 않는다.
 **끝나면 `CLAUDE.md`의 "명령" 절에 실제 빌드·실행 명령을 추가한다.**
 
 ## Phase 2a — DDL + 임포트  `1.5h`
@@ -280,8 +281,11 @@ Phase 4·7 완료 조건을 그대로 스크립트로 만들어 둔다. 당일 �
 ```text
 DB_HOST / DB_PORT / DB_NAME / DB_USER / DB_PASSWORD
 AI_SERVICE_URL          http://localhost:8000
-LLM_API_KEY / LLM_MODEL
-EMBEDDING_MODEL
+LLM_API_KEY
+LLM_MODEL              gpt-4o-mini
+EMBEDDING_MODEL        text-embedding-3-small
+EMBEDDING_DIMENSION    1536
+STT_MODEL              gpt-4o-mini-transcribe
 AUDIO_STORAGE_PATH      ./data/audio
 SPRING_PROFILES_ACTIVE  local | demo
 ```

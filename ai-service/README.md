@@ -14,6 +14,10 @@ POST /extract-knowledge   → { items: [...] }   Pydantic 강제
 POST /embed               { texts: [...] } → { model, dimension, vectors: [[...]] }
 ```
 
+확정 모델은 `.env.example` 기준으로 `gpt-4o-mini`(구조화 추출),
+`text-embedding-3-small`(1536차원), `gpt-4o-mini-transcribe`(STT)다.
+임베딩 모델이나 차원을 바꾸면 저장 벡터를 전부 재생성해야 한다.
+
 **`/similarity-search` 는 만들지 않는다.** 코사인 계산은 Spring에서 한다.
 `/embed` 는 배열을 받는다 — 시드 146건을 한 번에 처리해야 한다.
 

@@ -55,9 +55,9 @@ dataset/MOVE-AI_팀원용_가상데이터_제작_가이드.md     작성 가이�
 | `MOVE_AI_기능구현_원리_PPT준비_안내.pdf` | 위 문서의 초기 PDF본 |
 | `MOVE_AI_팀원용_기능흐름_AI원리_상세설명.md` | 전 팀원용 AI 원리 설명 |
 | `dataset/` | 데이터 작성 가이드 및 이력 |
-| `MOVE_AI_HACKATHON_READY_PACKAGE/` | 01~03 원본 패키지 |
+| `archive/` | 폐기된 초안. 구현 판단에 사용하지 않음 |
 
-화면 설계는 각 앱의 README에 있다 — `mobile/README.md`(Flutter 기사 앱), `admin-web/README.md`(관리자 검수).
+화면 설계는 각 앱의 README에 있다 — `mobile/README.md`(React 기사 모바일 웹), `admin-web/README.md`(React 관리자 검수).
 
 ---
 

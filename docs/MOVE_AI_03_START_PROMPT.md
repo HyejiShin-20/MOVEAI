@@ -1,8 +1,8 @@
 # 본선 당일 하네스 시작 프롬프트
 
 > 이 문서의 `▼ 여기부터 복사 ▼` 아래를 본선 당일 새 세션 첫 입력에 그대로 붙여넣는다.
-> 원본 초안은 `MOVE_AI_HACKATHON_READY_PACKAGE/MOVE_AI_03_HACKATHON_DAY_START_PROMPT.md`이며,
-> 04·05 문서와 프로젝트 구조가 생긴 뒤 이 파일로 갱신되었다. **당일에는 이 파일을 쓴다.**
+> 폐기된 초안은 `archive/OLD_HACKATHON_DAY_START_PROMPT.md`에 격리돼 있다.
+> **당일에는 이 파일만 쓴다.**
 
 Claude Code를 쓴다면 `CLAUDE.md`가 자동으로 읽히므로 아래 프롬프트는 짧아도 된다.
 다른 하네스라면 전문을 그대로 넣는다.

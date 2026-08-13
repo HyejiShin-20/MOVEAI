@@ -14,12 +14,12 @@
 | 상황 | 읽을 문서 |
 |---|---|
 | 항상 (세션 시작) | `docs/IMPLEMENTATION_STATUS.md` |
-| 제품이 뭔지 헷갈릴 때 | `docs/MOVE_AI_HACKATHON_READY_PACKAGE/MOVE_AI_01_MVP_PRD.md` |
+| 제품이 뭔지 헷갈릴 때 | `docs/MOVE_AI_01_MVP_PRD.md` |
 | **DB 스키마 · 임포트** | `docs/MOVE_AI_05A_DB스키마_임포트.md` |
 | **API 계약 (Spring · Python)** | `docs/MOVE_AI_05B_API계약.md` |
 | **구현 순서 · 모듈 · 테스트 · 운용** | `docs/MOVE_AI_05C_구현순서_운용.md` |
 | **검색·안내 내부 로직** | `docs/MOVE_AI_04_RETRIEVAL_GUIDANCE_구현명세.md` |
-| 작업 규칙·범위 판단 | `docs/MOVE_AI_HACKATHON_READY_PACKAGE/MOVE_AI_02_HARNESS_ENGINEERING_PLAN.md` |
+| 작업 규칙·범위 판단 | `docs/MOVE_AI_02_HARNESS_ENGINEERING_PLAN.md` |
 | 시연 시나리오 | `docs/DEMO_SCRIPT.md` |
 | 역할 분담 | `docs/TEAM_ROLES.md` |
 
@@ -122,8 +122,8 @@ REMAINING       blocker / 다음 정확한 작업 하나
 ```
 backend/     Spring Boot   장소·경로·제보·검수·검색·안내
 ai-service/  FastAPI       STT · 지식 추출 · 임베딩
-mobile/      Flutter       기사 앱 (배송목록·안내·팁등록)
-admin-web/   React + Vite  관리자 검수 화면
+mobile/      React + Vite  기사 모바일 웹 (배송목록·안내·팁등록)
+admin-web/   React + Vite  관리자 검수 웹
 datasets/    합성 데이터 4종 (임포트 대상, 검증 완료)
 docs/        기획·구현 문서
 scripts/     검증·실행 스크립트
@@ -134,8 +134,7 @@ scripts/     검증·실행 스크립트
 ```
 Java 17        Spring Boot 3.4.x   Gradle
 Python 3.12    FastAPI
-Flutter 3.24+  Dart 3.5+
-Node 20+       React 18 + TypeScript + Vite
+Node 20+       React 18 + TypeScript + Vite (mobile · admin-web 공통)
 MariaDB 11.4+
 ```
 

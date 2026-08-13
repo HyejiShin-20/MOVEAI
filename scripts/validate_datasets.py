@@ -1,10 +1,20 @@
 # -*- coding: utf-8 -*-
-import json, io, sys, collections, re
+import collections
+import io
+import json
+import re
+import sys
+from pathlib import Path
+
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
 
-import os
-BASE = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'datasets')
-files = ['synthetic_dataset_A.json','synthetic_dataset_B.json','synthetic_dataset_C.json','synthetic_dataset_D.json']
+BASE = Path(__file__).resolve().parent.parent / 'datasets'
+files = [
+    'synthetic_dataset_A.json',
+    'synthetic_dataset_B.json',
+    'synthetic_dataset_C.json',
+    'synthetic_dataset_D.json',
+]
 
 def norm(s):
     """loose normalization for substring check"""
@@ -14,7 +24,8 @@ def norm(s):
 grand = collections.Counter()
 
 for fn in files:
-    d = json.load(open(BASE+'\\'+fn, encoding='utf-8'))
+    with (BASE / fn).open(encoding='utf-8') as dataset_file:
+        d = json.load(dataset_file)
     print('='*72)
     print(fn, '   [', d['dataset_meta'].get('dataset_version'), ']')
     print('='*72)
@@ -58,6 +69,49 @@ for fn in files:
         if r.get('place_code') != place_code:
             issues.append(('REF', f"report {r['report_code']}.place={r.get('place_code')} != {place_code}"))
         chk_node(r.get('selected_scope_node_code'), f"report {r['report_code']}.scope")
+
+    # --- route segment continuity
+    for route in routes:
+        route_code = route['route_code']
+        route_segs = [s for s in segs if s.get('route_code') == route_code]
+        if not route_segs:
+            issues.append(('ROUTE', f'{route_code}에 구간이 없음'))
+            continue
+
+        sequence_numbers = [s.get('sequence_no') for s in route_segs]
+        if any(not isinstance(sequence_no, int) for sequence_no in sequence_numbers):
+            issues.append(('ROUTE', f'{route_code}.sequence_no가 정수가 아님: {sequence_numbers}'))
+            continue
+
+        ordered = sorted(route_segs, key=lambda segment: segment['sequence_no'])
+        expected_sequence = list(range(1, len(ordered) + 1))
+        actual_sequence = [segment['sequence_no'] for segment in ordered]
+        if actual_sequence != expected_sequence:
+            issues.append((
+                'ROUTE',
+                f'{route_code}.sequence_no가 1..N 연속이 아님: {actual_sequence}',
+            ))
+
+        if ordered[0].get('from_node_code') != route.get('start_node_code'):
+            issues.append((
+                'ROUTE',
+                f"{route_code} 첫 구간.from={ordered[0].get('from_node_code')} "
+                f"!= route.start={route.get('start_node_code')}",
+            ))
+        if ordered[-1].get('to_node_code') != route.get('destination_node_code'):
+            issues.append((
+                'ROUTE',
+                f"{route_code} 마지막 구간.to={ordered[-1].get('to_node_code')} "
+                f"!= route.destination={route.get('destination_node_code')}",
+            ))
+
+        for previous, current in zip(ordered, ordered[1:]):
+            if previous.get('to_node_code') != current.get('from_node_code'):
+                issues.append((
+                    'ROUTE',
+                    f"{route_code} seq{previous['sequence_no']}.to={previous.get('to_node_code')} "
+                    f"!= seq{current['sequence_no']}.from={current.get('from_node_code')}",
+                ))
 
     # --- knowledge target refs
     for k in ks:

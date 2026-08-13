@@ -27,8 +27,8 @@ venv/
 
 # node
 node_modules/
-frontend/dist/
-frontend/build/
+dist/
+build/
 .vite/
 
 # ide

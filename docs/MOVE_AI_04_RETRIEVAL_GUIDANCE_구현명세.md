@@ -357,13 +357,17 @@ place당 후보 40개 이하다. 매 요청 DB 조회로 충분하다.
 
 ```text
 관리자 [승인] 클릭
-  → PUBLISHED 전환
-  → /embed 호출 (동기, 스피너 표시)
-  → knowledge_embeddings 저장
-  → 커밋
+  → Draft 확인·최종 payload 확정
+  → embedding_text 생성
+  → /embed 호출 (동기, 스피너 표시)        ← DB transaction 밖
+  → DB transaction 시작
+     PUBLISHED + embedding + review + APPROVED 저장
+  → 커밋 → 200
 ```
 
-비동기로 빼면 "승인 직후 RAG 재조회"에서 레이스가 생긴다. 관리자 1명이 버튼 1번 누르는 상황이므로 동기가 맞다. 실패 시 명시적 에러를 띄우고 재시도 버튼을 준다(조용히 넘어가지 않는다).
+비동기로 빼면 "승인 직후 RAG 재조회"에서 레이스가 생기므로 HTTP 요청 자체는 동기로 유지한다.
+다만 느리거나 timeout 가능한 외부 호출 중에는 DB 트랜잭션을 열지 않는다. `/embed` 실패 시 DB는
+그대로 두고 명시적 에러와 재시도 버튼을 제공한다. DB 저장 실패 시에는 저장 묶음 전체를 롤백한다.
 
 ---
 
@@ -453,7 +457,8 @@ B/C 나머지 정합성은 검증 통과했다 — 코드 중복 없음, 참조 
 
 ```text
 [ ] ROUTE_B_01 7단계에서 같은 지식이 연속 두 단계에 중복 노출되지 않는가
-[ ] 모든 단계에 최소 1개 카드가 뜨는가 (빈 단계 없음)
+[ ] Demo fixture B의 시연 단계마다 예상 Knowledge가 1개 이상 뜨는가
+[ ] 일반 Guidance에서 relevant Knowledge가 없을 때 cards=[]를 허용하는가
 [ ] K_B_001이 seq1에 뜨는가 (from_node 예외 규칙 동작)
 [ ] context_time=12:30 일 때 seq6에 K_B_014가 뜨는가
 [ ] context_time=15:00 일 때 K_B_014가 사라지는가

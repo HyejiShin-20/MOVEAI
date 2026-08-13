@@ -72,8 +72,8 @@ $ 나 > 는 치지 않는다.  프롬프트 표시일 뿐이다.
 |---|---|
 | **전원** | Git |
 | 백엔드 (R1) | + Java · Python · **DB(Docker 또는 MariaDB)** |
-| 기사 앱 (R2) | + Flutter |
-| 관리자 화면 (R3) | + Node.js |
+| 기사 모바일 웹 (R2) | + Node.js |
+| 관리자 검수 웹 (R3) | + Node.js |
 | 발표·기획 (R4) | Git만. 나머지는 안 깔아도 된다 |
 
 역할은 `TEAM_ROLES.md`에 있다.
@@ -132,18 +132,11 @@ winget install --id Docker.DockerDesktop -e
 > 설치가 끝나면 **PowerShell을 닫고 새로 연다.** 그래야 새 명령이 인식된다.
 > 패키지 이름을 못 찾는다고 나오면 `winget search git` 처럼 검색해 정확한 ID를 확인한다.
 
-## 사이트에서 직접 받아야 하는 것
-
-winget으로 깔 수 있는 경우도 있지만, **설치 과정에서 선택할 것이 많아
-직접 받는 편이 확실하다.**
+## 사이트에서 직접 받을 수 있는 것
 
 | 항목 | 주소 | 누가 | 비고 |
 |---|---|---|---|
-| **Flutter SDK** | [docs.flutter.dev](https://docs.flutter.dev/get-started/install) | 기사 앱 담당 | 압축 풀고 PATH 추가. **웹만 쓸 거면 Android Studio 불필요** |
-| Android Studio | [developer.android.com](https://developer.android.com/studio) | 기사 앱 담당 중 **경로 B만** | 수 GB. 웹 경로면 건너뛴다 |
 | MariaDB | [mariadb.org/download](https://mariadb.org/download/) | 백엔드 담당 중 **Docker 안 쓸 때만** | 11.4 선택 |
-
-Flutter는 설치 후 PATH 등록이 필요해서 안내를 그대로 따라야 한다. → `§4`
 
 
 # 1. 전원 공통
@@ -450,114 +443,7 @@ gradlew.bat build
 
 ---
 
-# 4. Flutter  (기사 앱 담당) ★ 가장 오래 걸린다
-
-**두 가지 경로가 있다. 먼저 경량 경로로 시작하는 것을 권한다.**
-
-| | 받는 것 | 대략 | 시연 방식 |
-|---|---|---|---|
-| **A. 경량 — 웹만** (권장) | Flutter SDK | 1GB대 | 브라우저 창을 폰 비율로 |
-| B. 전체 — Android 포함 | + Android Studio · SDK · 에뮬레이터 | 수 GB | 에뮬레이터 |
-
-**Dart 코드는 두 경로가 동일하다.** A로 만들어 두고 나중에 B를 추가해도
-앱 코드를 다시 쓸 필요가 없다.
-
-## 왜 A를 권하는가
-
-- 제출물이 **녹화 영상**이라 실기기가 필수가 아니다
-- 브라우저 녹화가 에뮬레이터 녹화보다 쉽고 화질이 좋다
-- **마이크가 브라우저 API로 잡힌다** — 에뮬레이터 마이크 문제를 통째로 우회한다
-- 설치가 몇 배 빠르다. 해커톤 하루에서 이건 큰 차이다
-
-실기기처럼 보여야 한다는 요구가 있으면 B로 간다.
-
----
-
-## 4-1. Flutter SDK 설치  (A·B 공통)
-
-[docs.flutter.dev/get-started](https://docs.flutter.dev/get-started/install)의 OS별 안내를 따른다.
-
-**경로 A로 갈 거면 Android Studio는 설치하지 않아도 된다.** 안내 중
-"Android setup" 부분을 건너뛰고 SDK 압축만 풀어 PATH에 추가하면 된다.
-
-```bash
-flutter --version
-```
-
-`3.24` 이상이면 된다.
-
-## 4-2. 경로 A — 웹으로 확인
-
-Chrome이 있으면 준비 끝이다.
-
-```bash
-flutter config --enable-web
-```
-
-```bash
-flutter devices
-```
-
-목록에 `Chrome` 이 보이면 된다.
-
-```bash
-flutter create _warmup
-```
-
-```bash
-cd _warmup
-```
-
-```bash
-flutter run -d chrome
-```
-
-브라우저에 앱이 뜨면 성공이다. **`_warmup` 폴더는 지워도 된다.**
-
-> `flutter doctor` 에서 Android 관련 항목에 `[!]` 가 떠도 **웹만 쓸 거면 무시해도 된다.**
-> Chrome 항목만 체크돼 있으면 충분하다.
-
-### 마이크 확인
-
-브라우저에서 마이크 권한을 물으면 허용하고, 녹음이 되는지 본다.
-`localhost` 는 보안 예외라 HTTPS 없이도 마이크가 동작한다.
-
-## 4-3. 경로 B — Android까지  (실기기·에뮬레이터가 필요할 때만)
-
-Android Studio를 함께 설치한다. 에뮬레이터와 안드로이드 SDK가 같이 깔린다.
-
-```bash
-flutter doctor
-```
-
-`[!]` 나 `[X]` 가 없어야 한다. 가장 흔한 문제는 라이선스 미동의다.
-
-```bash
-flutter doctor --android-licenses
-```
-
-`y` 를 여러 번 입력하면 된다.
-
-Android Studio → `Device Manager` → 가상 기기 생성 후 실행.
-
-```bash
-flutter run
-```
-
-에뮬레이터에 앱이 뜨면 성공이다.
-
-### ★ 에뮬레이터 마이크 확인
-
-경로 B로 갈 때만 해당한다. **기사 앱에서 음성 녹음을 해야 하는데
-에뮬레이터에서 마이크가 안 잡히면 시연 방식을 바꿔야 한다.**
-당일에 알면 대응할 시간이 없다.
-
-에뮬레이터 설정에서 마이크가 호스트(노트북) 마이크로 연결되는지 확인한다.
-안 되면 경로 A(웹)로 전환하는 것이 가장 빠른 해결책이다.
-
----
-
-# 5. Node.js  (관리자 화면 담당)
+# 4. Node.js  (기사 모바일 웹 · 관리자 검수 웹 담당)
 
 **Node 20 이상**이 필요하다.
 
@@ -583,9 +469,13 @@ npm install
 
 에러 없이 끝나면 된다. **`_warmup` 폴더는 지워도 된다.**
 
+실제 구현은 `mobile/`과 `admin-web/`에 각각 React 앱을 만들고 같은 Node 도구 체인을 쓴다.
+기사 앱 녹음은 브라우저 `MediaRecorder` API와 마이크 권한을 사용한다. `localhost`에서
+실제 녹음·재생을 확인하고, Chrome 개발자 도구의 360px 모바일 뷰포트로 S3 화면을 점검한다.
+
 ---
 
-# 6. 환경 변수 파일
+# 5. 환경 변수 파일
 
 API 키 같은 값을 담는 파일이다. **`.env`는 절대 깃에 올리지 않는다.**
 
@@ -605,16 +495,17 @@ Copy-Item .env.example .env
 
 ```
 LLM_API_KEY=       ← 여기에 발급받은 키
-LLM_MODEL=
-EMBEDDING_MODEL=
-STT_MODEL=
+LLM_MODEL=gpt-4o-mini
+EMBEDDING_MODEL=text-embedding-3-small
+EMBEDDING_DIMENSION=1536
+STT_MODEL=gpt-4o-mini-transcribe
 ```
 
 키는 팀에서 공유받는다. **채팅에 그대로 붙여넣지 않는다.**
 
 ---
 
-# 7. 전체 확인
+# 6. 전체 확인
 
 설치가 끝나면 하나씩 쳐본다. **자기 역할에 해당하는 것만** 되면 된다.
 
@@ -637,10 +528,6 @@ java -version
 ```
 
 ```bash
-flutter devices          # Chrome 이 보이면 웹 개발 준비 완료
-```
-
-```bash
 node -v
 ```
 
@@ -654,7 +541,7 @@ python scripts/validate_datasets.py
 
 ---
 
-# 8. 자주 나는 오류
+# 7. 자주 나는 오류
 
 | 증상 | 원인과 해결 |
 |---|---|
@@ -666,14 +553,13 @@ python scripts/validate_datasets.py
 | `이 시스템에서 스크립트를 실행할 수 없습니다` | PowerShell 정책. `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned` |
 | `port is already allocated` / `TCP port in use` | 다른 DB가 3306을 쓰고 있다. **끄지 말고** 3307로 설치하고 `.env`의 `DB_PORT` 변경 (§1-B) |
 | 백엔드가 DB에 연결 못 함 | `.env`의 `DB_PORT`가 실제 설치 포트와 다르다 |
-| `flutter doctor`에 `[!]` | **웹만 쓸 거면 Android 항목은 무시해도 된다.** 라이선스 문제면 `flutter doctor --android-licenses` |
-| `flutter devices` 에 Chrome 이 없다 | `flutter config --enable-web` 실행 후 다시 확인 |
+| 브라우저에서 녹음이 안 됨 | `localhost`로 접속했는지 확인하고 주소창의 마이크 권한을 허용한다 |
 | 가상환경을 켰는데 패키지가 없다 | 터미널을 새로 열면 꺼진다. `conda activate moveai` 를 다시 친다 |
 | `.env` 를 만들었는데 안 읽힌다 | 파일명이 `.env.txt` 로 저장된 경우가 많다. 확장자 표시를 켜서 확인 |
 
 ---
 
-# 9. 다음 단계
+# 8. 다음 단계
 
 설치가 끝나면 `PREP_CHECKLIST.md` 로 넘어간다.
 거기에는 **AI 모델 결정, API 키 실제 호출 확인, 시연용 음성 녹음** 같은
