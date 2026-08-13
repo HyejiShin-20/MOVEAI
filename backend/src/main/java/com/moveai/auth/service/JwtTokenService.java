@@ -14,9 +14,12 @@ public class JwtTokenService {
     private final long accessTokenExpirationSeconds;
 
     public JwtTokenService(
-        @Value("${move-ai.security.jwt-secret:test-secret-key-12345}") String secret,
+        @Value("${move-ai.security.jwt-secret:MoveAiSuperSecureJwtSigningKey2026!@#}") String secret,
         @Value("${move-ai.security.access-token-expiration-seconds:3600}") long expirationSeconds
     ) {
+        if (secret == null || secret.trim().isEmpty()) {
+            secret = "MoveAiSuperSecureJwtSigningKey2026!@#";
+        }
         this.key = Keys.hmacShaKeyFor(secret.getBytes());
         this.accessTokenExpirationSeconds = expirationSeconds;
     }
@@ -36,7 +39,7 @@ public class JwtTokenService {
     }
 
     public String getUserIdFromToken(String token) {
-        Claims claims = Jwts.parserBuilder()
+        Claims claims = Jwts.parser()
             .setSigningKey(key)
             .build()
             .parseClaimsJws(token)
@@ -46,7 +49,7 @@ public class JwtTokenService {
 
     public boolean validateToken(String token) {
         try {
-            Jwts.parserBuilder()
+            Jwts.parser()
                 .setSigningKey(key)
                 .build()
                 .parseClaimsJws(token);

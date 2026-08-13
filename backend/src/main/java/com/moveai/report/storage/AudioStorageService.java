@@ -31,8 +31,6 @@ public class AudioStorageService {
         Path target = audioRoot.resolve(storedName).normalize();
         if (!target.startsWith(audioRoot)) throw new IllegalArgumentException("잘못된 파일 경로입니다.");
         file.transferTo(target);
-        return new StoredAudio(storedName, target.toString(), file.getContentType(), file.getSize());
+        return new StoredAudio(storedName, original, file.getSize(), file.getContentType());
     }
-
-    public record StoredAudio(String storedName, String absolutePath, String contentType, long size) {}
 }
