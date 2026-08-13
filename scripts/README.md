@@ -29,6 +29,18 @@ python scripts/build_release_zip.py
 
 ---
 
+## Phase 3에서 동작하는 명령
+
+```bash
+cd ai-service && python scripts/embed_dataset.py
+cd ../backend && ./gradlew bootRun --args="--import-embeddings"
+./gradlew bootRun --args="--evaluate-rag"
+```
+
+- `embed-seed`: Gemini `gemini-embedding-2`로 146건 × 1536차원 산출물 생성
+- `import-embeddings`: Spring 포맷 재생성 검증 후 `knowledge_embeddings` 원자 적재
+- `eval-rag`: 실제 `/embed` 질의 벡터로 Hit@3 / Hit@5 / must_not 위반 출력
+
 ## 구현하면서 추가할 것
 
 각 스택이 생기면 아래를 만든다. 지금 빈 껍데기를 만들어 두지 않는다.
@@ -37,8 +49,6 @@ python scripts/build_release_zip.py
 |---|---|
 | `dev-up` / `dev-down` | docker compose + 4개 앱 기동/종료 |
 | `import-datasets` | `datasets/` 4개 → MariaDB. **재실행 가능해야 한다** |
-| `embed-seed` | PUBLISHED 146건 임베딩 생성 → DB 저장 |
-| `eval-rag` | 정답 질문 20개로 Hit@3 / Hit@5 / must_not 위반 수 |
 | `smoke-test` | 시연 시나리오 1회 자동 실행 |
 
 `import-datasets`는 데모 중 초기화가 필요할 수 있으므로 **몇 번을 돌려도 같은 결과**가 나와야 한다.

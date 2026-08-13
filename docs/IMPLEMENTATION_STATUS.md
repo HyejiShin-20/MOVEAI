@@ -292,6 +292,20 @@ T+10.0h  W2 미완  →  검수를 API 직접 호출로 대체하고 화면은 �
 
 <!-- 여기부터 기록 -->
 
+## 본선 전 선행 — 2026-08-13  Phase 3 임베딩 + 검색
+변경   Python 산출물 검증·적재 서비스와 `--import-embeddings`, `/embed` Spring 클라이언트,
+       CandidateCollector·ConditionEvaluator·QueryTextBuilder·CosineCalculator·RankingService,
+       HybridSearchService(구조 4 + UNRESOLVED 1), `--evaluate-rag` 구현
+검증   `knowledge_embeddings` 146건 × 1536차원 실제 MariaDB 적재
+       Spring/Python embedding_text 146건 전부 동일
+       `--evaluate-rag` → Hit@3 20/20, Hit@5 20/20, Top-5 must_not 11건
+       `./gradlew test` → 25 tests, BUILD SUCCESSFUL
+결정   톤수·높이·시간·요일·movement는 임베딩 전에 hard filter하고,
+       코사인과 구조 가산점 계산은 Spring에서 수행한다. 별도 Vector DB와 Python 검색 API는 없다.
+남은것 Gold 질문에는 현재 세그먼트가 없어 Top-5 must_not 11건은 위치 구조로 제거할 수 없다.
+       실제 Guidance에서는 세그먼트·to_node 후보 제한이 먼저 적용된다.
+다음   Phase 4 — RouteSelector · GuidanceSession · 단계별 카드 조립
+
 ## 본선 전 선행 — 2026-08-13  Phase 2b 조회 API
 변경   JPA 엔티티 5개(Place · PlaceNode · Route · RouteSegment · DeliveryJob)와 리포지토리,
        PlaceService/RouteService/DeliveryJobService, 컨트롤러 3개,

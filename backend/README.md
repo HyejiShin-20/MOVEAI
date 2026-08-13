@@ -32,9 +32,9 @@ src/main/java/com/moveai/
    ├─ controller/ ├─ dto/ ├─ validation/ └─ service/
 ```
 
-대부분은 폴더 구조를 Git에 보존하기 위한 `package-info.java`만 있다. 엔티티·DTO·서비스
-클래스는 해당 Phase에서 API·DB 계약을 확인한 뒤 추가한다. Gemini STT 구현 자체는
-`ai-service/app/services/stt.py`에 있고, `ai/stt`는 이후 Spring HTTP 클라이언트가 들어갈 경계다.
+Phase 3까지 장소·경로·배송 조회와 임베딩 적재·하이브리드 검색 로직이 구현돼 있다.
+Gemini STT·추출·임베딩 생성 자체는 `ai-service`가 담당하며 Spring은 HTTP 클라이언트,
+조건 계산, 코사인 유사도와 랭킹을 담당한다.
 
 ## 실행 (Phase 1 완료)
 
@@ -43,6 +43,23 @@ src/main/java/com/moveai/
 ./gradlew bootRun    # http://localhost:8080
 curl http://localhost:8080/health
 ```
+
+## Phase 3 — 임베딩 적재와 평가
+
+Python에서 시드 벡터를 만든 뒤 Spring이 텍스트·모델·차원·지식 코드를 전건 검증해
+MariaDB에 적재한다. 두 명령은 저장소 루트 `.env`를 사용한다.
+
+```bash
+cd ../ai-service
+python scripts/embed_dataset.py
+
+cd ../backend
+./gradlew bootRun --args="--import-embeddings"
+./gradlew bootRun --args="--evaluate-rag"
+```
+
+`--evaluate-rag`는 ai-service `/embed`가 실행 중이어야 한다. 출력은 정답 질문 20개의
+Hit@3, Hit@5, Top-5 `must_not` 위반 수와 질문별 상위 코드를 포함한다.
 
 ```json
 { "status": "ok",
@@ -61,7 +78,8 @@ curl http://localhost:8080/health
 
 ## 주의
 
-- `retrieval` 4개 클래스는 **DB 없이 단위 테스트 가능한 순수 로직**으로 만든다.
+- `CandidateCollector`, `ConditionEvaluator`, `QueryTextBuilder`, `CosineCalculator`,
+  `RankingService`, `HybridSearchService`는 **DB 없이 단위 테스트 가능한 순수 로직**이다.
   당일 디버깅 속도가 여기서 갈린다.
 - AI 클라이언트는 인터페이스 뒤에 두고 `demo` 프로파일에서 mock으로 교체한다.
   단, mock 결과를 실제 AI 결과인 것처럼 발표하지 않는다.
