@@ -494,13 +494,16 @@ Copy-Item .env.example .env
 만들어진 `.env`를 메모장으로 열어 빈 항목을 채운다.
 
 ```
-LLM_API_KEY=       ← 여기에 발급받은 키
-LLM_MODEL=gpt-4o-mini
-EMBEDDING_MODEL=text-embedding-3-small
+GEMINI_API_KEY=       ← 여기에 발급받은 키
+LLM_MODEL=gemini-3.5-flash-lite
+LLM_THINKING_LEVEL=minimal
+EMBEDDING_MODEL=gemini-embedding-2
 EMBEDDING_DIMENSION=1536
-STT_MODEL=gpt-4o-mini-transcribe
+STT_MODEL=gemini-3.6-flash
+STT_MAX_FILE_BYTES=10485760
 ```
 
+앱은 `GOOGLE_API_KEY`가 시스템에 함께 설정돼 있어도 `GEMINI_API_KEY`를 우선한다.
 키는 팀에서 공유받는다. **채팅에 그대로 붙여넣지 않는다.**
 
 ---

@@ -4,7 +4,7 @@
 > Phase의 목적·시간 예산·축소 경로는 `MOVE_AI_05C_구현순서_운용.md §7`.
 > 하네스는 **세션 시작 시 이 파일을 먼저 읽고, 세션 종료 전 반드시 갱신**한다.
 
-**최종 갱신** — 2026-08-13 (본선 전 문서·validator 정비)
+**최종 갱신** — 2026-08-13 (Gemini STT API 구현·실호출 검증)
 **현재 Phase** — Phase 0 (미착수)
 **경과 시간** — T+0.0h
 
@@ -21,7 +21,7 @@ Phase 0 — repository audit
 ## 현재 blocker
 
 ```
-LLM_API_KEY 미설정. 본선 전 또는 Phase 0에서 확정한 LLM/Embedding/STT 모델의 실제 호출을 확인한다.
+STT는 `GEMINI_API_KEY`로 실호출 완료. LLM 지식 추출과 임베딩 API는 아직 구현·실호출 전이다.
 ```
 
 ## 마지막으로 검증한 명령
@@ -30,6 +30,8 @@ LLM_API_KEY 미설정. 본선 전 또는 Phase 0에서 확정한 LLM/Embedding/S
 python scripts/validate_datasets.py   → 전체 이슈 0건 (본선 전 확인 완료)
 python -m compileall scripts          → 성공
 python scripts/build_release_zip.py  → 생성 및 제외 규칙 검증 성공
+conda moveai: python -m pytest -q -p no:asyncio (ai-service) → 11 passed
+conda moveai: python scripts/smoke_stt.py → gemini-3.6-flash, M4A 1건 전사 성공
 ```
 
 ---
@@ -108,7 +110,9 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 
 > **T+8.0h 체크포인트.** 여기 못 왔으면 Phase 5~7 축소를 결정한다.
 
-## Phase 5 — 음성 제보  `TODO`  (1.0h / 누적 9.0h)
+## Phase 5 — 음성 제보  `PARTIAL`  (1.0h / 누적 9.0h)
+- [x] AI 서비스 `POST /stt` 구현 (Gemini, 업로드 검증·오류 매핑 포함)
+- [x] `datasets/voice` M4A 샘플 1건 Gemini 실호출 성공
 - [ ] 녹음 → 업로드 → STT
 - [ ] 기사 텍스트 수정 → 저장
 - [ ] 커밋

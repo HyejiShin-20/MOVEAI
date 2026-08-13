@@ -281,16 +281,19 @@ Phase 4·7 완료 조건을 그대로 스크립트로 만들어 둔다. 당일 �
 ```text
 DB_HOST / DB_PORT / DB_NAME / DB_USER / DB_PASSWORD
 AI_SERVICE_URL          http://localhost:8000
-LLM_API_KEY
-LLM_MODEL              gpt-4o-mini
-EMBEDDING_MODEL        text-embedding-3-small
+GEMINI_API_KEY
+LLM_MODEL              gemini-3.5-flash-lite
+LLM_THINKING_LEVEL     minimal
+EMBEDDING_MODEL        gemini-embedding-2
 EMBEDDING_DIMENSION    1536
-STT_MODEL              gpt-4o-mini-transcribe
+STT_MODEL              gemini-3.6-flash
+STT_MAX_FILE_BYTES     10485760
 AUDIO_STORAGE_PATH      ./data/audio
 SPRING_PROFILES_ACTIVE  local | demo
 ```
 
-`.env.example`만 커밋한다. **실제 키를 커밋하지 않는다.**
+`.env.example`만 커밋한다. **실제 키를 커밋하지 않는다.** 시스템에
+`GOOGLE_API_KEY`가 함께 있어도 애플리케이션은 `GEMINI_API_KEY`를 우선한다.
 
 ---
 

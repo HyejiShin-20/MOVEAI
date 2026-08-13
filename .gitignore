@@ -3,8 +3,12 @@
 *.pem
 *.key
 
-# data
+# generated/runtime data
 data/
+
+# datasets/*.json is synthetic test data and is intentionally versioned.
+# Raw voice recordings stay local unless consent and redistribution are confirmed.
+datasets/voice/
 *.wav
 *.mp3
 *.m4a
