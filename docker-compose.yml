@@ -1,22 +1,141 @@
-version: '3.8' 
- 
-services: 
-  backend: 
-    build: 
-      context: ./backend 
-      dockerfile: Dockerfile 
-    container_name: moveai-backend 
-    restart: always 
-    ports: 
-      - "3000:3000" 
-    env_file: 
-      - ./backend/.env 
- 
-  ai-service: 
-    build: 
-      context: ./ai-service 
-      dockerfile: Dockerfile 
-    container_name: moveai-ai 
-    restart: always 
-ports: - "8000:8000" 
-env_file: - ./ai-service/.env
+name: moveai
+
+services:
+  database:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: ${DB_NAME:-moveai}
+      MARIADB_USER: ${DB_USER:-moveai}
+      MARIADB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      MARIADB_RANDOM_ROOT_PASSWORD: "yes"
+    volumes:
+      - moveai-db:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  ai-service:
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:?GEMINI_API_KEY is required}
+      LLM_MODEL: ${LLM_MODEL:-gemini-3.5-flash-lite}
+      LLM_THINKING_LEVEL: ${LLM_THINKING_LEVEL:-minimal}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-gemini-embedding-2}
+      EMBEDDING_DIMENSION: ${EMBEDDING_DIMENSION:-1536}
+      EMBEDDING_BATCH_SIZE: ${EMBEDDING_BATCH_SIZE:-50}
+      STT_MODEL: ${STT_MODEL:-gemini-3.6-flash}
+      STT_MAX_FILE_BYTES: ${STT_MAX_FILE_BYTES:-10485760}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    depends_on:
+      database:
+        condition: service_healthy
+      ai-service:
+        condition: service_healthy
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-moveai}
+      DB_USER: ${DB_USER:-moveai}
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      AI_SERVICE_URL: http://ai-service:8000
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-gemini-embedding-2}
+      EMBEDDING_DIMENSION: ${EMBEDDING_DIMENSION:-1536}
+      EMBEDDING_ARTIFACT: /data/embeddings/knowledge_embeddings.json
+      AUDIO_STORAGE_PATH: /data/audio
+      DATASET_DIR: /datasets
+      CORS_ALLOWED_ORIGINS: ${CORS_ALLOWED_ORIGINS:-https://hyejishin-20.github.io}
+      SPRING_PROFILES_ACTIVE: ${SPRING_PROFILES_ACTIVE:-local}
+    volumes:
+      - ./datasets:/datasets:ro
+      - ./data:/data
+
+  caddy:
+    image: caddy:2.10-alpine
+    restart: unless-stopped
+    depends_on:
+      - backend
+    environment:
+      API_DOMAIN: ${API_DOMAIN:?API_DOMAIN is required}
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - caddy-data:/data
+      - caddy-config:/config
+
+  embedding-build:
+    profiles: ["init"]
+    build:
+      context: ./ai-service
+      dockerfile: Dockerfile
+    environment:
+      GEMINI_API_KEY: ${GEMINI_API_KEY:?GEMINI_API_KEY is required}
+      EMBEDDING_MODEL: ${EMBEDDING_MODEL:-gemini-embedding-2}
+      EMBEDDING_DIMENSION: ${EMBEDDING_DIMENSION:-1536}
+      EMBEDDING_BATCH_SIZE: ${EMBEDDING_BATCH_SIZE:-50}
+    command: ["python", "scripts/embed_dataset.py", "--out", "/data/embeddings/knowledge_embeddings.json"]
+    volumes:
+      - ./datasets:/datasets:ro
+      - ./data:/data
+
+  dataset-import:
+    profiles: ["init"]
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-moveai}
+      DB_USER: ${DB_USER:-moveai}
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      DATASET_DIR: /datasets
+      AI_SERVICE_URL: http://ai-service:8000
+    command: ["--import-datasets"]
+    volumes:
+      - ./datasets:/datasets:ro
+
+  embedding-import:
+    profiles: ["init"]
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    depends_on:
+      database:
+        condition: service_healthy
+    environment:
+      DB_HOST: database
+      DB_PORT: 3306
+      DB_NAME: ${DB_NAME:-moveai}
+      DB_USER: ${DB_USER:-moveai}
+      DB_PASSWORD: ${DB_PASSWORD:?DB_PASSWORD is required}
+      EMBEDDING_ARTIFACT: /data/embeddings/knowledge_embeddings.json
+      AI_SERVICE_URL: http://ai-service:8000
+    command: ["--import-embeddings"]
+    volumes:
+      - ./data:/data
+
+volumes:
+  moveai-db:
+  caddy-data:
+  caddy-config:

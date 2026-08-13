@@ -311,6 +311,35 @@ T+10.0h  W2 미완  →  검수를 API 직접 호출로 대체하고 화면은 �
 
 <!-- 여기부터 기록 -->
 
+## 본선 전 선행 — 2026-08-13  Windows 서버 배포 구성
+변경   기존 GitHub Pages 워크플로를 유지하고 Windows SSH 백엔드 배포 워크플로를 분리했다.
+       Spring·FastAPI·MariaDB·Caddy HTTPS Docker Compose, 최초 데이터·임베딩 적재 명령,
+       운영 환경변수와 배포 안내를 추가했다.
+검증   `docker compose config --quiet` 통과, FastAPI·Spring 운영 이미지 빌드 성공.
+       GitHub에 SERVER_HOST·SERVER_USER·SERVER_PASSWORD·SERVER_PORT 등록 확인.
+남은것 실제 서버 DNS·80/443 포트 개방, 서버 루트 `.env` 작성 후 Actions 1회 실행.
+차단   현재 Windows `sshd` 서비스가 중지되어 있고 공인 IP의 TCP 22 연결도 실패한다.
+       원격 배포 전 OpenSSH 시작·자동 시작과 공유기 22 포트포워딩을 명시적으로 승인·설정해야 한다.
+이관   `docs/DEPLOYMENT_HANDOFF.md`에 승인 필요 작업, Secrets 확인, 커밋·push,
+       최초 데이터 적재와 최종 기능 확인 명령을 순서대로 기록했다.
+
+## 본선 전 선행 — 2026-08-13  운영 Docker 스택 기동
+변경   운영 `.env`에 API 도메인·Pages CORS를 반영하고 MariaDB·FastAPI·Spring·Caddy를
+       Docker Compose로 기동했다. 새 운영 DB에 데이터셋과 기존 Gemini 임베딩을 적재했다.
+검증   database·ai-service healthy, 지식 146건·배송 5건·임베딩 146건 적재 성공.
+       Docker 내부 `/health` status=ok(DB up·Gemini ok), 배송 API 200, Pages CORS 200.
+차단   배포 대상은 현재 PC가 아닌 팀원의 원격 Windows PC다. 원격 PC에서 TCP 80·443
+       방화벽 허용과 공유기 포트포워딩이 필요하다. SSH 22번은 개방 완료로 전달받았다.
+다음   원격 PC 80·443 개방 후 인증서 발급 확인 → 사용자가 commit/push →
+       GitHub Actions SSH 배포와 Pages 실제 API 연동 확인.
+추가   로컬 Compose smoke에서 health=ok, DB=up, AI=ok, 배송 5건, Pages CORS 200을
+       재확인했다. 잘못 로컬에 적용한 운영 컨테이너와 방화벽 규칙은 제거했고 볼륨만 보존했다.
+원격   `home@121.166.129.218:22` 실제 SSH 인증 성공. 원격 `C:\MOVEAI`에 main 5081570을
+       clone했다. Docker Desktop Linux 엔진 29.6.2·Compose 5.3.1 실행을 확인했다.
+       SSH 세션의 credential helper 실패를 배포 전용 Docker 설정으로 우회하고 공개 이미지
+       pull, Compose config, FastAPI·Spring 운영 이미지 실제 빌드까지 성공했다.
+다음   공개 `/health` 확인 후 `VITE_API_BASE_URL`을 API HTTPS 주소로 설정해 Pages 재배포.
+
 ## 본선 전 선행 — 2026-08-13  main 병합·배포 점검
 변경   main의 로그인·회원가입·관리자 셸·관리 화면·라우팅을 기준으로 충돌을 해결하고,
        실제 배송 목록·안내 세션·장소 선택·제보 추출·관리자 검수 API 연결을 다시 결합했다.

@@ -1,0 +1,12 @@
+.git
+.github
+.env
+**/.env
+**/.gradle
+**/build
+**/node_modules
+**/__pycache__
+**/.pytest_cache
+tmp
+dist
+*.log
