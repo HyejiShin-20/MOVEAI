@@ -1,17 +1,12 @@
 import base64
 import logging
-import os
-import threading
 from typing import Any
 
-from google import genai
-
 from app.errors import SttProviderError
+from app.services.gemini import create_gemini_client
 
 
 logger = logging.getLogger(__name__)
-_CLIENT_ENV_LOCK = threading.Lock()
-
 TRANSCRIPTION_PROMPT = """
 다음 오디오의 한국어 음성을 정확히 전사하라.
 
@@ -27,7 +22,7 @@ TRANSCRIPTION_PROMPT = """
 class GeminiSttService:
     def __init__(self, *, api_key: str, model: str, client: Any | None = None) -> None:
         self.model = model
-        self._client = client or _create_gemini_client(api_key)
+        self._client = client or create_gemini_client(api_key)
 
     def transcribe(self, *, audio_bytes: bytes, mime_type: str) -> str:
         encoded_audio = base64.b64encode(audio_bytes).decode("ascii")
@@ -59,19 +54,3 @@ class GeminiSttService:
             raise SttProviderError()
 
         return transcript
-
-
-def _create_gemini_client(api_key: str) -> Any:
-    """Build a client from GEMINI_API_KEY even if GOOGLE_API_KEY exists globally.
-
-    google-genai resolves both environment variables while constructing a client and
-    logs that GOOGLE_API_KEY wins. The application passes the selected Gemini key
-    explicitly; temporarily hiding the unrelated variable also prevents ambiguity.
-    """
-    with _CLIENT_ENV_LOCK:
-        google_api_key = os.environ.pop("GOOGLE_API_KEY", None)
-        try:
-            return genai.Client(api_key=api_key)
-        finally:
-            if google_api_key is not None:
-                os.environ["GOOGLE_API_KEY"] = google_api_key

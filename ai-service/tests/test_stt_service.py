@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import pytest
 
 from app.errors import SttProviderError
-from app.services import stt
+from app.services import gemini
 from app.services.stt import GeminiSttService
 
 
@@ -71,9 +71,9 @@ def test_client_creation_prioritizes_explicit_gemini_key(monkeypatch) -> None:
         return object()
 
     monkeypatch.setenv("GOOGLE_API_KEY", "must-not-be-used")
-    monkeypatch.setattr(stt.genai, "Client", fake_client)
+    monkeypatch.setattr(gemini.genai, "Client", fake_client)
 
-    client = stt._create_gemini_client("selected-gemini-key")
+    client = gemini.create_gemini_client("selected-gemini-key")
 
     assert client is not None
     assert captured == {

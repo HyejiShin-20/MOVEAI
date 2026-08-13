@@ -1,0 +1,67 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.4.1'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com.moveai'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    // 이 기기에는 JDK 21만 있다. 산출물은 문서상 스택(Java 17)에 맞춰 둔다.
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
+    runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+/**
+ * 저장소 루트의 .env 를 읽어 실행 환경에 넣는다.
+ *
+ * SETUP.md §1-B가 "DB_PORT만 바꾸면 백엔드가 그 포트로 붙는다"를 전제하고 있고,
+ * 05C §9도 .env 를 설정의 단일 출처로 둔다. Spring Boot는 .env 를 스스로 읽지 않으므로
+ * 여기서 채워 준다. 이미 셸에 있는 환경변수가 있으면 그쪽을 우선한다.
+ */
+static Map<String, String> readDotenv(File file) {
+    if (!file.exists()) {
+        return [:]
+    }
+    Map<String, String> values = [:]
+    file.eachLine('UTF-8') { line ->
+        String trimmed = line.trim()
+        if (trimmed.isEmpty() || trimmed.startsWith('#') || !trimmed.contains('=')) {
+            return
+        }
+        int separator = trimmed.indexOf('=')
+        String key = trimmed.substring(0, separator).trim()
+        String value = trimmed.substring(separator + 1).trim()
+        if (!key.isEmpty() && !value.isEmpty()) {
+            values[key] = value
+        }
+    }
+    return values
+}
+
+tasks.named('bootRun') {
+    readDotenv(rootProject.file('../.env')).each { key, value ->
+        if (System.getenv(key) == null) {
+            environment key, value
+        }
+    }
+}

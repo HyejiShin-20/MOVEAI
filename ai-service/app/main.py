@@ -10,10 +10,21 @@ from app.config import Settings, get_settings
 from app.errors import (
     AppError,
     AudioTooLargeError,
+    EmbeddingConfigurationError,
+    ExtractionConfigurationError,
     InvalidAudioError,
     SttConfigurationError,
 )
-from app.schemas import HealthResponse, SttResponse
+from app.schemas import (
+    EmbedRequest,
+    EmbedResponse,
+    HealthResponse,
+    KnowledgeExtractionRequest,
+    KnowledgeExtractionResponse,
+    SttResponse,
+)
+from app.services.embedding import GeminiEmbeddingService
+from app.services.extraction import KnowledgeExtractionService
 from app.services.stt import GeminiSttService
 
 
@@ -63,11 +74,19 @@ def create_app(
     settings: Settings | None = None,
     stt_service: Any | None = None,
     service_factory: Callable[[Settings], Any] | None = None,
+    extraction_service: Any | None = None,
+    extraction_service_factory: Callable[[Settings], Any] | None = None,
+    embedding_service: Any | None = None,
+    embedding_service_factory: Callable[[Settings], Any] | None = None,
 ) -> FastAPI:
     app = FastAPI(title="MOVE-AI AI Service", version="0.1.0")
     app.state.settings = settings or get_settings()
     app.state.stt_service = stt_service
     app.state.service_factory = service_factory or _create_stt_service
+    app.state.extraction_service = extraction_service
+    app.state.extraction_service_factory = extraction_service_factory or _create_extraction_service
+    app.state.embedding_service = embedding_service
+    app.state.embedding_service_factory = embedding_service_factory or _create_embedding_service
 
     @app.exception_handler(AppError)
     async def handle_app_error(_request: Request, exc: AppError) -> JSONResponse:
@@ -105,6 +124,24 @@ def create_app(
         duration_ms = round((time.perf_counter() - started_at) * 1000)
         return SttResponse(text=transcript, durationMs=duration_ms)
 
+    @app.post("/extract-knowledge", response_model=KnowledgeExtractionResponse)
+    async def extract_knowledge(
+        request: Request,
+        payload: KnowledgeExtractionRequest,
+    ) -> KnowledgeExtractionResponse:
+        service = _get_extraction_service(request.app)
+        return await to_thread.run_sync(lambda: service.extract(payload))
+
+    @app.post("/embed", response_model=EmbedResponse)
+    async def embed_texts(request: Request, payload: EmbedRequest) -> EmbedResponse:
+        service = _get_embedding_service(request.app)
+        vectors = await to_thread.run_sync(lambda: service.embed(payload.texts))
+        return EmbedResponse(
+            model=service.model,
+            dimension=service.dimension,
+            vectors=vectors,
+        )
+
     return app
 
 
@@ -121,6 +158,45 @@ def _get_stt_service(app: FastAPI) -> Any:
     if app.state.stt_service is None:
         app.state.stt_service = app.state.service_factory(app.state.settings)
     return app.state.stt_service
+
+
+def _create_extraction_service(settings: Settings) -> KnowledgeExtractionService:
+    if settings.gemini_api_key is None:
+        raise ExtractionConfigurationError()
+    api_key = settings.gemini_api_key.get_secret_value().strip()
+    if not api_key:
+        raise ExtractionConfigurationError()
+    return KnowledgeExtractionService(
+        api_key=api_key,
+        model=settings.llm_model,
+        thinking_level=settings.llm_thinking_level,
+    )
+
+
+def _get_extraction_service(app: FastAPI) -> Any:
+    if app.state.extraction_service is None:
+        app.state.extraction_service = app.state.extraction_service_factory(app.state.settings)
+    return app.state.extraction_service
+
+
+def _create_embedding_service(settings: Settings) -> GeminiEmbeddingService:
+    if settings.gemini_api_key is None:
+        raise EmbeddingConfigurationError()
+    api_key = settings.gemini_api_key.get_secret_value().strip()
+    if not api_key:
+        raise EmbeddingConfigurationError()
+    return GeminiEmbeddingService(
+        api_key=api_key,
+        model=settings.embedding_model,
+        dimension=settings.embedding_dimension,
+        batch_size=settings.embedding_batch_size,
+    )
+
+
+def _get_embedding_service(app: FastAPI) -> Any:
+    if app.state.embedding_service is None:
+        app.state.embedding_service = app.state.embedding_service_factory(app.state.settings)
+    return app.state.embedding_service
 
 
 app = create_app()
