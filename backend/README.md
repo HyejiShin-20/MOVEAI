@@ -39,6 +39,37 @@ src/main/java/com/moveai/
 ```
 
 ## Dataset API
+## 현재 패키지 구조 (05C §6)
+
+```
+src/main/java/com/moveai/
+├─ common/
+├─ place/
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ route/
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ job/
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ report/
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ knowledge/
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ ├─ dto/ └─ embedding/
+├─ moderation/
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ retrieval/
+├─ guidance/
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ ai/
+│  ├─ stt/ ├─ extraction/ └─ embedding/
+└─ dataset/
+   ├─ controller/ ├─ dto/ ├─ validation/ └─ service/
+```
+
+현재는 폴더 구조를 Git에 보존하기 위한 `package-info.java`만 있다. 엔티티·DTO·서비스
+클래스는 해당 Phase에서 API·DB 계약을 확인한 뒤 추가한다. Gemini STT 구현 자체는
+`ai-service/app/services/stt.py`에 있고, `ai/stt`는 이후 Spring HTTP 클라이언트가 들어갈 경계다.
+
+## 주의
 
 ```text
 POST /api/admin/datasets/validate

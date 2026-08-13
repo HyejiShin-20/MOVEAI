@@ -1,0 +1,304 @@
+<!DOCTYPE html><html lang="ko" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"surface-tint":"#005bc0","tertiary":"#755700","on-secondary-fixed":"#131c26","on-error-container":"#93000a","on-primary-container":"#fefcff","on-tertiary-fixed":"#261a00","tertiary-fixed-dim":"#fabd00","surface-container":"#edeeef","surface-container-low":"#f3f4f5","surface-dim":"#d9dadb","on-background":"#191c1d","on-surface-variant":"#414754","on-tertiary-container":"#fffbff","on-secondary":"#ffffff","on-primary-fixed":"#001a41","inverse-surface":"#2e3132","on-secondary-fixed-variant":"#3f4853","primary-fixed-dim":"#adc7ff","secondary":"#565f6b","inverse-on-surface":"#f0f1f2","on-tertiary":"#ffffff","error":"#ba1a1a","background":"#f8f9fa","on-error":"#ffffff","surface":"#f8f9fa","tertiary-fixed":"#ffdf9e","inverse-primary":"#adc7ff","outline-variant":"#c1c6d7","secondary-fixed-dim":"#bec7d5","tertiary-container":"#946f00","on-surface":"#191c1d","on-tertiary-fixed-variant":"#5b4300","secondary-fixed":"#dae3f1","primary":"#0059bb","outline":"#717786","on-secondary-container":"#5c6571","secondary-container":"#dae3f1","surface-variant":"#e1e3e4","surface-container-highest":"#e1e3e4","on-primary":"#ffffff","error-container":"#ffdad6","on-primary-fixed-variant":"#004493","surface-bright":"#f8f9fa","surface-container-lowest":"#ffffff","primary-fixed":"#d8e2ff","surface-container-high":"#e7e8e9","primary-container":"#0070ea"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"container-margin":"24px","sidebar-width":"260px","gutter-md":"16px","table-row-height":"56px","header-height":"72px"},"fontFamily":{"body-md":["Inter"],"headline-md":["Inter"],"display-lg":["Inter"],"headline-sm":["Inter"],"label-md":["Inter"],"body-lg":["Inter"],"headline-md-mobile":["Inter"],"label-sm":["Inter"]},"fontSize":{"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"700"}],"display-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}],"headline-md-mobile":["20px",{"lineHeight":"28px","fontWeight":"700"}],"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}]}}}}</script><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"></head><body class="bg-background font-body-md text-on-background"><aside class="fixed left-0 top-0 h-full w-sidebar-width bg-surface-container-lowest z-50 flex flex-col shadow-[1px_0_0_0_rgba(0,0,0,0.05)]"><div class="p-container-margin mb-6"><div class="text-primary font-display-lg text-display-lg tracking-tighter">Logistics Pro<div class="">Admin</div></div><div class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-widest">Operations Control</div></div><nav class="flex-1 px-4 space-y-1" data-active-classes="bg-secondary-container text-primary font-bold"><a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant font-body-md hover:bg-surface-container hover:text-on-surface transition-all" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3">grid_view</span>대시보드</a><a aria-current="page" class="flex items-center px-4 py-3 rounded-lg transition-all bg-secondary-container text-primary font-bold" data-path="inspection-queue" href="#"><span class="material-symbols-outlined mr-3">fact_check</span>검수 대기</a><a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant font-body-md hover:bg-surface-container hover:text-on-surface transition-all" data-path="location-management" href="#"><span class="material-symbols-outlined mr-3">location_on</span>장소 관리</a><a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant font-body-md hover:bg-surface-container hover:text-on-surface transition-all" data-path="route-management" href="#"><span class="material-symbols-outlined mr-3">route</span>경로 관리</a><a class="flex items-center px-4 py-3 rounded-lg text-on-surface-variant font-body-md hover:bg-surface-container hover:text-on-surface transition-all" data-path="knowledge-base" href="#"><span class="material-symbols-outlined mr-3">auto_stories</span>운영 지식 목록</a></nav></aside><div class="pl-sidebar-width"><header class="fixed top-0 left-sidebar-width right-0 h-header-height bg-surface/80 backdrop-blur-md z-40 flex items-center justify-between px-container-margin border-b border-outline-variant"><div class="relative w-96"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline">search</span><input class="w-full h-10 pl-10 pr-4 bg-surface-container-low rounded-lg border-none focus:ring-2 focus:ring-primary/20 text-body-md" placeholder="제보 번호 또는 장소 검색..." type="text"></div><div class="flex items-center gap-6"><button class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined">notifications</span></button><button class="text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined">settings</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-header-height min-h-screen bg-background px-container-margin py-gutter-md mt-[15px]"><div class="flex flex-col w-full">
+<!-- Header Section -->
+<div class="flex items-start justify-between mb-8 mt-[10px]">
+<div>
+<h1 class="font-headline-md text-headline-md text-on-background mb-2 tracking-tight">검수 대기 목록</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant">AI가 구조화한 제보 데이터를 검토하고 승인하세요.</p>
+</div>
+<div class="bg-surface-container rounded-full px-4 py-2 border border-outline-variant flex items-center shadow-sm">
+<span class="font-label-md text-label-md text-on-surface-variant">총 <strong class="text-primary">142</strong>건 대기 중</span>
+</div>
+</div>
+<!-- Filter Section -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm border border-surface-variant mb-6">
+<div class="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-5 gap-4 items-end">
+<div class="flex flex-col space-y-2 lg:col-span-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">등록 장소</label>
+<div class="relative">
+<select class="w-full h-10 pl-3 pr-10 appearance-none bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors">
+<option>전체 구역</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col space-y-2 lg:col-span-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">등록 날짜</label>
+<input class="w-full h-10 px-3 bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors text-on-surface-variant" type="date">
+</div>
+<div class="flex flex-col space-y-2 lg:col-span-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">지식 카테고리</label>
+<div class="relative">
+<select class="w-full h-10 pl-3 pr-10 appearance-none bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors">
+<option>전체 카테고리</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="flex flex-col space-y-2 lg:col-span-1">
+<label class="font-label-sm text-label-sm text-on-surface-variant">이동 방식</label>
+<div class="relative">
+<select class="w-full h-10 pl-3 pr-10 appearance-none bg-surface-container-lowest border border-outline-variant rounded-lg font-body-md text-on-surface focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-colors">
+<option>전체 방식</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-on-surface-variant pointer-events-none">expand_more</span>
+</div>
+</div>
+<div class="lg:col-span-1">
+<button class="w-full h-10 bg-primary hover:bg-primary/90 text-on-primary font-label-md rounded-lg transition-colors flex items-center justify-center shadow-sm">
+          검색
+        </button>
+</div>
+</div>
+</div>
+<!-- Data Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-surface-variant overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse min-w-[1000px]">
+<thead>
+<tr class="bg-surface-container-low border-b border-surface-variant">
+<th class="px-6 py-4 text-label-sm text-on-surface-variant whitespace-nowrap text-center font-label-md">제보 번호</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant whitespace-nowrap text-center font-label-md">장소 (세부 구역)</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant whitespace-nowrap text-center font-label-md">등록 일시</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant whitespace-nowrap text-center font-label-md">음성 길이</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant whitespace-nowrap text-center font-label-md">AI 추출 지식 수</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant whitespace-nowrap text-center font-label-md">현재 상태</th>
+<th class="px-6 py-4 text-label-sm text-on-surface-variant whitespace-nowrap text-center font-label-md">액션</th>
+</tr>
+</thead>
+<tbody class="font-body-md">
+<!-- Expanded Row (Active) -->
+<tr class="h-table-row-height bg-surface-container-lowest hover:bg-surface-container-low transition-colors border-b border-surface-variant cursor-pointer">
+<td class="px-6 py-3 text-on-surface font-medium whitespace-nowrap text-center"><span class="material-symbols-outlined transition-transform duration-200 mr-2 align-middle cursor-pointer">chevron_right</span>REP-9923</td>
+<td class="px-6 py-3 whitespace-nowrap text-center">
+<div class="flex items-center gap-2 text-on-surface justify-center">
+<span class="material-symbols-outlined text-outline text-[18px]">location_on</span>
+<span class="truncate max-w-[200px]">서울 물류센터 A동 (하역장 3번)</span>
+</div>
+</td>
+<td class="px-6 py-3 text-on-surface-variant whitespace-nowrap text-center">2023.10.24 14:30</td>
+<td class="px-6 py-3 text-on-surface-variant text-center whitespace-nowrap">00:45</td>
+<td class="px-6 py-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary font-label-md">3</span>
+</td>
+<td class="px-6 py-3 text-center whitespace-nowrap">
+<span class="inline-flex px-2 py-1 rounded-md bg-secondary-container text-primary font-label-sm">검수 중</span>
+</td>
+<td class="px-6 py-3 whitespace-nowrap text-center">
+<button class="text-primary hover:text-primary-fixed-dim font-label-md transition-colors px-3 py-1.5 rounded-md hover:bg-primary/10">검수</button>
+</td>
+</tr>
+<!-- Expanded Content -->
+<tr class="bg-surface border-b border-surface-variant hidden">
+<td class="p-0 text-center" colspan="7">
+<div class="flex px-6 py-4 relative justify-center">
+<!-- Vertical accent line -->
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center mr-6 text-primary justify-center">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1">
+<!-- Extracted Item 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 shadow-sm hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="font-label-sm text-on-surface-variant mb-1 flex items-center gap-1 group-hover:text-primary transition-colors justify-center">
+                      지식 1 (위험 요소)
+                    </div>
+<div class="font-body-lg font-medium text-on-surface">하역장 바닥 미끄럼 주의</div>
+</div>
+<!-- Extracted Item 2 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 shadow-sm hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="font-label-sm text-on-surface-variant mb-1 flex items-center gap-1 group-hover:text-primary transition-colors justify-center">
+                      지식 2 (시설물)
+                    </div>
+<div class="font-body-lg font-medium text-on-surface">3번 게이트 센서 오작동</div>
+</div>
+<!-- Extracted Item 3 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 shadow-sm hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="font-label-sm text-on-surface-variant mb-1 flex items-center gap-1 group-hover:text-primary transition-colors justify-center">
+                      지식 3 (경로)
+                    </div>
+<div class="font-body-lg font-medium text-on-surface">우회로 진입 폭 좁음</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="h-table-row-height bg-surface-container-lowest hover:bg-surface-container-low transition-colors border-b border-surface-variant cursor-pointer">
+<td class="px-6 py-3 text-on-surface whitespace-nowrap text-center"><span class="material-symbols-outlined transition-transform duration-200 mr-2 align-middle cursor-pointer">chevron_right</span>REP-9922</td>
+<td class="px-6 py-3 whitespace-nowrap text-center">
+<div class="flex items-center gap-2 text-on-surface justify-center">
+<span class="material-symbols-outlined text-outline text-[18px]">location_on</span>
+<span class="truncate max-w-[200px]">경기 남부 허브 (B구역 외곽)</span>
+</div>
+</td>
+<td class="px-6 py-3 text-on-surface-variant whitespace-nowrap text-center">2023.10.24 13:15</td>
+<td class="px-6 py-3 text-on-surface-variant text-center whitespace-nowrap">01:12</td>
+<td class="px-6 py-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-surface-variant text-on-surface-variant font-label-md">1</span>
+</td>
+<td class="px-6 py-3 text-center whitespace-nowrap">
+<span class="inline-flex px-2 py-1 rounded-md bg-[#FFF3CD] text-[#856404] font-label-sm border border-[#FFEEBA]">검수 대기</span>
+</td>
+<td class="px-6 py-3 whitespace-nowrap text-center">
+<button class="text-primary hover:text-primary-fixed-dim font-label-md transition-colors px-3 py-1.5 rounded-md hover:bg-primary/10">검수</button>
+</td>
+</tr>
+<tr class="bg-surface border-b border-surface-variant hidden">
+<td class="p-0 text-center" colspan="7">
+<div class="flex px-6 py-4 relative justify-center">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center mr-6 text-primary justify-center">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 shadow-sm hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="font-label-sm text-on-surface-variant mb-1 flex items-center gap-1 group-hover:text-primary transition-colors justify-center">
+                      지식 1 (기타)
+                    </div>
+<div class="font-body-lg font-medium text-on-surface">추가 지식 정보</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="h-table-row-height bg-surface-container-lowest hover:bg-surface-container-low transition-colors border-b border-surface-variant cursor-pointer">
+<td class="px-6 py-3 text-on-surface whitespace-nowrap text-center"><span class="material-symbols-outlined transition-transform duration-200 mr-2 align-middle cursor-pointer">chevron_right</span>REP-9920</td>
+<td class="px-6 py-3 whitespace-nowrap text-center">
+<div class="flex items-center gap-2 text-on-surface justify-center">
+<span class="material-symbols-outlined text-outline text-[18px]">location_on</span>
+<span class="truncate max-w-[200px]">인천항 제2부두 (진입로)</span>
+</div>
+</td>
+<td class="px-6 py-3 text-on-surface-variant whitespace-nowrap text-center">2023.10.24 11:05</td>
+<td class="px-6 py-3 text-on-surface-variant text-center whitespace-nowrap">00:20</td>
+<td class="px-6 py-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-surface-variant text-on-surface-variant font-label-md">2</span>
+</td>
+<td class="px-6 py-3 text-center whitespace-nowrap">
+<span class="inline-flex px-2 py-1 rounded-md bg-[#FFF3CD] text-[#856404] font-label-sm border border-[#FFEEBA]">검수 대기</span>
+</td>
+<td class="px-6 py-3 whitespace-nowrap text-center">
+<button class="text-primary hover:text-primary-fixed-dim font-label-md transition-colors px-3 py-1.5 rounded-md hover:bg-primary/10">검수</button>
+</td>
+</tr>
+<tr class="bg-surface border-b border-surface-variant hidden">
+<td class="p-0 text-center" colspan="7">
+<div class="flex px-6 py-4 relative justify-center">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center mr-6 text-primary justify-center">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 shadow-sm hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="font-label-sm text-on-surface-variant mb-1 flex items-center gap-1 group-hover:text-primary transition-colors justify-center">
+                      지식 1
+                    </div>
+<div class="font-body-lg font-medium text-on-surface">지식 내용</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 shadow-sm hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="font-label-sm text-on-surface-variant mb-1 flex items-center gap-1 group-hover:text-primary transition-colors justify-center">
+                      지식 2
+                    </div>
+<div class="font-body-lg font-medium text-on-surface">지식 내용</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="h-table-row-height bg-surface-container-lowest hover:bg-surface-container-low transition-colors border-b border-surface-variant cursor-pointer">
+<td class="px-6 py-3 text-on-surface whitespace-nowrap text-center"><span class="material-symbols-outlined transition-transform duration-200 mr-2 align-middle cursor-pointer">chevron_right</span>REP-9918</td>
+<td class="px-6 py-3 whitespace-nowrap text-center">
+<div class="flex items-center gap-2 text-on-surface justify-center">
+<span class="material-symbols-outlined text-outline text-[18px]">location_on</span>
+<span class="truncate max-w-[200px]">서울 송파구 문정동 (골목 진입)</span>
+</div>
+</td>
+<td class="px-6 py-3 text-on-surface-variant whitespace-nowrap text-center">2023.10.24 09:40</td>
+<td class="px-6 py-3 text-on-surface-variant text-center whitespace-nowrap">02:05</td>
+<td class="px-6 py-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-surface-variant text-on-surface-variant font-label-md">5</span>
+</td>
+<td class="px-6 py-3 text-center whitespace-nowrap">
+<span class="inline-flex px-2 py-1 rounded-md bg-[#FFF3CD] text-[#856404] font-label-sm border border-[#FFEEBA]">검수 대기</span>
+</td>
+<td class="px-6 py-3 whitespace-nowrap text-center">
+<button class="text-primary hover:text-primary-fixed-dim font-label-md transition-colors px-3 py-1.5 rounded-md hover:bg-primary/10">검수</button>
+</td>
+</tr>
+<tr class="bg-surface border-b border-surface-variant hidden">
+<td class="p-0 text-center" colspan="7">
+<div class="flex px-6 py-4 relative justify-center">
+<div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div>
+<div class="flex items-center mr-6 text-primary justify-center">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 shadow-sm hover:border-primary/50 transition-colors cursor-pointer group">
+<div class="font-label-sm text-on-surface-variant mb-1 flex items-center gap-1 group-hover:text-primary transition-colors justify-center">
+                      지식 1
+                    </div>
+<div class="font-body-lg font-medium text-on-surface">지식 내용</div>
+</div>
+</div>
+</div>
+</td>
+</tr>
+<tr class="h-table-row-height bg-surface-container-lowest hover:bg-surface-container-low transition-colors border-b border-surface-variant cursor-pointer"><td class="px-6 py-3 text-on-surface whitespace-nowrap text-center"><span class="material-symbols-outlined transition-transform duration-200 mr-2 align-middle cursor-pointer">chevron_right</span>REP-9902</td><td class="px-6 py-3 whitespace-nowrap text-center"><div class="flex items-center gap-2 text-on-surface justify-center"><span class="material-symbols-outlined text-outline text-[18px]">location_on</span><span class="truncate max-w-[200px]">서울 강남구 역삼동 (테헤란로)</span></div></td><td class="px-6 py-3 text-on-surface-variant whitespace-nowrap text-center">2023.10.23 09:30</td><td class="px-6 py-3 text-on-surface-variant text-center whitespace-nowrap">00:55</td><td class="px-6 py-3 text-center whitespace-nowrap"><span class="inline-flex items-center justify-center w-6 h-6 rounded-full bg-surface-variant text-on-surface-variant font-label-md">2</span></td><td class="px-6 py-3 text-center whitespace-nowrap"><span class="inline-flex px-2 py-1 rounded-md bg-[#FFF3CD] text-[#856404] font-label-sm border border-[#FFEEBA]">검수 대기</span></td><td class="px-6 py-3 whitespace-nowrap text-center"><button class="text-primary hover:text-primary-fixed-dim font-label-md transition-colors px-3 py-1.5 rounded-md hover:bg-primary/10">검수</button></td></tr><tr class="bg-surface border-b border-surface-variant hidden"><td class="p-0 text-center" colspan="7"><div class="flex px-6 py-4 relative justify-center"><div class="absolute left-0 top-0 bottom-0 w-1 bg-primary"></div><div class="flex items-center mr-6 text-primary justify-center"><div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center"><span class="material-symbols-outlined text-[20px]">hub</span></div></div><div class="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1"><div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 shadow-sm hover:border-primary/50 transition-colors cursor-pointer group"><div class="font-label-sm text-on-surface-variant mb-1 flex items-center gap-1 group-hover:text-primary transition-colors justify-center">지식 1 (교통)</div><div class="font-body-lg font-medium text-on-surface">테헤란로 상습 정체 구역</div></div><div class="bg-surface-container-lowest border border-outline-variant rounded-lg p-4 shadow-sm hover:border-primary/50 transition-colors cursor-pointer group"><div class="font-label-sm text-on-surface-variant mb-1 flex items-center gap-1 group-hover:text-primary transition-colors justify-center">지식 2 (공사)</div><div class="font-body-lg font-medium text-on-surface">이면도로 공사 중</div></div></div></div></td></tr></tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="bg-surface-container-lowest px-6 py-4 flex items-center justify-between">
+<div class="text-body-md text-on-surface-variant">
+        Showing 1 to 10 of 142 entries
+      </div>
+<div class="flex items-center gap-1">
+<button class="w-8 h-8 flex items-center justify-center rounded text-outline hover:bg-surface-container-low transition-colors" disabled="">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 flex items-center justify-center rounded bg-primary text-on-primary font-label-md shadow-sm">1</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container-low text-on-surface font-body-md transition-colors">2</button>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container-low text-on-surface font-body-md transition-colors">3</button>
+<span class="w-8 h-8 flex items-center justify-center text-on-surface-variant font-body-md">...</span>
+<button class="w-8 h-8 flex items-center justify-center rounded hover:bg-surface-container-low text-on-surface font-body-md transition-colors">15</button>
+<button class="w-8 h-8 flex items-center justify-center rounded text-on-surface hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div></main></div>
+<script>
+document.querySelectorAll('tbody > tr:not(.bg-surface)').forEach(row => {
+  row.addEventListener('click', () => {
+    const detailRow = row.nextElementSibling;
+    if (detailRow && detailRow.classList.contains('bg-surface')) {
+      const isHidden = detailRow.classList.toggle('hidden');
+      const chevron = row.querySelector('.material-symbols-outlined');
+      if (chevron) {
+        chevron.style.transform = isHidden ? 'rotate(0deg)' : 'rotate(90deg)';
+      }
+      // Optional: Toggle a background color to show active state
+      row.classList.toggle('bg-primary/5', !isHidden);
+      row.classList.toggle('bg-surface-container-lowest', isHidden);
+    }
+  });
+});
+</script>
+
+
+
+
+
+</body></html>

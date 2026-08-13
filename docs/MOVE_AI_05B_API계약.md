@@ -210,7 +210,7 @@ DB 상태를 바꾸지 않고 명시적 오류를 반환한다. 임베딩 성공
 # 5. Python AI 서비스 계약
 
 ```text
-GET  /health              → { "status":"ok", "model":"..." }
+GET  /health              → { "status":"ok", "provider":"gemini", "model":"..." }
 POST /stt
 POST /extract-knowledge
 POST /embed
@@ -221,11 +221,11 @@ POST /embed
 ## 5-1. STT / 임베딩
 
 ```text
-POST /stt          multipart: audio
+POST /stt          multipart: audio (WAV/MP3/M4A/AIFF/AAC/OGG/FLAC, 기본 10MB 이하)
      → { "text":"...", "durationMs":8200 }
 
 POST /embed        { "texts": ["...", "..."] }
-     → { "model":"text-embedding-3-small", "dimension":1536,
+     → { "model":"gemini-embedding-2", "dimension":1536,
          "vectors":[[0.12,-0.44,...], [...]] }
 ```
 

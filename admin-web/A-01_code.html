@@ -1,0 +1,384 @@
+<!DOCTYPE html><html lang="ko" style=""><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={theme:{extend:{"colors":{"inverse-on-surface":"#f0f1f2","secondary-fixed":"#dae3f1","secondary-container":"#dae3f1","on-error":"#ffffff","inverse-primary":"#adc7ff","on-primary-fixed-variant":"#004493","surface-container-low":"#f3f4f5","error-container":"#ffdad6","on-tertiary-fixed-variant":"#5b4300","primary":"#0059bb","on-tertiary-fixed":"#261a00","on-primary":"#ffffff","primary-container":"#0070ea","on-error-container":"#93000a","tertiary":"#755700","tertiary-container":"#946f00","outline":"#717786","primary-fixed":"#d8e2ff","background":"#f8f9fa","surface-bright":"#f8f9fa","outline-variant":"#c1c6d7","on-tertiary":"#ffffff","on-surface-variant":"#414754","surface-dim":"#d9dadb","on-secondary-fixed-variant":"#3f4853","surface-container-lowest":"#ffffff","on-surface":"#191c1d","on-primary-container":"#fefcff","tertiary-fixed-dim":"#fabd00","surface-container":"#edeeef","surface-tint":"#005bc0","error":"#ba1a1a","on-secondary-container":"#5c6571","secondary":"#565f6b","surface-container-highest":"#e1e3e4","inverse-surface":"#2e3132","secondary-fixed-dim":"#bec7d5","on-tertiary-container":"#fffbff","tertiary-fixed":"#ffdf9e","on-secondary":"#ffffff","surface-variant":"#e1e3e4","on-primary-fixed":"#001a41","surface-container-high":"#e7e8e9","surface":"#f8f9fa","primary-fixed-dim":"#adc7ff","on-secondary-fixed":"#131c26","on-background":"#191c1d"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"table-row-height":"56px","gutter-md":"16px","header-height":"72px","container-margin":"24px","sidebar-width":"260px"},"fontFamily":{"display-lg":["Inter"],"headline-md":["Inter"],"headline-sm":["Inter"],"label-md":["Inter"],"headline-md-mobile":["Inter"],"label-sm":["Inter"],"body-md":["Inter"],"body-lg":["Inter"]},"fontSize":{"display-lg":["32px",{"lineHeight":"1.2","letterSpacing":"-0.02em","fontWeight":"800"}],"headline-md":["24px",{"lineHeight":"32px","fontWeight":"700"}],"headline-sm":["18px",{"lineHeight":"24px","fontWeight":"600"}],"label-md":["13px",{"lineHeight":"16px","letterSpacing":"0.01em","fontWeight":"600"}],"headline-md-mobile":["20px",{"lineHeight":"28px","fontWeight":"700"}],"label-sm":["12px",{"lineHeight":"16px","fontWeight":"500"}],"body-md":["14px",{"lineHeight":"20px","fontWeight":"400"}],"body-lg":["16px",{"lineHeight":"24px","fontWeight":"400"}]}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"></head><body class="bg-background font-body-md text-on-surface"><aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-lowest border-r border-outline-variant z-50 flex flex-col"><div class="p-container-margin mb-6">
+  <div class="text-primary font-display-lg text-display-lg tracking-tighter">
+    Logistics Pro<div class="">Admin<br></div></div>
+  <div class="text-on-surface-variant font-label-sm text-label-sm uppercase tracking-widest mt-1">
+    Operations Control
+  </div>
+</div><nav class="flex-1 px-3 space-y-1" data-active-classes="bg-secondary-container text-primary font-bold"><a aria-current="page" class="flex items-center h-[48px] px-4 rounded-lg transition-all group bg-secondary-container text-primary font-bold" data-path="dashboard" href="#"><span class="material-symbols-outlined mr-3 text-[20px]">grid_view</span><span class="font-label-md text-label-md">대시보드</span></a><a class="flex items-center h-[48px] px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="inspection-queue" href="#"><span class="material-symbols-outlined mr-3 text-[20px]">fact_check</span><span class="font-label-md text-label-md">검수 대기</span></a><a class="flex items-center h-[48px] px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="place-management" href="#"><span class="material-symbols-outlined mr-3 text-[20px]">location_on</span><span class="font-label-md text-label-md">장소 관리</span></a><a class="flex items-center h-[48px] px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="route-management" href="#"><span class="material-symbols-outlined mr-3 text-[20px]">route</span><span class="font-label-md text-label-md">경로 관리</span></a><a class="flex items-center h-[48px] px-4 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-all group" data-path="knowledge-base" href="#"><span class="material-symbols-outlined mr-3 text-[20px]">menu_book</span><span class="font-label-md text-label-md">운영 지식 목록</span></a></nav></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-[72px] bg-surface/80 backdrop-blur-xl z-40 flex items-center justify-between px-container-margin shadow-[0_1px_8px_rgba(0,0,0,0.04)]"><div class="w-full max-w-xl flex items-center bg-surface-container-high h-10 px-4 rounded-full border border-transparent focus-within:border-primary transition-all"><span class="material-symbols-outlined text-on-surface-variant mr-3 text-[20px]">search</span><input class="bg-transparent border-none focus:ring-0 text-body-md w-full placeholder:text-on-surface-variant/60" placeholder="빠른 검색 (Cmd+K)" type="text"></div><div class="flex items-center gap-4 ml-4"><button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-highest transition-colors"><span class="material-symbols-outlined text-[24px]">notifications</span></button><button class="w-10 h-10 flex items-center justify-center rounded-full text-on-surface-variant hover:bg-surface-container-highest transition-colors"><span class="material-symbols-outlined text-[24px]">settings</span></button><div class="w-[1px] h-6 bg-outline-variant mx-2"></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-[72px] min-h-screen bg-background"><div class="p-container-margin"><div class="flex flex-col w-full p-container-margin gap-6">
+<!-- Header -->
+<div class="flex items-center justify-between mb-4">
+<h1 class="font-headline-md text-on-surface text-display-lg">대시보드</h1>
+<div class="flex items-center gap-3">
+<select class="h-10 px-4 rounded-lg bg-surface-container border-none text-body-md text-on-surface-variant focus:ring-1 focus:ring-primary outline-none">
+<option>최근 7일</option>
+<option>최근 30일</option>
+<option>이번 달</option>
+</select>
+<button class="h-10 px-4 rounded-lg bg-surface-container text-primary font-label-md flex items-center gap-2 hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-[18px]">download</span>
+        리포트 다운로드
+      </button>
+</div>
+</div>
+<!-- Summary Cards -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col gap-3 relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-primary/5 rounded-full mix-blend-multiply group-hover:scale-150 transition-transform duration-500"></div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-label-sm">전체 제보</span>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-on-primary-container">article</span>
+</div>
+</div>
+<div class="flex items-end gap-3 mt-2">
+<span class="font-display-lg text-display-lg text-on-surface">1,248</span>
+<div class="flex items-center text-primary font-label-sm mb-1">
+<span class="material-symbols-outlined text-[16px] mr-1">trending_up</span>
+          12%
+        </div>
+</div>
+</div>
+<!-- Card 2 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col gap-3 relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-tertiary/5 rounded-full mix-blend-multiply group-hover:scale-150 transition-transform duration-500"></div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-label-sm">검수 대기</span>
+<div class="w-8 h-8 rounded-full bg-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-on-tertiary-container">hourglass_empty</span>
+</div>
+</div>
+<div class="flex items-end gap-3 mt-2">
+<span class="font-display-lg text-display-lg text-on-surface">342</span>
+<div class="flex items-center text-error font-label-sm mb-1">
+<span class="material-symbols-outlined text-[16px] mr-1">trending_up</span>
+          5%
+        </div>
+</div>
+</div>
+<!-- Card 3 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col gap-3 relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-error/5 rounded-full mix-blend-multiply group-hover:scale-150 transition-transform duration-500"></div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-label-sm">보완 필요</span>
+<div class="w-8 h-8 rounded-full bg-error-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-on-error-container">warning</span>
+</div>
+</div>
+<div class="flex items-end gap-3 mt-2">
+<span class="font-display-lg text-display-lg text-on-surface">56</span>
+<div class="flex items-center text-primary font-label-sm mb-1">
+<span class="material-symbols-outlined text-[16px] mr-1">trending_down</span>
+          2%
+        </div>
+</div>
+</div>
+<!-- Card 4 -->
+<div class="bg-surface-container-lowest rounded-xl p-5 shadow-sm flex flex-col gap-3 relative overflow-hidden group hover:shadow-md transition-shadow">
+<div class="absolute -right-4 -top-4 w-24 h-24 bg-secondary/5 rounded-full mix-blend-multiply group-hover:scale-150 transition-transform duration-500"></div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface-variant font-label-sm">오늘 승인</span>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px] text-on-secondary-container">check_circle</span>
+</div>
+</div>
+<div class="flex items-end gap-3 mt-2">
+<span class="font-display-lg text-display-lg text-on-surface">84</span>
+<div class="flex items-center text-on-surface-variant font-label-sm mb-1">
+<span class="material-symbols-outlined text-[16px] mr-1">remove</span>
+          0%
+        </div>
+</div>
+</div>
+</div>
+<!-- Charts & Lists Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-2">
+<!-- Main Left Column -->
+<div class="lg:col-span-2 flex flex-col gap-6">
+<!-- Charts Row -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<!-- Bar Chart -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">일별 제보 등록 추이</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<div class="flex-1 min-h-[240px] relative flex items-end gap-2 pb-6 px-2">
+<!-- Grid lines -->
+<div class="absolute inset-0 flex flex-col justify-between pb-8 z-0">
+<div class="w-full h-px bg-outline-variant/30"></div>
+<div class="w-full h-px bg-outline-variant/30"></div>
+<div class="w-full h-px bg-outline-variant/30"></div>
+<div class="w-full h-px bg-outline-variant/30"></div>
+<div class="w-full h-px bg-outline-variant/30"></div>
+</div>
+<!-- Y-axis labels -->
+<div class="absolute left-0 inset-y-0 flex flex-col justify-between pb-8 text-[10px] text-on-surface-variant/60 -ml-2 z-10">
+<span class="">400</span>
+<span class="">300</span>
+<span class="">200</span>
+<span class="">100</span>
+<span class="">0</span>
+</div>
+<!-- Bars -->
+<div class="relative z-10 flex-1 flex flex-col justify-end h-full group">
+<div class="w-full bg-primary-container/30 rounded-t-sm transition-all duration-300 group-hover:bg-primary-container" style="height: 45%;"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-on-surface-variant">10/1</div>
+</div>
+<div class="relative z-10 flex-1 flex flex-col justify-end h-full group">
+<div class="w-full bg-primary-container/30 rounded-t-sm transition-all duration-300 group-hover:bg-primary-container" style="height: 60%;"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-on-surface-variant">10/2</div>
+</div>
+<div class="relative z-10 flex-1 flex flex-col justify-end h-full group">
+<div class="w-full bg-primary-container/30 rounded-t-sm transition-all duration-300 group-hover:bg-primary-container" style="height: 55%;"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-on-surface-variant">10/3</div>
+</div>
+<!-- Highlighted Bar with Tooltip -->
+<div class="relative z-20 flex-1 flex flex-col justify-end h-full group">
+<div class="absolute -top-10 left-1/2 -translate-x-1/2 bg-inverse-surface text-inverse-on-surface text-[12px] font-bold px-3 py-1.5 rounded-md whitespace-nowrap shadow-md flex items-center justify-center">
+                340
+                <div class="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-inverse-surface rotate-45"></div>
+</div>
+<div class="w-full bg-primary rounded-t-sm transition-all duration-300" style="height: 85%;"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-on-surface font-bold">10/4</div>
+</div>
+<div class="relative z-10 flex-1 flex flex-col justify-end h-full group">
+<div class="w-full bg-primary-container/30 rounded-t-sm transition-all duration-300 group-hover:bg-primary-container" style="height: 40%;"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-on-surface-variant">10/5</div>
+</div>
+<div class="relative z-10 flex-1 flex flex-col justify-end h-full group">
+<div class="w-full bg-primary-container/30 rounded-t-sm transition-all duration-300 group-hover:bg-primary-container" style="height: 20%;"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-on-surface-variant">10/6</div>
+</div>
+<div class="relative z-10 flex-1 flex flex-col justify-end h-full group">
+<div class="w-full bg-primary-container/30 rounded-t-sm transition-all duration-300 group-hover:bg-primary-container" style="height: 75%;"></div>
+<div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-[10px] text-on-surface-variant">10/7</div>
+</div>
+</div>
+</div>
+<!-- Donut Chart -->
+<div class="bg-surface-container-lowest rounded-xl p-6 shadow-sm flex flex-col">
+<div class="flex justify-between items-center mb-2">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">상태별 제보 비중</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">more_vert</span>
+</button>
+</div>
+<div class="flex-1 flex items-center justify-center relative min-h-[200px]">
+<!-- SVG Donut Chart Placeholder -->
+<svg class="w-48 h-48 transform -rotate-90" viewBox="0 0 100 100">
+<!-- Background Ring -->
+<circle class="stroke-surface-container-high" cx="50" cy="50" fill="none" r="40" stroke-width="12"></circle>
+<!-- Segments -->
+<!-- 보완 필요 (15%) -->
+<circle class="stroke-error" cx="50" cy="50" fill="none" r="40" stroke-dasharray="251.2" stroke-dashoffset="213.52" stroke-width="12"></circle>
+<!-- 검수 대기 (20%) -->
+<circle class="stroke-tertiary" cx="50" cy="50" fill="none" r="40" stroke-dasharray="251.2" stroke-dashoffset="163.28" stroke-width="12" style="transform: rotate(54deg); transform-origin: 50% 50%;"></circle>
+<!-- 승인 완료 (65%) -->
+<circle class="stroke-primary" cx="50" cy="50" fill="none" r="40" stroke-dasharray="251.2" stroke-dashoffset="87.92" stroke-width="12" style="transform: rotate(126deg); transform-origin: 50% 50%;"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center">
+<span class="font-display-lg text-[28px] font-bold text-on-surface">100%</span>
+<span class="text-[11px] text-on-surface-variant">전체</span>
+</div>
+</div>
+<div class="flex flex-wrap justify-center gap-4 mt-4">
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm bg-primary"></div>
+<span class="text-label-sm text-on-surface-variant">승인 완료 (65%)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm bg-tertiary"></div>
+<span class="text-label-sm text-on-surface-variant">검수 대기 (20%)</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-3 h-3 rounded-sm bg-error"></div>
+<span class="text-label-sm text-on-surface-variant">보완 필요 (15%)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Recent Reports Table -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden flex flex-col h-full">
+<div class="p-6 pb-4 flex justify-between items-center border-b border-surface-variant/50">
+<h2 class="font-headline-sm text-headline-sm text-on-surface">최근 등록 제보</h2>
+<button class="text-primary font-label-md flex items-center hover:bg-surface-container rounded px-2 py-1 transition-colors">
+            전체 보기
+            <span class="material-symbols-outlined text-[16px] ml-1">chevron_right</span>
+</button>
+</div>
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest/50 text-on-surface-variant font-label-sm">
+<th class="py-3 px-6 font-medium whitespace-nowrap">ID</th>
+<th class="py-3 px-6 font-medium">장소명 / 위치</th>
+<th class="py-3 px-6 font-medium">유형</th>
+<th class="py-3 px-6 font-medium">상태</th>
+<th class="py-3 px-6 font-medium text-center">동작</th>
+</tr>
+</thead>
+<tbody class="text-body-md text-on-surface">
+<!-- Row 1 -->
+<tr class="border-b border-surface-variant/50 hover:bg-surface-container-lowest/80 transition-colors group">
+<td class="py-4 px-6 text-on-surface-variant/70 font-mono text-[13px]">REP-2023-1004</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">강남역 2번 출구 앞</span>
+<span class="text-[12px] text-on-surface-variant mt-0.5">서울시 강남구 역삼동 825</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-on-surface-variant text-[12px]">신규 장소</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-tertiary-container/30 text-tertiary text-[12px] font-medium border border-tertiary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary mr-1.5"></span>
+                    검수 대기
+                  </span>
+</td>
+<td class="py-4 px-6 text-center">
+<button class="w-8 h-8 rounded-full inline-flex items-center justify-center text-on-surface-variant/50 hover:bg-surface-container hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="border-b border-surface-variant/50 hover:bg-surface-container-lowest/80 transition-colors group">
+<td class="py-4 px-6 text-on-surface-variant/70 font-mono text-[13px]">REP-2023-1003</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">판교 테크노밸리 입구</span>
+<span class="text-[12px] text-on-surface-variant mt-0.5">경기도 성남시 분당구 삼평동</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-on-surface-variant text-[12px]">정보 수정</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-error-container/30 text-error text-[12px] font-medium border border-error/20">
+<span class="w-1.5 h-1.5 rounded-full bg-error mr-1.5"></span>
+                    보완 필요
+                  </span>
+</td>
+<td class="py-4 px-6 text-center">
+<button class="w-8 h-8 rounded-full inline-flex items-center justify-center text-on-surface-variant/50 hover:bg-surface-container hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-lowest/80 transition-colors group">
+<td class="py-4 px-6 text-on-surface-variant/70 font-mono text-[13px]">REP-2023-1002</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="font-medium text-on-surface">광화문 광장 북측</span>
+<span class="text-[12px] text-on-surface-variant mt-0.5">서울시 종로구 세종로</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded bg-surface-container text-on-surface-variant text-[12px]">신규 경로</span>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2 py-1 rounded-full bg-primary-container/20 text-primary text-[12px] font-medium border border-primary/20">
+<span class="w-1.5 h-1.5 rounded-full bg-primary mr-1.5"></span>
+                    승인 완료
+                  </span>
+</td>
+<td class="py-4 px-6 text-center">
+<button class="w-8 h-8 rounded-full inline-flex items-center justify-center text-on-surface-variant/50 hover:bg-surface-container hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[18px]">visibility</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Right Sidebar List -->
+<div class="lg:col-span-1 h-full flex">
+<div class="bg-surface-container-lowest rounded-xl shadow-sm p-6 h-full flex flex-col w-full">
+<div class="flex justify-between items-center mb-6">
+<h2 class="font-headline-sm text-headline-sm text-on-surface flex items-center gap-2">
+            경로 미등록 장소
+            <span class="flex items-center justify-center w-5 h-5 rounded-full bg-error/10 text-error text-[10px] font-bold">5</span>
+</h2>
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined text-[20px]">filter_list</span>
+</button>
+</div>
+<div class="flex-1 flex flex-col gap-4">
+<!-- Item 1 -->
+<div class="flex gap-4 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface font-bold text-[12px] flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors mt-0.5">1</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-md text-on-surface truncate pr-2">남산 서울타워 매표소 앞</h3>
+<span class="text-error font-bold text-[12px] whitespace-nowrap bg-error/10 px-1.5 py-0.5 rounded">42건 요청</span>
+</div>
+<p class="text-[12px] text-on-surface-variant line-clamp-2 leading-relaxed">케이블카 하차장에서 매표소까지 이어지는 진입로 경로가 유실되어 많은 제보가 접수되고 있습니다.</p>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="flex gap-4 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface font-bold text-[12px] flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors mt-0.5">2</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-md text-on-surface truncate pr-2">홍대입구역 9번 출구 지하상가</h3>
+<span class="text-error font-bold text-[12px] whitespace-nowrap bg-error/10 px-1.5 py-0.5 rounded">38건 요청</span>
+</div>
+<p class="text-[12px] text-on-surface-variant line-clamp-2 leading-relaxed">지하철역 출구와 상가가 연결되는 복잡한 교차 구간의 상세 경로 데이터가 누락되었습니다.</p>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="flex gap-4 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface font-bold text-[12px] flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors mt-0.5">3</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-md text-on-surface truncate pr-2">코엑스 스타필드 별마당도서관</h3>
+<span class="text-tertiary font-bold text-[12px] whitespace-nowrap bg-tertiary/10 px-1.5 py-0.5 rounded">25건 요청</span>
+</div>
+<p class="text-[12px] text-on-surface-variant line-clamp-2 leading-relaxed">실내 맵핑은 완료되었으나 주요 앵커 포인트 간의 도보 네비게이션 노드가 끊어져 있습니다.</p>
+</div>
+</div>
+<!-- Item 4 -->
+<div class="flex gap-4 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface font-bold text-[12px] flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors mt-0.5">4</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-md text-on-surface truncate pr-2">김포공항 국내선 2층 수속장</h3>
+<span class="text-tertiary font-bold text-[12px] whitespace-nowrap bg-tertiary/10 px-1.5 py-0.5 rounded">19건 요청</span>
+</div>
+<p class="text-[12px] text-on-surface-variant line-clamp-2 leading-relaxed">최근 리모델링으로 인해 셀프 체크인 키오스크 주변 동선 데이터 업데이트가 필요합니다.</p>
+</div>
+</div>
+<!-- Item 5 -->
+<div class="flex gap-4 p-3 rounded-lg hover:bg-surface-container-low transition-colors cursor-pointer group">
+<div class="w-6 h-6 rounded-full bg-surface-container-highest text-on-surface font-bold text-[12px] flex items-center justify-center flex-shrink-0 group-hover:bg-primary group-hover:text-on-primary transition-colors mt-0.5">5</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-start mb-1">
+<h3 class="font-label-md text-on-surface truncate pr-2">여의도 환승센터 3번 승강장</h3>
+<span class="text-on-surface-variant font-bold text-[12px] whitespace-nowrap bg-surface-container-highest px-1.5 py-0.5 rounded">12건 요청</span>
+</div>
+<p class="text-[12px] text-on-surface-variant line-clamp-2 leading-relaxed">버스 승하차 구역과 지하보도 연결 통로의 휠체어 접근 가능 경로 확인이 필요합니다.</p>
+</div>
+</div>
+</div>
+<button class="w-full py-3 mt-4 text-primary font-label-md hover:bg-primary/5 rounded-lg transition-colors border border-primary/20">
+          전체 목록 보기
+        </button>
+</div>
+</div>
+</div>
+</div></div></main></div>
+
+
+
+
+
+</body></html>

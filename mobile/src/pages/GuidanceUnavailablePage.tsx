@@ -1,0 +1,6 @@
+import { useNavigate } from 'react-router-dom'
+const menuIcon='https://www.figma.com/api/mcp/asset/0de4db50-afea-4d0d-9100-32bfa3efa3ca.svg'
+const infoIcon='https://www.figma.com/api/mcp/asset/6cfc1f43-6f02-4ba6-ae0b-b15705fc7bdd.svg'
+const vehicleIcon='https://www.figma.com/api/mcp/asset/6d2a3256-e882-4fa7-80cc-796e8508664b.svg'
+const placeIcon='https://www.figma.com/api/mcp/asset/3d1a5931-da8e-4973-8a74-85944b0b8d02.svg'
+export function GuidanceUnavailablePage(){const navigate=useNavigate(); return <div className="mobile-page unavailable-page"><header className="guidance-header"><button onClick={()=>navigate('/home')}><img src={menuIcon} alt=""/></button></header><main className="unavailable-main"><section className="unavailable-visual"><div/><h1>경로 정보가 없습니다</h1><p>검색하신 장소에 등록된 Last 100m 경로가 없거나,<br/>현재 차량 조건과 맞는 경로를 찾을 수 없습니다.</p></section><section className="constraint-box"><img src={infoIcon} alt=""/><div><h2>차량 진입 제약 안내</h2><p>1.5톤 차량은 정문 진입이 어려울 수 있습니다. 차량 조건을 확인하거나 도보 경로를 이용해 주세요.</p></div></section><section className="unavailable-actions"><button className="primary"><img src={vehicleIcon} alt=""/>차량 조건 다시 입력</button><button className="secondary"><img src={placeIcon} alt=""/>장소 정보 보기</button><button className="tertiary" onClick={()=>navigate('/home')}>안내 종료</button></section></main></div>}

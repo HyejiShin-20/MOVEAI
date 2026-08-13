@@ -5,7 +5,7 @@ DB 쓰기, 상태 판단, 순위 결정은 하지 않는다 (→ `backend`).
 
 계약 전문은 `docs/MOVE_AI_05B_API계약.md §5`.
 
-## 엔드포인트
+## 목표 API 계약
 
 ```
 GET  /health
@@ -14,24 +14,52 @@ POST /extract-knowledge   → { items: [...] }   Pydantic 강제
 POST /embed               { texts: [...] } → { model, dimension, vectors: [[...]] }
 ```
 
-확정 모델은 `.env.example` 기준으로 `gpt-4o-mini`(구조화 추출),
-`text-embedding-3-small`(1536차원), `gpt-4o-mini-transcribe`(STT)다.
+확정 모델은 `.env.example` 기준으로 `gemini-3.5-flash-lite`(구조화 추출),
+`gemini-embedding-2`(1536차원), `gemini-3.6-flash`(STT)다.
 임베딩 모델이나 차원을 바꾸면 저장 벡터를 전부 재생성해야 한다.
+
+## 현재 구현 — STT
+
+```bash
+conda activate moveai
+cd ai-service
+uvicorn app.main:app --reload --port 8000
+```
+
+```text
+GET  /health  → { status, provider:"gemini", model }
+POST /stt     multipart audio → { text, durationMs }
+```
+
+지원 형식은 WAV, MP3, M4A, AIFF, AAC, OGG, FLAC이며 기본 업로드 제한은 10MB다.
+작은 파일은 Gemini Interactions API에 inline base64로 보내고, API 키와 오디오 바이트는
+로그에 남기지 않는다. `GOOGLE_API_KEY`가 시스템에 함께 있어도 `.env`의
+`GEMINI_API_KEY`를 명시적으로 우선한다.
+
+실제 샘플 호출:
+
+```bash
+python scripts/smoke_stt.py
+python scripts/smoke_stt.py "../datasets/voice/파일.m4a"
+```
 
 **`/similarity-search` 는 만들지 않는다.** 코사인 계산은 Spring에서 한다.
 `/embed` 는 배열을 받는다 — 시드 146건을 한 번에 처리해야 한다.
 
-## 구조
+## 현재 구조
 
 ```
 app/
-├─ main.py
-├─ api/         stt.py · extraction.py · embedding.py
-├─ schemas/     knowledge.py        ← Pydantic 모델
-├─ services/    stt · extraction · embedding
-├─ prompts/     knowledge_extraction.txt
-└─ tests/
+├─ main.py              FastAPI 앱 · `/health` · `/stt`
+├─ config.py            `.env` 로딩과 STT 제한
+├─ errors.py            공개 오류 코드 매핑
+├─ schemas.py           응답 모델
+└─ services/stt.py      Gemini 인라인 오디오 전사
+scripts/smoke_stt.py    `datasets/voice` 실호출 검증
+tests/                  API·서비스 단위 테스트
 ```
+
+`/extract-knowledge`와 `/embed`는 다음 구현 대상이며 아직 라우트가 열려 있지 않다.
 
 ## 추출에서 반드시 지킬 것
 
