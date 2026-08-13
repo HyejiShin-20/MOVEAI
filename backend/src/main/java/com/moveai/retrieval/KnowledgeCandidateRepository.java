@@ -22,15 +22,27 @@ public class KnowledgeCandidateRepository {
             SELECT ki.id, ki.knowledge_code, ki.place_id, kt.target_type,
                    kt.target_node_id, kt.target_segment_id,
                    ki.movement_mode, ki.traversal_method, ki.fact_type, ki.access_state,
+                   ki.usage_scope, ki.statement, ki.action_text,
+                   CASE kt.target_type
+                     WHEN 'NODE' THEN target_node.name
+                     WHEN 'SEGMENT' THEN CONCAT(segment_from.name, ' → ', segment_to.name)
+                     WHEN 'PLACE' THEN p.name
+                     ELSE kt.target_free_text
+                   END AS target_name,
                    kc.vehicle_class, kc.min_tonnage, kc.min_tonnage_inclusive,
                    kc.max_tonnage, kc.max_tonnage_inclusive,
                    kc.max_vehicle_height_m, kc.max_vehicle_width_m,
                    kc.active_time_start, kc.active_time_end, kc.active_days,
                    kc.extra_condition_text, ki.published_at, ke.embedding_json
               FROM knowledge_items ki
+              JOIN places p ON p.id = ki.place_id
               JOIN knowledge_targets kt ON kt.knowledge_id = ki.id
               JOIN knowledge_embeddings ke ON ke.knowledge_id = ki.id
               LEFT JOIN knowledge_conditions kc ON kc.knowledge_id = ki.id
+              LEFT JOIN place_nodes target_node ON target_node.id = kt.target_node_id
+              LEFT JOIN route_segments target_segment ON target_segment.id = kt.target_segment_id
+              LEFT JOIN place_nodes segment_from ON segment_from.id = target_segment.from_node_id
+              LEFT JOIN place_nodes segment_to ON segment_to.id = target_segment.to_node_id
              WHERE ki.place_id = ? AND ki.status = 'PUBLISHED'
              ORDER BY ki.knowledge_code
             """;
@@ -65,7 +77,9 @@ public class KnowledgeCandidateRepository {
                 rs.getString("target_type"), nullableLong(rs, "target_node_id"),
                 nullableLong(rs, "target_segment_id"), rs.getString("movement_mode"),
                 rs.getString("traversal_method"), rs.getString("fact_type"),
-                rs.getString("access_state"), conditions,
+                rs.getString("access_state"), rs.getString("usage_scope"),
+                rs.getString("statement"), rs.getString("action_text"), rs.getString("target_name"),
+                conditions,
                 rs.getTimestamp("published_at") == null ? null
                         : rs.getTimestamp("published_at").toLocalDateTime(),
                 parseVector(rs.getString("embedding_json")));

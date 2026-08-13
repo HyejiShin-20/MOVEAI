@@ -13,7 +13,8 @@ final class RetrievalFixtures {
             String factType, String accessState, double... vector) {
         return new KnowledgeCandidate(
                 id, code, 2L, targetType, nodeId, segmentId, movement, traversal,
-                factType, accessState, conditions, LocalDateTime.of(2026, 7, 1, 0, 0), vector);
+                factType, accessState, "WARNING_ONLY", code + " 내용", null, code + " 위치",
+                conditions, LocalDateTime.of(2026, 7, 1, 0, 0), vector);
     }
 
     static KnowledgeCandidate candidate(

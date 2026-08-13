@@ -4,8 +4,8 @@
 > Phase의 목적·시간 예산·축소 경로는 `MOVE_AI_05C_구현순서_운용.md §7`.
 > 하네스는 **세션 시작 시 이 파일을 먼저 읽고, 세션 종료 전 반드시 갱신**한다.
 
-**최종 갱신** — 2026-08-13 (Phase 3 완료 — 벡터 적재 + 하이브리드 검색)
-**현재 Phase** — Phase 3 `DONE`. 다음은 Phase 4 (안내)
+**최종 갱신** — 2026-08-13 (Phase 4 완료 — Last 100m 단계별 안내)
+**현재 Phase** — Phase 4 `DONE`. 다음은 Phase 5·6 (제보 저장 / Draft 생성 Spring 연동)
 **경과 시간** — T+0.0h (본선 전 선행 작업)
 
 > **화면 담당에게 알릴 것** — `05B §4-1`·`§4-2` 조회 API가 실제 데이터로 응답한다.
@@ -16,10 +16,10 @@
 ## 다음에 할 정확한 작업
 
 ```
-Phase 4 — 안내
-  RouteSelector로 배송 목적지와 차량 조건에 맞는 고정 Route를 선택한다.
-  GuidanceSession을 생성하고 Phase 3 HybridSearchService를 단계별 카드 조립에 연결한다.
-  1톤 ROUTE_B_01(7단계) / 2.5톤 ROUTE_B_02(3단계), 시간 필터와 중복 제거를 검증한다.
+Phase 5·6 — 제보 저장 / Draft 생성 Spring 연동
+  이미 구현된 STT·구조화 Python API를 Spring 제보 흐름에 연결한다.
+  corrected_stt_text를 기준으로 Draft를 생성하고 스키마·source_excerpt를 검증한다.
+  실패 상태와 재시도 경계를 API 계약대로 고정한다.
 ```
 
 ## 현재 blocker
@@ -66,7 +66,12 @@ backend: .\gradlew.bat bootRun --args="--import-embeddings"
   → Spring/Python embedding_text 전건 일치 검증 후 적재
 backend: .\gradlew.bat bootRun --args="--evaluate-rag"
   → 정답 질문 20개 Hit@3 20/20(100%), Hit@5 20/20(100%), Top-5 must_not 위반 11건
-backend: .\gradlew.bat test → 25 tests, BUILD SUCCESSFUL
+backend: .\gradlew.bat test → 30 tests, BUILD SUCCESSFUL (Phase 4 단위 테스트 포함)
+Phase 4 실제 연동 smoke (MariaDB + Gemini embed + Spring 8082)
+  → 1톤 ROUTE_B_01 7단계 / 2.5톤 ROUTE_B_02 3단계
+  → K_B_001 seq1 노출, 전 단계 카드 1개 이상, 인접 단계 knowledgeId 중복 0건
+  → K_B_014 12:30 seq6 노출 / 15:00 제외
+  → 같은 배송 건 재시작 시 이전 ACTIVE 세션 ABANDONED·next 409, complete COMPLETED
 ```
 
 ---
@@ -133,16 +138,16 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 
 > **T+6.0h 체크포인트.** 여기 못 왔으면 P1·지도·복수 장소를 지금 버린다.
 
-## Phase 4 — 안내  `TODO`  (2.0h / 누적 8.0h)  ★ 첫 발표 가능 지점
-- [ ] 1톤 → `ROUTE_B_01` (7단계) 선택
-- [ ] 2.5톤 → `ROUTE_B_02` (3단계) 선택
-- [ ] 경로 후보 0개면 `404 NO_ROUTE_AVAILABLE` (기본 경로로 대체하지 않음)
-- [ ] **같은 배송 건을 차량만 바꿔 다시 시작할 수 있다 (`05B §4-3`)**
-- [ ] 같은 지식이 연속 두 단계에 중복 노출되지 않음
-- [ ] Demo fixture B의 시연 단계마다 예상 Knowledge가 1개 이상 노출
-- [ ] 일반 Guidance는 relevant Knowledge가 없으면 카드 0개 허용
-- [ ] `contextTime=12:30` → `K_B_014` 노출 / `15:00` → 사라짐
-- [ ] `complete` 동작
+## Phase 4 — 안내  `DONE`  (2.0h / 누적 8.0h)  ★ 첫 발표 가능 지점
+- [x] 1톤 → `ROUTE_B_01` (7단계) 선택
+- [x] 2.5톤 → `ROUTE_B_02` (3단계) 선택
+- [x] 경로 후보 0개면 `404 NO_ROUTE_AVAILABLE` (기본 경로로 대체하지 않음)
+- [x] **같은 배송 건을 차량만 바꿔 다시 시작할 수 있다 (`05B §4-3`)**
+- [x] 같은 지식이 연속 두 단계에 중복 노출되지 않음
+- [x] Demo fixture B의 시연 단계마다 예상 Knowledge가 1개 이상 노출
+- [x] 일반 Guidance는 relevant Knowledge가 없으면 카드 0개 허용
+- [x] `contextTime=12:30` → `K_B_014` 노출 / `15:00` → 사라짐
+- [x] `complete` 동작
 - [ ] 커밋
 - [ ] **★ 1막 시연 동작 확인** — 실제로 눌러보며 화면이 나오는지 (녹화는 개발 종료 후)
 
@@ -291,6 +296,19 @@ T+10.0h  W2 미완  →  검수를 API 직접 호출로 대체하고 화면은 �
 ```
 
 <!-- 여기부터 기록 -->
+
+## 본선 전 선행 — 2026-08-13  Phase 4 안내
+변경   RouteSelector·GuidanceSession과 `POST /api/guidance`, `GET /api/guidance/{id}`,
+       `POST /next`, `POST /complete`를 구현하고 Phase 3 검색 결과를 단계별 카드로 조립
+       카드에 usageScope·statement·actionText·targetName을 연결하고 ACTION fallback,
+       조건 라벨·24시간 신규 배지·미해결 타깃 표시를 적용
+검증   `./gradlew test` → 30 tests, BUILD SUCCESSFUL
+       실제 MariaDB·Gemini 임베딩 연동 smoke → B01 7단계·B02 3단계, 인접 중복 0건,
+       K_B_001 출발점 예외와 K_B_014 시간 조건, ACTIVE 재시작·complete 상태 전환 통과
+결정   Route는 배송 목적지를 먼저 고정한 뒤 차량 제약으로만 선택한다. 후보가 없으면 기본
+       Route로 우회하지 않고 404를 반환한다. 같은 배송 건 재시작 시 이전 ACTIVE는 ABANDONED다.
+남은것 React 화면에서 실제 버튼으로 이어지는 1막 리허설은 프론트 합류 뒤 사람이 확인한다.
+다음   Phase 5·6 — 기존 Python STT·구조화 API를 Spring 제보 저장·Draft 생성 흐름에 연결
 
 ## 본선 전 선행 — 2026-08-13  Phase 3 임베딩 + 검색
 변경   Python 산출물 검증·적재 서비스와 `--import-embeddings`, `/embed` Spring 클라이언트,

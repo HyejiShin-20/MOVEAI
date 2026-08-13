@@ -20,7 +20,13 @@ public interface RouteSegmentRepository extends JpaRepository<RouteSegment, Long
             """)
     List<RouteSegment> findByRouteIdOrderBySequence(Long routeId);
 
-    Optional<RouteSegment> findByRouteIdAndSequenceNo(Long routeId, int sequenceNo);
+    @Query("""
+            select s from RouteSegment s
+            join fetch s.fromNode
+            join fetch s.toNode
+            where s.routeId = :routeId and s.sequenceNo = :sequenceNo
+            """)
+    Optional<RouteSegment> findStep(Long routeId, int sequenceNo);
 
     int countByRouteId(Long routeId);
 }

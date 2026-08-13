@@ -17,6 +17,10 @@ public record KnowledgeCandidate(
         String traversalMethod,
         String factType,
         String accessState,
+        String usageScope,
+        String statement,
+        String actionText,
+        String targetName,
         Conditions conditions,
         LocalDateTime publishedAt,
         double[] embedding) {

@@ -83,4 +83,12 @@ public class DeliveryJob {
     public String getStatus() {
         return status;
     }
+
+    public void markInProgress() {
+        status = "IN_PROGRESS";
+    }
+
+    public void markDone() {
+        status = "DONE";
+    }
 }
