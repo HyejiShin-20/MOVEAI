@@ -13,6 +13,13 @@ import { GuidancePreviewPage } from './pages/GuidancePreviewPage'
 import { GuidanceStepPage } from './pages/GuidanceStepPage'
 import { GuidanceCompletedPage } from './pages/GuidanceCompletedPage'
 import { GuidanceUnavailablePage } from './pages/GuidanceUnavailablePage'
+import { AdminDashboardPage } from './pages/AdminDashboardPage'
+import { AdminReviewListPage } from './pages/AdminReviewListPage'
+import { AdminReviewDetailPage } from './pages/AdminReviewDetailPage'
+import { AdminPlaceManagementPage } from './pages/AdminPlaceManagementPage'
+import { AdminRouteEditPage } from './pages/AdminRouteEditPage'
+import { AdminRouteKnowledgePage } from './pages/AdminRouteKnowledgePage'
+import { AdminRouteValidationPage } from './pages/AdminRouteValidationPage'
 
 export default function App() {
   return (
@@ -32,6 +39,13 @@ export default function App() {
       <Route path="/guidance/step" element={<GuidanceStepPage />} />
       <Route path="/guidance/completed" element={<GuidanceCompletedPage />} />
       <Route path="/guidance/unavailable" element={<GuidanceUnavailablePage />} />
+      <Route path="/admin" element={<AdminDashboardPage />} />
+      <Route path="/admin/reviews" element={<AdminReviewListPage />} />
+      <Route path="/admin/reviews/:reportId" element={<AdminReviewDetailPage />} />
+      <Route path="/admin/places" element={<AdminPlaceManagementPage />} />
+      <Route path="/admin/routes" element={<AdminRouteEditPage />} />
+      <Route path="/admin/routes/knowledge" element={<AdminRouteKnowledgePage />} />
+      <Route path="/admin/routes/validation" element={<AdminRouteValidationPage />} />
       <Route path="*" element={<Navigate to="/login" replace />} />
     </Routes>
   )
