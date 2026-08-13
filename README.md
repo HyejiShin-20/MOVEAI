@@ -17,7 +17,13 @@
 ## 구조
 
 ```
-backend/     Spring Boot   장소·경로·제보·검수·검색·안내 · MariaDB
+backend/     Spring Boot   com.moveai 아래 도메인별 패키지
+  └─ src/main/java/com/moveai/
+     ├─ common/
+     ├─ place/ · route/ · job/ · report/
+     ├─ knowledge/ · moderation/ · retrieval/ · guidance/
+     ├─ ai/stt/ · ai/extraction/ · ai/embedding/
+     └─ dataset/controller/ · dto/ · validation/ · service/
 ai-service/  FastAPI       STT · 지식 추출 · 임베딩
 mobile/      React + Vite  기사 모바일 웹 — 배송 목록 · Last 100m 안내 · 팁 등록
 admin-web/   React + Vite  관리자 검수 웹
@@ -34,6 +40,9 @@ docker compose up -d          # MariaDB 기동
 python scripts/validate_datasets.py   # 데이터셋 정합성 (기대: 이슈 0건)
 pip install -r ai-service/requirements.txt
 ```
+
+백엔드 각 도메인은 필요에 따라 `entity/`, `repository/`, `service/`, `controller/`,
+`dto/`로 나눈다. 전체 패키지 트리는 [`backend/README.md`](backend/README.md)에 있다.
 
 전달용 압축은 탐색기에서 직접 만들지 않고 아래 명령을 사용한다.
 

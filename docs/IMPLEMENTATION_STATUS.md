@@ -4,7 +4,7 @@
 > Phase의 목적·시간 예산·축소 경로는 `MOVE_AI_05C_구현순서_운용.md §7`.
 > 하네스는 **세션 시작 시 이 파일을 먼저 읽고, 세션 종료 전 반드시 갱신**한다.
 
-**최종 갱신** — 2026-08-13 (Gemini STT API 구현·실호출 검증)
+**최종 갱신** — 2026-08-13 (백엔드 도메인 패키지 골격 정리)
 **현재 Phase** — Phase 0 (미착수)
 **경과 시간** — T+0.0h
 
@@ -32,6 +32,7 @@ python -m compileall scripts          → 성공
 python scripts/build_release_zip.py  → 생성 및 제외 규칙 검증 성공
 conda moveai: python -m pytest -q -p no:asyncio (ai-service) → 11 passed
 conda moveai: python scripts/smoke_stt.py → gemini-3.6-flash, M4A 1건 전사 성공
+backend 패키지 구조 검사 → 기대 경로 45개, 누락 0개, package-info 누락 0개
 ```
 
 ---

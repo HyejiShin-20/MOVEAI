@@ -57,26 +57,32 @@ MariaDB 11.4+
 # 6. 백엔드 모듈 구조
 
 ```text
-com.moveai
-├─ common/          예외, 응답 래퍼, enum
-├─ place/           Place, PlaceNode
-├─ route/           Route, RouteSegment, RouteSelector      ← 04 §11-3
-├─ job/             DeliveryJob
-├─ report/          FieldReport, ReportAudioFile
-├─ knowledge/
-│   ├─ KnowledgeItem, KnowledgeCondition, KnowledgeTarget
-│   └─ embedding/   EmbeddingTextBuilder, KnowledgeEmbedding
-├─ moderation/      KnowledgeDraft, ModerationReview, PublishService
-├─ retrieval/
-│   ├─ CandidateCollector      04 §1
-│   ├─ ConditionEvaluator      04 §3
-│   ├─ QueryTextBuilder        04 §5-2
-│   ├─ CosineCalculator        순수 함수, 단위 테스트 쉬움
-│   └─ RankingService          04 §6
-├─ guidance/        GuidanceSession, GuidanceService, StepAssembler
-├─ ai/              SttClient, ExtractionClient, EmbeddingClient (interface)
-└─ dataset/         DatasetValidator, DatasetImportService
+backend/src/main/java/com/moveai/
+├─ common/                         예외, 응답 래퍼, enum
+├─ place/                          장소·노드
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ route/                          경로·구간·경로 선택
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ job/                            배송 건
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ report/                         현장 제보·오디오
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ knowledge/                      승인 지식
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ ├─ dto/
+│  └─ embedding/                   EmbeddingTextBuilder, KnowledgeEmbedding
+├─ moderation/                     Draft·검수·발행
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ retrieval/                      후보·조건·코사인·랭킹 (04 §1~6)
+├─ guidance/                       단계별 Last 100m 안내
+│  ├─ entity/ ├─ repository/ ├─ service/ ├─ controller/ └─ dto/
+├─ ai/                             FastAPI HTTP 클라이언트 경계
+│  ├─ stt/ ├─ extraction/ └─ embedding/
+└─ dataset/                        합성 데이터 검증·임포트
+   ├─ controller/ ├─ dto/ ├─ validation/ └─ service/
 ```
+
+초기 골격은 각 디렉터리의 `package-info.java`만 둔다. 실제 클래스는 해당 Phase에서
+`05A`/`05B` 계약을 확인한 뒤 추가하며, 빈 placeholder 엔티티나 DTO는 미리 만들지 않는다.
 
 ## AI 클라이언트는 인터페이스 뒤에 둔다
 
