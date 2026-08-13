@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 import { HomePage } from './pages/HomePage'
-import { WebLoginPage } from './pages/WebLoginPage'
-import { WebSignupPage } from './pages/WebSignupPage'
+import { LoginRoutePage, SignupInfoRoutePage, SignupRoutePage } from './pages/AuthRoutePages'
 import { VoiceRecordPage } from './pages/VoiceRecordPage'
 import { VoiceUploadPage } from './pages/VoiceUploadPage'
 import { TranscriptionPage } from './pages/TranscriptionPage'
@@ -25,8 +24,9 @@ export default function App() {
   return (
     <Routes>
       <Route path="/" element={<Navigate to="/login" replace />} />
-      <Route path="/login" element={<WebLoginPage />} />
-      <Route path="/signup" element={<WebSignupPage />} />
+      <Route path="/login" element={<LoginRoutePage />} />
+      <Route path="/signup" element={<SignupRoutePage />} />
+      <Route path="/signup/info" element={<SignupInfoRoutePage />} />
       <Route path="/home" element={<HomePage />} />
       <Route path="/reports/record" element={<VoiceRecordPage />} />
       <Route path="/reports/uploading" element={<VoiceUploadPage />} />

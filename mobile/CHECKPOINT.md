@@ -1,12 +1,16 @@
-# MOVEAI Front Checkpoint — Guidance G-08
+# MOVEAI Front Checkpoint — Mobile Auth + Admin Complete
 
 기준: Figma `Move-AI` 디자인 / React + Vite + TypeScript / plain CSS
 
 ## 완료 범위
 
-### 웹 인증
-- 웹 로그인
-- 웹 회원가입 / 기사 정보 입력
+### 인증 화면
+- 데스크톱 로그인
+- 데스크톱 회원가입 / 기사 정보 입력
+- 모바일 로그인 (`118:9520`)
+- 모바일 회원가입 약관동의 (`118:9469`)
+- 모바일 회원정보 입력 (`118:9568`)
+- 반응형 인증 라우팅: `/login`, `/signup`, `/signup/info`
 
 ### 모바일 현장 팁 흐름
 - M-01 메인 화면
@@ -24,24 +28,25 @@
 - G-06 배달 및 안내 완료
 - G-08 경로 정보 없음
 
-## 이번 체크포인트 추가 반영
-- G-03 Figma 프레임 기준 지도/참고 사진 스트립/안내 시작 UI 반영
-- G-04 지도 컨트롤, 우회전 현재 단계 카드, 안내 종료 UI 반영
-- G-06 완료 그래픽, 거리·소요시간, 후문→정차→엘리베이터 요약, 후속 CTA 반영
-- G-08 경로 없음 상태, 차량 진입 제약 안내, 차량 조건/장소 정보/종료 액션 반영
-- 화면 간 이동: G-03 → G-04 → G-06, 각 종료/후속 액션 라우팅 연결
-- 해당 화면에 최신 Figma MCP asset URL 반영
+### 관리자 화면
+- A-01 관리자 대시보드
+- A-02 검수 대기 목록
+- A-03 제보 검수 상세
+- A-07 장소 내부 지점 관리
+- A-08 경로 생성 및 편집
+- A-09 경로별 지식 연결
+- A-10 경로 미리보기 및 검증
 
-## 다음 작업 순서
-- 웹/관리자 화면 전체 프레임 목록 재확인
-- 관리자 대시보드부터 Figma 순서대로 구현
+## Figma 전체 프레임 대조 결과
+- PC 페이지의 관리자 프레임은 A-01/A-02/A-03/A-07/A-08/A-09/A-10으로 구성되어 있음.
+- 현재 Figma PC 페이지에 A-04/A-05/A-06 프레임은 존재하지 않음.
+- MO 페이지의 서비스 화면과 모바일 인증 3종까지 코드에 반영함.
 
 ## 참고
 - Git commit / push 하지 않은 로컬 체크포인트입니다.
-- Figma MCP asset URL은 임시 URL입니다. 현재 실행 확인용으로 사용하며 실제 병합 전에 프로젝트 asset/CDN 정책에 맞춰 영구 자산화가 필요합니다.
-- 이 실행 환경은 Figma asset URL을 직접 다운로드할 DNS 접근이 없어 체크포인트 내부에 asset 바이너리를 저장하지 못했습니다.
+- Figma MCP asset URL은 임시 URL입니다. 실제 병합 전 프로젝트 asset/CDN 정책에 맞춰 영구 자산화가 필요합니다.
 
-## 검증
-- G-03 / G-04 / G-06 / G-08 TSX는 TypeScript `transpileModule` 기준 구문 검사를 통과했습니다.
-- App.tsx에 `/guidance/preview`, `/guidance/step`, `/guidance/completed`, `/guidance/unavailable` 라우트가 연결되어 있습니다.
-- 전체 `npm run build`는 체크포인트에 `node_modules`가 포함되어 있지 않아 실행하지 않았습니다.
+## 이번 체크포인트 검증
+- 전체 `src` TS/TSX 31개 파일을 TypeScript `transpileModule`로 구문 검증 완료.
+- `src/styles/global.css` 중괄호 구조 검증 완료.
+- `npm install --no-audit --no-fund`를 시도했으나 실행 환경의 패키지 다운로드가 120초 내 완료되지 않아 전체 `npm run build`는 실행하지 못함.
