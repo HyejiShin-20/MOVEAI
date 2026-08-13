@@ -102,10 +102,10 @@ cd _warmup && npm install
 
 ## STT
 
-**확정: `gpt-4o-mini-transcribe`.** 당일 처음 돌렸는데 "2.5톤 택시"로 나오면 대안을 찾을 시간이 없다.
+**확정: `gemini-3.6-flash`.** 당일 처음 돌렸는데 "2.5톤 택시"로 나오면 대안을 찾을 시간이 없다.
 
-- [x] OpenAI Transcription API 방식과 모델 결정
-- [ ] `datasets/`의 음성 후보 중 **3건 이상 실제로 녹음해서 돌려봄**
+- [x] Gemini Interactions API 방식과 모델 결정
+- [ ] `datasets/voice`의 음성 후보 중 **3건 이상 실제 호출** (현재 1건 성공)
 - [ ] 한국어 구어체 인식 확인 — "빡빡해요", "탑차", "1.5톤", "방화문"
 - [ ] 숫자가 제대로 나오는지 확인 (톤수·시간이 틀리면 추출이 전부 틀어진다)
 
@@ -113,7 +113,7 @@ cd _warmup && npm install
 
 ## 임베딩
 
-**확정: `text-embedding-3-small`, 1536차원.** 모델을 바꾸면 저장된 벡터를 전부
+**확정: `gemini-embedding-2`, 1536차원.** 모델을 바꾸면 저장된 벡터를 전부
 다시 만들어야 한다. **당일 변경은 사실상 불가능하다.**
 
 - [x] 모델과 차원 수 결정 → `05A §2-3`의 `embedding_dimension`에 함께 저장
@@ -122,8 +122,8 @@ cd _warmup && npm install
 
 ## LLM (지식 추출)
 
-**확정: `gpt-4o-mini`.** 현재 Python SDK와 호환되고 Structured Outputs를 지원하는
-저비용 모델을 사용한다.
+**확정: `gemini-3.5-flash-lite` + `minimal` thinking.** 지식 추출은 Gemini JSON
+출력과 서버의 Pydantic 검증을 함께 사용한다.
 
 - [x] 모델 결정
 - [x] Structured Outputs 지원 여부 공식 문서 확인
@@ -137,7 +137,7 @@ cd _warmup && npm install
 
 - [ ] LLM 키 발급 + **실제 호출 성공**
 - [ ] 임베딩 키 발급 + **실제 호출 성공**
-- [ ] STT 키 발급 + **실제 호출 성공** (API 방식인 경우)
+- [x] STT 키 발급 + **실제 호출 성공** (`datasets/voice` M4A 1건)
 - [ ] 잔액·쿼터 확인
 - [ ] 키를 팀 내 공유 방법 정해두기 (`.env`는 커밋 금지)
 

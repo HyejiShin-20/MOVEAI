@@ -120,7 +120,13 @@ REMAINING       blocker / 다음 정확한 작업 하나
 ## 프로젝트 구조
 
 ```
-backend/     Spring Boot   장소·경로·제보·검수·검색·안내
+backend/     Spring Boot
+  └─ src/main/java/com/moveai/
+     ├─ common/
+     ├─ place/ · route/ · job/ · report/
+     ├─ knowledge/ · moderation/ · retrieval/ · guidance/
+     ├─ ai/stt/ · ai/extraction/ · ai/embedding/
+     └─ dataset/controller/ · dto/ · validation/ · service/
 ai-service/  FastAPI       STT · 지식 추출 · 임베딩
 mobile/      React + Vite  기사 모바일 웹 (배송목록·안내·팁등록)
 admin-web/   React + Vite  관리자 검수 웹
@@ -128,6 +134,10 @@ datasets/    합성 데이터 4종 (임포트 대상, 검증 완료)
 docs/        기획·구현 문서
 scripts/     검증·실행 스크립트
 ```
+
+`place`, `route`, `job`, `report`, `knowledge`, `moderation`, `guidance`는
+`entity/repository/service/controller/dto`로 분리한다. 정확한 전체 트리는
+`backend/README.md`와 `05C §6`을 따른다.
 
 ## 스택 버전 (임의로 바꾸지 말 것)
 
