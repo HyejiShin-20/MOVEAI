@@ -284,6 +284,24 @@ PRD §P0-4의 예시에서 **`장소:` 줄을 뺀다.**
   별도로 붙이면 같은 정보가 두 번 들어가 가중치만 왜곡된다.
 - `action_text`가 null이면 그 줄 자체를 생략한다(B+C에 다수 존재).
 
+### 세부 규칙 (시드 임베딩 구현 시 확정)
+
+`위치:`와 `이동:` 줄의 값이 명시되지 않아 아래로 고정했다. 시드 146건은 이 규칙으로 이미
+벡터화되어 있으므로, **승인 시점에 동작하는 Spring `EmbeddingTextBuilder`도 같은 문자열을
+만들어야 한다.** 어긋나면 시드 벡터와 신규 벡터가 다른 공간에 놓인다.
+
+| 항목 | 규칙 | 대상 |
+|---|---|---|
+| `위치:` NODE | 노드 `name` | 105건 |
+| `위치:` SEGMENT | `"{from_node.name} → {to_node.name}"` (`05B §5-2` knownSegments 형식과 동일) | 8건 |
+| `위치:` UNKNOWN | `target_free_text` 원문 그대로 | 33건 |
+| `이동:` traversal=OTHER | `custom_traversal_method` 로 대체 | 7건 |
+| `이동:` traversal=null | `"이동: {movement_mode}"` 만 출력 | — |
+| `행동:` action_text 없음 | 줄 삭제 | 86건 |
+
+구현·테스트는 `ai-service/app/services/embedding_text.py`, `tests/test_embedding_text.py`.
+`K_B_001`의 최종 문자열이 `tests/test_dataset_embedding.py`에 기준값으로 박혀 있다.
+
 ## 5-2. Query text — 세그먼트에서 조립, 같은 포맷으로
 
 `기능흐름_AI원리` §24 3단계의 예시 문장은 쓰지 않는다.

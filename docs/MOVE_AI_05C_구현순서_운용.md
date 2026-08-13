@@ -292,6 +292,7 @@ LLM_MODEL              gemini-3.5-flash-lite
 LLM_THINKING_LEVEL     minimal
 EMBEDDING_MODEL        gemini-embedding-2
 EMBEDDING_DIMENSION    1536
+EMBEDDING_BATCH_SIZE   50            API 상한 100 / 무료 등급은 분당 100건
 STT_MODEL              gemini-3.6-flash
 STT_MAX_FILE_BYTES     10485760
 AUDIO_STORAGE_PATH      ./data/audio
