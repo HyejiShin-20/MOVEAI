@@ -179,6 +179,16 @@ cd backend && ./gradlew bootRun --args="--import-datasets"
 임포트만 하고 프로세스가 종료된다. **전체 TRUNCATE 후 재삽입**이므로 런타임에 쌓인
 초안·검수·세션도 함께 지워진다. 기대 건수는 아래 "데이터셋 사실"과 같다.
 
+**현재 열려 있는 API** (계약은 `05B`, 임의로 바꾸지 않는다)
+
+```
+GET /api/places · /api/places/{id} · /api/routes/{id}
+GET /api/delivery-jobs · /api/delivery-jobs/{id}
+```
+
+CORS는 `http://localhost:5173`·`5174`를 허용한다. 화면이 다른 포트를 쓰면
+`CORS_ALLOWED_ORIGINS`로 넘긴다.
+
 Gradle은 wrapper(8.11.1)로 고정돼 있다. 전역 설치가 필요 없고, **팀원 전원이 같은 버전으로 빌드한다.**
 JDK는 17 이상이면 된다(이 기기는 21, 산출물은 17 타깃).
 `bootRun`은 저장소 루트의 `.env`를 읽어 환경변수로 넣는다.

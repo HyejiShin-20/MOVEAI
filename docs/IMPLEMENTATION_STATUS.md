@@ -4,19 +4,25 @@
 > Phase의 목적·시간 예산·축소 경로는 `MOVE_AI_05C_구현순서_운용.md §7`.
 > 하네스는 **세션 시작 시 이 파일을 먼저 읽고, 세션 종료 전 반드시 갱신**한다.
 
-**최종 갱신** — 2026-08-13 (Phase 2a 완료 — DDL + 데이터셋 임포트)
-**현재 Phase** — Phase 2a `DONE`. 다음은 Phase 2b (조회 API)
+**최종 갱신** — 2026-08-13 (Phase 2b 완료 — 조회 API)
+**현재 Phase** — Phase 2b `DONE`. 다음은 Phase 3 (임베딩 + 검색)
 **경과 시간** — T+0.0h (본선 전 선행 작업)
+
+> **화면 담당에게 알릴 것** — `05B §4-1`·`§4-2` 조회 API가 실제 데이터로 응답한다.
+> Mock에서 실제 API로 넘어올 수 있다. base URL `http://localhost:8080`, CORS는 5173/5174 허용.
 
 ---
 
 ## 다음에 할 정확한 작업
 
 ```
-Phase 2b — 조회 API (05B §4-1)
-  GET /api/places · /api/places/{id} · /api/routes/{id} 가 실제 데이터로 응답하게 만든다.
-  DB에는 이미 장소 4 · 노드 57 · 경로 8 · 구간 30 · 지식 146이 들어가 있다.
-  여기서부터 프론트가 붙을 수 있다.
+Phase 3 — 임베딩 + 검색
+  이미 만들어 둔 146건 벡터(data/embeddings/knowledge_embeddings.json)를
+  knowledge_embeddings 테이블에 적재하고, retrieval 4개 클래스를 만든다.
+    CandidateCollector(04 §1) · ConditionEvaluator(04 §3)
+    QueryTextBuilder(04 §5-2) · CosineCalculator · RankingService(04 §6)
+  Spring EmbeddingTextBuilder는 04 §5-1의 표와 같은 문자열을 만들어야 한다.
+  정답 질문 20개로 Hit@3 수치를 확보한다.
 ```
 
 ## 현재 blocker
@@ -51,6 +57,13 @@ backend: .\gradlew.bat bootRun --args="--import-datasets" → 2회 실행 모두
 SQL 검증 → 장소별 지식 A36·B37·C40·D33 / 톤수 파생 8건이 05A §3-3 표와 일치
   / target NODE105·SEGMENT8·UNKNOWN33 / 구간 연속성 위반 0건
   / ROUTE_B_01 7단계 · ROUTE_B_02 maxTon·minTon 1.0 상호배타
+GET /api/places            → 4건
+GET /api/places/2          → 노드 14 + 경로 2 (ROUTE_B_01 maxTon 1.00/maxH 2.30, B_02 minTon 1.00)
+GET /api/routes/3          → 7단계 순서대로, fromNodeName/toNodeName 포함
+GET /api/routes/4          → 3단계
+GET /api/delivery-jobs     → 5건 (status 없이 호출하면 전체)
+GET /api/routes/999        → 404 {"error":{"code":"ROUTE_NOT_FOUND", …}}
+OPTIONS /api/places        → 200 (Origin http://localhost:5173)
 ```
 
 ---
@@ -97,10 +110,12 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 
 > 막히면 **B 하나만 넣고 2b로 넘어간다.** 시연은 B에서만 한다.
 
-## Phase 2b — 조회 API  `TODO`  (1.0h / 누적 4.0h)
-- [ ] `GET /api/places` 실제 응답
-- [ ] `GET /api/places/{id}` 노드·경로 포함 응답
-- [ ] `GET /api/routes/{id}` 구간 순서대로 응답
+## Phase 2b — 조회 API  `DONE`  (1.0h / 누적 4.0h)
+- [x] `GET /api/places` 실제 응답
+- [x] `GET /api/places/{id}` 노드·경로 포함 응답
+- [x] `GET /api/routes/{id}` 구간 순서대로 응답
+- [x] `GET /api/delivery-jobs` · `/{id}` — 화면 M2가 붙으려면 필요해 함께 구현 (`05B §4-2`)
+- [x] CORS 허용 (Vite 5173/5174) — 없으면 화면이 Mock에서 못 넘어온다
 - [ ] 커밋
 
 ## Phase 3 — 임베딩 + 검색  `TODO`  (2.0h / 누적 6.0h)
@@ -267,6 +282,19 @@ T+10.0h  W2 미완  →  검수를 API 직접 호출로 대체하고 화면은 �
 ```
 
 <!-- 여기부터 기록 -->
+
+## 본선 전 선행 — 2026-08-13  Phase 2b 조회 API
+변경   JPA 엔티티 5개(Place · PlaceNode · Route · RouteSegment · DeliveryJob)와 리포지토리,
+       PlaceService/RouteService/DeliveryJobService, 컨트롤러 3개,
+       `05B` 오류 형식용 `ApiException`·`ApiExceptionHandler`, CORS 설정
+검증   `.\gradlew.bat build` → BUILD SUCCESSFUL
+       places 4 / places/2 노드 14·경로 2 / routes/3 7단계 / routes/4 3단계 /
+       delivery-jobs 5 / 404 오류 형식 / CORS preflight 200
+결정   `GET /api/delivery-jobs` 를 여기서 함께 만들었다. 화면 M2(배송 목록)가 T+4.0h에
+       실제 API로 넘어오려면 필요하고, 이미 임포트된 데이터를 읽기만 하므로 범위가 커지지 않는다.
+       필터 없이 호출하면 전체를 반환한다 — 시연 중 목록에서 건이 사라지면 안 된다 (05B §4-3).
+남은것 임베딩 벡터가 아직 DB에 없다. retrieval 로직 전무.
+다음   Phase 3 — 벡터 적재 + CandidateCollector·ConditionEvaluator·CosineCalculator·RankingService
 
 ## 본선 전 선행 — 2026-08-13  Phase 2a DDL + 임포트
 변경   `db/schema.sql`(05A §2 전량 16테이블), `SchemaInitializer`, `DatasetImportService`(JdbcTemplate),

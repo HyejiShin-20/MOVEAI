@@ -28,6 +28,9 @@ moveai:
     # bootRun 의 작업 디렉터리는 backend/ 다. 임포트 대상은 저장소 루트의 datasets/ 뿐이며
     # docs/dataset/ 은 작성 이력이라 임포트하지 않는다 (05A §3-1).
     dir: ${DATASET_DIR:../datasets}
+  cors:
+    # Vite 기본 포트. 화면 담당이 다른 포트를 쓰면 CORS_ALLOWED_ORIGINS 로 넘긴다.
+    allowed-origins: ${CORS_ALLOWED_ORIGINS:http://localhost:5173,http://localhost:5174,http://127.0.0.1:5173,http://127.0.0.1:5174}
 
 logging:
   level:
