@@ -1,11 +1,12 @@
 import { useLocation, useNavigate } from 'react-router-dom'
+import { publicAsset } from '../publicAsset'
 import { routes } from '../routes'
 
 const items = [
-  { label: '배송', icon: '/assets/nav-delivery.svg', path: routes.home, matches: ['/home'] },
-  { label: '현장 팁', icon: '/assets/nav-tip.svg', path: routes.reportRecord, matches: ['/reports'] },
-  { label: '경로안내', icon: '/assets/nav-route.svg', path: routes.guidancePreview, matches: ['/guidance'] },
-  { label: 'MY', icon: '/assets/nav-my.svg', path: routes.myReports, matches: ['/reports/mine'], compact: true },
+  { label: '배송', icon: publicAsset('nav-delivery.svg'), path: routes.home, matches: ['/home'] },
+  { label: '현장 팁', icon: publicAsset('nav-tip.svg'), path: routes.reportRecord, matches: ['/reports'] },
+  { label: '경로안내', icon: publicAsset('nav-route.svg'), path: routes.guidancePreview, matches: ['/guidance'] },
+  { label: 'MY', icon: publicAsset('nav-my.svg'), path: routes.myReports, matches: ['/reports/mine'], compact: true },
 ]
 
 export function BottomNav() {

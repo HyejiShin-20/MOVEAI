@@ -4,6 +4,7 @@ import { api } from '../api/client'
 import type { DeliveryJobSummary, GuidanceSession } from '../api/models'
 import { BottomNav } from '../components/BottomNav'
 import { TopAppBar } from '../components/TopAppBar'
+import { publicAsset } from '../publicAsset'
 import { routes } from '../routes'
 import { guidanceSessionStore } from '../state/guidanceSession'
 import { reportDraftStore } from '../state/reportDraft'
@@ -59,10 +60,10 @@ export function HomePage() {
       <main className="home-content">
         <section className="primary-actions" aria-label="빠른 실행">
           <button type="button" className="primary-action primary-action--tip" onClick={() => { reportDraftStore.reset(); navigate(routes.reportRecord) }}>
-            <img src="/assets/mic-white.svg" alt="" /><span>현장 팁 기록</span>
+            <img src={publicAsset('mic-white.svg')} alt="" /><span>현장 팁 기록</span>
           </button>
           <button type="button" className="primary-action primary-action--route" onClick={() => openGuidance()}>
-            <img src="/assets/map.svg" alt="" /><span>배송지 안내</span>
+            <img src={publicAsset('map.svg')} alt="" /><span>배송지 안내</span>
           </button>
         </section>
 
@@ -71,9 +72,9 @@ export function HomePage() {
           <div className="recent-location-list">
             {jobs.map((job) => (
               <button type="button" className="recent-location" key={job.id} onClick={() => openGuidance(job.id)}>
-                <img className="recent-location__pin" src="/assets/location.svg" alt="" />
+                <img className="recent-location__pin" src={publicAsset('location.svg')} alt="" />
                 <span className="recent-location__copy"><strong>{job.placeName} · {job.recipientLabel}</strong><span>{job.addressText} · {job.itemSummary}</span></span>
-                <img className="recent-location__chevron" src="/assets/chevron.svg" alt="" />
+                <img className="recent-location__chevron" src={publicAsset('chevron.svg')} alt="" />
               </button>
             ))}
             {!jobs.length && <p className="delivery-list-state">{jobsError || '배송 목록을 불러오는 중입니다.'}</p>}
