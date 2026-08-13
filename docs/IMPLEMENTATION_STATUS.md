@@ -4,8 +4,8 @@
 > Phase의 목적·시간 예산·축소 경로는 `MOVE_AI_05C_구현순서_운용.md §7`.
 > 하네스는 **세션 시작 시 이 파일을 먼저 읽고, 세션 종료 전 반드시 갱신**한다.
 
-**최종 갱신** — 2026-08-13 (ai-service `/embed` + 데이터셋 146건 임베딩)
-**현재 Phase** — Phase 0 (미착수). ai-service는 3개 엔드포인트 모두 실호출 완료
+**최종 갱신** — 2026-08-13 (Phase 1 완료 — backend 런타임)
+**현재 Phase** — Phase 1 `DONE`. 다음은 Phase 2a (DDL + 임포트)
 **경과 시간** — T+0.0h (본선 전 선행 작업)
 
 ---
@@ -13,18 +13,21 @@
 ## 다음에 할 정확한 작업
 
 ```
-Phase 1 — backend Spring 런타임
-  build.gradle · Application · /health · MariaDB 연결.
-  backend/ 는 아직 package-info.java 뿐이라 컴파일되지 않는다.
-  이게 서야 Phase 2a(DDL·임포트) → Phase 3(임베딩 적재)로 이어진다.
+Phase 2a — DDL + 임포트
+  05A §2의 DDL을 moveai DB에 적용하고, datasets 4개를 임포트한다.
+  DB는 이미 비어 있는 상태로 준비돼 있다 (테이블 0개, utf8mb4_general_ci).
+  톤수 파생 컬럼(05A §3-3 8건 표)과 시드 배송 5건(§3-5)을 빠뜨리지 않는다.
 ```
 
 ## 현재 blocker
 
 ```
-backend Spring 프로젝트가 없어 임베딩 벡터를 적재할 DB 경로가 없다.
-벡터는 파일 산출물로 만들어 두었으므로, Spring이 서면 knowledge_code 조인으로 INSERT 하면 된다.
-Gemini 임베딩 무료 등급은 분당 100건 제한 — 146건 일괄 생성에 약 67초가 걸린다.
+없음. Phase 2a를 바로 시작할 수 있다.
+
+주의 두 가지 (환경):
+- DB는 호스트 설치 MariaDB 12.3.2가 3307에서 돈다. docker-compose 컨테이너를 같이 띄우면
+  같은 포트를 다퉈 어느 쪽에 붙는지 알 수 없게 된다. 둘 중 하나만 쓴다.
+- 포트 8000을 다른 앱이 IPv6로 물고 있다. AI_SERVICE_URL은 127.0.0.1로 고정해 두었다.
 ```
 
 ## 마지막으로 검증한 명령
@@ -35,9 +38,12 @@ python -m compileall scripts          → 성공
 python scripts/build_release_zip.py  → 생성 및 제외 규칙 검증 성공
 conda moveai: python -m pytest -q (ai-service) → 48 passed
 conda moveai: python scripts/smoke_stt.py → gemini-3.6-flash, M4A 1건 전사 성공
-conda moveai: python scripts/embed_dataset.py --dry-run → 146건 embedding_text 생성
 conda moveai: python scripts/embed_dataset.py → gemini-embedding-2, 146건 × 1536차원, 67초
-backend 패키지 구조 검사 → 기대 경로 45개, 누락 0개, package-info 누락 0개
+backend: .\gradlew.bat build → BUILD SUCCESSFUL (Gradle 8.11.1 / JDK 21 / 17 타깃)
+backend: .\gradlew.bat bootRun → Started MoveAiApplication, Tomcat 8080
+curl localhost:8080/health → {"status":"ok",
+  "database":{"status":"up","product":"12.3.2-MariaDB"},
+  "aiService":{"status":"ok","provider":"gemini","model":"gemini-3.6-flash"}}
 ```
 
 ---
@@ -64,12 +70,12 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 - [ ] 빌드·환경 파일 확인
 - [ ] 이 파일의 Phase 표를 실제 상태로 갱신
 
-## Phase 1 — Server Runtime  `TODO`  (1.0h / 누적 1.5h)
-- [ ] backend `/health` 200
-- [ ] ai-service `/health` 200
-- [ ] MariaDB 연결 성공
-- [ ] backend → ai-service `/health` 호출 성공
-- [ ] **`CLAUDE.md`의 "명령" 절에 실제 빌드·실행 명령 추가**
+## Phase 1 — Server Runtime  `DONE`  (1.0h / 누적 1.5h)
+- [x] backend `/health` 200
+- [x] ai-service `/health` 200
+- [x] MariaDB 연결 성공 (호스트 설치 12.3.2 / 3307)
+- [x] backend → ai-service `/health` 호출 성공
+- [x] **`CLAUDE.md`의 "명령" 절에 실제 빌드·실행 명령 추가**
 - [ ] 커밋
 
 ## Phase 2a — DDL + 임포트  `TODO`  (1.5h / 누적 3.0h)
@@ -254,6 +260,20 @@ T+10.0h  W2 미완  →  검수를 API 직접 호출로 대체하고 화면은 �
 ```
 
 <!-- 여기부터 기록 -->
+
+## 본선 전 선행 — 2026-08-13  Phase 1 Server Runtime
+변경   Gradle wrapper(8.11.1) 부트스트랩, `build.gradle`·`settings.gradle`,
+       `MoveAiApplication`, `HealthController`(서버·DB·ai-service 3경계), `AiServiceClient`,
+       `application.yml`(ddl-auto=none), `bootRun`이 루트 `.env`를 읽도록 구성,
+       `.gitignore`의 wrapper jar 예외 경로 수정, `CLAUDE.md` 명령 절 작성
+검증   `.\gradlew.bat build` → BUILD SUCCESSFUL
+       `curl localhost:8080/health` → database up(12.3.2-MariaDB) · aiService ok(gemini)
+환경   DB는 **호스트 설치 MariaDB 12.3.2 / 3307**을 쓴다. compose 컨테이너는 같은 포트를
+       다투므로 띄우지 않는다. 3306은 다른 프로젝트 mysqld가 점유 중이라 건드리지 않는다.
+       포트 8000은 다른 앱이 IPv6로 물고 있어 `AI_SERVICE_URL`을 127.0.0.1로 고정했다.
+       JDK 17이 없어 JDK 21로 빌드하되 산출물은 17 타깃으로 맞췄다.
+남은것 DB 테이블 0개. Phase 2a DDL·임포트가 다음이다.
+다음   05A §2 DDL 적용 → datasets 4개 임포트 → 톤수 파생 컬럼 8건 테스트 → 시드 배송 5건
 
 ## 본선 전 선행 — 2026-08-13  ai-service 임베딩
 변경   `POST /embed` 구현(05B §5-1 계약 그대로), `embedding_text` 조립 규칙 확정(04 §5-1),

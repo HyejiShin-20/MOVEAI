@@ -32,9 +32,32 @@ src/main/java/com/moveai/
    ├─ controller/ ├─ dto/ ├─ validation/ └─ service/
 ```
 
-현재는 폴더 구조를 Git에 보존하기 위한 `package-info.java`만 있다. 엔티티·DTO·서비스
+대부분은 폴더 구조를 Git에 보존하기 위한 `package-info.java`만 있다. 엔티티·DTO·서비스
 클래스는 해당 Phase에서 API·DB 계약을 확인한 뒤 추가한다. Gemini STT 구현 자체는
 `ai-service/app/services/stt.py`에 있고, `ai/stt`는 이후 Spring HTTP 클라이언트가 들어갈 경계다.
+
+## 실행 (Phase 1 완료)
+
+```bash
+./gradlew build      # Windows: .\gradlew.bat build
+./gradlew bootRun    # http://localhost:8080
+curl http://localhost:8080/health
+```
+
+```json
+{ "status": "ok",
+  "database":  { "status": "up", "product": "12.3.2-MariaDB" },
+  "aiService": { "status": "ok", "provider": "gemini", "model": "gemini-3.6-flash" } }
+```
+
+`/health`는 **어느 하나가 죽어도 200을 돌려주고 상태만 다르게 표시한다.** 여기서 500이 나면
+무엇이 끊겼는지 확인할 수단 자체가 사라진다.
+
+- Gradle은 wrapper(8.11.1)로 고정. 전역 설치 불필요, 팀원 전원 같은 버전.
+- JDK는 17 이상이면 된다. 이 기기는 21이고 산출물은 17 타깃(`sourceCompatibility`)이다.
+- `bootRun`이 저장소 루트의 `.env`를 읽어 환경변수로 넣는다 (`SETUP.md §1-B`가 전제하는 동작).
+- **`spring.jpa.hibernate.ddl-auto=none`.** 스키마는 `05A §2`의 DDL로만 만든다.
+  Hibernate가 테이블을 자동 생성하면 05A와 어긋난 스키마가 조용히 생긴다.
 
 ## 주의
 

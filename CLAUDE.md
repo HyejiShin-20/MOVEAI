@@ -152,13 +152,47 @@ MariaDB 11.4+
 
 ## 명령
 
+### DB
+
 ```bash
-docker compose up -d                  # MariaDB
-python scripts/validate_datasets.py   # 데이터셋 정합성 (기대: 이슈 0건)
-pip install -r ai-service/requirements.txt
+docker compose up -d                  # MariaDB (호스트에 이미 설치돼 있으면 띄우지 않는다)
 ```
 
-빌드·테스트·실행 명령은 각 스택 구성 후 이 절에 추가한다.
+**이 기기에는 MariaDB 12.3.2가 호스트에 설치돼 `3307`에서 돌고 있다.**
+`.env`의 `DB_PORT=3307`이 그것을 가리킨다. 컨테이너를 같은 포트로 띄우면 둘이 충돌하므로
+**둘 중 하나만 쓴다.** 3306은 다른 프로젝트의 mysqld가 쓰고 있으니 끄지 않는다. (`SETUP.md §1-B`)
+
+### backend (Spring Boot)
+
+```bash
+cd backend && ./gradlew build          # 빌드 (Windows: .\gradlew.bat)
+cd backend && ./gradlew bootRun        # 실행 → http://localhost:8080
+curl http://localhost:8080/health      # 서버 · DB · ai-service 세 경계를 한 번에 확인
+```
+
+Gradle은 wrapper(8.11.1)로 고정돼 있다. 전역 설치가 필요 없고, **팀원 전원이 같은 버전으로 빌드한다.**
+JDK는 17 이상이면 된다(이 기기는 21, 산출물은 17 타깃).
+`bootRun`은 저장소 루트의 `.env`를 읽어 환경변수로 넣는다.
+
+### ai-service (FastAPI)
+
+```bash
+conda activate moveai
+pip install -r ai-service/requirements.txt
+cd ai-service && uvicorn app.main:app --reload --port 8000
+cd ai-service && pytest -q             # 48 passed
+```
+
+**이 기기의 포트 8000은 다른 앱이 IPv6(`::`, `::1`)로 물고 있다.** uvicorn은 IPv4에만 붙으므로
+`localhost`가 IPv6로 풀리면 엉뚱한 서버에 간다. `.env`의 `AI_SERVICE_URL`을
+`http://127.0.0.1:8000`으로 고정해 뒀다. ai-service 응답이 이상하면 이걸 먼저 의심한다.
+
+### 데이터
+
+```bash
+python scripts/validate_datasets.py               # 데이터셋 정합성 (기대: 이슈 0건)
+cd ai-service && python scripts/embed_dataset.py  # 지식 146건 임베딩 산출물 생성
+```
 
 ---
 
