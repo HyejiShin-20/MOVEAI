@@ -4,6 +4,11 @@ server:
 spring:
   application:
     name: moveai-backend
+  servlet:
+    multipart:
+      # ai-service 의 업로드 제한(기본 10MB)과 맞춘다.
+      max-file-size: 10MB
+      max-request-size: 12MB
   datasource:
     url: jdbc:mariadb://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:moveai}?characterEncoding=utf8mb4
     username: ${DB_USER:moveai}
@@ -24,6 +29,13 @@ spring:
 moveai:
   ai-service:
     url: ${AI_SERVICE_URL:http://localhost:8000}
+  embedding:
+    model: ${EMBEDDING_MODEL:gemini-embedding-2}
+    dimension: ${EMBEDDING_DIMENSION:1536}
+    artifact: ${EMBEDDING_ARTIFACT:../data/embeddings/knowledge_embeddings.json}
+  audio:
+    # 원본 음성은 로컬 디렉터리 저장으로 충분하다. data/ 는 gitignore 대상이다.
+    storage-path: ${AUDIO_STORAGE_PATH:../data/audio}
   dataset:
     # bootRun 의 작업 디렉터리는 backend/ 다. 임포트 대상은 저장소 루트의 datasets/ 뿐이며
     # docs/dataset/ 은 작성 이력이라 임포트하지 않는다 (05A §3-1).

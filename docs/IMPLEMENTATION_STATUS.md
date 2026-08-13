@@ -4,8 +4,8 @@
 > Phase의 목적·시간 예산·축소 경로는 `MOVE_AI_05C_구현순서_운용.md §7`.
 > 하네스는 **세션 시작 시 이 파일을 먼저 읽고, 세션 종료 전 반드시 갱신**한다.
 
-**최종 갱신** — 2026-08-13 (Phase 2b 완료 — 조회 API)
-**현재 Phase** — Phase 2b `DONE`. 다음은 Phase 3 (임베딩 + 검색)
+**최종 갱신** — 2026-08-13 (Phase 3 완료 — 벡터 적재 + 하이브리드 검색)
+**현재 Phase** — Phase 3 `DONE`. 다음은 Phase 4 (안내)
 **경과 시간** — T+0.0h (본선 전 선행 작업)
 
 > **화면 담당에게 알릴 것** — `05B §4-1`·`§4-2` 조회 API가 실제 데이터로 응답한다.
@@ -16,13 +16,10 @@
 ## 다음에 할 정확한 작업
 
 ```
-Phase 3 — 임베딩 + 검색
-  이미 만들어 둔 146건 벡터(data/embeddings/knowledge_embeddings.json)를
-  knowledge_embeddings 테이블에 적재하고, retrieval 4개 클래스를 만든다.
-    CandidateCollector(04 §1) · ConditionEvaluator(04 §3)
-    QueryTextBuilder(04 §5-2) · CosineCalculator · RankingService(04 §6)
-  Spring EmbeddingTextBuilder는 04 §5-1의 표와 같은 문자열을 만들어야 한다.
-  정답 질문 20개로 Hit@3 수치를 확보한다.
+Phase 4 — 안내
+  RouteSelector로 배송 목적지와 차량 조건에 맞는 고정 Route를 선택한다.
+  GuidanceSession을 생성하고 Phase 3 HybridSearchService를 단계별 카드 조립에 연결한다.
+  1톤 ROUTE_B_01(7단계) / 2.5톤 ROUTE_B_02(3단계), 시간 필터와 중복 제거를 검증한다.
 ```
 
 ## 현재 blocker
@@ -64,6 +61,12 @@ GET /api/routes/4          → 3단계
 GET /api/delivery-jobs     → 5건 (status 없이 호출하면 전체)
 GET /api/routes/999        → 404 {"error":{"code":"ROUTE_NOT_FOUND", …}}
 OPTIONS /api/places        → 200 (Origin http://localhost:5173)
+backend: .\gradlew.bat bootRun --args="--import-embeddings"
+  → knowledge_embeddings=146, 모델 gemini-embedding-2, 전건 1536차원
+  → Spring/Python embedding_text 전건 일치 검증 후 적재
+backend: .\gradlew.bat bootRun --args="--evaluate-rag"
+  → 정답 질문 20개 Hit@3 20/20(100%), Hit@5 20/20(100%), Top-5 must_not 위반 11건
+backend: .\gradlew.bat test → 25 tests, BUILD SUCCESSFUL
 ```
 
 ---
@@ -118,13 +121,14 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 - [x] CORS 허용 (Vite 5173/5174) — 없으면 화면이 Mock에서 못 넘어온다
 - [ ] 커밋
 
-## Phase 3 — 임베딩 + 검색  `TODO`  (2.0h / 누적 6.0h)
-- [ ] `EmbeddingTextBuilder` (`04 §5-1`)
-- [ ] PUBLISHED 전건 일괄 임베딩 → DB 저장
-- [ ] **톤수 경계 8건 단위 테스트 통과 (`05A §3-3`)**
-- [ ] 높이 부호 분기 테스트 (`K_B_002` 초과 적용 / `K_C_006` 이하 적용)
-- [ ] `CosineCalculator` 단위 테스트
-- [ ] 정답 질문 20개 평가 스크립트 동작, Hit@3 수치 확보
+## Phase 3 — 임베딩 + 검색  `DONE`  (2.0h / 누적 6.0h)
+- [x] `EmbeddingTextBuilder` (`04 §5-1`) — Python 기준 문자열과 전건 비교
+- [x] PUBLISHED 전건 일괄 임베딩 → DB 저장 — 146건 × 1536차원
+- [x] **톤수 경계 8건 단위 테스트 통과 (`05A §3-3`)**
+- [x] 높이 부호 분기 테스트 (`K_B_002` 초과 적용 / `K_C_006` 이하 적용)
+- [x] `CandidateCollector` · `ConditionEvaluator` · `QueryTextBuilder`
+- [x] `CosineCalculator` · `RankingService` · 구조 4 + UNRESOLVED 1 하이브리드 슬롯
+- [x] 정답 질문 20개 평가 동작 — Hit@3 100%, Hit@5 100%, Top-5 must_not 11건
 - [ ] 커밋
 
 > **T+6.0h 체크포인트.** 여기 못 왔으면 P1·지도·복수 장소를 지금 버린다.
@@ -144,12 +148,17 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 
 > **T+8.0h 체크포인트.** 여기 못 왔으면 Phase 5~7 축소를 결정한다.
 
-## Phase 5 — 음성 제보  `PARTIAL`  (1.0h / 누적 9.0h)
+## Phase 5 — 음성 제보  `DONE`  (1.0h / 누적 9.0h)
 - [x] AI 서비스 `POST /stt` 구현 (Gemini, 업로드 검증·오류 매핑 포함)
 - [x] `datasets/voice` M4A 샘플 1건 Gemini 실호출 성공
-- [ ] 녹음 → 업로드 → STT
-- [ ] 기사 텍스트 수정 → 저장
+- [x] 녹음 → 업로드 → STT — `POST /api/reports` 실제 m4a로 201, 전사문 반환, 원본 파일 저장
+- [x] 기사 텍스트 수정 → 저장 — `PATCH /api/reports/{id}/transcript`
+- [x] 텍스트 직접 입력 축소 경로 `POST /api/reports/text`
 - [ ] 커밋
+
+> **남은 결함** — 깨진 JSON 본문이 오면 `500 INTERNAL_ERROR`가 나간다.
+> `HttpMessageNotReadableException` 핸들러를 `ApiExceptionHandler`에 추가해 400으로 바꿀 것.
+> **오디오 저장 위치는 `.env`의 `AUDIO_STORAGE_PATH=./data/audio`가 이긴다** → `backend/data/audio/<날짜>/`.
 
 > STT가 막히면 **텍스트 직접 입력으로 대체**하고 진행한다.
 
