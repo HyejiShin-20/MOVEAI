@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom'
+import { routes } from '../routes'
+import { reportDraftStore } from '../state/reportDraft'
 
 const closeIcon = 'https://www.figma.com/api/mcp/asset/bf2f9e73-8689-4d59-9fd4-ea11aa50de12.svg'
 const pauseIcon = 'https://www.figma.com/api/mcp/asset/ad55ad36-4667-4960-aacf-333bb8b0a163.svg'
@@ -16,7 +18,7 @@ export function VoiceRecordPage() {
   return (
     <div className="mobile-page voice-record-page">
       <header className="record-header">
-        <button className="record-header__button" type="button" aria-label="닫기" onClick={() => navigate('/home')}>
+        <button className="record-header__button" type="button" aria-label="닫기" onClick={() => navigate(routes.home)}>
           <img src={closeIcon} alt="" />
         </button>
         <h1>현장 팁 녹음</h1>
@@ -47,7 +49,7 @@ export function VoiceRecordPage() {
             <img src={pauseIcon} alt="" />
             <span>일시정지</span>
           </button>
-          <button className="record-action record-action--finish" type="button" onClick={() => navigate('/reports/uploading')}>
+          <button className="record-action record-action--finish" type="button" onClick={() => { reportDraftStore.patch({ stage: 'uploading' }); navigate(routes.reportUploading) }}>
             <img src={finishIcon} alt="" />
             <span>기록 완료</span>
           </button>

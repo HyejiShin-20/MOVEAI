@@ -1,5 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { routes } from '../routes'
+import { reportDraftStore } from '../state/reportDraft'
 
 const menuIcon = 'https://www.figma.com/api/mcp/asset/6cddfd86-59cb-41d0-a920-2cfd16bc5330.svg'
 const profileIcon = 'https://www.figma.com/api/mcp/asset/2f5748b1-d3bf-471b-82e2-8b413c3f135f.svg'
@@ -17,14 +19,18 @@ const initialText = '지하로 내려가면 바로 차량 차단기가 있습니
 
 export function TranscriptionPage() {
   const navigate = useNavigate()
-  const [text, setText] = useState(initialText)
+  const [text, setText] = useState(() => reportDraftStore.get().transcript || initialText)
+
+  useEffect(() => {
+    reportDraftStore.patch({ transcript: text, stage: 'transcription' })
+  }, [text])
 
   return (
     <div className="mobile-page transcription-page">
       <header className="transcription-header">
-        <button type="button" aria-label="메뉴"><img src={menuIcon} alt="" /></button>
+        <button type="button" aria-label="메뉴" onClick={() => navigate(routes.reportDrafts)}><img src={menuIcon} alt="" /></button>
         <strong>Logistics Pro</strong>
-        <button type="button" aria-label="프로필"><img src={profileIcon} alt="" /></button>
+        <button type="button" aria-label="프로필" onClick={() => navigate(routes.myReports)}><img src={profileIcon} alt="" /></button>
       </header>
 
       <main className="transcription-main">
@@ -57,17 +63,17 @@ export function TranscriptionPage() {
           <button type="button" className="transcription-action transcription-action--retry" onClick={() => setText(initialText)}>
             <img src={retryIcon} alt="" /><span>다시 변환</span>
           </button>
-          <button type="button" className="transcription-action transcription-action--next" onClick={() => navigate('/reports/place')}>
+          <button type="button" className="transcription-action transcription-action--next" onClick={() => { reportDraftStore.patch({ transcript: text, stage: 'place' }); navigate(routes.reportPlace) }}>
             <span>다음</span><img src={nextIcon} alt="" />
           </button>
         </section>
       </main>
 
       <nav className="updated-mobile-nav" aria-label="주요 메뉴">
-        <button type="button" onClick={() => navigate('/home')}><img src={navDelivery} alt="" /><span>Deliveries</span></button>
+        <button type="button" onClick={() => navigate(routes.home)}><img src={navDelivery} alt="" /><span>Deliveries</span></button>
         <button type="button" className="active"><img src={navVoice} alt="" /><span>Voice<br />Tip</span></button>
-        <button type="button"><img src={navNavigation} alt="" /><span>Navigation</span></button>
-        <button type="button"><img src={navProfile} alt="" /><span>Profile</span></button>
+        <button type="button" onClick={() => navigate(routes.guidancePreview)}><img src={navNavigation} alt="" /><span>Navigation</span></button>
+        <button type="button" onClick={() => navigate(routes.myReports)}><img src={navProfile} alt="" /><span>Profile</span></button>
       </nav>
     </div>
   )

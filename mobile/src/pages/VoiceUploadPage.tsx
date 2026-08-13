@@ -1,5 +1,7 @@
 import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { routes } from '../routes'
+import { reportDraftStore } from '../state/reportDraft'
 
 const uploadIcon = 'https://www.figma.com/api/mcp/asset/e9271131-3c13-4bea-8561-016966c6d748.svg'
 const fileIcon = 'https://www.figma.com/api/mcp/asset/b64a0dc3-72e0-462d-acd7-4c4a1762451d.svg'
@@ -9,7 +11,8 @@ export function VoiceUploadPage() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    const timer = window.setTimeout(() => navigate('/reports/transcription'), 1800)
+    reportDraftStore.patch({ stage: 'uploading' })
+    const timer = window.setTimeout(() => { reportDraftStore.patch({ stage: 'transcription' }); navigate(routes.reportTranscription) }, 1800)
     return () => window.clearTimeout(timer)
   }, [navigate])
 
@@ -45,7 +48,7 @@ export function VoiceUploadPage() {
           </div>
         </section>
 
-        <button className="upload-later" type="button" onClick={() => navigate('/home')}>
+        <button className="upload-later" type="button" onClick={() => { reportDraftStore.patch({ stage: 'uploading' }); navigate(routes.home) }}>
           <img src={laterIcon} alt="" />
           <span>나중에 이어서 등록</span>
         </button>

@@ -205,6 +205,7 @@ button { -webkit-tap-highlight-color: transparent; }
 .bottom-nav__icon { width: 24px; height: 24px; display: grid; place-items: center; }
 .bottom-nav__icon img { display: block; width: 24px; height: 24px; }
 .bottom-nav__icon--compact img { width: 16px; height: 16px; }
+.bottom-nav__item.is-active { color: var(--blue); font-weight: 700; }
 
 @media (max-width: 370px) {
   .ongoing-guidance { padding-left: 20px; padding-right: 16px; }
@@ -625,58 +626,35 @@ button { -webkit-tap-highlight-color: transparent; }
 .history-nav button.active { width:auto; padding:4px 16px; background:#0053c7; color:#001a43; }
 .history-nav img { max-width:22px; max-height:19px; }
 
-.guidance-preview-page,.guidance-step-page { min-height:845px; background:#fff; }
-.guidance-header { position:relative; z-index:5; height:56px; display:flex; align-items:center; padding:0 16px; background:#fff; }
-.guidance-header button { width:40px; height:40px; border:0; background:transparent; display:grid; place-items:center; cursor:pointer; }
-.guidance-header img { width:18px; height:12px; }
-.guidance-map-wrap { position:relative; height:789px; overflow:hidden; }
-.guidance-map,.guidance-step-map > img { width:100%; height:100%; object-fit:cover; opacity:.8; }
-.guidance-photo-strip { position:absolute; left:0; right:0; top:513px; padding:9px 12px; display:flex; gap:12px; overflow-x:auto; }
-.guidance-photo-card { position:relative; flex:0 0 160px; height:96px; overflow:hidden; border-radius:16px; }
-.guidance-photo-card img { width:100%; height:100%; object-fit:cover; }
-.guidance-photo-card span { position:absolute; left:0; right:0; bottom:0; height:56px; display:flex; align-items:flex-end; padding:10px; color:#fff; font-size:12px; font-weight:700; background:linear-gradient(6deg, rgba(0,0,0,.7) 27%, transparent 71%); }
-.guidance-start-wrap { position:absolute; left:0; right:0; bottom:0; padding:32px 16px; background:linear-gradient(to top,#f8f9ff,rgba(248,249,255,.8) 50%,transparent); }
-.guidance-start-wrap button { width:100%; height:60px; border:0; border-radius:8px; background:var(--blue); color:#fff; display:flex; align-items:center; justify-content:center; gap:8px; font-size:18px; font-weight:700; box-shadow:0 10px 15px -3px rgba(0,0,0,.1); cursor:pointer; }
-.guidance-start-wrap img { width:16px; height:22px; }
-.guidance-step-page { position:relative; overflow:hidden; }
-.guidance-step-map { position:absolute; left:0; right:0; top:56px; bottom:0; }
-.guidance-map-controls { position:absolute; top:72px; right:16px; display:flex; flex-direction:column; gap:8px; }
-.guidance-map-controls > button,.guidance-map-controls > div { border:1px solid var(--border); border-radius:12px; background:rgba(248,249,255,.9); box-shadow:0 10px 15px -3px rgba(0,0,0,.1); backdrop-filter:blur(10px); overflow:hidden; }
-.guidance-map-controls button { width:56px; height:56px; border:0; background:transparent; display:grid; place-items:center; }
-.guidance-map-controls > button img { width:22px; height:22px; }
-.guidance-map-controls > div button + button { border-top:1px solid rgba(196,197,218,.5); }
-.guidance-map-controls > div img { width:14px; max-height:14px; }
-.guidance-step-card { position:absolute; left:16px; right:16px; bottom:191px; overflow:hidden; border-radius:8px; background:#f8f9ff; box-shadow:0 4px 12px rgba(0,0,0,.15); }
-.guidance-step-card__head { height:44px; padding:8px 16px; background:var(--blue); color:#e4eeff; display:flex; align-items:center; gap:12px; }
-.guidance-step-card__head img { width:18px; height:19px; }
-.guidance-step-card__head strong { font-size:20px; }
-.guidance-step-card__body { padding:16px 20px; }
-.guidance-step-card__body > div { display:flex; gap:16px; align-items:center; color:var(--blue); font-size:14px; font-weight:700; }
-.guidance-step-card__body p { margin:4px 0 0; color:var(--text-main); font-size:18px; font-weight:500; }
-.guidance-end { position:absolute; left:16px; right:16px; bottom:121px; height:56px; border:0; border-radius:4px; background:#f8f9ff; color:#ba1a1a; display:flex; align-items:center; justify-content:center; gap:8px; font-size:18px; font-weight:500; cursor:pointer; }
-.guidance-end img { width:14px; height:14px; }
+.guidance-preview-page,
+.guidance-step-page {
+  min-height: 845px;
+  background: #fff;
+}
 
-.guidance-complete-page { min-height:845px; background:#fff; }
-.guidance-complete-main { padding:88px 16px 32px; display:flex; flex-direction:column; align-items:center; gap:65px; }
-.guidance-success { display:flex; flex-direction:column; align-items:center; gap:20px; }
-.guidance-success img { width:72px; height:72px; }
-.guidance-success h1 { margin:0; color:#444657; font-size:24px; line-height:1.4; font-weight:500; letter-spacing:-.48px; }
-.guidance-stats { width:100%; display:flex; flex-direction:column; gap:10px; }
-.guidance-stats > div:first-child { padding:0 24px; display:flex; align-items:center; justify-content:space-between; color:var(--text-main); font-size:14px; }
-.guidance-stats strong { color:var(--blue); font-size:20px; }
-.route-summary { min-height:120px; padding:24px 14px 36px; display:flex; align-items:center; justify-content:center; background:#fff; border-radius:8px; box-shadow:0 1px 1px rgba(0,0,0,.05); }
-.route-summary > div { width:56px; display:flex; flex-direction:column; align-items:center; gap:4px; }
-.route-summary > div > span { width:40px; height:40px; display:grid; place-items:center; border:1px solid var(--blue); border-radius:12px; }
-.route-summary > div > span.active { background:var(--blue); }
-.route-summary img { max-width:20px; max-height:18px; }
-.route-summary small { color:var(--blue); white-space:nowrap; font-size:12px; font-weight:500; }
-.route-summary i { width:83px; height:1px; background:var(--blue); }
-.guidance-complete-actions { width:100%; display:grid; grid-template-columns:1fr 1fr; gap:16px; }
-.guidance-complete-actions button { height:56px; border-radius:8px; font-size:18px; font-weight:600; cursor:pointer; }
-.guidance-complete-actions button:first-child { border:1px solid var(--blue); background:#fff; color:var(--blue); }
-.guidance-complete-actions button:last-child { border:0; background:var(--blue); color:#fff; }
+.guidance-header {
+  position: relative;
+  z-index: 5;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  background: #fff;
+}
+.guidance-header--plain { justify-content: flex-start; }
+.guidance-header button {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+}
+.guidance-header button > img { width: 18px; height: 12px; object-fit: contain; }
 
-<<<<<<< Updated upstream
 .unavailable-page { min-height:845px; background:#fff; }
 .unavailable-main { min-height:789px; padding:20px 16px; display:flex; flex-direction:column; align-items:center; }
 .unavailable-visual { padding-bottom:32px; display:flex; flex-direction:column; align-items:center; text-align:center; }
@@ -693,7 +671,6 @@ button { -webkit-tap-highlight-color: transparent; }
 .unavailable-actions .primary { border:0; background:var(--blue); color:#fff; }
 .unavailable-actions .secondary { border:2px solid var(--blue); background:#f8f9ff; color:var(--blue); }
 .unavailable-actions .tertiary { border:1px solid var(--border); background:var(--bg-blue); color:var(--text-main); }
-=======
 /* G-03 경로 미리보기 */
 .guidance-map-wrap {
   position: relative;
@@ -1590,4 +1567,3 @@ button { -webkit-tap-highlight-color: transparent; }
   .admin-topbar__divider { display: none; }
   .route-admin-breadcrumb { max-width: calc(100vw - 150px); }
 }
->>>>>>> Stashed changes

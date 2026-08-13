@@ -34,10 +34,8 @@ function canUseStorage() {
 export const reportDraftStore = {
   get(): ReportDraftState {
     if (!canUseStorage()) return emptyDraft()
-
     const raw = window.localStorage.getItem(STORAGE_KEY)
     if (!raw) return emptyDraft()
-
     try {
       return { ...emptyDraft(), ...(JSON.parse(raw) as Partial<ReportDraftState>) }
     } catch {
@@ -46,11 +44,7 @@ export const reportDraftStore = {
   },
 
   patch(patch: Partial<Omit<ReportDraftState, 'updatedAt'>>): ReportDraftState {
-    const next: ReportDraftState = {
-      ...this.get(),
-      ...patch,
-      updatedAt: new Date().toISOString(),
-    }
+    const next = { ...this.get(), ...patch, updatedAt: new Date().toISOString() }
     if (canUseStorage()) window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next))
     return next
   },
