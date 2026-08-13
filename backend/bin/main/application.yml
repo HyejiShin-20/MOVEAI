@@ -1,34 +1,42 @@
+server:
+  address: 0.0.0.0
+  port: 8080
+
 spring:
-  application:
-    name: move-ai-backend
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
   datasource:
-    url: ${DB_URL:jdbc:mariadb://localhost:3306/move_ai}
-    username: ${DB_USERNAME:}
-    password: ${DB_PASSWORD:}
+    url: ${DB_URL:jdbc:mariadb://127.0.0.1:3306/move}
+    username: ${root}
+    password: ${1234}
     driver-class-name: org.mariadb.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: validate
     open-in-view: false
-    properties:
-      hibernate:
-        format_sql: true
-
-server:
-  port: ${SERVER_PORT:8080}
 
 move-ai:
+  dataset:
+    path: ${MOVE_DATASET_PATH:../datasets/move-ai-data.json}
+  storage:
+    root: ${MOVE_STORAGE_ROOT:C:/move}
+    audio-directory: ${MOVE_AUDIO_DIRECTORY:audio}
+    upload-directory: ${MOVE_UPLOAD_DIRECTORY:uploads}
   security:
-    admin-token: ${MOVE_AI_ADMIN_TOKEN:}
-    driver-token: ${MOVE_AI_DRIVER_TOKEN:}
+    jwt-secret: ${JWT_SECRET:test-secret-key-12345}
+    access-token-expiration-seconds: 3600
   ai:
-    stt:
-      mode: ${STT_MODE:mock}
-    extraction:
-      mode: ${EXTRACTION_MODE:mock}
-    embedding:
-      mode: ${EMBEDDING_MODE:mock}
-
-logging:
-  level:
-    com.moveai: INFO
+    # STT (음성인식) API 키
+    stt-api-key: ${STT_API_KEY:}
+    stt-api-url: ${STT_API_URL:}
+    # Embedding (임베딩) API 키
+    embedding-api-key: ${EMBEDDING_API_KEY:}
+    embedding-api-url: ${EMBEDDING_API_URL:}
+    # Moderation (콘텐츠 검수) API 키
+    moderation-api-key: ${MODERATION_API_KEY:}
+    moderation-api-url: ${MODERATION_API_URL:}
+    # Extraction (데이터 추출) API 키
+    extraction-api-key: ${EXTRACTION_API_KEY:}
+    extraction-api-url: ${EXTRACTION_API_URL:}
