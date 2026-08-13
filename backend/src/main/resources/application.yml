@@ -24,6 +24,10 @@ spring:
 moveai:
   ai-service:
     url: ${AI_SERVICE_URL:http://localhost:8000}
+  dataset:
+    # bootRun 의 작업 디렉터리는 backend/ 다. 임포트 대상은 저장소 루트의 datasets/ 뿐이며
+    # docs/dataset/ 은 작성 이력이라 임포트하지 않는다 (05A §3-1).
+    dir: ${DATASET_DIR:../datasets}
 
 logging:
   level:

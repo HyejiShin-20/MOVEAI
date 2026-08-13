@@ -4,8 +4,8 @@
 > Phase의 목적·시간 예산·축소 경로는 `MOVE_AI_05C_구현순서_운용.md §7`.
 > 하네스는 **세션 시작 시 이 파일을 먼저 읽고, 세션 종료 전 반드시 갱신**한다.
 
-**최종 갱신** — 2026-08-13 (Phase 1 완료 — backend 런타임)
-**현재 Phase** — Phase 1 `DONE`. 다음은 Phase 2a (DDL + 임포트)
+**최종 갱신** — 2026-08-13 (Phase 2a 완료 — DDL + 데이터셋 임포트)
+**현재 Phase** — Phase 2a `DONE`. 다음은 Phase 2b (조회 API)
 **경과 시간** — T+0.0h (본선 전 선행 작업)
 
 ---
@@ -13,16 +13,16 @@
 ## 다음에 할 정확한 작업
 
 ```
-Phase 2a — DDL + 임포트
-  05A §2의 DDL을 moveai DB에 적용하고, datasets 4개를 임포트한다.
-  DB는 이미 비어 있는 상태로 준비돼 있다 (테이블 0개, utf8mb4_general_ci).
-  톤수 파생 컬럼(05A §3-3 8건 표)과 시드 배송 5건(§3-5)을 빠뜨리지 않는다.
+Phase 2b — 조회 API (05B §4-1)
+  GET /api/places · /api/places/{id} · /api/routes/{id} 가 실제 데이터로 응답하게 만든다.
+  DB에는 이미 장소 4 · 노드 57 · 경로 8 · 구간 30 · 지식 146이 들어가 있다.
+  여기서부터 프론트가 붙을 수 있다.
 ```
 
 ## 현재 blocker
 
 ```
-없음. Phase 2a를 바로 시작할 수 있다.
+없음.
 
 주의 두 가지 (환경):
 - DB는 호스트 설치 MariaDB 12.3.2가 3307에서 돈다. docker-compose 컨테이너를 같이 띄우면
@@ -44,6 +44,13 @@ backend: .\gradlew.bat bootRun → Started MoveAiApplication, Tomcat 8080
 curl localhost:8080/health → {"status":"ok",
   "database":{"status":"up","product":"12.3.2-MariaDB"},
   "aiService":{"status":"ok","provider":"gemini","model":"gemini-3.6-flash"}}
+backend: .\gradlew.bat bootRun --args="--import-datasets" → 2회 실행 모두
+  places=4 place_nodes=57 routes=8 route_segments=30 field_reports=41
+  knowledge_items=146 knowledge_conditions=146 knowledge_targets=146
+  rag_test_queries=20 delivery_jobs=5 users=2
+SQL 검증 → 장소별 지식 A36·B37·C40·D33 / 톤수 파생 8건이 05A §3-3 표와 일치
+  / target NODE105·SEGMENT8·UNKNOWN33 / 구간 연속성 위반 0건
+  / ROUTE_B_01 7단계 · ROUTE_B_02 maxTon·minTon 1.0 상호배타
 ```
 
 ---
@@ -78,14 +85,14 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 - [x] **`CLAUDE.md`의 "명령" 절에 실제 빌드·실행 명령 추가**
 - [ ] 커밋
 
-## Phase 2a — DDL + 임포트  `TODO`  (1.5h / 누적 3.0h)
-- [ ] `python scripts/validate_datasets.py` → 이슈 0건
-- [ ] DDL 적용 (`05A §2`)
-- [ ] 장소 B 임포트 → SQL로 건수 확인 (지식 37)
-- [ ] A · C · D 임포트 → 장소 4 · 지식 146 확인
-- [ ] **톤수 포함/배타 파생 컬럼 생성 확인 (`05A §3-3`)**
-- [ ] **시드 배송 건 5건 생성 (`05A §3-5`)** — 없으면 Phase 4를 시작할 수 없다
-- [ ] 재실행해도 같은 결과 (idempotent)
+## Phase 2a — DDL + 임포트  `DONE`  (1.5h / 누적 3.0h)
+- [x] `python scripts/validate_datasets.py` → 이슈 0건
+- [x] DDL 적용 (`05A §2`) — `backend/src/main/resources/db/schema.sql`
+- [x] 장소 B 임포트 → SQL로 건수 확인 (지식 37)
+- [x] A · C · D 임포트 → 장소 4 · 지식 146 확인
+- [x] **톤수 포함/배타 파생 컬럼 생성 확인 (`05A §3-3`)** — 8건 표와 SQL 결과 일치
+- [x] **시드 배송 건 5건 생성 (`05A §3-5`)** — 5건 모두 실재하는 Route 도착지를 가리킴
+- [x] 재실행해도 같은 결과 (idempotent) — 2회 실행 후 건수 동일
 - [ ] 커밋
 
 > 막히면 **B 하나만 넣고 2b로 넘어간다.** 시연은 B에서만 한다.
@@ -260,6 +267,20 @@ T+10.0h  W2 미완  →  검수를 API 직접 호출로 대체하고 화면은 �
 ```
 
 <!-- 여기부터 기록 -->
+
+## 본선 전 선행 — 2026-08-13  Phase 2a DDL + 임포트
+변경   `db/schema.sql`(05A §2 전량 16테이블), `SchemaInitializer`, `DatasetImportService`(JdbcTemplate),
+       `DatasetImportRunner`(`--import-datasets`), `DatasetPayload` DTO,
+       `EnumAllowList`(05A §2-6), `TonnageBoundaryRule`(§3-3) + 단위 테스트 8건
+검증   `.\gradlew.bat build` → BUILD SUCCESSFUL (톤수 8건 테스트 포함)
+       `--import-datasets` 2회 실행 → 건수 동일 (idempotent)
+       SQL 직접 확인 → 지식 146(A36·B37·C40·D33), 톤수 파생이 §3-3 표와 일치,
+       구간 연속성 위반 0건, 시드 배송 5건 전부 실재 Route 도착지, 시간·요일 17건 파싱 정상
+결정   Phase 2a는 JdbcTemplate으로 넣는다. JPA 엔티티는 조회가 필요한 Phase 2b에서 만든다.
+       FK 순서와 2-pass parent 갱신을 직접 통제하는 편이 임포트에서 더 안전하다.
+       임포트는 전체 TRUNCATE 후 재삽입이다. 런타임 데이터(초안·세션)도 함께 지워진다.
+남은것 조회 API 없음. 임베딩 벡터도 아직 DB에 없다(파일 산출물만).
+다음   Phase 2b — GET /api/places · /api/places/{id} · /api/routes/{id}
 
 ## 본선 전 선행 — 2026-08-13  Phase 1 Server Runtime
 변경   Gradle wrapper(8.11.1) 부트스트랩, `build.gradle`·`settings.gradle`,

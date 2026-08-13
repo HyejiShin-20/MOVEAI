@@ -170,6 +170,15 @@ cd backend && ./gradlew bootRun        # 실행 → http://localhost:8080
 curl http://localhost:8080/health      # 서버 · DB · ai-service 세 경계를 한 번에 확인
 ```
 
+**DDL 적용 + 데이터셋 임포트** (몇 번을 돌려도 같은 결과가 나온다)
+
+```bash
+cd backend && ./gradlew bootRun --args="--import-datasets"
+```
+
+임포트만 하고 프로세스가 종료된다. **전체 TRUNCATE 후 재삽입**이므로 런타임에 쌓인
+초안·검수·세션도 함께 지워진다. 기대 건수는 아래 "데이터셋 사실"과 같다.
+
 Gradle은 wrapper(8.11.1)로 고정돼 있다. 전역 설치가 필요 없고, **팀원 전원이 같은 버전으로 빌드한다.**
 JDK는 17 이상이면 된다(이 기기는 21, 산출물은 17 타깃).
 `bootRun`은 저장소 루트의 `.env`를 읽어 환경변수로 넣는다.
