@@ -18,6 +18,22 @@ class StrictModel(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
 
+class EmbedRequest(StrictModel):
+    texts: list[str] = Field(min_length=1, max_length=200)
+
+    @model_validator(mode="after")
+    def ensure_texts_are_not_blank(self) -> "EmbedRequest":
+        if any(not text.strip() for text in self.texts):
+            raise ValueError("texts에 빈 문자열을 넣을 수 없습니다.")
+        return self
+
+
+class EmbedResponse(BaseModel):
+    model: str
+    dimension: int
+    vectors: list[list[float]]
+
+
 class KnownLocation(StrictModel):
     code: str = Field(min_length=1, max_length=32)
     name: str = Field(min_length=1, max_length=120)

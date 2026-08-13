@@ -61,6 +61,24 @@ class ExtractionProviderError(AppError):
         )
 
 
+class EmbeddingConfigurationError(AppError):
+    def __init__(self) -> None:
+        super().__init__(
+            code="EMBEDDING_NOT_CONFIGURED",
+            message="임베딩 서비스 설정이 완료되지 않았습니다.",
+            status_code=503,
+        )
+
+
+class EmbeddingProviderError(AppError):
+    def __init__(self, message: str | None = None) -> None:
+        super().__init__(
+            code="EMBEDDING_PROVIDER_ERROR",
+            message=message or "임베딩 생성에 실패했습니다. 잠시 후 다시 시도해 주세요.",
+            status_code=502,
+        )
+
+
 class ExtractionFailedError(AppError):
     def __init__(self, details: list[str] | None = None) -> None:
         self.details = details or []

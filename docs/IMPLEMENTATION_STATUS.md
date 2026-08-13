@@ -4,24 +4,27 @@
 > Phase의 목적·시간 예산·축소 경로는 `MOVE_AI_05C_구현순서_운용.md §7`.
 > 하네스는 **세션 시작 시 이 파일을 먼저 읽고, 세션 종료 전 반드시 갱신**한다.
 
-**최종 갱신** — 2026-08-13 (백엔드 도메인 패키지 골격 정리)
-**현재 Phase** — Phase 0 (미착수)
-**경과 시간** — T+0.0h
+**최종 갱신** — 2026-08-13 (ai-service `/embed` + 데이터셋 146건 임베딩)
+**현재 Phase** — Phase 0 (미착수). ai-service는 3개 엔드포인트 모두 실호출 완료
+**경과 시간** — T+0.0h (본선 전 선행 작업)
 
 ---
 
 ## 다음에 할 정확한 작업
 
 ```
-Phase 0 — repository audit
-  tree / git status / 빌드 파일 / 기존 코드 확인 후 아래 Phase 표를 실제 상태에 맞게 갱신한다.
-  바로 대규모 리팩터링을 시작하지 않는다.
+Phase 1 — backend Spring 런타임
+  build.gradle · Application · /health · MariaDB 연결.
+  backend/ 는 아직 package-info.java 뿐이라 컴파일되지 않는다.
+  이게 서야 Phase 2a(DDL·임포트) → Phase 3(임베딩 적재)로 이어진다.
 ```
 
 ## 현재 blocker
 
 ```
-STT는 `GEMINI_API_KEY`로 실호출 완료. LLM 지식 추출과 임베딩 API는 아직 구현·실호출 전이다.
+backend Spring 프로젝트가 없어 임베딩 벡터를 적재할 DB 경로가 없다.
+벡터는 파일 산출물로 만들어 두었으므로, Spring이 서면 knowledge_code 조인으로 INSERT 하면 된다.
+Gemini 임베딩 무료 등급은 분당 100건 제한 — 146건 일괄 생성에 약 67초가 걸린다.
 ```
 
 ## 마지막으로 검증한 명령
@@ -30,8 +33,10 @@ STT는 `GEMINI_API_KEY`로 실호출 완료. LLM 지식 추출과 임베딩 API�
 python scripts/validate_datasets.py   → 전체 이슈 0건 (본선 전 확인 완료)
 python -m compileall scripts          → 성공
 python scripts/build_release_zip.py  → 생성 및 제외 규칙 검증 성공
-conda moveai: python -m pytest -q -p no:asyncio (ai-service) → 11 passed
+conda moveai: python -m pytest -q (ai-service) → 48 passed
 conda moveai: python scripts/smoke_stt.py → gemini-3.6-flash, M4A 1건 전사 성공
+conda moveai: python scripts/embed_dataset.py --dry-run → 146건 embedding_text 생성
+conda moveai: python scripts/embed_dataset.py → gemini-embedding-2, 146건 × 1536차원, 67초
 backend 패키지 구조 검사 → 기대 경로 45개, 누락 0개, package-info 누락 0개
 ```
 
@@ -249,6 +254,17 @@ T+10.0h  W2 미완  →  검수를 API 직접 호출로 대체하고 화면은 �
 ```
 
 <!-- 여기부터 기록 -->
+
+## 본선 전 선행 — 2026-08-13  ai-service 임베딩
+변경   `POST /embed` 구현(05B §5-1 계약 그대로), `embedding_text` 조립 규칙 확정(04 §5-1),
+       datasets 146건 → 벡터 산출물 생성 스크립트, `EMBEDDING_BATCH_SIZE` 환경변수 추가
+검증   `pytest -q` → 48 passed (임베딩 관련 22건 신규)
+       `python scripts/embed_dataset.py` → gemini-embedding-2 / 1536차원 / 146건 / 67초
+       질의 스모크: ROUTE_B_01 seq6 질의문 → Top1 `K_B_027`(그 구간의 배수구 턱 경고) 0.862,
+       Top3에 UNRESOLVED 지식 `K_B_015` 등장 (04 §4-2가 임베딩에 기대한 동작)
+남은것 backend Spring 부재로 DB 적재 미완. 산출물은 `data/embeddings/`(gitignore)에만 있다.
+       Spring `EmbeddingTextBuilder`가 04 §5-1 표와 같은 문자열을 만들어야 한다.
+다음   Phase 1 backend 런타임 → Phase 2a DDL·임포트 → Phase 3 벡터 적재
 
 ## 본선 전 정비 — 2026-08-13
 변경   폐기 문서 격리, React 프론트 통일, Phase 책임 경계·승인 트랜잭션·카드 규칙 정정,
