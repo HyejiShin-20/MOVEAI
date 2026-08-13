@@ -1,0 +1,21 @@
+name: Deploy to Remote Server 
+on: 
+push: 
+branches: - main 
+jobs: 
+deploy: 
+runs-on: ubuntu-latest 
+steps: - name: Checkout Code 
+uses: actions/checkout@v3 
+      - name: Execute Remote SSH Commands 
+        uses: appleboy/ssh-action@v0.1.10 
+        with: 
+          host: ${{ secrets.SERVER_HOST }} 
+          username: ${{ secrets.SERVER_USER }} 
+          password: ${{ secrets.SERVER_PASSWORD }} 
+          port: ${{ secrets.SERVER_PORT }} 
+          script: | 
+            cd C:/MOVEAI 
+            git pull origin main 
+            docker-compose up -d --build 
+            docker image prune -f

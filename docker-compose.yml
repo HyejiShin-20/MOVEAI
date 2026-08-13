@@ -1,35 +1,22 @@
-services:
-  mariadb:
-    image: mariadb:11.4
-    container_name: moveai-mariadb
-    restart: unless-stopped
-    environment:
-      MARIADB_ROOT_PASSWORD: ${DB_ROOT_PASSWORD:-rootpw}
-      MARIADB_DATABASE: ${DB_NAME:-moveai}
-      MARIADB_USER: ${DB_USER:-moveai}
-      MARIADB_PASSWORD: ${DB_PASSWORD:-moveai}
-    command:
-      - --character-set-server=utf8mb4
-      - --collation-server=utf8mb4_general_ci
-    ports:
-      - "${DB_PORT:-3307}:3306"
-    volumes:
-      - mariadb_data:/var/lib/mysql
-    healthcheck:
-      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
-      interval: 10s
-      timeout: 5s
-      retries: 10
-
-  # DB를 눈으로 확인할 때. 필요 없으면 지워도 된다.
-  adminer:
-    image: adminer:latest
-    container_name: moveai-adminer
-    restart: unless-stopped
-    ports:
-      - "8081:8080"
-    depends_on:
-      - mariadb
-
-volumes:
-  mariadb_data:
+version: '3.8' 
+ 
+services: 
+  backend: 
+    build: 
+      context: ./backend 
+      dockerfile: Dockerfile 
+    container_name: moveai-backend 
+    restart: always 
+    ports: 
+      - "3000:3000" 
+    env_file: 
+      - ./backend/.env 
+ 
+  ai-service: 
+    build: 
+      context: ./ai-service 
+      dockerfile: Dockerfile 
+    container_name: moveai-ai 
+    restart: always 
+ports: - "8000:8000" 
+env_file: - ./ai-service/.env
