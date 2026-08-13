@@ -1,11 +1,15 @@
+import { useEffect, useMemo, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { api } from '../api/client'
+import type { DeliveryJobSummary, GuidanceSession } from '../api/models'
 import { BottomNav } from '../components/BottomNav'
 import { TopAppBar } from '../components/TopAppBar'
-
-const recentLocations = [
-  { title: '송파구 올림픽로 300', subtitle: '롯데월드타워 하역장 B2' },
-  { title: '송파구 올림픽로 300', subtitle: '롯데월드타워 하역장 B2' },
-]
+<<<<<<< Updated upstream
+=======
+import { routes } from '../routes'
+import { guidanceSessionStore } from '../state/guidanceSession'
+import { reportDraftStore } from '../state/reportDraft'
+>>>>>>> Stashed changes
 
 const recentReports = [
   {
@@ -33,10 +37,45 @@ const recentReports = [
 
 export function HomePage() {
   const navigate = useNavigate()
+  const [jobs, setJobs] = useState<DeliveryJobSummary[]>([])
+  const [activeGuidance, setActiveGuidance] = useState<GuidanceSession | null>(null)
+  const [jobsError, setJobsError] = useState('')
+
+  useEffect(() => {
+    let active = true
+    api.deliveryJobs()
+      .then((response) => {
+        if (active) setJobs(response)
+      })
+      .catch(() => {
+        if (active) setJobsError('배송 목록을 불러오지 못했습니다.')
+      })
+
+    const saved = guidanceSessionStore.read()
+    if (saved) {
+      api.guidance(saved.sessionId)
+        .then((response) => {
+          if (active) setActiveGuidance(response)
+        })
+        .catch(() => guidanceSessionStore.clear())
+    }
+    return () => { active = false }
+  }, [])
+
+  const defaultJob = useMemo(
+    () => jobs.find((job) => job.jobCode === 'JOB_B_01') ?? jobs[0],
+    [jobs],
+  )
+
+  const openGuidance = (jobId?: number) => {
+    const selectedId = jobId ?? defaultJob?.id
+    navigate(selectedId ? `${routes.guidancePreview}?jobId=${selectedId}` : routes.guidancePreview)
+  }
 
   return (
     <div className="mobile-page home-page">
       <section className="home-hero">
+<<<<<<< Updated upstream
         <TopAppBar />
         <div className="ongoing-guidance">
           <div className="ongoing-guidance__copy">
@@ -45,6 +84,18 @@ export function HomePage() {
           </div>
           <button type="button" className="ongoing-guidance__end">종료</button>
         </div>
+=======
+        <TopAppBar onMenu={() => navigate(routes.reportDrafts)} onProfile={() => navigate(routes.myReports)} />
+        {activeGuidance && (
+          <div className="ongoing-guidance">
+            <div className="ongoing-guidance__copy">
+              <strong>진행 중인 배송 안내가 있습니다</strong>
+              <span>{activeGuidance.route.name} · {activeGuidance.currentStep.sequenceNo}/{activeGuidance.route.totalSteps}단계</span>
+            </div>
+            <button type="button" className="ongoing-guidance__end" onClick={() => navigate(`${routes.guidanceStep}?sessionId=${activeGuidance.sessionId}`)}>이어가기</button>
+          </div>
+        )}
+>>>>>>> Stashed changes
       </section>
 
       <main className="home-content">
@@ -53,25 +104,35 @@ export function HomePage() {
             <img src="/assets/mic-white.svg" alt="" />
             <span>현장 팁 기록</span>
           </button>
+<<<<<<< Updated upstream
           <button type="button" className="primary-action primary-action--route" onClick={() => navigate('/guidance/preview')}>
+=======
+          <button type="button" className="primary-action primary-action--route" onClick={() => openGuidance()}>
+>>>>>>> Stashed changes
             <img src="/assets/map.svg" alt="" />
             <span>배송지 안내</span>
           </button>
         </section>
 
         <section className="home-section">
-          <h2>최근 검색 장소</h2>
+          <h2>배송 목록</h2>
           <div className="recent-location-list">
+<<<<<<< Updated upstream
             {recentLocations.map((location, index) => (
               <button type="button" className="recent-location" key={`${location.title}-${index}`}>
+=======
+            {jobs.map((job) => (
+              <button type="button" className="recent-location" key={job.id} onClick={() => openGuidance(job.id)}>
+>>>>>>> Stashed changes
                 <img className="recent-location__pin" src="/assets/location.svg" alt="" />
                 <span className="recent-location__copy">
-                  <strong>{location.title}</strong>
-                  <span>{location.subtitle}</span>
+                  <strong>{job.placeName} · {job.recipientLabel}</strong>
+                  <span>{job.addressText} · {job.itemSummary}</span>
                 </span>
                 <img className="recent-location__chevron" src="/assets/chevron.svg" alt="" />
               </button>
             ))}
+            {!jobs.length && <p className="delivery-list-state">{jobsError || '배송 목록을 불러오는 중입니다.'}</p>}
           </div>
         </section>
 

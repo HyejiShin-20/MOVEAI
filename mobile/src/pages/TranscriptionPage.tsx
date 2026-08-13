@@ -13,7 +13,7 @@ const navNavigation = 'https://www.figma.com/api/mcp/asset/f406938c-d4d5-409c-a4
 const navProfile = 'https://www.figma.com/api/mcp/asset/5366b926-2803-478d-a467-5afaf00a84b3.svg'
 
 const waveHeights = [56, 42, 28, 56, 47, 56, 37, 19, 45, 56, 28, 14, 42, 56, 37, 19]
-const initialText = '고객님, 배송 물품 문 앞에 두고 갑니다.\n공동현관 비밀번호가 틀려서 경비실 호출했는데 부재중이시라 어쩔 수 없이 1층 우편함 옆에 두었습니다. 확인 부탁드립니다.'
+const initialText = '지하로 내려가면 바로 차량 차단기가 있습니다. 차단기에서 방재실에 배송 왔다고 말하면 출입을 열어줍니다.'
 
 export function TranscriptionPage() {
   const navigate = useNavigate()

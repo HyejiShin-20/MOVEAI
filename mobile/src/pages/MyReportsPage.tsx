@@ -108,7 +108,11 @@ export function MyReportsPage() {
                     <img src={calendarIcon} alt="" />
                     <span>{report.date}</span>
                     {report.tone === 'rejected' && (
+<<<<<<< Updated upstream
                       <button type="button" onClick={() => navigate('/reports/record')}>다시 등록</button>
+=======
+                      <button type="button" onClick={() => navigate(routes.reportRecord)}>다시 등록</button>
+>>>>>>> Stashed changes
                     )}
                   </div>
                 </div>
@@ -119,10 +123,17 @@ export function MyReportsPage() {
       </main>
 
       <nav className="history-nav" aria-label="하단 메뉴">
+<<<<<<< Updated upstream
         <button type="button" onClick={() => navigate('/home')}><img src={navDelivery} alt="" /><span>Deliveries</span></button>
         <button type="button" className="active"><img src={navVoice} alt="" /><span>Voice Tip</span></button>
         <button type="button" onClick={() => navigate('/guidance/preview')}><img src={navRoute} alt="" /><span>Navigation</span></button>
         <button type="button"><img src={navProfile} alt="" /><span>Profile</span></button>
+=======
+        <button type="button" onClick={() => navigate(routes.home)}><img src={navDelivery} alt="" /><span>Deliveries</span></button>
+        <button type="button" onClick={() => navigate(routes.reportRecord)}><img src={navVoice} alt="" /><span>Voice Tip</span></button>
+        <button type="button" onClick={() => navigate(routes.guidancePreview)}><img src={navRoute} alt="" /><span>Navigation</span></button>
+        <button type="button" className="active" aria-current="page"><img src={navProfile} alt="" /><span>Profile</span></button>
+>>>>>>> Stashed changes
       </nav>
     </div>
   )

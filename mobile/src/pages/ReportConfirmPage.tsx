@@ -15,11 +15,39 @@ const addIcon = 'https://www.figma.com/api/mcp/asset/b8b81c4e-f09e-4bda-8cc1-de6
 
 export function ReportConfirmPage() {
   const navigate = useNavigate()
+<<<<<<< Updated upstream
+=======
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+  const draft = reportDraftStore.get()
+  const selectedPlace = draft.selectedPlace ?? { id: 0, name: '강남 물류센터 A동', address: '서울 강남구 테헤란로 123' }
+  const selectedZone = draft.selectedZone ?? '지하 2층 하역장 B구역'
+  const transcript = draft.transcript || '기존 안내된 지하 1층 하역장은 현재 공사 중으로 출입이 불가능합니다. 임시로 지하 2층 B구역을 사용해야 하며, 화물 엘리베이터 3호기를 이용하세요.'
+
+  const submitReport = async () => {
+    if (submitting) return
+    setSubmitting(true)
+    setSubmitError('')
+    try {
+      await reportRepository.submit(reportDraftStore.get())
+      reportDraftStore.clear()
+      navigate(routes.myReports)
+    } catch (reason) {
+      setSubmitError(reason instanceof Error ? reason.message : '제보를 등록하지 못했습니다.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
+>>>>>>> Stashed changes
 
   return (
     <div className="mobile-page confirm-page" data-figma-node="118:8176">
       <header className="transaction-header">
+<<<<<<< Updated upstream
         <button type="button" aria-label="뒤로가기" onClick={() => navigate('/reports/place')}>
+=======
+        <button type="button" aria-label="뒤로가기" onClick={() => navigate(routes.reportPlace)}>
+>>>>>>> Stashed changes
           <img src={backIcon} alt="" />
         </button>
         <strong>제보 확인</strong>
@@ -36,13 +64,22 @@ export function ReportConfirmPage() {
         <section className="confirm-card confirm-card--place">
           <div className="confirm-card__head">
             <span><img src={locationIcon} alt="" />선택한 장소</span>
+<<<<<<< Updated upstream
             <button type="button" onClick={() => navigate('/reports/place')}>수정</button>
+=======
+            <button type="button" onClick={() => navigate(routes.reportPlace)}>수정</button>
+>>>>>>> Stashed changes
           </div>
           <div className="confirm-place-row">
             <img className="confirm-place-row__photo" src={placePhoto} alt="강남 물류센터 A동" />
             <div>
+<<<<<<< Updated upstream
               <strong>강남 물류센터 A동</strong>
               <span><img src={addressIcon} alt="" />서울 강남구 테헤란로 123</span>
+=======
+              <strong>{selectedPlace.name}</strong>
+              <span><img src={addressIcon} alt="" />{selectedPlace.address}</span>
+>>>>>>> Stashed changes
             </div>
           </div>
         </section>
@@ -50,18 +87,30 @@ export function ReportConfirmPage() {
         <section className="confirm-card">
           <div className="confirm-card__head">
             <span><img src={zoneIcon} alt="" />세부 구역</span>
+<<<<<<< Updated upstream
             <button type="button" onClick={() => navigate('/reports/place')}>수정</button>
           </div>
           <strong className="confirm-card__value">지하 2층 하역장 B구역</strong>
+=======
+            <button type="button" onClick={() => navigate(routes.reportPlace)}>수정</button>
+          </div>
+          <strong className="confirm-card__value">{selectedZone}</strong>
+>>>>>>> Stashed changes
           <span className="confirm-chip"><img src={truckIcon} alt="" />1.5t 진입가능</span>
         </section>
 
         <section className="confirm-card">
           <div className="confirm-card__head">
             <span><img src={textIcon} alt="" />수정/제보 내용</span>
+<<<<<<< Updated upstream
             <button type="button" onClick={() => navigate('/reports/transcription')}>수정</button>
           </div>
           <blockquote>“기존 안내된 지하 1층 하역장은 현재 공사 중으로 출입이 불가능합니다. 임시로 지하 2층 B구역을 사용해야 하며, 화물 엘리베이터 3호기를 이용하세요.”</blockquote>
+=======
+            <button type="button" onClick={() => navigate(routes.reportTranscription)}>수정</button>
+          </div>
+          <blockquote>“{transcript}”</blockquote>
+>>>>>>> Stashed changes
         </section>
 
         <section className="confirm-card">
@@ -75,10 +124,18 @@ export function ReportConfirmPage() {
       </main>
 
       <footer className="confirm-actions">
+<<<<<<< Updated upstream
         <button className="confirm-submit" type="button" onClick={() => navigate('/reports/mine')}>
           <img src={submitIcon} alt="" />제보 등록하기
         </button>
         <button className="confirm-cancel" type="button" onClick={() => navigate('/home')}>취소</button>
+=======
+        {submitError && <p className="confirm-submit-error" role="alert">{submitError}</p>}
+        <button className="confirm-submit" type="button" disabled={submitting} onClick={submitReport}>
+          <img src={submitIcon} alt="" />{submitting ? '등록 중...' : '제보 등록하기'}
+        </button>
+        <button className="confirm-cancel" type="button" onClick={() => navigate(routes.home)}>취소</button>
+>>>>>>> Stashed changes
       </footer>
     </div>
   )

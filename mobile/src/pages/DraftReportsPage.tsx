@@ -27,12 +27,44 @@ const initialDrafts: Draft[] = [
 
 export function DraftReportsPage() {
   const navigate = useNavigate()
+<<<<<<< Updated upstream
   const [drafts, setDrafts] = useState(initialDrafts)
+=======
+  const [drafts, setDrafts] = useState<Draft[]>(() => {
+    const saved = reportDraftStore.get()
+    const hasCurrentDraft = saved.stage !== 'recording' || Boolean(saved.transcript) || Boolean(saved.selectedPlace)
+    if (!hasCurrentDraft) return initialDrafts
+
+    const savedDraft: Draft = {
+      id: -1,
+      date: new Intl.DateTimeFormat('ko-KR', { dateStyle: 'short', timeStyle: 'short' }).format(new Date(saved.updatedAt)),
+      duration: '00:15',
+      place: saved.selectedPlace?.name,
+      stage: saved.stage,
+      persisted: true,
+    }
+    return [savedDraft, ...initialDrafts]
+  })
+
+  const deleteDraft = (draft: Draft) => {
+    if (draft.persisted) reportDraftStore.clear()
+    setDrafts((current) => current.filter((item) => item.id !== draft.id))
+  }
+
+  const clearDrafts = () => {
+    reportDraftStore.clear()
+    setDrafts([])
+  }
+>>>>>>> Stashed changes
 
   return (
     <div className="mobile-page drafts-page" data-figma-node="118:8354">
       <header className="transaction-header drafts-header">
+<<<<<<< Updated upstream
         <button type="button" aria-label="뒤로가기" onClick={() => navigate('/home')}><img src={backIcon} alt="" /></button>
+=======
+        <button type="button" aria-label="뒤로가기" onClick={() => navigate(routes.home)}><img src={backIcon} alt="" /></button>
+>>>>>>> Stashed changes
         <strong>작성 중인 제보</strong>
         <span />
       </header>
@@ -40,7 +72,11 @@ export function DraftReportsPage() {
       <main className="drafts-main">
         <div className="drafts-summary">
           <span>총 {drafts.length}건</span>
+<<<<<<< Updated upstream
           <button type="button" disabled={drafts.length === 0} onClick={() => setDrafts([])}>전체 삭제</button>
+=======
+          <button type="button" disabled={drafts.length === 0} onClick={clearDrafts}>전체 삭제</button>
+>>>>>>> Stashed changes
         </div>
 
         {drafts.map((draft) => (
@@ -50,7 +86,11 @@ export function DraftReportsPage() {
                 <strong>{draft.date}</strong>
                 <span><img src={micIcon} alt="" />{draft.duration}</span>
               </div>
+<<<<<<< Updated upstream
               <button type="button" aria-label={`${draft.date} 제보 삭제`} onClick={() => setDrafts((current) => current.filter((item) => item.id !== draft.id))}>
+=======
+              <button type="button" aria-label={`${draft.date} 제보 삭제`} onClick={() => deleteDraft(draft)}>
+>>>>>>> Stashed changes
                 <img src={trashIcon} alt="" />
               </button>
             </div>
@@ -69,7 +109,11 @@ export function DraftReportsPage() {
             </div>
 
             <div className="draft-card__divider" />
+<<<<<<< Updated upstream
             <button className="draft-continue" type="button" onClick={() => navigate(draft.place ? '/reports/transcription' : '/reports/place')}>
+=======
+            <button className="draft-continue" type="button" onClick={() => navigate(draft.persisted ? resumePath(draft.stage) : (draft.place ? routes.reportTranscription : routes.reportPlace))}>
+>>>>>>> Stashed changes
               이어서 작성<img src={arrowIcon} alt="" />
             </button>
           </article>
@@ -79,7 +123,11 @@ export function DraftReportsPage() {
       </main>
 
       <footer className="drafts-footer">
+<<<<<<< Updated upstream
         <button type="button" onClick={() => navigate('/home')}><img src={homeIcon} alt="" />메인 화면으로 돌아가기</button>
+=======
+        <button type="button" onClick={() => navigate(routes.home)}><img src={homeIcon} alt="" />메인 화면으로 돌아가기</button>
+>>>>>>> Stashed changes
       </footer>
     </div>
   )

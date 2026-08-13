@@ -1,4 +1,6 @@
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
+import type { GuidanceSession } from '../api/models'
+import { routes } from '../routes'
 
 const successIcon = 'https://www.figma.com/api/mcp/asset/a3a3dc63-3336-460e-8a09-a6f0291abed4.svg'
 const gateIcon = 'https://www.figma.com/api/mcp/asset/cccd73f7-da68-49e0-8f34-9666b56ad9c3.svg'
@@ -8,6 +10,8 @@ const elevatorIcon = 'https://www.figma.com/api/mcp/asset/b15464db-12b1-4d1d-838
 
 export function GuidanceCompletedPage() {
   const navigate = useNavigate()
+  const location = useLocation()
+  const session = (location.state as { session?: GuidanceSession } | null)?.session
 
   return (
     <div className="mobile-page guidance-complete-page" data-figma-node="118:8720">
@@ -20,8 +24,8 @@ export function GuidanceCompletedPage() {
 
         <section className="guidance-stats" aria-label="완료 경로 요약">
           <div className="guidance-stats__numbers">
-            <span>총 <strong>125</strong>M</span>
-            <span><strong>3</strong>분 <strong>45</strong>초 소요</span>
+            <span>총 <strong>{session?.route.totalSteps ?? '-'}</strong>단계</span>
+            <span>{session?.route.name ?? 'Last 100m 안내'}</span>
           </div>
 
           <div className="route-summary">
@@ -43,8 +47,8 @@ export function GuidanceCompletedPage() {
         </section>
 
         <section className="guidance-complete-actions">
-          <button type="button" onClick={() => navigate('/reports/record')}>현장 팁 기록</button>
-          <button type="button" onClick={() => navigate('/home')}>메인으로</button>
+          <button type="button" onClick={() => navigate(routes.reportRecord)}>현장 팁 기록</button>
+          <button type="button" onClick={() => navigate(routes.home)}>메인으로</button>
         </section>
       </main>
     </div>

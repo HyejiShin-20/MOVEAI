@@ -3,6 +3,13 @@ import type {
   DeliveryJobDetail,
   DeliveryJobSummary,
   GuidanceSession,
+  KnowledgePayload,
+  ModerationDraftDetail,
+  ModerationDraftSummary,
+  PlaceDetail,
+  PlaceSummary,
+  ReportCreated,
+  ReportExtraction,
   VehicleInput,
 } from './models'
 
@@ -47,6 +54,12 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
 }
 
 export const api = {
+  places() {
+    return request<PlaceSummary[]>('/api/places')
+  },
+  place(id: number) {
+    return request<PlaceDetail>(`/api/places/${id}`)
+  },
   deliveryJobs(status?: string) {
     const query = status ? `?status=${encodeURIComponent(status)}` : ''
     return request<DeliveryJobSummary[]>(`/api/delivery-jobs${query}`)
@@ -71,5 +84,39 @@ export const api = {
       `/api/guidance/${sessionId}/complete`,
       { method: 'POST' },
     )
+  },
+  moderationDrafts(status = 'PENDING') {
+    return request<ModerationDraftSummary[]>(
+      `/api/moderation/drafts?status=${encodeURIComponent(status)}`,
+    )
+  },
+  moderationDraft(draftId: number) {
+    return request<ModerationDraftDetail>(`/api/moderation/drafts/${draftId}`)
+  },
+  approveDraft(draftId: number, editedPayload?: KnowledgePayload) {
+    return request<{ draftId: number; knowledgeId: number; embeddingCreated: boolean }>(
+      `/api/moderation/drafts/${draftId}/approve`,
+      {
+        method: 'POST',
+        body: JSON.stringify(editedPayload ? { editedPayload } : {}),
+      },
+    )
+  },
+  rejectDraft(draftId: number, reason: string) {
+    return request<{ draftId: number; status: 'REJECTED' }>(
+      `/api/moderation/drafts/${draftId}/reject`,
+      { method: 'POST', body: JSON.stringify({ reason }) },
+    )
+  },
+  createTextReport(placeId: number, selectedScopeNodeId: number | null, correctedText: string) {
+    const query = new URLSearchParams({ placeId: String(placeId) })
+    if (selectedScopeNodeId) query.set('selectedScopeNodeId', String(selectedScopeNodeId))
+    return request<ReportCreated>(`/api/reports/text?${query}`, {
+      method: 'POST',
+      body: JSON.stringify({ correctedText }),
+    })
+  },
+  extractReport(reportId: number) {
+    return request<ReportExtraction>(`/api/reports/${reportId}/extract`, { method: 'POST' })
   },
 }

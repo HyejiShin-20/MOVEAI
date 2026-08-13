@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.moveai.report.dto.ExtractResponse;
 import com.moveai.report.dto.ReportResponse;
 import com.moveai.report.dto.TranscriptUpdateRequest;
+import com.moveai.report.service.ReportExtractionService;
 import com.moveai.report.service.ReportService;
 
 import jakarta.validation.Valid;
@@ -23,9 +25,18 @@ import jakarta.validation.Valid;
 public class ReportController {
 
     private final ReportService reportService;
+    private final ReportExtractionService reportExtractionService;
 
-    public ReportController(ReportService reportService) {
+    public ReportController(
+            ReportService reportService, ReportExtractionService reportExtractionService) {
         this.reportService = reportService;
+        this.reportExtractionService = reportExtractionService;
+    }
+
+    /** 05B §4-5. corrected_stt_text 를 입력으로 Draft 를 만든다. */
+    @PostMapping("/{id}/extract")
+    public ExtractResponse extract(@PathVariable Long id) {
+        return reportExtractionService.extract(id);
     }
 
     /** 05B §4-5. multipart: placeId, selectedScopeNodeId?, audio */

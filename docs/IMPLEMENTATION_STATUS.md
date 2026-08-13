@@ -4,8 +4,8 @@
 > Phase의 목적·시간 예산·축소 경로는 `MOVE_AI_05C_구현순서_운용.md §7`.
 > 하네스는 **세션 시작 시 이 파일을 먼저 읽고, 세션 종료 전 반드시 갱신**한다.
 
-**최종 갱신** — 2026-08-13 (Phase 4 완료 — Last 100m 단계별 안내)
-**현재 Phase** — Phase 4 `DONE`. 다음은 Phase 5·6 (제보 저장 / Draft 생성 Spring 연동)
+**최종 갱신** — 2026-08-13 (Phase 4·6·7 React 실제 API 연결 및 통합 검증)
+**현재 Phase** — Phase 7 `DONE`. 다음은 Phase 8 (시연 리허설·화면 다듬기)
 **경과 시간** — T+0.0h (본선 전 선행 작업)
 
 > **화면 담당에게 알릴 것** — `05B §4-1`·`§4-2` 조회 API가 실제 데이터로 응답한다.
@@ -16,10 +16,10 @@
 ## 다음에 할 정확한 작업
 
 ```
-Phase 5·6 — 제보 저장 / Draft 생성 Spring 연동
-  이미 구현된 STT·구조화 Python API를 Spring 제보 흐름에 연결한다.
-  corrected_stt_text를 기준으로 Draft를 생성하고 스키마·source_excerpt를 검증한다.
-  실패 상태와 재시도 경계를 API 계약대로 고정한다.
+Phase 8 — 시연 리허설·화면 다듬기
+  실제 녹음(MediaRecorder) → /api/reports 업로드를 연결할지 텍스트 대체 경로로 확정할지 결정한다.
+  내 제보 내역의 정적 샘플을 실제 제보 조회 API로 교체한다.
+  DRAFT-4(PENDING)를 이용해 승인 → 신규 카드 노출 2막을 사람이 최종 확인한다.
 ```
 
 ## 현재 blocker
@@ -72,6 +72,10 @@ Phase 4 실제 연동 smoke (MariaDB + Gemini embed + Spring 8082)
   → K_B_001 seq1 노출, 전 단계 카드 1개 이상, 인접 단계 knowledgeId 중복 0건
   → K_B_014 12:30 seq6 노출 / 15:00 제외
   → 같은 배송 건 재시작 시 이전 ACTIVE 세션 ABANDONED·next 409, complete COMPLETED
+mobile: npm run build → TypeScript + Vite production build 성공
+브라우저 실제 연동 (React 5173 + Spring 8082 + Gemini 8002)
+  → 배송 5건 조회, 1톤 7단계 안내·완료, 2.4m NO_ROUTE_AVAILABLE 확인
+  → 텍스트 제보 REP-44 생성·Gemini 추출·DRAFT-4 PENDING 관리자 상세 표시 확인
 ```
 
 ---
@@ -149,7 +153,7 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 - [x] `contextTime=12:30` → `K_B_014` 노출 / `15:00` → 사라짐
 - [x] `complete` 동작
 - [ ] 커밋
-- [ ] **★ 1막 시연 동작 확인** — 실제로 눌러보며 화면이 나오는지 (녹화는 개발 종료 후)
+- [x] **★ 1막 시연 동작 확인** — 실제 React 화면에서 7단계 진행·완료·경로 없음까지 확인
 
 > **T+8.0h 체크포인트.** 여기 못 왔으면 Phase 5~7 축소를 결정한다.
 
@@ -167,22 +171,32 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 
 > STT가 막히면 **텍스트 직접 입력으로 대체**하고 진행한다.
 
-## Phase 6 — 추출  `TODO`  (1.0h / 누적 10.0h)
-- [ ] `corrected_stt_text` → Draft 생성
-- [ ] 스키마 검증 + 1회 재시도 + `EXTRACTION_FAILED` 처리
-- [ ] `source_excerpt`가 원문 부분 문자열인지 검증
-- [ ] 데이터셋 transcript로 품질 확인
+## Phase 6 — 추출  `DONE`  (1.0h / 누적 10.0h)
+- [x] `corrected_stt_text` → Draft 생성 — `POST /api/reports/{id}/extract`
+- [x] 스키마 검증 + 1회 재시도 + `EXTRACTION_FAILED` 처리 (검증은 ai-service, Spring은 상태 저장)
+- [x] `source_excerpt`가 원문 부분 문자열인지 검증 — ai-service `extraction.py`
+- [x] 실제 STT 전사문으로 품질 확인 — 3건 추출, 타깃·근거 구절 모두 정확
 - [ ] 커밋
 
-## Phase 7 — 검수 + 발행  `TODO`  (1.5h / 누적 11.5h)  ★ 핵심 완성 지점
-- [ ] 검수 화면 (원문 / AI 결과 / 근거 구절 나란히)
-- [ ] 승인 요청 중 `/embed` 동기 호출은 DB 트랜잭션 밖에서 수행
-- [ ] 임베딩 성공 후 PUBLISHED·Embedding·Review·Draft 상태를 한 DB 트랜잭션으로 저장
-- [ ] 실패 시 롤백 + 명시적 오류
-- [ ] 새 제보 승인 후 같은 경로 재시작 시 새 카드 노출
-- [ ] `isRecentlyAdded = true` 배지
+> `knownNodes`/`knownSegments`는 그 장소의 노드 전체와 구간 전체를 넘긴다.
+> 구간은 이름이 없어 `"출발 → 도착"`으로 만든다. 이게 없으면 LLM이 타깃 코드를 못 맞춘다.
+> 재추출하면 그 제보의 이전 초안은 지운다. 겹겹이 쌓이면 검수 화면이 뒤엉킨다.
+
+## Phase 7 — 검수 + 발행  `DONE`  (1.5h / 누적 11.5h)  ★ 핵심 완성 지점
+- [x] 검수 API — 목록 / 상세(원문·AI 결과·근거 구절·resolvedTargetName) / 승인 / 반려
+- [x] 검수 화면 — `mobile/`의 React 관리자 목록·상세를 실제 API에 연결
+- [x] 승인 요청 중 `/embed` 동기 호출은 DB 트랜잭션 밖에서 수행
+- [x] 임베딩 성공 후 PUBLISHED·Embedding·Review·Draft 상태를 한 DB 트랜잭션으로 저장
+- [x] 실패 시 롤백 + 명시적 오류 (`EMBEDDING_FAILED`, DB 무변경)
+- [x] 중복 클릭 방어 — 트랜잭션 안에서 PENDING 재확인, 아니면 `409 DRAFT_NOT_PENDING`
+- [x] 새 제보 승인 후 같은 경로 재시작 시 새 카드 노출 — `id=148`이 seq1 최상단
+- [x] `isRecentlyAdded = true` 배지
 - [ ] 커밋
-- [ ] **★ 2막 시연 동작 확인** — 승인 → 재조회에서 새 카드가 실제로 뜨는지
+- [x] **★ 2막 서버 동작 확인** — 승인 → 재조회에서 새 카드가 실제로 뜬다
+
+> 승인한 지식이 조건에 걸리면 안 뜨는 게 **정상**이다. 실제로 draft 1(높이 2.3m 초과 제한)은
+> 2.0m 차량 세션에서 제외됐고, 조건 없는 draft 2는 seq1 최상단에 떴다.
+> 2막 리허설 때 이 차이를 모르면 "버그"로 오해하기 쉽다.
 
 > **T+11.5h 체크포인트.** 미완이면 2막을 포기하고 1막으로 발표를 구성한다.
 > 없는 기능을 있는 것처럼 말하지 않는다.
@@ -205,58 +219,58 @@ T+11.5h Phase 7 미완  →  2막 녹화 포기. 1막만으로 발표 구성.
 > API 계약(`05B`)이 이미 확정돼 있어 **서버가 안 끝나도 Mock으로 만들 수 있다.**
 > 디자인 시안 — [Figma](https://www.figma.com/design/4girj3oH3g2JxyIM5erfUC/Untitled?node-id=0-1)
 
-## M — 기사 모바일 웹 (React)  `TODO`
+## M — 기사 모바일 웹 (React)  `PARTIAL`
 
 ```
 합류 지점   T+1.5h  Phase 1 완료 후 Mock 으로 시작
            T+4.0h  Phase 2b 완료 후 실제 API 연결
 ```
 
-### M1 — 프로젝트 뼈대  `TODO`
-- [ ] React 18 + TypeScript + Vite 프로젝트 생성 및 실행 확인
-- [ ] API 클라이언트 · 모델 클래스 (`05B` 계약 그대로)
-- [ ] Mock 응답으로 화면 전환 동작
+### M1 — 프로젝트 뼈대  `DONE`
+- [x] React 18 + TypeScript + Vite 프로젝트 생성 및 실행 확인
+- [x] API 클라이언트 · 모델 클래스 (`05B` 계약 그대로)
+- [x] React Router 화면 전환 동작
 
-### M2 — 배송 목록 · 상세 (S1·S2)  `TODO`
-- [ ] 배송 목록 표시
-- [ ] 배송 상세 → [현장 도착] → 차량 입력 (톤수·높이)
-- [ ] 실제 API 연결
+### M2 — 배송 목록 · 상세 (S1·S2)  `DONE`
+- [x] 배송 목록 표시
+- [x] 배송 상세 → 차량 입력 (톤수·높이·너비)
+- [x] 실제 API 연결
 
-### M3 — Last 100m 안내 (S3)  `TODO`  ★ 시연의 중심
-- [ ] 단계 표시 (`4 / 7` 형태)
-- [ ] 다음 이동 문구
-- [ ] 카드 3종 시각 구분 (WARNING / ACTION / REFERENCE)
-- [ ] `conditionLabel` 표시
-- [ ] **`isRecentlyAdded` 배지** — 없으면 2막이 약해진다
-- [ ] [다음] / [배송 완료] 버튼
-- [ ] 실제 API 연결
+### M3 — Last 100m 안내 (S3)  `DONE`  ★ 시연의 중심
+- [x] 단계 표시 (`4 / 7` 형태)
+- [x] 다음 이동 문구
+- [x] 카드 3종 시각 구분 (WARNING / ACTION / REFERENCE)
+- [x] `conditionLabel` 표시
+- [x] **`isRecentlyAdded` 배지**
+- [x] [다음] / [배송 완료] 버튼
+- [x] 실제 API 연결
 
-### M4 — 현장 팁 등록 (S4)  `TODO`
-- [ ] 장소·대표 위치 선택
+### M4 — 현장 팁 등록 (S4)  `PARTIAL`
+- [x] 실제 API 장소·대표 위치 선택
 - [ ] 녹음 + 마이크 권한
-- [ ] STT 결과 표시 · 수정 · 제출
+- [x] 텍스트 대체 경로 결과 표시 · 수정 · 제출 → 실제 추출·Draft 생성
 
 > 녹음이 막히면 **텍스트 직접 입력**으로 대체한다. 이후 파이프라인은 그대로 살아난다.
 
-## W — 관리자 검수 (React)  `TODO`
+## W — 관리자 검수 (React)  `DONE`
 
 ```
 합류 지점   T+1.5h  Mock 으로 시작
            Phase 7 완료 후 실제 승인 연결
 ```
 
-### W1 — Admin Runtime · 검수 대기 목록  `TODO`
-- [ ] React 18 + TypeScript + Vite 프로젝트 생성 및 실행 확인
-- [ ] 초안 목록 표시
+### W1 — Admin Runtime · 검수 대기 목록  `DONE`
+- [x] React 18 + TypeScript + Vite 프로젝트 실행 확인 (`mobile/`에 통합)
+- [x] 실제 API 초안 목록·필터·빈 상태·오류 표시
 
-### W2 — 검수 상세  `TODO`  ★ 신뢰성의 근거
-- [ ] **좌우 분할** — 왼쪽 원문 / 오른쪽 AI 결과
-- [ ] AI 결과를 카드로 표시 (JSON 노출 금지)
-- [ ] `source_excerpt` 표시 (원문 하이라이트면 더 좋음)
-- [ ] UNKNOWN 타깃은 "확인 필요"로 표시
-- [ ] 승인 / 수정 승인 / 반려
-- [ ] **승인 중 스피너** — 임베딩까지 동기 처리라 수 초 걸린다
-- [ ] 실패 시 명시적 오류 + 재시도
+### W2 — 검수 상세  `DONE`  ★ 신뢰성의 근거
+- [x] **좌우 분할** — 왼쪽 원문 / 오른쪽 AI 결과
+- [x] AI 결과를 카드로 표시 (JSON 노출 없음)
+- [x] `source_excerpt` 표시
+- [x] UNKNOWN 타깃은 "확인 필요"로 표시
+- [x] 승인 / 수정 승인 / 반려
+- [x] **승인 중 처리 상태** — 중복 클릭 방지
+- [x] 실패 시 명시적 오류 + 재시도
 
 ## 화면 트랙 컷라인
 
@@ -296,6 +310,18 @@ T+10.0h  W2 미완  →  검수를 API 직접 호출로 대체하고 화면은 �
 ```
 
 <!-- 여기부터 기록 -->
+
+## 본선 전 선행 — 2026-08-13  React 실제 API 통합
+변경   배송 목록·차량 조건·안내 세션·단계 이동·완료·경로 없음 화면을 Phase 4 API에 연결하고,
+       장소·내부 노드 선택·텍스트 제보·Gemini 추출을 Phase 6 API에 연결했다.
+       관리자 대기 목록·상세·승인·수정 승인·반려를 Phase 7 API에 연결했다.
+검증   TypeScript/Vite production build 성공. 실제 브라우저에서 1톤 B01 7단계 완주,
+       2.4m 차량의 NO_ROUTE_AVAILABLE, 반응형 모바일 레이아웃을 확인했다.
+       REP-44를 실제 생성해 Gemini가 DRAFT-4 한 건으로 구조화했고 관리자 상세에서 원문·조건·
+       타깃·근거 구절을 확인했다. DRAFT-4는 사용자 확인용으로 PENDING 상태를 유지한다.
+결정   실제 음성 녹음이 아직 없으므로 M4는 텍스트 직접 입력 축소 경로까지만 완료로 본다.
+남은것 MediaRecorder/STT 업로드 연결, 내 제보 내역의 정적 샘플을 실제 조회로 교체.
+다음   Phase 8 — DRAFT-4 승인 시연과 신규 카드 노출 재확인, 시연 동선 고정
 
 ## 본선 전 선행 — 2026-08-13  Phase 4 안내
 변경   RouteSelector·GuidanceSession과 `POST /api/guidance`, `GET /api/guidance/{id}`,
