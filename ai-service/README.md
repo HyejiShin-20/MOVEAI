@@ -18,7 +18,7 @@ POST /embed               { texts: [...] } → { model, dimension, vectors: [[..
 `gemini-embedding-2`(1536차원), `gemini-3.6-flash`(STT)다.
 임베딩 모델이나 차원을 바꾸면 저장 벡터를 전부 재생성해야 한다.
 
-## 현재 구현 — STT
+## 현재 구현 — STT · 지식 추출
 
 ```bash
 conda activate moveai
@@ -29,6 +29,7 @@ uvicorn app.main:app --reload --port 8000
 ```text
 GET  /health  → { status, provider:"gemini", model }
 POST /stt     multipart audio → { text, durationMs }
+POST /extract-knowledge JSON → { items: [...] }
 ```
 
 지원 형식은 WAV, MP3, M4A, AIFF, AAC, OGG, FLAC이며 기본 업로드 제한은 10MB다.
@@ -41,7 +42,13 @@ POST /stt     multipart audio → { text, durationMs }
 ```bash
 python scripts/smoke_stt.py
 python scripts/smoke_stt.py "../datasets/voice/파일.m4a"
+python scripts/smoke_extraction.py --dataset B --report REPORT_B_01
 ```
+
+`/extract-knowledge`는 `knowledge_code`를 반환하지 않는다. 이 코드는 관리자 승인 뒤
+Spring/DB가 발급한다. Gemini 응답은 Pydantic JSON Schema로 제한하고, 서버가 원문 구절,
+알려진 타깃 코드, 숫자 근거, custom label과 usage scope를 다시 검증한다. 실패 시 검증
+오류를 첨부해 1회 재요청하고, 다시 실패하면 `EXTRACTION_FAILED`를 반환한다.
 
 **`/similarity-search` 는 만들지 않는다.** 코사인 계산은 Spring에서 한다.
 `/embed` 는 배열을 받는다 — 시드 146건을 한 번에 처리해야 한다.
@@ -59,7 +66,7 @@ scripts/smoke_stt.py    `datasets/voice` 실호출 검증
 tests/                  API·서비스 단위 테스트
 ```
 
-`/extract-knowledge`와 `/embed`는 다음 구현 대상이며 아직 라우트가 열려 있지 않다.
+`/embed`는 다음 구현 대상이며 아직 라우트가 열려 있지 않다.
 
 ## 추출에서 반드시 지킬 것
 

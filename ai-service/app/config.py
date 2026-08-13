@@ -10,6 +10,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
 class Settings(BaseSettings):
     gemini_api_key: SecretStr | None = Field(default=None, alias="GEMINI_API_KEY")
+    llm_model: str = Field(default="gemini-3.5-flash-lite", alias="LLM_MODEL")
+    llm_thinking_level: str = Field(default="minimal", alias="LLM_THINKING_LEVEL")
     stt_model: str = Field(default="gemini-3.6-flash", alias="STT_MODEL")
     stt_max_file_bytes: int = Field(
         default=10 * 1024 * 1024,
