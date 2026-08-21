@@ -72,6 +72,8 @@ services:
       - backend
     environment:
       API_DOMAIN: ${API_DOMAIN:?API_DOMAIN is required}
+      DAHUM_DOMAIN: ${DAHUM_DOMAIN:-yellow.it.kr}
+      DAHUM_UPSTREAM: ${DAHUM_UPSTREAM:-host.docker.internal:9000}
     ports:
       - "80:80"
       - "443:443"
