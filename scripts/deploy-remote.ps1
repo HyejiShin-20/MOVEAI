@@ -23,6 +23,14 @@ $config = @{
 $env:DOCKER_CONFIG = $dockerConfig
 $env:DOCKER_HOST = 'npipe:////./pipe/dockerDesktopLinuxEngine'
 
+# 완전 재배포 시 컨테이너/네트워크만 내리고 named volume은 보존한다.
+# -v / docker volume rm / prune은 사용하지 않는다.
+Write-Host 'Stopping MoveAI stack before clean rebuild (volumes preserved)...'
+docker compose down --remove-orphans
+if ($LASTEXITCODE -ne 0) {
+    throw 'docker compose down failed'
+}
+
 $baseImages = @(
     'python:3.12-slim',
     'gradle:8.10-jdk17',
@@ -38,7 +46,7 @@ foreach ($image in $baseImages) {
     }
 }
 
-docker compose up -d --build
+docker compose up -d --build --remove-orphans
 if ($LASTEXITCODE -ne 0) {
     throw 'docker compose up failed'
 }
